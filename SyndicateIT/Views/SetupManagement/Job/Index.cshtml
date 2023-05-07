@@ -1,0 +1,29 @@
+﻿@model  SyndicateIT.Model.ViewModel.SetupManagement.Job.JobContentViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string PublicResources = "~/Views/SetupManagement/Job/PublicResource";
+}
+@Scripts.Render("~/Scripts/Job")
+@Scripts.Render("~/Scripts/translate")
+@*@Html.Partial("~/Views/Shared/_NavigationPartial.cshtml", @Model.Navigation)*@
+<div id="JobContent">
+    @Html.Partial("~/Views/SetupManagement/Job/_JobContentPartial.cshtml", Model);
+</div>
+<script type="text/javascript">
+    var JobSearchURL = '@Html.GetUrl("LoadSearchJob", "Job")';
+    var JobDeleteURL = '@Html.GetUrl("JobDelete", "Job")';
+    var loadJobURL = '@Html.GetUrl("LoadJob", "Job")';
+    var loader = '@Utilities.GetAbsotuleUrl("~/Content/image/ajax-loader.gif")';
+    var saveJobUrl = '@Html.GetUrl("AddUpdateJob", "Job")';
+    var messageDelete = '@Html.Resource("MessageDelete", PublicResources)';
+    var loadTranslationJobURL = '@Html.GetUrl("LoadTranslateJob", "Job")';
+
+    $("#SchoolSettings", $("#nav")).addClass("active open");
+    $("#SchoolSettings Ul", $("#nav")).show();
+
+</script>
+@section Scripts {
+    @Scripts.Render("~/bundles/kendo/js")
+}
+

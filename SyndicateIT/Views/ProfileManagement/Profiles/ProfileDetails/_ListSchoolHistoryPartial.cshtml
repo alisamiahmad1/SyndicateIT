@@ -1,0 +1,91 @@
+﻿
+@model List<SyndicateIT.Model.ViewModel.ProfileManagement.ProfileDetails.SchoolHistoryViewModel>
+@{
+    Layout = null;
+    string PublicResources = "~/Views/ProfileManagement/Profiles/ProfileDetails/PublicResources";
+}
+
+<article class="col-sm-12 sortable-grid ui-sortable">
+    <div class="alert alert-success alert-block">
+        <h4 class="alert-heading">@Html.Resource("LblSchoolHistory", PublicResources)</h4>
+    </div>
+    @for (int i = 0; i < Model.Count; i++)
+    {
+
+        <div class="jarviswidget  jarviswidget-sortable jarviswidget-color-pink" id="wid-id-@i" data-widget-editbutton="false" role="widget" style="">
+            <header role="heading">
+                <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                <h3 class="widget-h3"> (@Model[i].SchoolName)</h3>
+                <span class="jarviswidget-loader" style="display: none;"><i class="fa fa-refresh fa-spin"></i></span>
+            </header>
+
+            <!-- widget div-->
+            <div role="content">
+                <div class="row">
+                    <div class="widget-body">
+                        @using (Html.BeginForm("DeleteHistory", "ProfileManagement", FormMethod.Post, new { @class = "", role = "form", id = "HistoryList-form" }))
+                        { @Html.HiddenFor(m => m[i].SchoolHistory_ID)
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true)
+                            <fieldset>
+                                <div class="form-group  col-sm-6">
+                                    @Html.LabelFor(m => m[i].SchoolName, Html.Resource("SchoolName", PublicResources), new { @class = "col-md-4 control-label" })
+                                    <div class="col-md-6">
+                                        <b class="pull-left"> @Model[i].SchoolName</b>
+                                    </div>
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    @Html.LabelFor(m => m[i].Location, Html.Resource("Location", PublicResources), new { @class = "col-md-4 control-label" })
+                                    <div class="col-md-6">
+                                        <b class="pull-left"> @Model[i].Location</b>
+                                    </div>
+                                </div>
+                                <div class="form-group  col-sm-6">
+                                    @Html.LabelFor(m => m[i].StageNameS, Html.Resource("StageName", PublicResources), new { @class = "col-md-4 control-label" })
+                                    <div class="col-md-6">
+                                        <b class="pull-left"> @Model[i].StageNameS</b>
+                                    </div>
+                                </div>
+                                <div class="form-group  col-sm-6">
+                                    @Html.LabelFor(m => m[i].ClassNameS, Html.Resource("ClassName", PublicResources), new { @class = "col-md-4 control-label" })
+                                    <div class="col-md-6">
+                                        <b class="pull-left"> @Model[i].ClassNameS</b>
+                                    </div>
+                                </div>
+                                <div class="form-group  col-sm-6">
+                                    @Html.LabelFor(m => m[i].FromHistory, Html.Resource("FromHistory", PublicResources), new { @class = "col-md-4 control-label" })
+                                    <div class="col-md-6">
+                                        <b class="pull-left"> @Model[i].FromHistory</b>
+                                    </div>
+                                </div>
+                                <div class="form-group  col-sm-6">
+                                    @Html.LabelFor(m => m[i].ToHistory, Html.Resource("ToHistory", PublicResources), new { @class = "col-md-4 control-label" })
+                                    <div class="col-md-6">
+                                        <b class="pull-left"> @Model[i].ToHistory</b>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group  col-sm-12">
+                                    @Html.LabelFor(m => m[i].Description, Html.Resource("Description", PublicResources), new { @class = "col-md-2 control-label" })
+                                    <div class="col-md-8">
+                                        <b class="pull-left"> @Model[i].Description</b>
+                                    </div>
+                                </div>
+                                <div class="form-group  col-sm-6">
+                                    <div class="col-md-6">
+                                        <b class="pull-left"> <button onclick="DeleteHistory(@i);" class="btn btn-sm btn-danger disabled pull-left" type="button" style="cursor:pointer;"> Delete</button></b>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        }
+                    </div>
+                </div>
+            </div>
+            <!-- end widget content -->
+        </div>
+        <!-- end widget -->
+
+    }
+</article>
+

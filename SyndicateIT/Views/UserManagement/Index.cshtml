@@ -1,0 +1,96 @@
+﻿
+@model SyndicateIT.Model.ViewModel.UserManagement.UserManagementContentViewModel
+
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "User";
+    string resouceFilePath = "~/Views/UserManagement/Index.cshtml";
+}
+
+<script src="~/Scripts/Views/UserManagement/user.js" type="text/javascript"></script>
+
+@Html.Partial("~/Views/Shared/_NavigationPartial.cshtml", @Model.Navigation)
+<div id="content">
+    <div class="row">
+        <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+            <h1 class="page-title txt-color-blueDark">
+                <i class="@Model.ClassTitle"></i> @Model.Title<span></span>
+            </h1>
+        </div>
+        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+            <!-- Button trigger modal -->
+            <a data-toggle="modal" href="#myModal" onclick="AddUser();" class="btn btn-primary btn-lg pull-right header-btn hidden-mobile"><i class="fa fa-circle-arrow-up fa-lg"></i> Add New User</a>
+        </div>
+    </div>
+    <section id="widget-grid" class="">
+        <!-- row -->
+      
+        <div class="row">
+            <!-- NEW WIDGET START -->
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12 sortable-grid ui-sortable">
+                <!-- Widget ID (each widget will need unique ID)-->
+                <div class="jarviswidget jarviswidget-color-blueDark jarviswidget-sortable" id="wid-id-0" data-widget-editbutton="false" role="widget">
+                    <header role="heading">
+                        <div class="jarviswidget-ctrls" role="menu">
+                            <a href="javascript:void(0);" class="button-icon jarviswidget-toggle-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Collapse">
+                                <i class="fa fa-minus "></i>
+                            </a>
+                            <a href="javascript:void(0);" class="button-icon jarviswidget-fullscreen-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Fullscreen">
+                                <i class="fa fa-expand "></i>
+                            </a>
+                        </div>
+
+                        @*<div class="widget-toolbar " role="menu">
+                                 <a data-toggle="dropdown" class="fa fa-cog " href="javascript:void(0);" aria-expanded="true" style="color:#ffffff"></a>
+                                    <ul class="dropdown-menu arrow-box-up-right color-select pull-right">
+                                          <li>
+
+                                          </li>
+                                   </ul>
+                            </div>*@
+
+                        <span class="widget-icon"> <i class="@Model.ClassTitle"></i> </span>
+                        <h2>User List</h2>
+                        <span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span>
+                    </header>
+                    <!-- widget div-->
+                    <div role="content" id="Grid_User">
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+                            <!-- This area used as dropdown edit box -->
+                        </div>
+                        <!-- end widget edit box -->
+                        <!-- widget content -->
+                        <div class="widget-body">
+                            <div id="userList"></div>
+                        </div>
+                        <!-- end widget content -->
+                    </div>
+                    <!-- end widget div -->
+                </div>
+                <!-- end widget -->
+            </article>
+        </div>
+    </section>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/kendo/js")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("AdministrationUL").children().find('li').removeClass("active");
+            $("#Administration").addClass("open");
+            $("#AdministrationUL").show();
+            $("#Administration").children().find('em').removeClass("fa fa-plus-square-o");
+            $("#Administration").children().find('em').addClass("fa fa-minus-square-o");
+        });
+        var deactiveUserURL = '@Html.GetUrl("DeactiveUser", "UserManagement", SessionContent.Current.Corporate.IsSecure)';
+        var editUserURL = '@Html.GetUrl("EditUser", "UserManagement", SessionContent.Current.Corporate.IsSecure)';
+        var activeUserURL = '@Html.GetUrl("activeUser", "UserManagement", SessionContent.Current.Corporate.IsSecure)';
+        var loadGridUserURL = '@Html.GetUrl("LoadGridUser", "UserManagement", SessionContent.Current.Corporate.IsSecure)';
+        var loadAddUrl = '@Html.GetUrl("Create", "UserManagement", SessionContent.Current.Corporate.IsSecure)';
+        var loader = '@Utilities.GetAbsotuleUrl("~/Content/image/ajax-loader.gif")';
+        var activetedUser = '@Html.Resource("ActivetedUser", resouceFilePath)';
+        var deactivetedUser = '@Html.Resource("DeactivetedUser", resouceFilePath)';
+    </script>
+}

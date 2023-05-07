@@ -1,0 +1,29 @@
+﻿@model  SyndicateIT.Model.ViewModel.SetupManagement.ROLE.ROLEContentViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string PublicResources = "~/Views/SetupManagement/ROLE/PublicResource";
+}
+@Scripts.Render("~/Scripts/ROLE")
+@Scripts.Render("~/Scripts/translate")
+@*@Html.Partial("~/Views/Shared/_NavigationPartial.cshtml", @Model.Navigation)*@
+<div id="ROLEContent">
+    @Html.Partial("~/Views/SetupManagement/ROLE/_ROLEContentPartial.cshtml", Model);
+</div>
+<script type="text/javascript">
+    var ROLESearchURL = '@Html.GetUrl("LoadSearchROLE", "ROLE")';
+    var ROLEDeleteURL = '@Html.GetUrl("ROLEDelete", "ROLE")';
+    var loadROLEURL = '@Html.GetUrl("LoadROLE", "ROLE")';
+    var loader = '@Utilities.GetAbsotuleUrl("~/Content/image/ajax-loader.gif")';
+    var saveROLEUrl = '@Html.GetUrl("AddUpdateROLE", "ROLE")';
+    var messageDelete = '@Html.Resource("MessageDelete", PublicResources)';
+    var loadTranslationROLEURL = '@Html.GetUrl("LoadTranslateROLE", "ROLE")';
+
+    $("#SchoolSettings", $("#nav")).addClass("active open");
+    $("#SchoolSettings Ul", $("#nav")).show();
+
+</script>
+@section Scripts {
+    @Scripts.Render("~/bundles/kendo/js")
+}
+

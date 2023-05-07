@@ -1,0 +1,295 @@
+﻿
+@model SyndicateIT.Model.ViewModel.ProfileManagement.ProfileDetails.TransactionViewModel
+@{
+    Layout = null;
+    string PublicResources = "~/Views/ProfileManagement/Profiles/ProfileDetails/PublicResources";
+}
+
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+@*@Html.Partial("~/Views/Shared/_AlertPartial.cshtml", Model.Alert)*@
+
+<article class="col-sm-12 sortable-grid ui-sortable">
+    @using (Html.BeginForm("SaveTransaction", "ProfileManagement", FormMethod.Post, new { @class = "", role = "form", id = "Experience-form" }))
+    {
+        <!-- Widget ID (each widget will need unique ID)-->
+        <div class="jarviswidget jarviswidgetTransparent" id="wid-id-x" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false" data-widget-custombutton="false" data-widget-sortable="false" role="widget">
+            <header role="heading">
+                <span class="widget-icon"> <i class="fa fa-align-justify"></i> </span>
+                <h2>@Html.Resource("LblTransactionInfo", PublicResources)</h2>
+                <span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span>
+            </header>
+            <!-- widget div-->
+            <div role="content">
+
+                <div class="row">
+                    <div class="widget-body">
+                        @Html.Hidden("Transaction_ID", Model.Transaction_ID)
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+                       
+
+
+                        <fieldset>
+                            <div class=" col-sm-12">
+                                <p class="alert alert-info">Sender</p>
+                            </div>
+                            <div class="form-group  col-sm-6">
+                                @Html.LabelFor(m => m.CountryID, Html.Resource("CountryID", PublicResources), new { @class = "col-md-4 control-label" })
+                                <div class="col-md-7">
+                                    @(Html.Kendo().DropDownListFor(m => m.CountryID)
+                                                                                                                                        .DataTextField("Text")
+                                                                                                                                        .Name("CountryID")
+                                                                                                                                        .DataValueField("Value")
+                                                                                                                                        .OptionLabel(@Html.Resource("EnterCountryID", PublicResources))
+                                                                                                                                        .HtmlAttributes(new { @class = "ui-select form-control-md10" })
+                                                                                                                                        .Value(Model.CountryID.ToString())
+                                                                                                                                    .Enable(@Model.IsEdit)
+                                                                                                                                    .DataSource(source =>
+                                                                                                                                    {
+                                                                                                                                        source.Read(read =>
+                                                                                                                                        {
+                                                                                                                                            read.Action("GetCountry", "ProfileManagement");
+                                                                                                                                        });
+                                                                                                                                    }))
+                                </div>
+                            </div>
+                            <div class="form-group  col-sm-6">
+                                @Html.LabelFor(m => m.Bank_ID, Html.Resource("BankID", PublicResources), new { @class = "col-md-4 control-label" })
+                                <div class="col-md-7">
+                                    @(Html.Kendo().DropDownListFor(m => m.Bank_ID)
+                                                                                                                                        .DataTextField("Text")
+                                                                                                                                        .Name("Bank_ID")
+                                                                                                                                        .DataValueField("Value")
+                                                                                                                                        .OptionLabel(@Html.Resource("SelectBankID", PublicResources))
+                                                                                                                                        .HtmlAttributes(new { @class = "ui-select form-control-md10" })
+                                                                                                                                        .Value(Model.Bank_ID.ToString())
+                                                                                                                                    .Enable(@Model.IsEdit)
+                                                                                                                                    .DataSource(source =>
+                                                                                                                                    {
+                                                                                                                                        source.Read(read =>
+                                                                                                                                        {
+                                                                                                                                            read.Action("GetCountry", "ProfileManagement");
+                                                                                                                                        });
+                                                                                                                                    }))
+                                </div>
+                            </div>
+                            <div class="form-group  col-sm-6">
+                                @Html.LabelFor(m => m.Account_ID, Html.Resource("Account_ID", PublicResources), new { @class = "col-md-4 control-label" })
+                                <div class="col-md-7">
+                                    @(Html.Kendo().DropDownListFor(m => m.Account_ID)
+                                                                                                                                                                                                .DataTextField("Text")
+                                                                                                                                                                                                .Name("Account_ID")
+                                                                                                                                                                                                .DataValueField("Value")
+                                                                                                                                                                                                .OptionLabel(@Html.Resource("EnterAccount_ID", PublicResources))
+                                                                                                                                                                                                .HtmlAttributes(new { @class = "ui-select form-control-md10" })
+                                                                                                                                                                                                .Value(Model.CountryID.ToString())
+                                                                                                                                                                                            .Enable(@Model.IsEdit)
+                                                                                                                                                                                            .DataSource(source =>
+                                                                                                                                                                                            {
+                                                                                                                                                                                                source.Read(read =>
+                                                                                                                                                                                                {
+                                                                                                                                                                                                    read.Action("GetCountry", "ProfileManagement");
+                                                                                                                                                                                                });
+                                                                                                                                                                                            }))
+                                </div>
+                            </div>
+                            <div class="form-group  col-sm-6">
+                                @Html.LabelFor(m => m.CurrencyReciveID, Html.Resource("CurrencyID", PublicResources), new { @class = "col-md-4 control-label" })
+                                <div class="col-md-7">
+                                    @(Html.Kendo().DropDownListFor(m => m.CurrencyReciveID)
+                                                                                                                                                                        .DataTextField("Text")
+                                                                                                                                                                        .Name("CurrencyReciveID")
+                                                                                                                                                                        .DataValueField("Value")
+                                                                                                                                                                        .OptionLabel(@Html.Resource("EnterCurrencyID", PublicResources))
+                                                                                                                                                                        .HtmlAttributes(new { @class = "ui-select form-control-md10" })
+                                                                                                                                                                        .Value(Model.CurrencyReciveID.ToString())
+                                                                                                                                                                    .Enable(@Model.IsEdit)
+                                                                                                                                                                    .DataSource(source =>
+                                                                                                                                                                    {
+                                                                                                                                                                        source.Read(read =>
+                                                                                                                                                                        {
+                                                                                                                                                                            read.Action("GetCurrencyID", "ProfileManagement");
+                                                                                                                                                                        });
+                                                                                                                                                                    }))
+                                </div>
+                            </div>
+                            <div class="form-group  col-sm-6">
+                                @Html.LabelFor(m => m.Amount, Html.Resource("Amount", PublicResources), new { @class = "col-md-4 control-label" })
+                                <div class="col-md-7">
+                                    @Html.Kendo().TextBoxFor(model => model.Amount).HtmlAttributes(new { @class = "form-control  form-control-md10", @maxlength = 150, @placeholder = @Html.Resource("EnterAmount", PublicResources) }).Name("Amount").Enable(@Model.IsEdit)
+                                    @*<span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error" data-for="BankName" data-valmsg-for="BankName" id="BankName_validationMessage" style="display:none;" role="alert"><span class="k-icon k-warning"> </span>@Html.Resource("RequiredBankName", PublicResources)</span>*@
+                                </div>
+                            </div>
+                            <div class="form-group  col-sm-6">
+                                @Html.LabelFor(m => m.TransactionDate, Html.Resource("TransactionDate", PublicResources), new { @class = "col-md-4 control-label" })
+                                <div class="col-md-7">
+                                    @Html.Kendo().DatePickerFor(model => model.TransactionDate).HtmlAttributes(new { @class = "form-control  form-control-md10", @maxlength = 200, @placeholder = @Html.Resource("EnterTransactionDate", PublicResources) }).Name("TransactionDate").Enable(@Model.IsEdit)
+                                </div>
+                            </div>
+
+
+
+                            <div class=" col-sm-12">
+                                <p class="alert alert-info">Receive</p>
+                            </div>
+
+                            <div class="form-group  col-sm-6">
+                                @Html.LabelFor(m => m.FirstName, Html.Resource("FirstName", PublicResources), new { @class = "col-md-4 control-label" })
+                                <div class="col-md-7">
+                                    @Html.Kendo().TextBoxFor(model => model.FirstName).HtmlAttributes(new { @class = "form-control  form-control-md10", @maxlength = 150, @placeholder = @Html.Resource("EnterFirstName", PublicResources) }).Name("FirstName").Enable(@Model.IsEdit)
+                                    @*<span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error" data-for="AccountName" data-valmsg-for="AccountName" id="Company_validationMessage" style="display:none;" role="alert"><span class="k-icon k-warning"> </span> @Html.Resource("RequiredAccountName", PublicResources)</span>*@
+                                </div>
+                            </div>
+
+                            <div class="form-group  col-sm-6">
+                                @Html.LabelFor(m => m.LastName, Html.Resource("LastName", PublicResources), new { @class = "col-md-4 control-label" })
+                                <div class="col-md-7">
+                                    @Html.Kendo().TextBoxFor(model => model.LastName).HtmlAttributes(new { @class = "form-control  form-control-md10", @maxlength = 150, @placeholder = @Html.Resource("EnterLastName", PublicResources) }).Name("LastName").Enable(@Model.IsEdit)
+                                    @*<span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error" data-for="AccountName" data-valmsg-for="AccountName" id="Company_validationMessage" style="display:none;" role="alert"><span class="k-icon k-warning"> </span> @Html.Resource("RequiredAccountName", PublicResources)</span>*@
+                                </div>
+                            </div>
+
+                            <div class="form-group  col-sm-6">
+                                @Html.LabelFor(m => m.CountryReciveID, Html.Resource("CountryID", PublicResources), new { @class = "col-md-4 control-label" })
+                                <div class="col-md-7">
+                                    @(Html.Kendo().DropDownListFor(m => m.CountryReciveID)
+                                                                                                                                        .DataTextField("Text")
+                                                                                                                                        .Name("CountryReciveID")
+                                                                                                                                        .DataValueField("Value")
+                                                                                                                                        .OptionLabel(@Html.Resource("EnterCountryID", PublicResources))
+                                                                                                                                        .HtmlAttributes(new { @class = "ui-select form-control-md10" })
+                                                                                                                                        .Value(Model.CountryID.ToString())
+                                                                                                                                    .Enable(@Model.IsEdit)
+                                                                                                                                    .DataSource(source =>
+                                                                                                                                    {
+                                                                                                                                        source.Read(read =>
+                                                                                                                                        {
+                                                                                                                                            read.Action("GetCountry", "ProfileManagement");
+                                                                                                                                        });
+                                                                                                                                    }))
+                                </div>
+                            </div>
+
+                            <div class="form-group  col-sm-6">
+                                @Html.LabelFor(m => m.AccountTypeReciveID, Html.Resource("AccountType", PublicResources), new { @class = "col-md-4 control-label" })
+                                <div class="col-md-7">
+                                    @(Html.Kendo().DropDownListFor(m => m.AccountTypeID)
+                                                                                            .DataTextField("Text")
+                                                                                            .Name("AccountTypeReciveID")
+                                                                                            .DataValueField("Value")
+                                                                                            .OptionLabel(@Html.Resource("EnterAccountType", PublicResources))
+                                                                                            .HtmlAttributes(new { @class = "ui-select form-control-md10" })
+                                                                                            .Value(Model.AccountTypeReciveID.ToString())
+                                                                                        .Enable(@Model.IsEdit)
+                                                                                        .DataSource(source =>
+                                                                                        {
+                                                                                            source.Read(read =>
+                                                                                            {
+                                                                                                read.Action("GetAccountType", "ProfileManagement");
+                                                                                            });
+                                                                                        }))
+                                </div>
+                            </div>
+
+                            <div class="form-group  col-sm-6">
+                                @Html.LabelFor(m => m.BankName, Html.Resource("BankName", PublicResources), new { @class = "col-md-4 control-label" })
+                                <div class="col-md-7">
+                                    @Html.Kendo().TextBoxFor(model => model.BankName).HtmlAttributes(new { @class = "form-control  form-control-md10", @maxlength = 150, @placeholder = @Html.Resource("SelectBankName", PublicResources) }).Name("BankName").Enable(@Model.IsEdit)
+                                    @*<span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error" data-for="BankName" data-valmsg-for="BankName" id="BankName_validationMessage" style="display:none;" role="alert"><span class="k-icon k-warning"> </span>@Html.Resource("RequiredBankName", PublicResources)</span>*@
+                                </div>
+                            </div>
+
+                            <div class="form-group  col-sm-6">
+                                @Html.LabelFor(m => m.BankNumber, Html.Resource("BankNumber", PublicResources), new { @class = "col-md-4 control-label" })
+                                <div class="col-md-7">
+                                    @Html.Kendo().TextBoxFor(model => model.BankNumber).HtmlAttributes(new { @class = "form-control  form-control-md10", @maxlength = 150, @placeholder = @Html.Resource("SelectBankNumber", PublicResources) }).Name("BankNumber").Enable(@Model.IsEdit)
+                                    @*<span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error" data-for="BankNumber" data-valmsg-for="BankNumber" id="BankNumber_validationMessage" style="display:none;" role="alert"><span class="k-icon k-warning"> </span> @Html.Resource("RequiredBankNumber", PublicResources)</span>*@
+                                </div>
+                            </div>
+
+                            <div class="form-group  col-sm-6">
+                                @Html.LabelFor(m => m.AccountName, Html.Resource("AccountName", PublicResources), new { @class = "col-md-4 control-label" })
+                                <div class="col-md-7">
+                                    @Html.Kendo().TextBoxFor(model => model.AccountName).HtmlAttributes(new { @class = "form-control  form-control-md10", @maxlength = 150, @placeholder = @Html.Resource("SelectAccountName", PublicResources) }).Name("AccountName").Enable(@Model.IsEdit)
+                                    @*<span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error" data-for="AccountName" data-valmsg-for="AccountName" id="Company_validationMessage" style="display:none;" role="alert"><span class="k-icon k-warning"> </span> @Html.Resource("RequiredAccountName", PublicResources)</span>*@
+                                </div>
+                            </div>
+                            <div class="form-group  col-sm-6">
+                                @Html.LabelFor(m => m.AccountNumber, Html.Resource("AccountNumber", PublicResources), new { @class = "col-md-4 control-label" })
+                                <div class="col-md-7">
+                                    @Html.Kendo().TextBoxFor(model => model.AccountNumber).HtmlAttributes(new { @class = "form-control  form-control-md10", @maxlength = 200, @placeholder = @Html.Resource("SelectAccountNumber", PublicResources) }).Name("AccountNumber").Enable(@Model.IsEdit)
+                                    @*<span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error" data-for="AccountNumber" data-valmsg-for="AccountNumber" id="AccountNumber_validationMessage" style="display:none;" role="alert"><span class="k-icon k-warning"> </span>@Html.Resource("RequiredAccountNumber", PublicResources)</span>*@
+                                </div>
+                            </div>
+
+
+
+                            <div class="form-group  col-sm-6">
+                                @Html.LabelFor(m => m.CurrencyID, Html.Resource("CurrencyID", PublicResources), new { @class = "col-md-4 control-label" })
+                                <div class="col-md-7">
+                                    @(Html.Kendo().DropDownListFor(m => m.CurrencyID)
+                                                                                                .DataTextField("Text")
+                                                                                                .Name("CurrencyID")
+                                                                                                .DataValueField("Value")
+                                                                                                .OptionLabel(@Html.Resource("EnterCurrencyID", PublicResources))
+                                                                                                .HtmlAttributes(new { @class = "ui-select form-control-md10" })
+                                                                                                .Value(Model.CurrencyID.ToString())
+                                                                                            .Enable(@Model.IsEdit)
+                                                                                            .DataSource(source =>
+                                                                                            {
+                                                                                                source.Read(read =>
+                                                                                                {
+                                                                                                    read.Action("GetCurrencyID", "ProfileManagement");
+                                                                                                });
+                                                                                            }))
+                                </div>
+                            </div>
+
+
+
+                            <div class="form-group  col-sm-12">
+                                @Html.LabelFor(m => m.Description, Html.Resource("Description", PublicResources), new { @class = "col-md-2 control-label" })
+                                <div class="col-md-10">
+                                    @Html.TextArea("Description", Model.Description, new { @class = "k-textbox", style = "width: 100%;height: 100px;" })
+                                </div>
+                            </div>@if (@Model.IsEdit == false)
+                            {
+                                <div class="col-lg-2">
+                                    <button type="button" onclick="SaveTransaction();" class="btn bg-color-orange txt-color-white" data-toggle="#phoneInfo">
+                                        @Html.Resource("LblAddTransaction", PublicResources)
+                                    </button>
+                                </div>
+                            }
+                        </fieldset>
+                    </div>
+                </div>
+
+            </div>
+            <!-- end widget content -->
+        </div>        
+    }
+    @Html.Partial("~/Views/ProfileManagement/Profiles/ProfileDetails/_ListTransactionPartial.cshtml")
+</article>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+       
+        HideExperiencetValidation();
+        $.validator.setDefaults({
+            ignore: ""
+        });
+
+    });
+
+    if ('@SessionContent.Container.Profiles.IsLoadProfilesContent' == "true") {
+     
+    }
+    else {
+        //$('#HoursPerDay').val("");
+        //$('#WorkingDays').val("");
+        //$('#Shift').val("");
+        //$('#IssuingCountry').val("");
+    }
+
+</script>

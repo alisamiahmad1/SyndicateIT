@@ -1,0 +1,92 @@
+﻿@model SyndicateIT.Model.ViewModel.FileManagement.FilesSearchViewModel
+@{
+    string PublicResources = "~/Views/FileManagement/Files/_FilesSearchPartial.cshtml";
+}
+@Html.Partial("~/Views/Shared/_AlertPartial.cshtml", Model.Alert)
+
+@using (Html.BeginForm("SearchFiles", "FileManagement", FormMethod.Post, new { @class = "smart-form", role = "form" }))
+{
+
+    @Html.Hidden("FileType", Model.FileType);
+    <section class="col col-3">
+        @Html.LabelFor(m => m.SearchCycle, Html.Resource("lblSearchCycle", PublicResources), new { @class = "label" })
+        @(Html.Kendo().DropDownListFor(m => m.SearchCycle)
+                      .Name("SearchCycle")
+                      .DataTextField("Text")
+                      .DataValueField("Value")
+                      .OptionLabel(@Html.Resource("EnterSearchCycle", PublicResources))
+                      .HtmlAttributes(new { @class = "form-control input-sm" })
+                      .Value(Model.SearchCycle.ToString())
+                      .DataSource(source =>
+                       {
+                        source.Read(read =>
+                        {
+                            read.Action("GetCycleTypesList", "FileManagement");
+                        });
+                    }))
+        <div class="text-danger field-validation-error" id="ErrorSearchCycle" style="display:none;">
+            <span for="SearchCycle" class=""> @Html.Resource("RequiredSearchCycle", PublicResources)</span>
+        </div>
+    </section>
+    <section class="col col-3">        
+        @Html.LabelFor(m => m.SearchClass, Html.Resource("lblSearchClass", PublicResources), new { @class = "label" })
+        @(Html.Kendo().DropDownListFor(m => m.SearchClass)
+                        .Name("SearchClass")
+                        .DataTextField("Text")
+                        .DataValueField("Value")
+                        .OptionLabel(@Html.Resource("EnterSearchClass", PublicResources))
+                        .HtmlAttributes(new { @class = "form-control input-sm" })
+                        .Value(Model.SearchClass.ToString())
+                        .Filter("startswith")
+                        .DataSource(sourceClass =>
+                        {
+                            sourceClass.Read(read =>
+                            {
+                                read.Action("GetClass", "FileManagement")
+                                .Data("FilterClass");
+                            }).ServerFiltering(true);
+                        })
+                    .Enable(true)
+                    .AutoBind(false)
+                    .CascadeFrom("SearchCycle"))
+        <div class="text-danger field-validation-error" id="ErrorSearchClass" style="display:none;">
+            <span for="SearchClass" class=""> @Html.Resource("RequiredSearchClass", PublicResources)</span>
+        </div>
+
+    </section>
+    <section class="col col-3">
+        @Html.LabelFor(m => m.SearchDivision, Html.Resource("lblSearchDivision", PublicResources), new { @class = "label" })
+        @(Html.Kendo().DropDownListFor(m => m.SearchDivision)
+                    .Name("SearchDivision")
+                    .DataTextField("Text")
+                    .DataValueField("Value")
+                    .OptionLabel(@Html.Resource("EnterDivision", PublicResources))
+                    .HtmlAttributes(new { @class = "form-control input-sm" })
+                    .Value(Model.SearchDivision.ToString())
+                    .Filter("startswith")
+                    .DataSource(sourceDivision =>
+                    {
+                        sourceDivision.Read(read =>
+                        {
+                            read.Action("GetDivision", "FileManagement")
+                            .Data("FilterDivision");
+                        }).ServerFiltering(true);
+                    })
+                .Enable(true)
+                .AutoBind(false)
+                .CascadeFrom("SearchClass"))
+        <div class="text-danger field-validation-error" id="ErrorSearchDivision" style="display:none;">
+            <span for="SearchDivision" class=""> @Html.Resource("RequiredSearchDivision", PublicResources)</span>
+        </div>
+    </section>  
+
+    <section class="col col-2 ">
+        <label class="label">&nbsp;</label>
+        <button type="button" class="btn btn-serach " onclick="SearchFiles()">Search</button>
+    </section>
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+
+    });
+</script>

@@ -1,0 +1,55 @@
+﻿@model SyndicateIT.Model.ViewModel.Report.ReportSearchViewModel
+
+
+@using (Html.BeginForm("SearchReport", "Report", FormMethod.Post, new { @class = "smart-form", role = "form" })){
+       
+        @Html.Hidden("PageID", Model.PageID);
+        <section class="col col-5">
+            @Html.LabelFor(m => m.SearchFromDate, new { @class = "label" })
+            @(Html.Kendo().DatePickerFor(m => m.SearchFromDate).Value(DateTime.Now.AddMonths(-2)))
+            <div class="text-danger field-validation-error" id="ErrorSearchFromDate" style="display:none;">
+                <span for="SearchFromDate" class=""> From Date is not valid</span>
+            </div>
+        </section>
+        <section class="col col-5">
+            @Html.LabelFor(m => m.SearchToDate, new { @class = "label" })
+            @(Html.Kendo().DatePickerFor(m => m.SearchToDate).Value(DateTime.Now))
+
+            <div class="text-danger field-validation-error" id="ErrorSearchToDate" style="display:none;">
+                <span for="SearchToDate" class=""> To Date is not valid</span>
+            </div>
+        </section>
+        <section class="col col-5">
+            @Html.LabelFor(m => m.AccountTypeCode, new { @class = "label" })
+            @(Html.Kendo().DropDownListFor(m => m.AccountTypeCode)
+                .DataTextField("Text")
+                .DataValueField("Value")
+                .OptionLabel("Select Account Type")
+                .HtmlAttributes(new { @class = "ui-select form-control-md15" })                   
+                .DataSource(source =>
+                {
+                    source.Read(read =>
+                    {
+                        read.Action("GetAccountTypes", "Report");
+                    });
+                })
+            )
+        </section>
+        <section class="col col-5">
+            @Html.LabelFor(m => m.PaymentTypeID, new { @class = "label" })
+            @Html.Kendo().TextBoxFor(model => model.PaymentTypeID).HtmlAttributes(new { @class = "form-control" }).Name("PaymentTypeID")
+
+
+        </section>
+        <section class="col col-5">
+            @Html.Label("Successful Transactions", new { @class = "label" })
+            @Html.Kendo().CheckBoxFor(model => model.Status)
+        </section>
+    <section class="col col-2 ">
+        <label class="label">&nbsp;</label>
+        <button type="button" class="btn btn-serach " onclick="SearchReport()">Search</button>
+    </section>
+}
+<script type="text/javascript">
+    
+</script>

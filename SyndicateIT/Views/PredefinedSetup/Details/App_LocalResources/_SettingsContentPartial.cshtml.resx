@@ -1,0 +1,558 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AddClasses" xml:space="preserve">
+    <value>New Class</value>
+  </data>
+  <data name="AddCycle" xml:space="preserve">
+    <value>New Cycle</value>
+  </data>
+  <data name="Classes" xml:space="preserve">
+    <value>Class</value>
+  </data>
+  <data name="ClassesSearch" xml:space="preserve">
+    <value>Class Search</value>
+  </data>
+  <data name="ClassesTitle" xml:space="preserve">
+    <value>Class</value>
+  </data>
+  <data name="Class_Column" xml:space="preserve">
+    <value>Column</value>
+  </data>
+  <data name="Class_Column_Required" xml:space="preserve">
+    <value>Class Column is required</value>
+  </data>
+  <data name="Class_Credits" xml:space="preserve">
+    <value>Credit Number</value>
+  </data>
+  <data name="Class_Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="Class_Row" xml:space="preserve">
+    <value>Row</value>
+  </data>
+  <data name="Class_Row_Required" xml:space="preserve">
+    <value>Class Row is required</value>
+  </data>
+  <data name="Class_Title" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Class_Title_Required" xml:space="preserve">
+    <value>Name is required</value>
+  </data>
+  <data name="Company_ID" xml:space="preserve">
+    <value>Company</value>
+  </data>
+  <data name="Company_ID_Required" xml:space="preserve">
+    <value>Company is required</value>
+  </data>
+  <data name="Cycle" xml:space="preserve">
+    <value>Cycle</value>
+  </data>
+  <data name="CycleSearch" xml:space="preserve">
+    <value>Stage Search</value>
+  </data>
+  <data name="CycleTitle" xml:space="preserve">
+    <value>Stage</value>
+  </data>
+  <data name="Cycle_Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="Cycle_ID" xml:space="preserve">
+    <value>Cycle</value>
+  </data>
+  <data name="Cycle_ID_Required" xml:space="preserve">
+    <value>Cycle is required</value>
+  </data>
+  <data name="Cycle_Title" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Cycle_Title_Required" xml:space="preserve">
+    <value>Name is required</value>
+  </data>
+  <data name="EnterCycle" xml:space="preserve">
+    <value>Enter Cycle</value>
+  </data>
+  <data name="ListClasses" xml:space="preserve">
+    <value>List Classes</value>
+  </data>
+  <data name="ListCycle" xml:space="preserve">
+    <value>List Stage</value>
+  </data>
+  <data name="MessageDelete" xml:space="preserve">
+    <value>Are You sure to delete this record?</value>
+  </data>
+  <data name="Serial_ID" xml:space="preserve">
+    <value>Serial</value>
+  </data>
+  <data name="AddDivision" xml:space="preserve">
+    <value>New Division</value>
+  </data>
+  <data name="Class_ID" xml:space="preserve">
+    <value>Class</value>
+  </data>
+  <data name="Class_ID_Required" xml:space="preserve">
+    <value>Class is required</value>
+  </data>
+  <data name="Division" xml:space="preserve">
+    <value>Division</value>
+  </data>
+  <data name="DivisionSearch" xml:space="preserve">
+    <value>Division Search</value>
+  </data>
+  <data name="DivisionTitle" xml:space="preserve">
+    <value>Division</value>
+  </data>
+  <data name="Division_Name" xml:space="preserve">
+    <value>Division</value>
+  </data>
+  <data name="Division_Name_Required" xml:space="preserve">
+    <value>Name is required</value>
+  </data>
+  <data name="EnterClass" xml:space="preserve">
+    <value>Enter Class</value>
+  </data>
+  <data name="ListDivision" xml:space="preserve">
+    <value>List Classes</value>
+  </data>
+  <data name="AddSkills" xml:space="preserve">
+    <value>New Skill</value>
+  </data>
+  <data name="Coeficient_Grade" xml:space="preserve">
+    <value>Coeficient Grade</value>
+  </data>
+  <data name="Coeficient_Grade_Required" xml:space="preserve">
+    <value>Coeficient Grade is required</value>
+  </data>
+  <data name="Coeficient_KJGrade" xml:space="preserve">
+    <value>Grade</value>
+  </data>
+  <data name="Coeficient_KJGrade_Required" xml:space="preserve">
+    <value>Grade  is required</value>
+  </data>
+  <data name="CoursesTitle" xml:space="preserve">
+    <value>Course</value>
+  </data>
+  <data name="Course_ID" xml:space="preserve">
+    <value>Course</value>
+  </data>
+  <data name="Course_ID_Required" xml:space="preserve">
+    <value>Course is required</value>
+  </data>
+  <data name="Credits" xml:space="preserve">
+    <value>Credits Number</value>
+  </data>
+  <data name="Division_ID" xml:space="preserve">
+    <value>Division</value>
+  </data>
+  <data name="Division_ID_Required" xml:space="preserve">
+    <value>Grade is required</value>
+  </data>
+  <data name="EnterDivision" xml:space="preserve">
+    <value>Select Division</value>
+  </data>
+  <data name="ListSkills" xml:space="preserve">
+    <value>List Skills</value>
+  </data>
+  <data name="Skills" xml:space="preserve">
+    <value>Skill</value>
+  </data>
+  <data name="SkillsSearch" xml:space="preserve">
+    <value>Skill Search</value>
+  </data>
+  <data name="Skill_Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="Skill_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Skill_Name_Required" xml:space="preserve">
+    <value>Name is required</value>
+  </data>
+  <data name="Subject_ID" xml:space="preserve">
+    <value>Subject</value>
+  </data>
+  <data name="Subject_ID_Required" xml:space="preserve">
+    <value>Subject </value>
+  </data>
+  <data name="Year_ID" xml:space="preserve">
+    <value>Year</value>
+  </data>
+  <data name="AddTerm" xml:space="preserve">
+    <value>New Term</value>
+  </data>
+  <data name="EnterFrom" xml:space="preserve">
+    <value>From</value>
+  </data>
+  <data name="EnterTo" xml:space="preserve">
+    <value>To</value>
+  </data>
+  <data name="FromValid" xml:space="preserve">
+    <value>please enter from field</value>
+  </data>
+  <data name="ListTerm" xml:space="preserve">
+    <value>List Term</value>
+  </data>
+  <data name="ParentTerm" xml:space="preserve">
+    <value>Parent Term</value>
+  </data>
+  <data name="Term" xml:space="preserve">
+    <value>Term</value>
+  </data>
+  <data name="TermPercentage" xml:space="preserve">
+    <value>Term Percentage</value>
+  </data>
+  <data name="TermPercentage_Required" xml:space="preserve">
+    <value>please enter Term Percentage field</value>
+  </data>
+  <data name="TermSearch" xml:space="preserve">
+    <value>Term Search</value>
+  </data>
+  <data name="TermSucces" xml:space="preserve">
+    <value>success average </value>
+  </data>
+  <data name="TermSucces_Required" xml:space="preserve">
+    <value>success average  is required</value>
+  </data>
+  <data name="TermTitle" xml:space="preserve">
+    <value>Term</value>
+  </data>
+  <data name="Term_From" xml:space="preserve">
+    <value>From Date</value>
+  </data>
+  <data name="Term_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Term_Name_Required" xml:space="preserve">
+    <value>Name is required</value>
+  </data>
+  <data name="Term_TermSucces" xml:space="preserve">
+    <value>TermSucces</value>
+  </data>
+  <data name="Term_Title" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Term_Title_Required" xml:space="preserve">
+    <value>Name is required</value>
+  </data>
+  <data name="Term_To" xml:space="preserve">
+    <value>To Date</value>
+  </data>
+  <data name="ToValid" xml:space="preserve">
+    <value>please Enter to field</value>
+  </data>
+  <data name="AddSubjects" xml:space="preserve">
+    <value>New Subject</value>
+  </data>
+  <data name="ListSubjects" xml:space="preserve">
+    <value>Subject</value>
+  </data>
+  <data name="Subjects" xml:space="preserve">
+    <value>Subject</value>
+  </data>
+  <data name="SubjectsSearch" xml:space="preserve">
+    <value>Subject Search</value>
+  </data>
+  <data name="SubjectsTitle" xml:space="preserve">
+    <value>Subject</value>
+  </data>
+  <data name="Subject_Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="Subject_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Subject_Name_Required" xml:space="preserve">
+    <value>Name is required</value>
+  </data>
+  <data name="AddCourses" xml:space="preserve">
+    <value>New Course</value>
+  </data>
+  <data name="AddSkillCoefficient" xml:space="preserve">
+    <value>New Skill Coefficient</value>
+  </data>
+  <data name="Courses" xml:space="preserve">
+    <value>Course</value>
+  </data>
+  <data name="CoursesSearch" xml:space="preserve">
+    <value>Course Search</value>
+  </data>
+  <data name="Course_Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="Course_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Course_Name_Required" xml:space="preserve">
+    <value>Name is required</value>
+  </data>
+  <data name="Educationalsystem_ID" xml:space="preserve">
+    <value>Educational System</value>
+  </data>
+  <data name="Educationalsystem_ID_Required" xml:space="preserve">
+    <value>Educational System  is required</value>
+  </data>
+  <data name="GenderSearch" xml:space="preserve">
+    <value>Skill Coefficient Search</value>
+  </data>
+  <data name="GenderTitle" xml:space="preserve">
+    <value>Skill Coefficient</value>
+  </data>
+  <data name="ListSkillCoefficient" xml:space="preserve">
+    <value>List Skill Coefficient</value>
+  </data>
+  <data name="SkillCoefficient" xml:space="preserve">
+    <value>Skill Coefficient</value>
+  </data>
+  <data name="SkillCoefficient_NAME" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="SkillCoefficient_NAME_Required" xml:space="preserve">
+    <value>Name is required</value>
+  </data>
+  <data name="AddTermMonth" xml:space="preserve">
+    <value>New Term Month</value>
+  </data>
+  <data name="EnterCourse_Id" xml:space="preserve">
+    <value>Enter Course</value>
+  </data>
+  <data name="EnterDivision_Id" xml:space="preserve">
+    <value>Enter Division</value>
+  </data>
+  <data name="EnterSearchClass" xml:space="preserve">
+    <value>Enter Class</value>
+  </data>
+  <data name="EnterSearchCycle" xml:space="preserve">
+    <value>Enter Cycle</value>
+  </data>
+  <data name="lblSearchClass" xml:space="preserve">
+    <value>Class</value>
+  </data>
+  <data name="lblSearchCourse" xml:space="preserve">
+    <value>Course</value>
+  </data>
+  <data name="lblSearchCycle" xml:space="preserve">
+    <value>Cycle</value>
+  </data>
+  <data name="lblSearchDivision" xml:space="preserve">
+    <value>Division</value>
+  </data>
+  <data name="lblSearchFromDate" xml:space="preserve">
+    <value>From Date</value>
+  </data>
+  <data name="lblSearchToDate" xml:space="preserve">
+    <value>To Date</value>
+  </data>
+  <data name="PeriodDate" xml:space="preserve">
+    <value>Period Date</value>
+  </data>
+  <data name="RequiredSearchClass" xml:space="preserve">
+    <value>The Class  is required</value>
+  </data>
+  <data name="RequiredSearchCourse" xml:space="preserve">
+    <value>The Course is required</value>
+  </data>
+  <data name="RequiredSearchCycle" xml:space="preserve">
+    <value>The Cycle is required</value>
+  </data>
+  <data name="RequiredSearchDivision" xml:space="preserve">
+    <value>The Division is required</value>
+  </data>
+  <data name="TermMonth" xml:space="preserve">
+    <value>Term Month</value>
+  </data>
+  <data name="TermMonthSearch" xml:space="preserve">
+    <value>Term Month Search</value>
+  </data>
+  <data name="TermMonthSucces" xml:space="preserve">
+    <value>success average </value>
+  </data>
+  <data name="TermMonthSucces_Required" xml:space="preserve">
+    <value>success average  is required</value>
+  </data>
+  <data name="TermMonthTitle" xml:space="preserve">
+    <value>Term Month</value>
+  </data>
+  <data name="TermMonth_From" xml:space="preserve">
+    <value>From Date</value>
+  </data>
+  <data name="TermMonth_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="TermMonth_Name_Required" xml:space="preserve">
+    <value>Name is required</value>
+  </data>
+  <data name="TermMonth_TermSucces" xml:space="preserve">
+    <value>Term Month Succes</value>
+  </data>
+  <data name="TermMonth_Title" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="TermMonth_Title_Required" xml:space="preserve">
+    <value>Name is required</value>
+  </data>
+  <data name="TermMonth_To" xml:space="preserve">
+    <value>To Date</value>
+  </data>
+  <data name="AddCompany" xml:space="preserve">
+    <value>New School </value>
+  </data>
+  <data name="Company" xml:space="preserve">
+    <value>School</value>
+  </data>
+  <data name="CompanySearch" xml:space="preserve">
+    <value>School Search</value>
+  </data>
+  <data name="CompanyTitle" xml:space="preserve">
+    <value>School</value>
+  </data>
+  <data name="Company_Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="Company_Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="Company_ID_Required1" xml:space="preserve">
+    <value>School is required</value>
+  </data>
+  <data name="Company_Logo" xml:space="preserve">
+    <value>Logo</value>
+  </data>
+  <data name="Company_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Company_Name_Required" xml:space="preserve">
+    <value>Name is required</value>
+  </data>
+  <data name="Company_Website" xml:space="preserve">
+    <value>Website</value>
+  </data>
+  <data name="ListCompany" xml:space="preserve">
+    <value>List Company</value>
+  </data>
+  <data name="MessageDelete1" xml:space="preserve">
+    <value>Are You sure to delete this record?</value>
+  </data>
+  <data name="Reg_CNSS" xml:space="preserve">
+    <value>Reg Cnss</value>
+  </data>
+  <data name="Reg_Finance" xml:space="preserve">
+    <value>Reg Finance</value>
+  </data>
+</root>

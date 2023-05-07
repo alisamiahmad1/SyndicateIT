@@ -1,0 +1,134 @@
+﻿
+@model List<SyndicateIT.Model.ViewModel.ProfileManagement.ProfileDetails.AccountViewModel>
+@{
+    Layout = null;
+    string PublicResources = "~/Views/ProfileManagement/Profiles/ProfileDetails/PublicResources";
+}
+
+<article class="col-sm-12 sortable-grid ui-sortable">
+    <div class="alert alert-success alert-block">
+        <h4 class="alert-heading">@Html.Resource("LblListAccount", PublicResources)</h4>
+    </div>
+    @for (int i = 0; i < Model.Count; i++)
+    {
+
+        <div class="jarviswidget jarviswidget-color-orange jarviswidget-sortable" id="wid-id-@i" data-widget-editbutton="false" role="widget" style="">
+            <header role="heading">
+                <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                <h3 class="widget-h3"> @Model[i].AccountName</h3>
+                <span class="jarviswidget-loader" style="display: none;"><i class="fa fa-refresh fa-spin"></i></span>
+            </header>
+
+            <!-- widget div-->
+            <div role="content">
+                <div class="row">
+                    <div class="widget-body">
+
+
+                        @using (Html.BeginForm("DeleteAccount", "ProfileManagement", FormMethod.Post, new { @class = "", role = "form", id = "ExperienceList-form" }))
+                        {
+                            @Html.Hidden("Account_ID", Model[i].Account_ID)
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true)
+                        <fieldset>
+
+
+
+                            <div class="form-group  col-sm-6">
+                                @Html.LabelFor(m => m[i].BankName, Html.Resource("CountryID", PublicResources), new { @class = "col-md-4 control-label" })
+                                <div class="col-md-6">
+                                    <b class="pull-left"> @Model[i].Country</b>
+                                </div>
+                            </div>
+                            <div class="form-group  col-sm-6">
+                                @Html.LabelFor(m => m[i].Status, Html.Resource("StatusID", PublicResources), new { @class = "col-md-4 control-label" })
+                                <div class="col-md-6">
+                                    <b class="pull-left"> @Model[i].Status</b>
+                                </div>
+                            </div>
+                            <div class="form-group  col-sm-6">
+                                @Html.LabelFor(m => m[i].AccountType, Html.Resource("AccountType", PublicResources), new { @class = "col-md-4 control-label" })
+                                <div class="col-md-6">
+                                    <b class="pull-left"> @Model[i].AccountType</b>
+                                </div>
+                            </div>
+                            <div class="form-group  col-sm-6">
+                                @Html.LabelFor(m => m[i].Currency, Html.Resource("CurrencyID", PublicResources), new { @class = "col-md-4 control-label" })
+                                <div class="col-md-6">
+                                    <b class="pull-left"> @Model[i].Currency</b>
+                                </div>
+                            </div>
+
+
+
+                            <div class="form-group  col-sm-6">
+                                @Html.LabelFor(m => m[i].BankName, Html.Resource("BankName", PublicResources), new { @class = "col-md-4 control-label" })
+                                <div class="col-md-6">
+                                    <b class="pull-left"> @Model[i].BankName</b>
+                                </div>
+                            </div>
+                            <div class="form-group  col-sm-6">
+                                @Html.LabelFor(m => m[i].BankNumber, Html.Resource("BankNumber", PublicResources), new { @class = "col-md-4 control-label" })
+                                <div class="col-md-6">
+                                    <b class="pull-left"> @Model[i].BankNumber</b>
+                                </div>
+                            </div>
+                            <div class="form-group  col-sm-6">
+                                @Html.LabelFor(m => m[i].AccountName, Html.Resource("JobTitle", PublicResources), new { @class = "col-md-4 control-label" })
+                                <div class="col-md-6">
+                                    <b class="pull-left"> @Model[i].AccountName</b>
+                                </div>
+                            </div>
+                            <div class="form-group  col-sm-6">
+                                @Html.LabelFor(m => m[i].AccountNumber, Html.Resource("AccountNumber", PublicResources), new { @class = "col-md-4 control-label" })
+                                <div class="col-md-6">
+                                    <b class="pull-left"> @Model[i].AccountNumber</b>
+                                </div>
+                            </div>
+                            <div class="form-group  col-sm-6">
+                                @Html.LabelFor(m => m[i].IBAN, Html.Resource("IBAN", PublicResources), new { @class = "col-md-4 control-label" })
+                                <div class="col-md-6">
+                                    <b class="pull-left"> @Model[i].IBAN</b>
+                                </div>
+                            </div>
+                            <div class="form-group  col-sm-6">
+                                @Html.LabelFor(m => m[i].RountingNumber, Html.Resource("RountingNumber", PublicResources), new { @class = "col-md-4 control-label" })
+                                <div class="col-md-6">
+                                    <b class="pull-left"> @Model[i].RountingNumber</b>
+                                </div>
+                            </div>
+                            <div class="form-group  col-sm-6">
+                                @Html.LabelFor(m => m[i].CreationDate, Html.Resource("CreationDate", PublicResources), new { @class = "col-md-4 control-label" })
+                                <div class="col-md-6">
+                                    <b class="pull-left"> @Model[i].CreationDate</b>
+                                </div>
+                            </div>
+                            <div class="form-group  col-sm-6">
+                                @Html.LabelFor(m => m[i].CloseDate, Html.Resource("CloseDate", PublicResources), new { @class = "col-md-4 control-label" })
+                                <div class="col-md-6">
+                                    <b class="pull-left"> @Model[i].CloseDate</b>
+                                </div>
+                            </div>
+                            <div class="form-group  col-sm-12">
+                                @Html.LabelFor(m => m[i].Description, Html.Resource("Description", PublicResources), new { @class = "col-md-2 control-label" })
+                                <div class="col-md-10">
+                                    <b class="pull-left ">@Model[i].Description</b>
+                                </div>
+                            </div>
+                            <div class="form-group  col-sm-6">
+                                <div class="col-md-6">
+                                    <b class="pull-left"> <button onclick="DeleteExperience(@i);" class="btn btn-sm btn-danger disabled pull-left" type="button">  @Html.Resource("LblDelete", PublicResources)</button></b>
+                                </div>
+                            </div>
+                        </fieldset>
+                        }
+                    </div>
+                </div>
+            </div>
+            <!-- end widget content -->
+        </div>
+        <!-- end widget -->
+
+    }
+</article>
+

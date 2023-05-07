@@ -1,0 +1,181 @@
+﻿@model SyndicateIT.Model.ViewModel.Msg.Msg_GridViewModel
+@{
+    var vModel = Model;
+    var Recivers = Model.Msg_Recivers.Where(p => p.Recived && !p.Readed).ToList();
+    var Readers = Model.Msg_Recivers.Where(p => p.Readed).ToList();
+    var RestRecivers = Model.Msg_Recivers.Where(p => !p.Recived).ToList();
+    bool isSender = vModel.isSender;
+}
+<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 pull-right">
+    <div class="well well-sm well-light">
+        <h5>Messege Info</h5>
+        <ul class="list-unstyled">
+            @if (!isSender)
+            {
+                <li>
+                    <i class="fa fa-user fa-fw text-success"></i> Send From : <a href="javascript:void(0);"> @vModel.SenderName</a>
+                </li>
+            }
+            <li>
+                <i class="fa fa-time fa-fw text-danger"></i> Send Time : <a href="javascript:void(0);">
+                    <strong>
+                        @if (vModel.ENTRY_DATE.GetValueOrDefault().Date == DateTime.Now.Date)
+                        {
+                            <span>@string.Format("{0:hh:mm tt}", vModel.ENTRY_DATE.Value)</span>
+                        }
+                        else
+                        {
+                            <span>@string.Format("{0:dd/MM/yyyy}", vModel.ENTRY_DATE.Value)</span>
+                        }
+                    </strong>
+                </a>
+            </li>
+        </ul>
+        @if (isSender)
+        {
+            <h5>Recived By</h5>
+            <ul class="list-unstyled">
+                @for (int i = 0; i < Recivers.Count; i++)
+                {
+                    <li>
+                        <i class="fa fa-user fa-fw text-primary"></i> <a href="javascript:void(0);"> @Recivers[i].Reciver_Name</a>
+                    </li>
+                }
+            </ul>
+            <h5>Viewd By</h5>
+            <ul class="list-unstyled">
+                @for (int i = 0; i < Readers.Count; i++)
+                {
+                    <li>
+                        <i class="fa fa-user fa-fw text-success"></i> <a href="javascript:void(0);"> @Readers[i].Reciver_Name</a>
+                    </li>
+                }
+            </ul>
+            <h5>Rest No Recive</h5>
+            <ul class="list-unstyled">
+                @for (int i = 0; i < RestRecivers.Count; i++)
+                {
+                    <li>
+                        <i class="fa fa-user fa-fw text-success"></i> <a href="javascript:void(0);"> @RestRecivers[i].Reciver_Name</a>
+                    </li>
+                }
+            </ul>
+        }
+    </div>
+
+</div>
+
+<div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+    <div class="well well-sm well-light">
+        <h5>@vModel.Msg_Subject</h5>
+        @(Html.TextAreaFor(m => m.Msg_Content))
+        <script>
+            $(function () {
+                $("#Msg_Content").kendoEditor({ "tools": [] });
+                $(".k-editable-area iframe").contents().find('body').attr("contenteditable", false)
+            });
+
+        </script>
+    </div>
+    
+    @if (vModel.Has_Attachemant)
+    {
+        <div class="col-lg-12">
+            <div class="inbox-download">
+                @vModel.Msg_Attachement.Count attachment(s)
+            </div>
+                @for (int i = 0; i < vModel.Msg_Attachement.Count; i++)
+                {
+                    var fileName = Path.GetFileName(Server.MapPath("~/") + vModel.Msg_Attachement[i]);
+                    <div class="well well-sm">
+                        <span>
+                            <i class="fa fa-file"></i>
+                        </span>
+                        <strong>@fileName</strong>
+                        <br>
+                        <br>
+                        <a href="@Html.GetUrl("",vModel.Msg_Attachement[i])" download="@fileName"> Download</a>  |
+                        <a href="@Html.GetUrl("",vModel.Msg_Attachement[i])" target="_blank"> View</a>
+                    </div>
+                }
+        </div>
+    }
+</div>
+<div style="display:none">
+    <div class="inbox-download">
+        2 attachment(s) — <a href="javascript:void(0);"> Download all attachments</a>
+
+        <ul class="inbox-download-list">
+            <li>
+                <div class="well well-sm">
+                    <span>
+                        <img src="img/demo/sample.jpg">
+                    </span>
+                    <br>
+                    <strong>rocketlaunch.jpg</strong>
+                    <br>
+                    400 kb
+                    <br>
+                    <a href="javascript:void(0);"> Download</a>  | <a href="javascript:void(0);"> View</a>
+                </div>
+            </li>
+            <li>
+                <div class="well well-sm">
+                    <span>
+                        <i class="fa fa-file"></i>
+                    </span>
+
+                    <br>
+                    <strong>timelogs.xsl</strong>
+                    <br>
+                    1.3 mb
+                    <br>
+                    <a href="javascript:void(0);"> Download</a> | <a href="javascript:void(0);"> Share</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="email-infobox">
+
+        <div class="well well-sm well-light">
+            <h5>Related Invoice</h5>
+            <ul class="list-unstyled">
+                <li>
+                    <i class="fa fa-file fa-fw text-success"></i><a href="javascript:void(0);"> #4831 - Paid</a>
+                </li>
+                <li>
+                    <i class="fa fa-file fa-fw text-danger"></i><a href="javascript:void(0);"><strong> #4835 - Unpaid</strong></a>
+                </li>
+            </ul>
+
+
+        </div>
+
+        <div class="well well-sm well-light">
+            <h5>Upcoming Meetings</h5>
+
+            <p>
+                <span class="label label-success"><i class="fa fa-check"></i> <strike>Agenda Review @@ 10 AM</strike> </span>
+            </p>
+
+            <p>
+                <span class="label label-primary"><i class="fa fa-clock-o"></i> Client Meeting @@ 2:30 PM</span>
+            </p>
+
+            <p>
+                <span class="label label-warning"><i class="fa fa-clock-o"></i> Salary Review @@ 4:00 PM</span>
+            </p>
+        </div>
+
+        <ul class="list-inline">
+            <li><img src="img/avatars/5.png" alt="me" width="30px"></li>
+            <li><img src="img/avatars/3.png" alt="me" width="30px"></li>
+            <li><img src="img/avatars/sunny.png" alt="me" width="30px"></li>
+            <li><a href="javascript:void(0);">1 more</a></li>
+        </ul>
+
+    </div>
+</div>
+
+

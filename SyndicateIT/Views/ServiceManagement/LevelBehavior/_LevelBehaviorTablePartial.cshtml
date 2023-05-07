@@ -1,0 +1,54 @@
+﻿@model List<SyndicateIT.Model.ViewModel.ServiceManagement.ServiceDetails.LevelBehaviorTableViewModel>
+@{
+    string PublicResources = "~/Views/ServiceManagement/LevelBehavior/_LevelBehaviorPartial.cshtml";
+}
+@Html.Partial("~/Views/Shared/_AlertPartial.cshtml", Model[0].Alert)
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th></th>
+            <th> @Html.Resource("Presence", PublicResources)</th>
+            <th> @Html.Resource("Reason", PublicResources)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < Model.Count; i++)
+        {
+
+            var Reason_ID = Model[i].Reason_ID;
+            var preasonId = "Reason" + "_" + i;
+
+            <tr class="ServiceTr">
+                @Html.Hidden("UserID", Model[i].User_ID, new { @class = "hdUser" })
+                @Html.Hidden("LevelBehaviorID", Model[i].LevelBehavior_ID, new { @class = "hdAttendances" })
+                <th>@Model[i].UserName.ToUpperFirstLetter()</th>
+                <td>
+                    <label class="radio radio-inline no-margin">
+                        <input type="text" name="@preasonId" value="@Model[i].Percentage" class="radiobox style-2" data-bv-field="rating">
+                        <span>%</span>
+                    </label>
+                </td>
+                <td>
+                    @(Html.Kendo().DropDownListFor(m => m[i].Reason_ID)
+                        .Name("Reason_ID" + @i)
+                        .DataTextField("Text")
+                        .DataValueField("Value")
+                        .OptionLabel(@Html.Resource("SelectReasons", PublicResources))
+                        .HtmlAttributes(new { @class = "ui-select form-control-md10 dpReasons" })
+                        .Value(Reason_ID.ToString())
+                        .DataSource(source =>
+                        {
+                            source.Read(read =>
+                            {
+                                read.Action("GetStudentLevelsList", "ServiceManagement");
+                            });
+                        }))
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section Scripts {
+    @Scripts.Render("~/bundles/kendo/js")
+
+}

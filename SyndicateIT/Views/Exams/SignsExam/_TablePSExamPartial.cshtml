@@ -1,0 +1,282 @@
+﻿@model SyndicateIT.Model.ViewModel.Exam.TablePSViewModel
+@{
+    Layout = null;
+    string PublicResources = "~/Views/Exams/SignsExam/_TablePSExamPartial.cshtml";
+}
+
+<table width="100%" cellpadding="0" cellspacing="0">
+    <tr>
+        <td>
+            <table width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                    <td>
+                        <table cellpadding="0" cellspacing="0" class="col-md-12">
+                            <tr>
+                                <td class="col-md-4">
+                                    <table width="100%" cellpadding="0" cellspacing="0">
+                                        <tr>
+                                            <td colspan="2" class="txt-center " style="padding: 8px 10px;text-align:left;font-weight:bold; font-size:12px; ">@Html.Resource("SchoolName", PublicResources)</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" class="txt-center " style="padding: 8px 10px;text-align:left;font-weight:bold; font-size:12px;">@Html.Resource("SchoolNameFr", PublicResources)</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td class="col-md-4" style="text-align:center;"><img src="http://www.byec-edu.org/AppByec/Content/image/Corporate/logo-bey-exam1.png" style="width:146px!important; height:120px!important;"></td>
+                                <td class="col-md-4">
+                                    <table width="100%" cellpadding="0" cellspacing="0">
+                                        <tr>
+                                            <td colspan="2" class="txt-center font-md" style="padding: 8px 10px;text-align:right;font-weight:bold;">@Html.Resource("SchoolNameAr", PublicResources)</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" class="txt-center font-md" style="padding: 8px 10px;text-align:right;font-weight:bold;">@Html.Resource("SchoolNameArAddr", PublicResources)</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td class="col-md-12" style="padding: 4px 5px;">
+            <table cellpadding="0" cellspacing="0" class="col-md-12">
+                <tr>
+                    <td style="text-align:center;" class="font-xl">
+                        @Html.Resource("SignExamTitle", PublicResources)  @Model.ClassNameAlfa
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td class="col-md-12">
+            <table cellpadding="0" cellspacing="0" class="col-md-12">
+                <tr>
+                    <td class="col-md-9">&nbsp;</td>
+                    <td class="col-md-2 font-md" style="text-align:right;">@Model.NameStudent</td>
+                    <td class="col-md-1 font-md" style="text-align:right;">@Html.Resource("Name", PublicResources)</td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td class="col-md-12" style="padding: 8px 10px;">
+            <table cellpadding="0" cellspacing="0" class="col-md-12" style="margin-bottom: 20px;">
+                <tr>
+                    <td class="col-md-4">&nbsp;</td>
+                    <td class="col-md-2 font-md" style="text-align:right;">@Model.Division</td>
+                    <td class="col-md-1 font-md" style="text-align:left;">@Html.Resource("Division", PublicResources)</td>
+                    <td class="col-md-2 font-md" style="text-align:right;">@Model.Class</td>
+                    <td class="col-md-1 font-md" style="text-align:right;">@Html.Resource("Class", PublicResources)</td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <table width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                    <td width="70%">
+                        <table class="table table-bordered table-striped responsive-utilities col-md-12">
+                            <thead>
+                                <tr>
+                                    <th class="col-md-2 text-center" style="background-color: rgba(61, 106, 124, 0.15);border: 1px solid rgba(61, 106, 124, 0.2);">@Html.Resource("Average", PublicResources)</th>
+                                    <th class="col-md-3 text-center" style="background-color: rgba(61, 106, 124, 0.15);border: 1px solid rgba(61, 106, 124, 0.2);">@Model.SemesterFirstName</th>
+                                    <th class="col-md-3 text-center" style="background-color: rgba(61, 106, 124, 0.15);border: 1px solid rgba(61, 106, 124, 0.2);">@Model.SemesterSecondName </th>
+                                    <th class="col-md-2 text-center" style="background-color: rgba(61, 106, 124, 0.15);border: 1px solid rgba(61, 106, 124, 0.2);"> @Html.Resource("Total", PublicResources)  </th>
+                                    <th class="col-md-2 text-center" style="background-color: rgba(61, 106, 124, 0.15);border: 1px solid rgba(61, 106, 124, 0.2);"> @Html.Resource("MaximumMark", PublicResources) </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for (int t = 0; t < Model.ItemCoursePS.Count; t++)
+                                {
+                                    var ItemCourseData = Model.ItemCoursePS[t];
+                                    for (int j = 0; j < ItemCourseData.ItemSkilsPS.Count; j++)
+                                    {
+
+                                        <tr style="background-color: #fff;">
+                                            <th class="is-visible text-center">@ItemCourseData.ItemSkilsPS[j].Average</th>
+                                            <td class="is-visible text-center">@ItemCourseData.ItemSkilsPS[j].SemesterFirstValue</td>
+                                            <td class="is-hidden text-center">@ItemCourseData.ItemSkilsPS[j].SemesterSecondValue</td>
+                                            @if (j == 0)
+                                            {
+                                                <td class="is-hidden text-center">@ItemCourseData.ItemSkilsPS[j].Total</td>
+                                            }
+                                            else
+                                            {
+                                                <td class="is-hidden text-center" style="border-top-color: #fff;">&nbsp;</td>
+                                            }
+                                            <td class="is-hidden text-center">@ItemCourseData.ItemSkilsPS[j].MaximumMark</td>
+                                        </tr>
+                                    }
+                                }
+                                <tr style="background-color: #fff;">
+                                    <th class="is-visible text-center">@Model.AgerageAllSemester</th>
+                                    <td class="is-visible text-center">@Model.AgerageFirstSemester</td>
+                                    <td class="is-hidden text-center">@Model.AgerageFirstTerm</td>
+                                    <td class="is-hidden text-center">@Model.MAximunCoefficeint</td>
+                                    <td class="is-hidden text-center">@Model.MAximunCoefficeint</td>
+
+                                </tr>
+                                <tr style="background-color: #fff;">
+                                    <th class="is-visible text-center">@Model.CoefficientAgerageAllSemester</th>
+                                    <td class="is-visible text-center">@Model.CoefficientAgerageFirstSemester</td>
+                                    <td class="is-hidden text-center">@Model.CoefficientAgerageFirstTerm</td>
+                                    <td class="is-hidden text-center">&nbsp;</td>
+                                    <td class="is-hidden text-center">&nbsp;</td>
+
+
+                                </tr>
+                                <tr style="background-color: #fff;">
+                                    <th class="is-visible text-center">@Model.ratingAgerageAllSemester</th>
+                                    <td class="is-visible text-center">@Model.ratingAgerageFirstSemester</td>
+                                    <td class="is-hidden text-center">@Model.ratingAgerageFirstTerm</td>
+                                    <td class="is-hidden text-center">&nbsp;</td>
+                                    <td class="is-hidden text-center">&nbsp;</td>
+
+                                </tr>
+                                <tr style="background-color: #fff;">
+                                    <th class="is-visible text-center">@Model.resultAgerageAllSemester</th>
+                                    <td class="is-visible text-center">@Model.resultAgerageFirstSemester</td>
+                                    <td class="is-hidden text-center">@Model.resultAgerageFirstTerm</td>
+                                    <td class="is-hidden text-center">&nbsp;</td>
+                                    <td class="is-hidden text-center">&nbsp;</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                    <td width="30%">
+                        <table class="table table-bordered table-striped responsive-utilities col-md-12">
+                            <thead>
+                                <tr>
+                                    <th class="col-md-12 text-center" colspan="2" style="background-color: rgba(61, 106, 124, 0.15);border: 1px solid rgba(61, 106, 124, 0.2);">@Html.Resource("Material", PublicResources) </th>
+                                </tr>
+                            </thead>
+                            @for (int i = 0; i < Model.ItemCoursePS.Count; i++)
+                            {
+                                if (Model.ItemCoursePS[i].HasSkils == true)
+                                {
+                                    var ItemCourse = Model.ItemCoursePS[i];
+
+                                    <tr>
+                                        <td style="padding:0px!important;margin:0px!important;">
+                                            <table class="table table-bordered table-striped responsive-utilities " style="width:100%; margin-bottom:0px!important;border: 0px;" cellpadding="0" cellspacing="0">
+                                                <tbody>
+                                                    @for (int j = 0; j < ItemCourse.ItemSkilsPS.Count; j++)
+                                                    {
+                                                        if (j == 0)
+                                                        {
+                                                            <tr>
+                                                                <td class="is-hidden text-center" style="border-width: 0px;">@ItemCourse.ItemSkilsPS[j].Name</td>
+                                                            </tr>
+                                                        }
+                                                        else
+                                                        {
+                                                            <tr>
+                                                                <td class="text-center is-visible">@ItemCourse.ItemSkilsPS[j].Name</td>
+                                                            </tr>
+                                                        }
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                        <th class="text-center is-visible" colspan="2" style="-webkit-transform: rotate(-90deg);vertical-align:middle;width: 50px;">@ItemCourse.Name</th>
+
+                                    </tr>
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td class="text-center is-visible" colspan="2" style="border: 1px solid #ddd;">@Model.ItemCoursePS[i].Name</td>
+                                    </tr>
+                                }
+                            }
+                            <tr>
+                                <th class="col-md-12 text-center" colspan="2" style="background-color: rgba(61, 106, 124, 0.15);border: 1px solid rgba(61, 106, 124, 0.2);">@Html.Resource("GeneralTotal", PublicResources) </th>
+                            </tr>
+                            <tr>
+                                <th class="col-md-12 text-center" colspan="2" style="background-color: rgba(61, 106, 124, 0.15);border: 1px solid rgba(61, 106, 124, 0.2);">@Html.Resource("GeneralAverage", PublicResources) </th>
+                            </tr>
+                            <tr>
+                                <th class="col-md-12 text-center" colspan="2" style="background-color: rgba(61, 106, 124, 0.15);border: 1px solid rgba(61, 106, 124, 0.2);">@Html.Resource("Category", PublicResources) </th>
+                            </tr>
+                            <tr>
+                                <th class="col-md-12 text-center" colspan="2" style="background-color: rgba(61, 106, 124, 0.15);border: 1px solid rgba(61, 106, 124, 0.2);">@Html.Resource("Result", PublicResources) </th>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr style="display: table-row; vertical-align: inherit; border-color: inherit;">
+        <td class="col-md-12" style="width: 100%; float: left;position: relative; min-height: 1px;margin-bottom:30px;margin-left:50px; text-align:left;margin-top:0px;font-size:16px;">
+            @Html.Resource("AdminSignature", PublicResources)
+        </td>
+    </tr>
+    <tr>
+        <td><hr style="border-top: 2px dashed #000; width:95%; float:left;" /><img src="http://www.byec-edu.org/AppByec/Content/image/Repair.png" style="width:20px!important; height:20px!important;"></td>
+    </tr>
+    <tr style="display: table-row; vertical-align: inherit; border-color: inherit;">
+        <td style="width: 100%; float: left;">
+            <table style="width: 100%; float: left;background-color: transparent; border-collapse: collapse; border-spacing: 0; display: table; border-spacing: 0;">
+                <tr>
+                    <td style="width: 70%;border: 1px solid #ddd;">
+                        <table width="100%" cellpadding="0" cellspacing="0" style="background-color: transparent; border-collapse: collapse; border-spacing: 0; display: table; border-spacing: 0;">
+                            <tbody style="display: table-row-group; vertical-align: middle;border-color: inherit;">
+                                <tr style="display: table-row; vertical-align: inherit; border-color: inherit;">
+                                    <td style="line-height: 1.42857143; vertical-align: top;padding: 4px 5px; text-align: right; font-size:16px;">@Html.Resource("ParentsNotes", PublicResources) </td>
+                                </tr>
+                                <tr style="display: table-row; vertical-align: inherit; border-color: inherit;">
+                                    <td style="line-height: 1.42857143; vertical-align: top;padding: 4px 5px; text-align: left; font-size:16px;">@Html.Resource("ParentSignature", PublicResources)</td>
+                                </tr>
+                                <tr style="display: table-row; vertical-align: inherit; border-color: inherit;">
+                                    <td>
+                                        <table width="100%" cellpadding="0" cellspacing="0">
+                                            <tr>
+                                                <td width="68%">&nbsp;</td>
+                                                <td style="width:30%;border: 1px solid #ddd;line-height: 1.42857143; vertical-align: top;margin: 4px 5px; text-align: center; font-size:16px;">@Html.Resource("ReturnNote", PublicResources)</td>
+                                                <td width="2%">&nbsp;</td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                    <td style="width: 30%;border: 1px solid #ddd;">
+                        <table width="100%" cellpadding="0" cellspacing="0" style="background-color: transparent; border-collapse: collapse; border-spacing: 0; display: table; border-spacing: 0;">
+                            <tbody style="display: table-row-group; vertical-align: middle;border-color: inherit;">
+                                <tr style="display: table-row; vertical-align: inherit; border-color: inherit;">
+                                    <td style="line-height: 1.42857143; vertical-align: top;text-align: right; font-size:16px;">@Model.NameStudent</td>
+                                    <td style="line-height: 1.42857143; vertical-align: top;text-align: right; font-size:16px;">@Html.Resource("Name", PublicResources)</td>
+                                </tr>
+                                <tr style="display: table-row; vertical-align: inherit; border-color: inherit;">
+                                    <td style="line-height: 1.42857143; vertical-align: top;text-align: right;font-size:16px;">@Model.Class</td>
+                                    <td style="line-height: 1.42857143; vertical-align: top; text-align: right; font-size:16px;">@Html.Resource("Class", PublicResources)</td>
+                                </tr>
+                                <tr style="display: table-row; vertical-align: inherit; border-color: inherit;">
+                                    <td style="line-height: 1.42857143; vertical-align: top;text-align: right;font-size:16px;">@Model.Division</td>
+                                    <td style="line-height: 1.42857143; vertical-align: top;text-align: right; font-size:16px;">@Html.Resource("Division", PublicResources)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr style="display: table-row; vertical-align: inherit; border-color: inherit;">
+        <td class="col-md-12">
+            <table class="col-md-12" style="width: 100%; float: left;position: relative; min-height: 1px;margin-bottom:30px;margin-left:50px; text-align:left;margin-top:20px;font-size:16px;">
+                <tr>
+                    <td style="text-align:right">@Model.SchoolNotes</td>
+                    <td style="text-align:left"> :@Html.Resource("SchoolNotes", PublicResources)</td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>

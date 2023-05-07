@@ -1,0 +1,22 @@
+﻿@model List<SyndicateIT.DataLayer.DataContext.T_Form>
+@{
+        var m = ViewData["m"] as SyndicateIT.DataLayer.DataContext.T_Document_Template;}
+<h2>@m.Name</h2>
+<a href="~/Document/Form/@m.Id">new form for this template</a>
+<table class="table table-bordered">
+    <tr>
+        <th>id</th>
+        <th></th>
+    </tr>
+    @for (int i = 0; i < Model.Count; i++)
+    {
+        <tr>
+            <td>@Model[i].Id</td>
+            <td>@Model[i].T_Document_Template.Name</td>
+            <td>
+                <a href="~/Document/Form/@Model[i].Document_Template_Id?form_id=@Model[i].Id">Edit</a><br />
+                <a href="~/Document/RemoveForm/@Model[i].Id">Delete</a><br />
+            </td>
+        </tr>
+    }
+</table>

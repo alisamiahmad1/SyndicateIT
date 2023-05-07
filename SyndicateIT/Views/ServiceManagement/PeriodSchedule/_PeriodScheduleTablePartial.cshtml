@@ -1,0 +1,200 @@
+﻿@model SyndicateIT.Model.ViewModel.ServiceManagement.ServiceDetails.PeriodScheduleTableViewModel
+
+
+@Styles.Render("~/Content/DropDopSchedule")
+@{
+    var freeDay = Model.ScheduleTimes.Where(p => p.Deny_Day != -1 && p.Allow_Day == -1).Select(s => s.Deny_Day).FirstOrDefault();
+    var generalTimes = Model.ScheduleTimes.Where(p => p.Allow_Day == -1).ToList();
+    var date = Model.ScheduleDate.Date;
+}
+
+<!-- tables inside this DIV could have draggable content -->
+<div id="redips-drag">
+    <table cellpadding="0" cellspacing="0" width="100%" style="background-color: #fff;">
+        <tr>
+            <td width="20%">
+                <div id="left">
+                    <table id="table1">
+                        <colgroup>
+                            <col width="190" />
+                        </colgroup>
+                        <tbody>
+                            @for (int i = 0; i < Model.UserGrade.Count; i++)
+                            {
+                                <tr><td class="dark" style="padding: 8px!important;"><div id="btnCourse@(Model.UserGrade[i].User_ID)" data-value="@(Model.UserGrade[i].User_ID)" class="redips-drag redips-clone bi " draggable="true" ondragstart="drag(event)">@Model.UserGrade[i].UserName</div></td></tr>
+                            }
+                            <tr><td class="redips-trash td-drag-drop" title="Trash" ondrop='drop(event)' ondragover='allowDrop(event)' id="ScheduleTrash">Trash</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </td>
+            <td width="80%">
+                <div id="right">
+                    <table id="table2" style="background-color: #eee; width:100%;">
+                        <colgroup>
+                            <col width="15%" />
+                            <col width="17%" />
+                            <col width="17%" />
+                            <col width="17%" />
+                            <col width="17%" />
+                            <col width="17%" />
+                        </colgroup>
+                        <tbody>
+                            <tr>
+                                <!-- if checkbox is checked, clone school subjects to the whole table row  -->
+                                <td class="redips-mark blank">
+                                    Time
+                                </td>
+                                @{ var countDays = 5 + (freeDay > 6 ? 1 : 0);}
+                                @for (int i = 1; i < 7; i++)
+                                {
+                                    if (i != freeDay)
+                                    {
+                                        var dateNext = date.AddDays(i);
+                                        <td class="redips-mark dark">
+                                            @((DayOfWeek)i)
+                                            <br />@dateNext.ToShortDateString()
+                                        </td>
+                                    }
+                                }
+                            </tr>
+                            @for (int j = 1; j < generalTimes.Count; j++)
+                            {
+                                <tr>
+                                    <td class="redips-mark dark">@generalTimes[j].From_Time - @generalTimes[j].To_Time</td>
+                                    @for (int i = 1; i < 7; i++)
+                                    {
+                                        if (i != freeDay)
+                                        {
+                                            if (generalTimes[j].is_Free_Time)
+                                            {
+                                                <td class="redips-mark lunch" id='td@(i)@(j)' style="padding: 2%;">Free Time</td>
+                                                continue;
+                                            }
+                                            var dateNext = date.AddDays(i);
+                                            var schedule = Model.ScheduleTableGrid.Where(p => p.Schedule_Day == i && p.Schedule_Times_ID == generalTimes[j].Schedule_Times_ID).FirstOrDefault();
+                                            string Schedule_ID = (schedule == null) ? "" : schedule.Schedule_ID.ToString();
+                                            <td id='td@(i)@(j)'
+                                                data-time="@generalTimes[j].Schedule_Times_ID"
+                                                data-date='@(dateNext)'
+                                                data-schedule="@Schedule_ID"
+                                                ondrop='drop(event)'
+                                                ondragover='allowDrop(event)'
+                                                class="td-drag-drop" style="padding: 2%;">
+                                                @if (schedule != null)
+                                                {
+                                                    string User_ID = schedule.User_ID.ToString();
+                                                    if (!string.IsNullOrEmpty(User_ID))
+                                                    {
+                                                        <div id="btnSchedule@(i)@(j)" data-value="@User_ID" class="redips-drag redips-clone bi inTbl" draggable="true" ondragstart="drag(event)">
+                                                            @schedule.UserName
+                                                        </div>
+                                                    }
+                                                }
+                                            </td>
+                                        }
+                                    }
+                                </tr>
+                            }
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div><!-- drag container -->
+<div id="message">Drag school subjects to the timetable (clone subjects with SHIFT key)</div>
+
+<script>
+    function allowDrop(ev) {
+        ev.preventDefault();
+    }
+
+    function drag(ev) {
+        ev.dataTransfer.setData("text", ev.target.id);
+    }
+
+    function drop(ev) {
+        ev.preventDefault();
+
+        var data = ev.dataTransfer.getData("text");
+
+        var parent = $("#" + data).closest("td");
+        var id = ev.target.id;
+        var scheduleId = $("#" + data).closest("td").attr("data-schedule");
+
+
+        if (id == "ScheduleTrash") {
+            DeleteRecord(scheduleId);
+            $("#" + data).remove();
+            $("#" + data).closest("td").attr("data-schedule", "");
+        }
+
+        var obj = $(document.getElementById(data).outerHTML)
+        var dest = $("#" + id);
+        if (!obj.hasClass('inTbl')) {
+            obj = obj.attr("id", data + new Date().getTime()).addClass('inTbl');
+        }
+        else {
+            if (dest.is("td") || dest.closest("td").is("td")) {
+                DeleteRecord(scheduleId);
+                $("#" + data).remove();
+                $("#" + data).closest("td").attr("data-schedule", "");
+            }
+            else {
+                return;
+            }
+        }
+        if (!dest.is("td"))
+            dest = dest.closest("td");
+        dest.html(obj);
+        if (dest.attr("id") == parent.attr("id")) {
+            return;
+        }
+        SaveRecord(dest.attr("id"));
+
+    }
+
+            function SaveRecord(element_ID) {
+                var myData = $("#scheduleContent").serialize();
+                var td_ID = td_IDs.indexOf(element_ID);
+                myData += "&Cycle_ID=" + $("#SearchCycle").data("kendoDropDownList").value();
+                myData += "&Class_ID=" + $("#SearchClass").data("kendoDropDownList").value();
+                myData += "&Division_ID=" + $("#SearchDivision").data("kendoDropDownList").value();
+                myData += "&Schedule_ID=" + Schedule_IDs[td_ID];
+                myData += "&User_ID=" + $("#" + element_ID).find(".inTbl").data("value");
+                myData += "&Schedule_Date=" + $("#" + element_ID).data("date");
+                myData += "&Schedule_Times_ID=" + $("#" + element_ID).data("time");
+                $.post('@Html.GetUrl("SavePeriodSchedule", "ServiceManagement")', myData, function (data, textStatus, xhr) {
+                    if (data[0] == "s") {
+                        Schedule_IDs[td_ID] = data[1];
+                        $("#" + element_ID).attr("data-schedule", data[1]);
+                    }
+                    else {
+
+                    }
+                })
+            }
+            var Schedule_IDs = [];
+            var td_IDs = [];
+            var tdSchedules = $(".td-drag-drop");
+            for (var i = 0; i < tdSchedules.length ; i++) {
+                Schedule_IDs.push(tdSchedules.eq(i).data("schedule"));
+                td_IDs.push(tdSchedules.eq(i).attr("id"));
+            }
+
+            function DeleteRecord(id) {
+                $.post('@Html.GetUrl("DeletePeriodSchedule", "ServiceManagement")', { pScheduleID: id }, function (data, textStatus, xhr) {
+                    if (data[0] == "s") {
+
+                    }
+                    else {
+
+                    }
+                })
+            }
+
+
+</script>

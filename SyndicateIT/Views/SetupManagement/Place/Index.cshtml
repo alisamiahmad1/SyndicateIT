@@ -1,0 +1,29 @@
+﻿@model  SyndicateIT.Model.ViewModel.SetupManagement.Place.PlaceContentViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string PublicResources = "~/Views/SetupManagement/Place/PublicResource";
+}
+@Scripts.Render("~/Scripts/Place")
+@Scripts.Render("~/Scripts/translate")
+@*@Html.Partial("~/Views/Shared/_NavigationPartial.cshtml", @Model.Navigation)*@
+<div id="PlaceContent">
+    @Html.Partial("~/Views/SetupManagement/Place/_PlaceContentPartial.cshtml", Model);
+</div>
+<script type="text/javascript">
+    var PlaceSearchURL = '@Html.GetUrl("LoadSearchPlace", "Place")';
+    var PlaceDeleteURL = '@Html.GetUrl("PlaceDelete", "Place")';
+    var loadPlaceURL = '@Html.GetUrl("LoadPlace", "Place")';
+    var loader = '@Utilities.GetAbsotuleUrl("~/Content/image/ajax-loader.gif")';
+    var savePlaceUrl = '@Html.GetUrl("AddUpdatePlace", "Place")';
+    var messageDelete = '@Html.Resource("MessageDelete", PublicResources)';
+    var loadTranslationPlaceURL = '@Html.GetUrl("LoadTranslatePlace", "Place")';
+
+    $("#SchoolSettings", $("#nav")).addClass("active open");
+    $("#SchoolSettings Ul", $("#nav")).show();
+
+</script>
+@section Scripts {
+    @Scripts.Render("~/bundles/kendo/js")
+}
+

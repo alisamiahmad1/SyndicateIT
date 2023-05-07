@@ -1,0 +1,23 @@
+﻿@model SyndicateIT.DataLayer.DataContext.T_Document_Form_Template
+@{
+    ViewBag.Title = "Template " + Model;
+}
+<div id="content">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-title txt-color-blueDark">
+                @Model.Name
+                @Html.ActionLink("Back to List", "Index", null, new { style = "float:right" })
+            </h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            @Html.Raw((Model.Executed_Template))
+        </div>
+        </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/kendo/js")
+}

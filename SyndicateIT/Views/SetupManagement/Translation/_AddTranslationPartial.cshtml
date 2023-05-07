@@ -1,0 +1,62 @@
+﻿
+@model List<SyndicateIT.Model.ViewModel.SetupManagement.Translation.TranslationViewModel>
+@{
+    Layout = null;
+    string resouceFilePath = "~/Views/SetupManagement/Translation/_AddTranslationPartial.cshtml";
+}
+
+    @Html.Partial("~/Views/Shared/_AlertPartial.cshtml", Model[0].Alert)
+
+     <div class="col-md-12">
+
+        <!-- Horizontal Form -->
+        <!-- /.box-header -->
+        <!-- form start -->
+
+        @using (Html.BeginForm("AddUpdateTranslation", "Translation", FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "Translation-form" }))
+        {
+            @Html.Hidden("TableTranslation", Model[0].TableName)
+
+            for (int i = 0; i < Model.Count; i++)
+            {
+                @Html.HiddenFor(m => m[i].TableName)
+                @Html.HiddenFor(m => m[i].LanguageID)
+                @Html.HiddenFor(m => m[i].FieldID)
+                @Html.HiddenFor(m => m[i].TableID)
+
+                <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                    <div class="form-group col-md-4 col-sm-4 col-xs-12">
+                        <span>@Model[i].LanguageName</span>
+                    </div>
+                    <div class="form-group col-md-8 col-sm-8 col-xs-12">
+                        @Html.TextBoxFor(m => m[i].FieldName, new { @class = "form-control width-100" })
+                    </div>
+
+                </div>
+
+            }
+                    <!-- /.box-body -->
+            <div class="box-footer">
+                <input type="button" value="@Html.Resource("save", resouceFilePath)" class="btn btn-info pull-right" onclick="SaveTranslation();" />
+            </div>
+                    <!-- /.box-footer -->
+        }
+    </div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+       $.validator.setDefaults({
+            ignore: ""
+        });
+        $("form").kendoValidator();
+        $(".k-datepicker").find('span').find('input').attr("readonly", "readonly");
+        if ($('#Translation_BirthDate').val() == "1/1/0001") { $('#Translation_BirthDate').val("") };
+    });
+    var saveTranslationUrl = '@Html.GetUrl("AddUpdateTranslation", "Translation")';
+ </script>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/Validation")
+        @Scripts.Render("~/bundles/kendoAll")
+        @Scripts.Render("~/Scripts/translate")
+    }

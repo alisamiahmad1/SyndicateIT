@@ -1,0 +1,124 @@
+﻿
+@model SyndicateIT.Model.ViewModel.SetupManagement.Courses.CoursesContentViewModel
+@using SyndicateIT.Views.App_GlobalResources
+@{
+    string PublicResources = "~/Views/SetupManagement/Courses/PublicResource";
+}
+<!-- widget div-->
+<div>
+    <div class="widget-body">
+        <div class="ui-jqgrid-view">
+            <table id="dtcr_Result" class="ui-jqgrid-htable table table-bordered table-hover" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Courses</th>
+                        <th>@GeneralResources.ENTRY_DATE</th>
+                        <th>@GeneralResources.MODIFICATION_DATE</th>
+                        <th>@GeneralResources.Action</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+
+    </div>
+    <!-- end widget content -->
+</div>
+<!-- end widget div -->
+<script type="text/javascript">
+
+    // DO NOT REMOVE : GLOBAL FUNCTIONS!
+
+    $(document).ready(function () {
+
+        var responsiveHelper_dt_Result = undefined;
+        var responsiveHelper_datatable_fixed_column = undefined;
+        var responsiveHelper_datatable_col_reorder = undefined;
+        var responsiveHelper_datatable_tabletools = undefined;
+
+        var breakpointDefinition = {
+            tablet: 1024,
+            phone: 480
+        };
+
+        var Coursesname = "";
+        var languageid = 1;
+        var isActive = true;
+
+        var Cycle_ID ="";
+        var Class_ID = "";
+        var Division_ID = "";
+
+        $.ajax({
+            type: 'GET',
+            dataType: 'json',
+            url: '@Url.Action("SearchCoursesList_ReadAjax", "PredefinedSetup")',
+            data: { 'Cycle_ID': Cycle_ID, 'Class_ID': Class_ID, 'Division_ID': Division_ID, 'CoursesName': Coursesname, 'languageid': languageid, 'Is_Active': isActive },
+            contentType: "application/json;charset=utf-8",
+            success: function (data) {
+
+
+                for (var i=0;i<data.length;i++)
+                {
+                    $('#dtcr_Result tbody').append(drawRaw(data[i], "Courses_EncryptId", ["Course_Name", "ENTRY_DATE", "MODIFICATION_DATE"]));
+                }
+
+            },
+            complete: function (jqXHR, status) {
+
+                if (status == 'success' || status == 'notmodified') {
+                    $('#dtcr_Result').dataTable({
+                        "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-12 hidden-xs'l>r>" +
+                            "t" +
+                            "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
+                        "autoWidth": true,
+
+                        "preDrawCallback": function () {
+                            // Initialize the responsive datatables helper once.
+                            if (!responsiveHelper_dt_Result) {
+                                responsiveHelper_dt_Result = new ResponsiveDatatablesHelper($('#dtcr_Result'), breakpointDefinition);
+                            }
+                        },
+                        "rowCallback": function (nRow) {
+                            responsiveHelper_dt_Result.createExpandIcon(nRow);
+                        },
+                        "drawCallback": function (oSettings) {
+                            responsiveHelper_dt_Result.respond();
+                        }
+                    });
+                }
+            }
+        });
+    });
+
+    function drawRaw(element,hiddenId, fields) {
+        var i;
+         var res = '<tr >';
+         var Edit = "EditCourses('" + element[hiddenId] + "')";       
+         var del = "DeleteCourses('" + element[hiddenId] + "')";
+         for (i = 0; i < fields.length; i++) {
+             field = fields[i];
+             if (element[field] != null) {
+                 if (field == "ENTRY_DATE" || field == "MODIFICATION_DATE") {
+                     date = new Date(0);
+                     date.setUTCMilliseconds(eval(element[field].slice(6, -2)));
+                     element[field] = date.toLocaleDateString();
+                 }
+             } else {
+                 element[field] = "-";
+             }
+             res = res + '<td>' + element[field] + '</td>';
+         }
+
+        if (i === fields.length) {
+            res = res + '<td ><button class="btn btn-xs btn-default"  onclick="' + eval("Edit") + ';return false;" style="margin-left:10px;"><i class="fa fa-pencil"></i></button>';
+            res = res + '<button class="btn btn-xs btn-default"  onclick="' + eval("del") + ';return false;" style="margin-left:10px;"><i class="fa fa-times"></i></button>';          
+            res = res + '</td>'
+        }
+        res = res + '</tr>';
+
+        return res;
+
+    }
+
+</script>

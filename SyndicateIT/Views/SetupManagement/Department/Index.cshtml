@@ -1,0 +1,29 @@
+﻿@model  SyndicateIT.Model.ViewModel.SetupManagement.Department.DepartmentContentViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string PublicResources = "~/Views/SetupManagement/Department/PublicResource";
+}
+@Scripts.Render("~/Scripts/Department")
+@Scripts.Render("~/Scripts/translate")
+@*@Html.Partial("~/Views/Shared/_NavigationPartial.cshtml", @Model.Navigation)*@
+<div id="DepartmentContent">
+    @Html.Partial("~/Views/SetupManagement/Department/_DepartmentContentPartial.cshtml", Model);
+</div>
+<script type="text/javascript">
+    var DepartmentSearchURL = '@Html.GetUrl("LoadSearchDepartment", "Department")';
+    var DepartmentDeleteURL = '@Html.GetUrl("DepartmentDelete", "Department")';
+    var loadDepartmentURL = '@Html.GetUrl("LoadDepartment", "Department")';
+    var loader = '@Utilities.GetAbsotuleUrl("~/Content/image/ajax-loader.gif")';
+    var saveDepartmentUrl = '@Html.GetUrl("AddUpdateDepartment", "Department")';
+    var messageDelete = '@Html.Resource("MessageDelete", PublicResources)';
+    var loadTranslationDepartmentURL = '@Html.GetUrl("LoadTranslateDepartment", "Department")';
+
+    $("#SchoolSettings", $("#nav")).addClass("active open");
+    $("#SchoolSettings Ul", $("#nav")).show();
+
+</script>
+@section Scripts {
+    @Scripts.Render("~/bundles/kendo/js")
+}
+

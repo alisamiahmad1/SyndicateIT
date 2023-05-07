@@ -1,0 +1,43 @@
+﻿
+@model SyndicateIT.Model.ViewModel.SetupManagement.TermMonth.TermMonthContentViewModel
+@using SyndicateIT.Views.App_GlobalResources
+@{
+    Layout = null;
+    string PublicResources = "~/Views/SetupManagement/TermMonth/PublicResource";
+}
+@using (Html.BeginForm("SearchTermMonth", "TermMonth", FormMethod.Post, new { @class = "smart-form", role = "form" }))
+{
+        <section class="col col-3">
+        @Html.LabelFor(m => m.Term_ID, GeneralResources.Term_ID, new { @class = " label" })
+        <div class="col-md-7">
+            @(Html.Kendo().DropDownListFor(m => m.Term_ID)
+                          .Name("Term_ID")
+                          .DataTextField("Text")
+                          .DataValueField("Value")
+                          .Value(Model.Term_ID.ToString())
+                          .Filter("startswith")
+                          .DataSource(source =>
+                          {
+                              source.Read(read =>
+                              {
+                                  read.Action("GetTermList", "TermMonth");
+                              });
+                          }))
+            <div class="text-danger field-validation-error" id="ErrorSearchTerm_ID" style="display:none;">
+                <span for="SearchTerm_ID" class=""> Term_ID is not valid</span>
+            </div>
+        </div>
+    </section>
+    <section class="col col-3">
+        <label class="label">&nbsp;</label>
+        @Html.CheckBoxFor(m => m.IS_ACTIVE, new { @checked = "checked" })
+        <i></i>@GeneralResources.IS_ACTIVE
+    </section>
+    <section class="col col-2">
+        <label class="label">&nbsp;</label>
+        <button type="button" class="btn btn-serach " onclick="SearchTermMonth(true)">Search</button>
+    </section>
+}
+@section Scripts {
+    @Scripts.Render("~/Scripts/TermMonth")
+}

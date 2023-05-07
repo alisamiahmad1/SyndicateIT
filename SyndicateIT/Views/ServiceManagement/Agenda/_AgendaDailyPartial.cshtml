@@ -1,0 +1,130 @@
+﻿@model SyndicateIT.Model.ViewModel.ServiceManagement.ServiceDetails.AgendaDailyViewModel
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+@{
+    string PublicResources = "~/Views/ServiceManagement/Agenda/_AgendaDailyPartial.cshtml";
+}
+@Html.Partial("~/Views/Shared/_AlertPartial.cshtml", Model.Alert)
+<div id="content">
+    <section id="Gender-content" class="">
+        <div class="row">
+            <!-- NEW WIDGET START -->
+            <article class="col-sm-12 sortable-grid ui-sortable">
+                <!-- Widget ID (each widget will need unique ID)-->
+                <div class="jarviswidget jarviswidgetTransparent" id="wid-id-x" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false" data-widget-custombutton="false" data-widget-sortable="false" role="widget">
+                    <header role="heading">
+                        <span class="widget-icon"> <i class="fa fa-align-justify"></i> </span>
+                        <h2>@Html.Resource("Search", PublicResources)</h2>
+                        <span class="jarviswidget-loader"><i class="fa fa-lg fa-fw fa-th-list"></i></span>
+                    </header>
+                    <!-- widget div-->
+                    <div role="content">
+                        <div class="row">
+                            @using (Html.BeginForm("SearchAgenda", "ServiceManagement", FormMethod.Post, new { @class = "smart-form", role = "form" }))
+                            {
+                                @Html.Hidden("UserTypeID", Model.ServiceTypeID);
+                                <div class="col-sm-12 col-md-10">
+                                    <section class="col col-3">
+                                        @Html.LabelFor(m => m.SearchCycle, Html.Resource("lblSearchCycle", PublicResources), new { @class = "label" })
+                                        @(Html.Kendo().DropDownListFor(m => m.SearchCycle)
+                                        .Name("SearchCycle")
+                                        .DataTextField("Text")
+                                        .DataValueField("Value")
+                                        .OptionLabel(@Html.Resource("EnterSearchCycle", PublicResources))
+                                        .HtmlAttributes(new { @class = "form-control input-sm" })
+                                        .Value(Model.SearchCycle.ToString())
+                                        .DataSource(source =>
+                                        {
+                                            source.Read(read =>
+                                            {
+                                                read.Action("GetCycleTypesList", "ProfileManagement");
+                                            });
+                                        }))
+                                        <div class="text-danger field-validation-error" id="ErrorSearchCycle" style="display:none;">
+                                            <span for="SearchCycle" class=""> @Html.Resource("RequiredSearchCycle", PublicResources)</span>
+                                        </div>
+                                    </section>
+                                    <section class="col col-3">
+                                    @Html.LabelFor(m => m.SearchClass, Html.Resource("lblSearchClass", PublicResources), new { @class = "label" })
+                                    @(Html.Kendo().DropDownListFor(m => m.SearchClass)
+                                              .Name("SearchClass")
+                                              .DataTextField("Text")
+                                              .DataValueField("Value")
+                                              .OptionLabel(@Html.Resource("EnterSearchClass", PublicResources))
+                                              .HtmlAttributes(new { @class = "form-control input-sm" })
+                                              .Value(Model.SearchClass.ToString())
+                                              .Filter("startswith")
+                                             .DataSource(sourceClass =>
+                                             {
+                                                 sourceClass.Read(read =>
+                                                 {
+                                                     read.Action("GetClass", "ServiceManagement")
+                                                     .Data("FilterClass");
+                                                 }).ServerFiltering(true);
+                                             })
+                                            .Enable(true)
+                                            .AutoBind(false)
+                                            .CascadeFrom("SearchCycle"))
+                                    <div class="text-danger field-validation-error" id="ErrorSearchClass" style="display:none;">
+                                        <span for="SearchClass" class=""> @Html.Resource("RequiredSearchClass", PublicResources)</span>
+                                    </div>
+                                    </section>
+                                    <section class="col col-3">
+                                        @Html.LabelFor(m => m.SearchDivision, Html.Resource("lblSearchDivision", PublicResources), new { @class = "label" })
+                                        @(Html.Kendo().DropDownListFor(m => m.SearchDivision)
+                                              .Name("SearchDivision")
+                                              .DataTextField("Text")
+                                              .DataValueField("Value")
+                                              .OptionLabel(@Html.Resource("EnterDivision_Id", PublicResources))
+                                              .HtmlAttributes(new { @class = "form-control input-sm" })
+                                              .Value(Model.SearchDivision.ToString())
+                                              .Filter("startswith")
+                                              .DataSource(sourceDivision =>
+                                              {
+                                                  sourceDivision.Read(read =>
+                                                  {
+                                                      read.Action("GetDivision", "ServiceManagement")
+                                                      .Data("FilterDivision");
+                                                  }).ServerFiltering(true);
+                                              })
+                                            .Enable(true)
+                                            .AutoBind(false)
+                                            .CascadeFrom("SearchClass"))
+                                        <div class="text-danger field-validation-error" id="ErrorSearchDivision" style="display:none;">
+                                            <span for="SearchDivision" class=""> @Html.Resource("RequiredSearchDivision", PublicResources)</span>
+                                        </div>
+                                    </section>
+                                    <section class="col col-3">
+                                        @Html.LabelFor(m => m.SearchDate, @Html.Resource("SearchDate", PublicResources), new { @class = "label" })
+                                        @Html.Kendo().DatePickerFor(model => model.SearchDate).HtmlAttributes(new { @class = "form-control  ", @maxlength = 200, @placeholder = @Html.Resource("EnterSearchDate", PublicResources) }).Name("SearchDate")
+                                        <div class="text-danger field-validation-error" id="ErrorSearchDate" style="display:none;">
+                                            <span for="SearchDate" class=""> @Html.Resource("RequiredDate", PublicResources)</span>
+                                        </div>
+                                        </section>
+                                </div>
+                                <div class="col-sm-12 col-md-2">
+                                    <section class="col col-6 ">
+                                        <label class="label">&nbsp;</label>
+                                        <button type="button" class="btn btn-serach " onclick="SearchAgendaDaily()">@Html.Resource("Search", PublicResources)</button>
+                                    </section>
+                                </div>                              
+                               
+                            }
+
+
+                        </div>
+                    </div>
+                    <!-- end widget content -->
+                </div>
+                <!-- end widget -->
+            </article>
+            <!-- WIDGET END -->
+            <!-- NEW WIDGET START -->
+            <!-- WIDGET END -->
+        </div>
+    </section>
+    <article class="col-sm-12 sortable-grid ui-sortable" id="Agenda-Daily-List">
+       
+    </article>
+</div>
+   

@@ -1,0 +1,29 @@
+﻿@model  SyndicateIT.Model.ViewModel.SetupManagement.Kaddaa.KaddaaContentViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string PublicResources = "~/Views/SetupManagement/Kaddaa/PublicResource";
+}
+@Scripts.Render("~/Scripts/Kaddaa")
+@Scripts.Render("~/Scripts/translate")
+@*@Html.Partial("~/Views/Shared/_NavigationPartial.cshtml", @Model.Navigation)*@
+<div id="KaddaaContent">
+    @Html.Partial("~/Views/SetupManagement/Kaddaa/_KaddaaContentPartial.cshtml", Model);
+</div>
+<script type="text/javascript">
+    var KaddaaSearchURL = '@Html.GetUrl("LoadSearchKaddaa", "Kaddaa")';
+    var KaddaaDeleteURL = '@Html.GetUrl("KaddaaDelete", "Kaddaa")';
+    var loadKaddaaURL = '@Html.GetUrl("LoadKaddaa", "Kaddaa")';
+    var loader = '@Utilities.GetAbsotuleUrl("~/Content/image/ajax-loader.gif")';
+    var saveKaddaaUrl = '@Html.GetUrl("AddUpdateKaddaa", "Kaddaa")';
+    var messageDelete = '@Html.Resource("MessageDelete", PublicResources)';
+    var loadTranslationKaddaaURL = '@Html.GetUrl("LoadTranslateKaddaa", "Kaddaa")';
+
+    $("#SchoolSettings", $("#nav")).addClass("active open");
+    $("#SchoolSettings Ul", $("#nav")).show();
+
+</script>
+@section Scripts {
+    @Scripts.Render("~/bundles/kendo/js")
+}
+

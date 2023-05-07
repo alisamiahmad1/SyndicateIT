@@ -1,0 +1,117 @@
+﻿
+@model SyndicateIT.Model.ViewModel.ProfileManagement.ProfileDetails.ExperienceViewModel
+@{
+    Layout = null;
+    string PublicResources = "~/Views/ProfileManagement/Profiles/ProfileDetails/PublicResources";
+}
+
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+@Html.Partial("~/Views/Shared/_AlertPartial.cshtml", Model.Alert)
+
+<article class="col-sm-12 sortable-grid ui-sortable">
+    @using (Html.BeginForm("SaveExperience", "ProfileManagement", FormMethod.Post, new { @class = "", role = "form", id = "Experience-form" }))
+    {
+        <!-- Widget ID (each widget will need unique ID)-->
+        <div class="jarviswidget jarviswidgetTransparent" id="wid-id-x" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false" data-widget-custombutton="false" data-widget-sortable="false" role="widget">
+            <header role="heading">
+                <span class="widget-icon"> <i class="fa fa-align-justify"></i> </span>
+                <h2>@Html.Resource("LblExperienceInfo", PublicResources)</h2>
+                <span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span>
+            </header>
+            <!-- widget div-->
+            <div role="content">
+
+                <div class="row">
+                    <div class="widget-body">
+                        @Html.Hidden("Experience_ID", Model.Experience_ID)
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+                        <fieldset>
+                            <div class="form-group  col-sm-6">
+                                @Html.LabelFor(m => m.JobTitle, Html.Resource("JobTitle", PublicResources), new { @class = "col-md-4 control-label" })
+                                <div class="col-md-7">
+                                    @Html.Kendo().TextBoxFor(model => model.JobTitle).HtmlAttributes(new { @class = "form-control  form-control-md10", @maxlength = 150, @placeholder = @Html.Resource("SelectJobTitle", PublicResources) }).Name("JobTitle").Enable(@Model.IsEdit)
+                                    <span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error" data-for="JobTitle" data-valmsg-for="JobTitle" id="JobTitle_validationMessage" style="display:none;" role="alert"><span class="k-icon k-warning"> </span>@Html.Resource("RequiredJob", PublicResources)</span>
+                                </div>
+                            </div>
+                            <div class="form-group  col-sm-6">
+                                @Html.LabelFor(m => m.Department, Html.Resource("Department", PublicResources), new { @class = "col-md-4 control-label" })
+                                <div class="col-md-7">
+                                    @Html.Kendo().TextBoxFor(model => model.JobTitle).HtmlAttributes(new { @class = "form-control  form-control-md10", @maxlength = 150, @placeholder = @Html.Resource("SelectDepartment", PublicResources) }).Name("Department").Enable(@Model.IsEdit)
+                                    <span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error" data-for="Department" data-valmsg-for="Department" id="Department_validationMessage" style="display:none;" role="alert"><span class="k-icon k-warning"> </span> @Html.Resource("RequiredDepartment", PublicResources)</span>
+                                </div>
+                            </div>
+                            <div class="form-group  col-sm-6">
+                                @Html.LabelFor(m => m.Company, Html.Resource("Company", PublicResources), new { @class = "col-md-4 control-label" })
+                                <div class="col-md-7">
+                                    @Html.Kendo().TextBoxFor(model => model.Company).HtmlAttributes(new { @class = "form-control  form-control-md10", @maxlength = 150, @placeholder = @Html.Resource("SelectCompany", PublicResources) }).Name("Company").Enable(@Model.IsEdit)
+                                    <span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error" data-for="Company" data-valmsg-for="Company" id="Company_validationMessage" style="display:none;" role="alert"><span class="k-icon k-warning"> </span> @Html.Resource("RequiredCompany", PublicResources)</span>
+                                </div>
+                            </div>
+                            <div class="form-group  col-sm-6">
+                                @Html.LabelFor(m => m.Location, Html.Resource("Location", PublicResources), new { @class = "col-md-4 control-label" })
+                                <div class="col-md-7">
+                                    @Html.Kendo().TextBoxFor(model => model.Location).HtmlAttributes(new { @class = "form-control  form-control-md10", @maxlength = 200, @placeholder = @Html.Resource("SelectLocation", PublicResources) }).Name("Location").Enable(@Model.IsEdit)
+                                    <span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error" data-for="Location" data-valmsg-for="Division" id="Location_validationMessage" style="display:none;" role="alert"><span class="k-icon k-warning"> </span>@Html.Resource("RequiredLocation", PublicResources)</span>
+                                </div>
+                            </div>
+                            <div class="form-group  col-sm-6">
+                                @Html.LabelFor(m => m.FromDate, Html.Resource("FromDate", PublicResources), new { @class = "col-md-4 control-label" })
+                                <div class="col-md-7">
+                                    @Html.Kendo().DatePickerFor(model => model.FromDate).HtmlAttributes(new { @class = "form-control  form-control-md10", @maxlength = 200, @placeholder = @Html.Resource("SelectFromDate", PublicResources) }).Name("FromDate").Enable(@Model.IsEdit)
+                                    <span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error" data-for="FromDate" data-valmsg-for="FromDate" id="FromDate_validationMessage" style="display:none;" role="alert"><span class="k-icon k-warning"> </span>@Html.Resource("RequiredFromDate", PublicResources)</span>
+                                </div>
+                            </div>
+                            <div class="form-group  col-sm-6">
+                                @Html.LabelFor(m => m.ToDate, Html.Resource("ToDate", PublicResources), new { @class = "col-md-4 control-label" })
+                                <div class="col-md-7">
+                                    @Html.Kendo().DatePickerFor(model => model.ToDate).HtmlAttributes(new { @class = "form-control  form-control-md10", @maxlength = 200, @placeholder = @Html.Resource("SelectToDate", PublicResources) }).Name("ToDate").Enable(@Model.IsEdit)
+                                    <span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error" data-for="ToDate" data-valmsg-for="FromDate" id="FromDate_validationMessage" style="display:none;" role="alert"><span class="k-icon k-warning"> </span>@Html.Resource("RequiredToDate", PublicResources)</span>
+                                </div>
+                            </div>
+                            <div class="form-group  col-sm-12">
+                                @Html.LabelFor(m => m.Description, Html.Resource("Description", PublicResources), new { @class = "col-md-2 control-label" })
+                                <div class="col-md-10">
+                                    @Html.TextArea("Description", Model.Description, new { @class = "k-textbox", style = "width: 100%;height: 100px;" })
+                                </div>
+                            </div>@if (@Model.IsEdit == true)
+                            {
+                                <div class="col-lg-2">
+                                    <button type="button" onclick="SaveExperience();" class="btn bg-color-orange txt-color-white" data-toggle="#phoneInfo">
+                                        @Html.Resource("LblAddExperience", PublicResources)
+                                    </button>
+                                </div>
+                            }
+                            </fieldset>
+                    </div>
+                </div>
+
+            </div>
+            <!-- end widget content -->
+        </div>        
+    }
+    @Html.Partial("~/Views/ProfileManagement/Profiles/ProfileDetails/_ListExperiencePartial.cshtml", Model.Experiences)
+</article>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+       
+        HideExperiencetValidation();
+        $.validator.setDefaults({
+            ignore: ""
+        });
+
+    });
+
+    if ('@SessionContent.Container.Profiles.IsLoadProfilesContent' == "true") {
+     
+    }
+    else {
+        //$('#HoursPerDay').val("");
+        //$('#WorkingDays').val("");
+        //$('#Shift').val("");
+        //$('#IssuingCountry').val("");
+    }
+
+</script>

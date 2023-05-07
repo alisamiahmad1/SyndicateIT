@@ -1,0 +1,29 @@
+﻿@{
+    string PublicResources = "~/Views/Exams/LoadExamsStudents/PublicResource";
+}
+<div class="jarviswidget jarviswidget-color-blueDark">
+    <header style="border-color: #B2B5B9!important;background: #B2B5B9;">
+        <h2><span class="badge bg-color-orange" style="margin-right:10px;">@Html.Resource("Step", PublicResources) 4 </span> @Html.Resource("PrintExamStudents", PublicResources) </h2>
+    </header>
+    <input type="hidden" id="PrintCycleID" />
+    <input type="hidden" id="PrintClassID" />
+    <input type="hidden" id="PrintDivisionID" />
+    <div class="well well-sm">
+        <form>
+            <fieldset>
+                <legend>
+                  @Html.Resource("AllStudents", PublicResources) 
+                </legend>
+                <ul id="external-events" class="list-unstyled">
+                    <li style="position: relative; width: 100%;cursor: pointer!important; " onclick="PrintAllStudent();">
+                        <span class="bg-color-blue  txt-color-white" data-icon="fa-time" style="cursor: pointer!important; "><i class="fa  fa-pencil-square-o txt-color-white"></i><span style="margin-left:5%">@Html.Resource("Print", PublicResources)</span></span>
+                    </li>
+                </ul>
+            </fieldset>
+        </form>
+    </div>
+</div>
+
+
+
+

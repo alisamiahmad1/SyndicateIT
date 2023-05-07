@@ -1,0 +1,58 @@
+﻿@model List<SelectListItem>
+@{
+    var materialsExsiting = Model.Where(p => p.Selected == true).ToList();
+    var materialsNotExsiting = Model.Where(p => p.Selected == false).ToList();
+    string PublicResources = "~/Views/Exams/LoadExamsMaterials/PublicResource";
+ }
+<div class="jarviswidget jarviswidget-color-blueDark">
+    <header style="border-color: #B2B5B9!important;background: #B2B5B9;">
+        <h2><span class="badge bg-color-orange" style="margin-right:10px;">@Html.Resource("Step", PublicResources)  2 </span> @Html.Resource("SelectStudents", PublicResources)</h2>
+    </header>
+    <input type="hidden" id="MaterialId" />
+    <input type="hidden" id="CycleID" />
+    <input type="hidden" id="ClassID" />
+    <input type="hidden" id="DivisionID" />
+    <input type="hidden" id="TermID" />
+    <div class="well well-sm">
+        @if (materialsExsiting != null && materialsExsiting.Count > 0)
+        {
+            <form>
+                <fieldset>
+                    <legend>
+                        @Html.Resource("DefinedMaterials", PublicResources)
+                    </legend>
+                    <ul id="external-events" class="list-unstyled">
+                        @for (int i = 0; i < materialsExsiting.Count(); i++)
+                    {
+                    <li style="position: relative; width: 100%;cursor: pointer!important; " onclick="LoadMaterialsById('@materialsExsiting[i].Value');">
+                        <span class="bg-color-blue  txt-color-white" data-icon="fa-time" style="cursor: pointer!important; "><i class="fa  fa-pencil-square-o txt-color-white"></i><span style="margin-left:5%">@materialsExsiting[i].Text</span></span>
+                    </li>
+                    }
+                    </ul>
+                </fieldset>
+            </form>
+        }
+        @if (materialsNotExsiting != null && materialsNotExsiting.Count > 0)
+        {
+            <form>
+                <fieldset>
+                    <legend>
+                        @Html.Resource("DefinedMaterials", PublicResources)
+                    </legend>
+                    <ul id="external-events" class="list-unstyled">
+                   @for (int i = 0; i < materialsNotExsiting.Count(); i++)
+                    {
+                    <li style="position: relative; width: 100%;cursor: pointer!important; " onclick="LoadMaterialsById('@materialsNotExsiting[i].Value');">
+                        <span class="bg-color-orange  txt-color-white" data-icon="fa-time" style="cursor: pointer!important; "><i class="fa  fa-pencil-square-o txt-color-white"></i><span style="margin-left:5%">@materialsNotExsiting[i].Text</span></span>
+                    </li>
+                    }
+                    </ul>
+                </fieldset>
+            </form>
+        }
+    </div>
+</div>
+
+
+
+

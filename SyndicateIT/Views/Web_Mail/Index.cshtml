@@ -1,0 +1,114 @@
+﻿@model SyndicateIT.Model.ViewModel.Inbox.InboxContentViewModel
+@using SyndicateIT.Views.App_GlobalResources
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string PublicResources = "~/Views/Web_Mail/PublicResources";
+}
+
+<!-- RIBBON -->
+<div id="ribbon">
+
+    <span class="ribbon-button-alignment"></span>
+
+    <!-- breadcrumb -->
+    <ol class="breadcrumb">
+        <li><a href="~/UserManagement/Index">@GeneralResources.Dashboard </a></li>
+        <li><a href="#">@Html.Resource("Inbox", PublicResources)</a></li>
+    </ol>
+    <!-- end breadcrumb -->
+</div>
+<!-- END RIBBON -->
+<!-- #MAIN CONTENT -->
+<div id="content" style="opacity: 1;">
+
+    <div class="inbox-nav-bar no-content-padding col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <h1 class="page-title txt-color-blueDark hidden-tablet">
+            <i class="fa fa-fw fa-inbox"></i>@ViewBag.Message
+        </h1>
+        <div class="inbox-checkbox-triggered" style="margin-left:27px" id="delete-group-buttons">
+            <div class="btn-group">
+                <a rel="tooltip" title="" data-placement="bottom" data-original-title="Delete" class="deletebutton btn btn-default" id="delete_items"><strong><i class="fa fa-trash-o fa-lg"></i></strong></a>
+            </div>
+            <div class="btn-group">
+                <a rel="tooltip" title="" data-placement="bottom" data-original-title="Delete Forever" class="deletebutton btn btn-default" id="delete_items_forever" style="display:none; margin-left:0px"><strong><i class="fa fa-trash-o fa-lg"></i></strong></a>
+            </div>
+            <div class="btn-group">
+                <a  rel="tooltip" title="" data-placement="bottom" data-original-title="Restore" class="deletebutton btn btn-default" id="restore_items" style="display:none"><strong><i class="glyphicon glyphicon-repeat"></i></strong></a>
+            </div>
+        </div>
+        <div class="btn-group hidden-desktop visible-tablet">
+            <div class="inbox-checkbox-triggered">
+                <div class="btn-group">
+                    
+                </div>
+            </div>
+        </div>
+
+
+        <a href="javascript:void(0);" id="compose-mail-mini" class="btn btn-primary pull-right hidden-desktop visible-tablet"> <strong><i class="fa fa-file fa-lg"></i></strong> </a>
+
+        @*<div class="btn-group pull-right inbox-paging">
+            <a href="javascript:void(0);" class="btn btn-default btn-sm"><strong><i class="fa fa-chevron-left"></i></strong></a>
+            <a href="javascript:void(0);" class="btn btn-default btn-sm"><strong><i class="fa fa-chevron-right"></i></strong></a>
+        </div>
+        <span class="pull-right"><strong>1-30</strong> of <strong>3,452</strong></span>*@
+
+    </div>
+
+        <div id="inbox-content" class="inbox-body no-content-padding col-md-12">
+            <div class="inbox-side-bar">
+
+                <a id="compose-mail" class="btn btn-primary btn-block" onclick="LaunchInbox_Sent('Compose')"> <strong>Compose</strong> </a>
+
+                <h6> Folder <a href="" rel="tooltip" title="" data-placement="right" data-original-title="Refresh" class="pull-right txt-color-darken"><i class="fa fa-refresh"></i></a></h6>
+
+                <ul class="inbox-menu-lg">
+                    <li class="active" onclick="LaunchInbox_Sent('Inbox')" style="cursor:pointer">
+                        <a class="inbox-load"> Inbox <span id="messages_amount"></span></a>
+                    </li>
+                    <li onclick="LaunchInbox_Sent('Sent')" style="cursor:pointer">
+                        <a>Sent</a>
+                    </li>
+                  
+                    <li onclick="LaunchInbox_Sent('Trash')">
+                        <a href="javascript:void(0);">Trash</a>
+                    </li>
+                  
+                </ul>
+
+                @*<h6> Quick Access <a href="javascript:void(0);" rel="tooltip" title="" data-placement="right" data-original-title="Add Another" class="pull-right txt-color-darken"><i class="fa fa-plus"></i></a></h6>
+
+                <ul class="inbox-menu-sm">
+                    <li>
+                        <a href="javascript:void(0);"> Images (476)</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);">Documents (4)</a>
+                    </li>
+                </ul>*@
+            </div>
+            
+                <div class="table-wrap custom-scroll animated fast fadeInRight" style="opacity: 1;" id="Web_MailContent">
+                    @Html.Partial("~/Views/Web_Mail/Inbox.cshtml", Model)
+                </div>
+    </div>    
+    @Scripts.Render("~/Scripts/Web_Mail")
+    <script type="text/javascript">
+    @*var SectionSearchURL = '@Html.GetUrl("LoadSearchSection", "Section")';
+    var SectionDeleteURL = '@Html.GetUrl("SectionDelete", "Section")';*@
+    var loadInbox_SentURL = '@Html.GetUrl("LoadInbox_Sent", "Web_Mail")';
+    var loader = '@Utilities.GetAbsotuleUrl("~/Content/img/ajax-loader.gif")';
+    var saveComposeUrl = '@Html.GetUrl("AddUpdateCompose", "Web_Mail")';
+    var saveComposeAjaxUrl = '@Html.GetUrl("AddUpdateComposeAjax", "Web_Mail")'; 
+    var loadMessageContentURL = '@Html.GetUrl("LoadMessage_Content", "Web_Mail")';
+    @*var saveSectionUrl = '@Html.GetUrl("AddUpdateSection", "Section")';
+    var messageDelete = '@Html.Resource("MessageDelete", PublicResources)';
+    var loadTranslationSectionURL = '@Html.GetUrl("LoadTranslateSection", "Section")';*@
+    </script>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    
+}

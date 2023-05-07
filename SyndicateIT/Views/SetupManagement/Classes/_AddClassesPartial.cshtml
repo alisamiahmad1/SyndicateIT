@@ -1,0 +1,137 @@
+﻿
+@model SyndicateIT.Model.ViewModel.SetupManagement.Classes.ClassesViewModel
+@using SyndicateIT.Views.App_GlobalResources
+@{
+    Layout = null;
+    string PublicResources = "~/Views/SetupManagement/Classes/PublicResource";
+}
+@Html.Partial("~/Views/Shared/_NavigationPartial.cshtml", @Model.Navigation)
+<div id="content">
+    <div class="row">
+        <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+            <h1 class="page-title txt-color-blueDark">
+                <i class="@Model.ClassTitle"></i> @Model.Title<span></span>
+            </h1>
+        </div>
+    </div>
+    @Html.Partial("~/Views/Shared/_AlertPartial.cshtml", Model.Alert)
+    <section id="widget-grid" class="">
+        <!-- row -->
+        <div class="row">
+            <article class="col-sm-12 sortable-grid ui-sortable">
+                <!-- Widget ID (each widget will need unique ID)-->
+                <div class="jarviswidget jarviswidgetTransparent" id="wid-id-x" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false" data-widget-custombutton="false" data-widget-sortable="false" role="widget">
+                    <header role="heading"></header>
+                    <!-- widget div-->
+                    <div role="content">
+                        <div class="row">
+                            <div class="widget-body">
+                                @using (Html.BeginForm("AddUpdateClasses", "Classes", FormMethod.Post, new { @class = "smart-form", role = "form", id = "Classes-form" }))
+                                {
+                                    @Html.HiddenFor(m => m.Class_ID)
+                                    @Html.AntiForgeryToken()
+                                    @Html.ValidationSummary(true)
+                                    <fieldset>
+                                        <section class="form-group  col-sm-6">
+                                            @Html.Label(GeneralResources.IS_ACTIVE, new { @class = "col-md-4 control-label" })
+                                            <div class="col-md-6">
+                                                <label class="checkbox">
+                                                    @Html.CheckBoxFor(m => m.IS_ACTIVE, new { @checked = "checked" })
+                                                    <i></i>
+                                                </label>
+                                            </div>
+                                        </section>
+                                        <section class="form-group  col-sm-6">
+                                            @Html.LabelFor(m => m.Class_Title, Html.Resource("Class_Title", PublicResources), new { @class = "col-md-4 control-label" })
+                                            <div class="col-md-6">
+                                                @Html.Kendo().TextBoxFor(model => model.Class_Title).HtmlAttributes(new { @class = "form-control form-control-md10" }).Name("Class_Title")
+                                                <div class="text-danger field-validation-error" id="Class_Title_ValidationMsg" style="display:none;">
+                                                    <span for="SearchClasses" class=""> @Html.Resource("Class_Title_Required", PublicResources)</span>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        <section class="form-group  col-sm-6">
+                                            @Html.LabelFor(m => m.Cycle_ID, Html.Resource("Cycle_ID", PublicResources), new { @class = "col-md-4  control-label" })
+                                            <div class="col-md-6">
+                                                @(Html.Kendo().DropDownListFor(m => m.Cycle_ID)
+                                                .DataTextField("Text")
+                                                .DataValueField("Value")
+                                                .OptionLabel("Select Cycle")
+                                                .HtmlAttributes(new { @class = "ui-select form-control-md10" })
+                                                .DataSource(source =>
+                                                {
+                                                    source.Read(read =>
+                                                    {
+                                                        read.Action("GetCycleTypesList", "Classes");
+                                                    });
+                                                }))
+                                                <div class="text-danger field-validation-error" id="Cycle_ID_ValidationMsg" style="display:none;">
+                                                    <span for="Cycle_ID" class=""> @Html.Resource("Cycle_ID_Required", PublicResources)</span>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        <section class="form-group  col-sm-6">
+                                            @Html.LabelFor(m => m.Company_ID, Html.Resource("Company_ID", PublicResources), new { @class = "col-md-4 control-label" })
+                                            <div class="col-md-6">
+                                                @(Html.Kendo().DropDownListFor(m => m.Company_ID)
+                                                .DataTextField("Text")
+                                                .DataValueField("Value")
+                                                .OptionLabel("Select Company")
+                                                .HtmlAttributes(new { @class = "ui-select form-control-md10" })
+                                                .DataSource(source =>
+                                                {
+                                                    source.Read(read =>
+                                                    {
+                                                        read.Action("GetCompanyName", "Classes");
+                                                    });
+                                                }))
+                                                <div class="text-danger field-validation-error" id="Company_ID_ValidationMsg" style="display:none;">
+                                                    <span for="Company_ID" class=""> @Html.Resource("Company_ID_Required", PublicResources)</span>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        <section class="form-group  col-sm-6">
+                                            @Html.LabelFor(m => m.Class_Row, Html.Resource("Class_Row", PublicResources), new { @type = "number", @class = "col-md-4 control-label" })
+                                            <div class="col-md-6">
+                                                @(Html.Kendo().NumericTextBoxFor(m => m.Class_Row).Min(0).HtmlAttributes(new { @class = "form-control form-control-md10" }))
+                                                <div class="text-danger field-validation-error" id="Class_Row_ValidationMsg" style="display:none;">
+                                                    <span for="Class_Row" class=""> @Html.Resource("Class_Row_Required", PublicResources)</span>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        <section class="form-group  col-sm-6">
+                                            @Html.LabelFor(m => m.Class_Column, Html.Resource("Class_Column", PublicResources), new { @type = "number", @class = "col-md-4 control-label" })
+                                            <div class="col-md-6">
+                                                @(Html.Kendo().NumericTextBoxFor(m => m.Class_Column).Min(0).HtmlAttributes(new { @class = "form-control form-control-md10" }))
+                                                <div class="text-danger field-validation-error" id="Class_Column_ValidationMsg" style="display:none;">
+                                                    <span for="Class_Column" class=""> @Html.Resource("Class_Column_Required", PublicResources)</span>
+                                                </div>
+                                            </div>
+                                          
+                                        </section>
+                                        <section class="form-group  col-sm-12">
+                                            @Html.LabelFor(m => m.Class_Description, Html.Resource("Class_Description", PublicResources), new { @class = "col-md-2 text-left control-label" })
+                                            <div class="col-md-9">
+                                                @(Html.Kendo().EditorFor(m => m.Class_Description).Tools(tools => tools.Clear().Bold().Italic().Underline().Strikethrough().JustifyCenter().JustifyFull().JustifyLeft().JustifyRight().CreateLink().Unlink().TableEditing().FontColor().BackColor().Pdf().ViewHtml()))
+                                            </div>
+                                        </section>
+                                    </fieldset>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end widget content -->
+                </div>
+                <!-- end widget -->
+                <div class="footer">
+                    <button type="button" class="btn btn-primary general-btn" onclick="SaveClasses();">@GeneralResources.save</button>
+                </div>
+            </article>
+        </div>
+    </section>
+</div>
+@section Scripts {
+    @Scripts.Render("~/Scripts/Classes")
+}
+
+

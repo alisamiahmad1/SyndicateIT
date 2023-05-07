@@ -1,0 +1,60 @@
+﻿@model SyndicateIT.DataLayer.DataContext.T_Document_Template
+@{
+    Layout = null;
+}
+
+@*<script src="~/Content/jSignature-master/libs/jSignature.min.js"></script>*@
+
+@Scripts.Render("~/bundles/jquery")
+<script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
+
+@*<style>
+        div.sgn {
+            width: 100%;
+        }
+
+        canvas.jSignature {
+            max-width: 300px;
+            border: 1px solid black !important;
+        }
+    </style>*@
+<form method="post" action="~/Document/form/@Model.Id" enctype="multipart/form-data">
+    @Html.AntiForgeryToken()
+    @Html.Hidden("Form_Id", ViewData["form_id"])
+    <h2>@Model.Name</h2>
+    <button type="submit" style="position:fixed;top:20px;left:50px">Save</button><br />
+    @Html.Raw(Model.Executed_Template)
+
+</form>
+<script>
+    //var $sigdiv;
+    var signaturePad, canvas;
+    if ($("canvas.sgn").length > 0) {
+        canvas = document.querySelector("canvas.sgn");
+        signaturePad = new SignaturePad(canvas, {
+            //minWidth: 5,
+            //maxWidth: 10,
+            //penColor: "rgb(66, 133, 244)"
+        });
+        if ($("canvas.sgn").data("val") != "") {
+            signaturePad.fromDataURL("data:image/png;base64," + $("canvas.sgn").data("val"));
+        }
+       // $sigdiv = $("div.sgn").jSignature({ 'UndoButton': true, 'height': '200px' });
+        $('form').submit(function (event) {
+            event.preventDefault();
+            if (signaturePad.isEmpty()) {
+                alert('signature is required');
+                return;
+            }
+            //var data = $sigdiv.jSignature('getData', 'image');
+            var data = signaturePad.toDataURL().split(",")[1];
+            //$("input.sgn").remove();
+            $("[name='" + $('canvas.sgn').data('id') + "']").val(data);
+            debugger
+            $(this).unbind('submit').submit();
+        })
+        $(".button.sgn-clear").click(function () {
+            signaturePad.clear();
+        });
+     }
+</script>

@@ -1,0 +1,422 @@
+﻿@using SyndicateIT.Models
+
+@model SyndicateIT.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Register";
+    Layout = null;
+    string resouceFilePath = "~/Views/Account/Login.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en-us" id="extr-page">
+<head>
+    <meta charset="utf-8">
+    <title> @Html.Resource("SyndicateIT", resouceFilePath) </title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" type="text/css" media="screen" href="~/Content/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="~/Content/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="~/Content/smartadmin-production-plugins.min.css">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="~/Content/smartadmin-skins.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="~/Content/smartadmin-rtl.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="~/Content/demo.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="~/Content/lockscreen.min.css" hr>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
+    <link rel="stylesheet" type="text/css" media="screen" href="~/Content/smartadmin-production.min.css">
+</head>
+<body>
+    <div id="main" role="main">
+
+        <header id="header">
+            <!--<span id="logo"></span>-->
+
+            <div id="logo-group">
+                <span id="logo"><a href="http://www.skyweb-lb.com/"><img src="@Utilities.GetAbsotuleUrl("~/Content/image/Corporate/SkyWeb.png")" alt="SyndicateIT"></a> </span>
+
+                <!-- END AJAX-DROPDOWN -->
+            </div>
+
+            <span id="extr-page-header-space"> <span class="hidden-mobile hiddex-xs">Already registered?</span> <a href="@Html.GetUrl("Login", "Account", SessionContent.Current.Corporate.IsSecure)" class="btn btn-danger">Sign In</a> </span>
+
+        </header>
+
+        <!-- MAIN CONTENT -->
+        <div id="content" class="container">
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 hidden-xs hidden-sm">
+                    <h1 class="txt-color-red login-header-big">IT  Application form</h1>
+                    <div class="hero">
+
+                        <div class="pull-left login-desc-box-l">
+                            <h4 class="paragraph-header">An application form is used to collect relevant and required information from an applicant</h4>
+                            <div class="login-app-icons">
+                                <a href="https://www.lebaneseitsyndicate.org" class="btn btn-danger btn-sm">Go To Home Page</a>
+                              
+                            </div>
+                        </div>
+
+                        <img src="@string.Format(@Utilities.GetAbsotuleUrl("/Content/image/Corporate/{0}.png"), SessionContent.Current.Corporate.LogoName)" " alt="" class="pull-right display-image" style="width:210px;margin-top:0px">
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <h5 class="about-heading">About Registration - Are you up to date?</h5>
+                            <p>
+                                This service, provided free of charge by the IT Syndicate Register Centre, allows you to check your personal details recorded in the IT Syndicate Information System after registration ...
+                            </p>
+                        </div>
+                      
+                    </div>
+
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
+                    <div class="well no-padding">
+                        @using (Html.BeginForm("Register", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @id = "smart-form-register", @class = "smart-form client-form", role = "form" }))
+                        {
+                            <header>
+                                Registration
+                            </header>
+
+                            <fieldset>
+                                <section>
+                                    <label class="input">
+                                        <i class="icon-append fa fa-user"></i>
+                                        @Html.TextBoxFor(m => m.Username, new { @class = "form-control", @maxlength = "100", @placeholder = "username" })
+                                        <b class="tooltip tooltip-bottom-right">Please enter the username</b>
+                                    </label>
+                                </section>
+
+                                <section>
+                                    <label class="input">
+                                        <i class="icon-append fa fa-envelope"></i>
+                                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @maxlength = "100", @placeholder = "Email address" })
+                                        <b class="tooltip tooltip-bottom-right">please enter the email</b>
+                                    </label>
+                                </section>
+
+                                <section>
+                                    <label class="input">
+                                        <i class="icon-append fa fa-lock"></i>
+                                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", @maxlength = "15", autocomplete = "off", @placeholder = "Password" })
+                                        <b class="tooltip tooltip-bottom-right">please enter the password</b>
+                                    </label>
+                                </section>
+
+                                <section>
+                                    <label class="input">
+                                        <i class="icon-append fa fa-lock"></i>
+                                        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @maxlength = "15", autocomplete = "off", @placeholder = "Confirm password" })
+                                        <b class="tooltip tooltip-bottom-right">please enter the password</b>
+                                    </label>
+                                </section>
+                            </fieldset>
+
+                            <fieldset>
+                                <div class="row">
+                                    <section class="col col-6">
+                                        <label class="input">
+                                            @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @maxlength = "100", @placeholder = "First name" })
+                                            <b class="tooltip tooltip-bottom-right">please enter the fisrt name</b>
+                                        </label>
+                                    </section>
+                                    <section class="col col-6">
+                                        <label class="input">
+                                            @Html.TextBoxFor(m => m.MiddleName, new { @class = "form-control", @maxlength = "100", @placeholder = "Middle  name" })
+                                            <b class="tooltip tooltip-bottom-right">please enter the middle name</b>
+                                        </label>
+                                    </section>
+                                </div>
+
+                                <div class="row">
+                                    <section class="col col-6">
+                                        <label class="input">
+                                            @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", @maxlength = "100", @placeholder = "Last name" })
+                                            <b class="tooltip tooltip-bottom-right">please enter the last name</b>
+                                        </label>
+                                    </section>
+                                    <section class="col col-6">
+                                        <label class="input">
+                                            <i class="icon-append fa fa-calendar"></i>
+                                            <input type="text" name="DateOfBirth" placeholder="Date Of Birth" class="datepicker" data-dateformat='dd/mm/yy'>
+                                            <b class="tooltip tooltip-bottom-right">please select the Date of Birth</b>
+                                        </label>
+                                    </section>
+                                </div>
+
+                                <section>
+                                    @*<label class="checkbox">
+                                        <input type="checkbox" name="subscription" id="subscription">
+                                        <i></i>I want to receive news and special offers
+                                    </label>*@
+                                    <label class="checkbox">
+                                        <input type="checkbox" name="terms" id="terms">
+                                        <i></i>I agree with the <a href="#" data-toggle="modal" data-target="#myModal"> Terms and Conditions </a>
+                                    </label>
+                                </section>
+                            </fieldset>
+
+                            <footer>
+                                <button type="submit" class="btn btn-primary">
+                                    Register
+                                </button>
+                            </footer>
+
+                            <div class="message">
+                                <i class="fa fa-check"></i>
+                                <p>
+                                    Thank you for your registration!
+                                </p>
+                            </div>
+                        }
+                        @if (!ViewData.ModelState.IsValid)
+                        {
+                        <div class="alert alert-danger fade in">
+                            <i class="fa-fw fa fa-times"></i>
+                            <strong>@Html.Resource("Error", resouceFilePath) </strong> @Html.ValidationMessage("Error").
+                        </div>
+                        }
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">Terms & Conditions</h4>
+                </div>
+                <div class="modal-body custom-scroll terms-body">
+
+                    <div id="left">
+
+
+                        <h1>SyndicateIT TERMS & CONDITIONS TEMPLATE</h1>
+
+                        
+                        <h2>Introduction</h2>
+
+                        <p>These terms and conditions govern your use of this website; by using this website, you accept these terms and conditions in full.   If you disagree with these terms and conditions or any part of these terms and conditions, you must not use this website.</p>
+
+                        <p>[You must be at least [18] years of age to use this website.  By using this website [and by agreeing to these terms and conditions] you warrant and represent that you are at least [18] years of age.]</p>
+
+
+                        <h2>License to use website</h2>
+                       
+                        <p>You must not conduct any systematic or automated data collection activities (including without limitation scraping, data mining, data extraction and data harvesting) on or in relation to this website without [NAME'S] express written consent.</p>
+
+                        <p>[You must not use this website to transmit or send unsolicited commercial communications.]</p>
+
+                        <p>[You must not use this website for any purposes related to marketing without [NAME'S] express written consent.]</p>
+
+                        <h2>[Restricted access</h2>
+
+                        <p>[Access to certain areas of this website is restricted.]  [NAME] reserves the right to restrict access to [other] areas of this website, or indeed this entire website, at [NAME'S] discretion.</p>
+
+                        <p>If [NAME] provides you with a user ID and password to enable you to access restricted areas of this website or other content or services, you must ensure that the user ID and password are kept confidential.</p>
+
+                        <p>[[NAME] may disable your user ID and password in [NAME'S] sole discretion without notice or explanation.]</p>
+
+                        <h2>[User content</h2>
+
+                       
+                        <h2>[Registrations and authorisations</h2>
+
+                        <p>[[NAME] is registered with [TRADE REGISTER].  You can find the online version of the register at [URL].  [NAME'S] registration number is [NUMBER].]</p>
+
+                        <p>[[NAME] is subject to [AUTHORISATION SCHEME], which is supervised by [SUPERVISORY AUTHORITY].]</p>
+
+
+                        <h2>[NAME'S] details</h2>
+
+                        <p>The full name of [NAME] is [FULL NAME].</p>
+
+                        <p>[[NAME] is registered in [JURISDICTION] under registration number [NUMBER].]</p>
+
+                        <p>[NAME'S] [registered] address is [ADDRESS].</p>
+
+                        <p>You can contact [NAME] by email to [EMAIL].</p>
+
+
+
+                    </div>
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        Cancel
+                    </button>
+                    <button type="button" class="btn btn-primary" id="i-agree">
+                        <i class="fa fa-check"></i> I Agree
+                    </button>
+
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+
+    <!-- /.modal -->
+    <!--================================================== -->
+    <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
+    <script src="~/Scripts/plugin/pace/pace.min.js"></script>
+
+    <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script>if (!window.jQuery) { document.write('<script src="js/libs/jquery-2.1.1.min.js"><\/script>'); }</script>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+    <script>if (!window.jQuery.ui) { document.write('<script src="js/libs/jquery-ui-1.10.3.min.js"><\/script>'); }</script>
+
+    <!-- IMPORTANT: APP CONFIG -->
+    <script src="~/Scripts/app.config.js"></script>
+
+    <!-- JS TOUCH : include this plugin for mobile drag / drop touch events
+    <script src="js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script> -->
+    <!-- BOOTSTRAP JS -->
+    <script src="~/Scripts/bootstrap/bootstrap.min.js"></script>
+
+    <!-- JQUERY VALIDATE -->
+    <script src="~/Scripts/plugin/jquery-validate/jquery.validate.min.js"></script>
+
+    <!-- JQUERY MASKED INPUT -->
+    <script src="~/Scripts/plugin/masked-input/jquery.maskedinput.min.js"></script>
+
+    <!--[if IE 8]>
+
+        <h1>Your browser is out of date, please update your browser by going to www.microsoft.com/download</h1>
+
+    <![endif]-->
+    <!-- MAIN APP JS FILE -->
+    <script src="~/Scripts/app.min.js"></script>
+
+    <script type="text/javascript">
+        runAllForms();
+
+        // Model i agree button
+        $("#i-agree").click(function () {
+            $this = $("#terms");
+            if ($this.checked) {
+                $('#myModal').modal('toggle');
+            } else {
+                $this.prop('checked', true);
+                $('#myModal').modal('toggle');
+            }
+        });
+
+        // Validation
+        $(function () {
+            // Validation
+            $("#smart-form-register").validate({
+
+                // Rules for form validation
+                rules: {
+                    Username: {
+                        required: true
+                    },
+                    Email: {
+                        required: true,
+                        email: true
+                    },
+                    Password: {
+                        required: true,
+                        minlength: 3,
+                        maxlength: 20
+                    },
+                    ConfirmPassword: {
+                        required: true,
+                        minlength: 3,
+                        maxlength: 20,
+                        equalTo: '#Password'
+                    },
+                    FirstName: {
+                        required: true
+                    },
+                    LastName: {
+                        required: true
+                    },
+                    MiddleName: {
+                        required: true
+                    },
+                    DateOfBirth: {
+                        required: true
+                    },
+                    terms: {
+                        required: true
+                    }
+                },
+
+                // Messages for form validation
+                messages: {
+                    login: {
+                        required: 'Please enter your login'
+                    },
+                    Email: {
+                        required: 'Please enter your email address',
+                        email: 'Please enter a VALID email address'
+                    },
+                    Password: {
+                        required: 'Please enter your password'
+                    },
+                    Username: {
+                        required: 'Please enter your Username'
+                    },
+                    ConfirmPassword: {
+                        required: 'Please enter your password one more time',
+                        equalTo: 'Please enter the same password as above'
+                    },
+                    FirstName: {
+                        required: 'Please enter your first name'
+                    },
+                    LastName: {
+                        required: 'Please enter your last name'
+                    },
+                    MiddleName: {
+                        required: 'Please enter your middle name'
+                    },
+                    DateOfBirth: {
+                        required: 'Please select your date of  Birth'
+                    },
+                    terms: {
+                        required: 'You must agree with Terms and Conditions'
+                    }
+                },
+
+                // Ajax form submition
+                submitHandler: function (form) {
+                    $(form).ajaxSubmit({
+                        success: function () {
+                            $("#smart-form-register").addClass('submited');
+                        }
+                    });
+                },
+
+                // Do not change code below
+                errorPlacement: function (error, element) {
+                    error.insertAfter(element.parent());
+                }
+            });
+
+        });
+    </script>
+
+
+</body>
+</html>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/kendo/js")
+}

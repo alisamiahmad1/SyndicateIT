@@ -1,0 +1,121 @@
+﻿
+@model SyndicateIT.Model.ViewModel.SetupManagement.Kaddaa.KaddaaViewModel
+@using SyndicateIT.Views.App_GlobalResources
+@{
+    Layout = null;
+    string PublicResources = "~/Views/SetupManagement/Kaddaa/PublicResource";
+}
+@Html.Partial("~/Views/Shared/_NavigationPartial.cshtml", @Model.Navigation)
+<div id="content">
+    <div class="row">
+        <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+            <h1 class="page-title txt-color-blueDark">
+                <i class="@Model.ClassTitle"></i> @Model.Title<span></span>
+            </h1>
+        </div>
+    </div>
+    @Html.Partial("~/Views/Shared/_AlertPartial.cshtml", Model.Alert)
+    <section id="widget-grid" class="">
+        <!-- row -->
+        <div class="row">
+            <article class="col-sm-12 sortable-grid ui-sortable">
+                <!-- Widget ID (each widget will need unique ID)-->
+                <div class="jarviswidget jarviswidgetTransparent" id="wid-id-x" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false" data-widget-custombutton="false" data-widget-sortable="false" role="widget">
+                    <header role="heading"></header>
+                    <!-- widget div-->
+                    <div role="content">
+                        <div class="row">
+                            <div class="widget-body">
+                                @using (Html.BeginForm("AddUpdateKaddaa", "Kaddaa", FormMethod.Post, new { @class = "smart-form", role = "form", id = "Kaddaa-form" }))
+                                {
+                                    @Html.HiddenFor(m => m.STP_Kaddaa_ID)
+                                    @Html.AntiForgeryToken()
+                                    @Html.ValidationSummary(true)
+                                    <fieldset>
+                                        <section class="col col-6">
+                                            @Html.Label(GeneralResources.IS_ACTIVE, new { @class = "col-md-4 control-label" })
+                                            <div class="col-md-6">
+                                                <label class="checkbox">
+                                                    @Html.CheckBoxFor(m => m.IS_ACTIVE, new { @checked = "checked", @class = "form-control form-control-md10" })
+                                                    <i></i>
+                                                </label>
+                                            </div>
+                                        </section>     
+                                        <section class="col col-6">
+                                            @Html.LabelFor(m => m.Kaddaa_NAME, Html.Resource("Kaddaa_NAME", PublicResources), new { @class = "col-md-4 control-label" })
+                                            <div class="col-md-6">
+                                                @Html.Kendo().TextBoxFor(model => model.Kaddaa_NAME).HtmlAttributes(new { @class = "form-control form-control-md10" }).Name("Kaddaa_NAME")
+                                                <div class="text-danger field-validation-error" id="Kaddaa_NAME_ValidationMsg" style="display:none;">
+                                                    <span for="SearchKaddaa" class=""> @Html.Resource("Kaddaa_NAME_Required", PublicResources)</span>
+                                                </div>
+                                            </div>
+                                        </section>
+                                       
+                                        <section class="col col-6">
+                                            @Html.LabelFor(m => m.COUNTRY_ID, Html.Resource("COUNTRY_ID", PublicResources), new { @class = "col-md-4  control-label" })
+                                            <div class="col-md-6">
+                                                @(Html.Kendo().DropDownListFor(m => m.COUNTRY_ID)
+                                                .DataTextField("Text")
+                                                .DataValueField("Value")
+                                                .OptionLabel("Select Country")
+                                                .HtmlAttributes(new { @class = "ui-select form-control-md10" })
+                                                .DataSource(source =>
+                                                {
+                                                    source.Read(read =>
+                                                    {
+                                                        read.Action("GetCountry", "Kaddaa");
+                                                    });
+                                                }))   
+                                                <div class="text-danger field-validation-error" id="Country_ID_ValidationMsg" style="display:none;">
+                                                    <span for="Country_ID" class=""> @Html.Resource("Country_ID_Required", PublicResources)</span>
+                                                </div>                                               
+                                            </div>
+                                        </section>
+                                        <section class="col col-6">
+                                            @Html.LabelFor(m => m.Region_ID, Html.Resource("Region_ID", PublicResources), new { @class = "col-md-4  control-label" })
+                                            <div class="col-md-6">                                               
+                                                    @(Html.Kendo().DropDownListFor(m => m.Region_ID)
+                                                         .Name("Region_ID")
+                                                         .DataTextField("Text")
+                                                         .DataValueField("Value")
+                                                         .OptionLabel("Select Region")
+                                                         .HtmlAttributes(new { @class = "ui-select form-control-md10" })
+                                                         .Value(Model.Region_ID.ToString())
+                                                         .DataSource(source =>
+                                                            {
+                                                                source.Read(read =>
+                                                                {
+                                                                    read.Action("GetRegionID", "Kaddaa")
+                                                                    .Data("FilterCountry");
+                                                                }).ServerFiltering(true);
+                                                            })
+                                                        .Enable(true)
+                                                        .AutoBind(false)
+                                                        .CascadeFrom("COUNTRY_ID")
+                                                    )
+                                                    <div class="text-danger field-validation-error" id="Region_ID_ValidationMsg" style="display:none;">
+                                                        <span for="Region_ID" class=""> @Html.Resource("Region_ID_Required", PublicResources)</span>
+                                                    </div>
+                                                  </div>
+                                        </section>   
+                                                                   
+                                    </fieldset>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end widget content -->
+                </div>
+                <!-- end widget -->
+                <div class="footer">
+                    <button type="button" class="btn btn-primary general-btn" onclick="SaveKaddaa();">@GeneralResources.save</button>
+                </div>
+            </article>
+        </div>
+    </section>
+</div>
+@section Scripts {
+    @Scripts.Render("~/Scripts/Kaddaa")
+}
+
+

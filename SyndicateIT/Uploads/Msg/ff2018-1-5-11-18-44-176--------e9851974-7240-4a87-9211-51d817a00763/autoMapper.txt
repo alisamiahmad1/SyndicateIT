@@ -1,0 +1,1 @@
+new SyndicateIT.Model.DomainModel.Msg.MsgDomainModel().InitializeMapper();

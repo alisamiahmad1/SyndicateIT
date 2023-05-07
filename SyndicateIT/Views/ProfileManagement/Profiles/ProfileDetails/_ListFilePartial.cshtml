@@ -1,0 +1,40 @@
+﻿@model List< SyndicateIT.Model.ViewModel.User_Documents.User_DocumentsViewModel>
+@for (int i = 0; i < Model.Count; i++)
+{
+    string path = Model[i].Document_Path;
+    string[] ar = Model[i].Document_Path.Split('\\');
+    string docName = ar[ar.Length - 1];
+    string size = "";
+    //  string path = Server.MapPath(pPath);
+    if (File.Exists(path))
+    {
+        FileInfo fi = new FileInfo(path);
+        var length = fi.Length;
+        if (length / 1024 < 1000)
+        {
+            size = Math.Round(length / 1024.0, 2) + " KB ";
+        }
+        else
+        {
+            size = Math.Round(length / (1024 * 1024.0), 2) + " MB ";
+        }
+    }       
+        <div class="col-md-3">
+            <div class="hpanel">
+                <div class="panel-body file-body">
+                    <i class="fa fa-file-pdf-o text-info"></i>
+                </div>
+                <div style="background-color:#92a2a8"><a href="@Model[i].Document_Path" style="color:#fff">@docName</a> </div>              
+                <div class="panel-footer">
+                    
+                    @if (Model.Count > 0 && Model[0].IsEditable == true)
+                    {
+                        <i class="fa fa-trash-o txt-color-red remScnt" onclick="DeleteDocument('User_Document_ID','@Model[i].User_Document_ID')" style="cursor:pointer;"> </i> <span>Trash</span>
+                    }
+                    
+                </div>
+            </div>
+        </div>
+}
+
+

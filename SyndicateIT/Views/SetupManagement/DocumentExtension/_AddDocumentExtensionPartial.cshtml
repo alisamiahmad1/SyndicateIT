@@ -1,0 +1,84 @@
+﻿
+@model SyndicateIT.Model.ViewModel.SetupManagement.DocumentExtension.DocumentExtensionViewModel
+@using SyndicateIT.Views.App_GlobalResources
+@{
+    Layout = null;
+    string PublicResources = "~/Views/SetupManagement/DocumentExtension/PublicResource";
+}
+@Html.Partial("~/Views/Shared/_NavigationPartial.cshtml", @Model.Navigation)
+<div id="content">
+    <div class="row">
+        <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+            <h1 class="page-title txt-color-blueDark">
+                <i class="@Model.ClassTitle"></i> @Model.Title<span></span>
+            </h1>
+        </div>
+    </div>
+    @Html.Partial("~/Views/Shared/_AlertPartial.cshtml", Model.Alert)
+    <section id="widget-grid" class="">
+        <!-- row -->
+        <div class="row">
+            <article class="col-sm-12 sortable-grid ui-sortable">
+                <!-- Widget ID (each widget will need unique ID)-->
+                <div class="jarviswidget jarviswidgetTransparent" id="wid-id-x" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false" data-widget-custombutton="false" data-widget-sortable="false" role="widget">
+                    <header role="heading"></header>
+                    <!-- widget div-->
+                    <div role="content">
+                        <div class="row">
+                            <div class="widget-body">
+                                @using (Html.BeginForm("AddUpdateDocumentExtension", "DocumentExtension", FormMethod.Post, new { @class = "smart-form", role = "form", id = "DocumentExtension-form" }))
+                                {
+                                    @Html.HiddenFor(m => m.Document_Ext_ID)
+                                    @Html.AntiForgeryToken()
+                                    @Html.ValidationSummary(true)
+                                    <fieldset>
+                                        <section class="form-group  col-sm-12">
+                                            @Html.Label(GeneralResources.IS_ACTIVE, new { @class = "col-md-2 control-label" })
+                                            <div class="col-md-10">
+                                                <label class="checkbox">
+                                                    @Html.CheckBoxFor(m => m.IS_ACTIVE, new { @checked = "checked" })
+                                                    <i></i>
+                                                </label>
+                                            </div>
+                                        </section>
+                                        <section class="form-group  col-sm-6">
+                                            @Html.LabelFor(m => m.Extension_Name, Html.Resource("Extension_Name", PublicResources), new { @class = "col-md-4 control-label" })
+                                            <div class="col-md-6">
+                                                @Html.Kendo().TextBoxFor(model => model.Extension_Name).HtmlAttributes(new { @class = "form-control form-control-md10" }).Name("Extension_Name")
+                                                <div class="text-danger field-validation-error" id="Extension_Name_ValidationMsg" style="display:none;">
+                                                    <span for="SearchDocumentExtension" class=""> @Html.Resource("Extension_Name_Required", PublicResources)</span>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        <section class="form-group  col-sm-6">
+                                            @Html.LabelFor(m => m.Extension_Type, Html.Resource("Extension_Type", PublicResources), new { @class = "col-md-4 control-label" })
+                                            <div class="col-md-6">
+                                                @Html.Kendo().TextBoxFor(model => model.Extension_Type).HtmlAttributes(new { @class = "form-control form-control-md10" }).Name("Extension_Name")
+                                                <div class="text-danger field-validation-error" id="Extension_Type_ValidationMsg" style="display:none;">
+                                                    <span for="Extension_Type" class=""> @Html.Resource("Extension_Type_Required", PublicResources)</span>
+                                                </div>
+                                            </div>
+                                        </section>
+
+                                        
+                                       
+                                    </fieldset>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end widget content -->
+                </div>
+                <!-- end widget -->
+                <div class="footer">
+                    <button type="button" class="btn btn-primary general-btn" onclick="SaveDocumentExtension();">@GeneralResources.save</button>
+                </div>
+            </article>
+        </div>
+    </section>
+</div>
+@section Scripts {
+    @Scripts.Render("~/Scripts/DocumentExtension")
+}
+
+

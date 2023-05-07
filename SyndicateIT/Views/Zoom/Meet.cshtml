@@ -1,0 +1,76 @@
+﻿@model SyndicateIT.DataLayer.DataContext.T_Meeting
+
+@{
+    Layout = null;
+//    return;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link type="text/css" rel="stylesheet" href="https://source.zoom.us/2.11.0/css/bootstrap.css" />
+    <link type="text/css" rel="stylesheet" href="https://source.zoom.us/2.11.0/css/react-select.css" />
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="origin-trial" content="">
+    <!-- Dependencies for client view and component view -->
+    <script src="https://source.zoom.us/2.11.0/lib/vendor/react.min.js"></script>
+    <script src="https://source.zoom.us/2.11.0/lib/vendor/react-dom.min.js"></script>
+    <script src="https://source.zoom.us/2.11.0/lib/vendor/redux.min.js"></script>
+    <script src="https://source.zoom.us/2.11.0/lib/vendor/redux-thunk.min.js"></script>
+    <script src="https://source.zoom.us/2.11.0/lib/vendor/lodash.min.js"></script>
+
+    <!-- Choose between the client view or component view: -->
+    <!-- CDN for client view -->
+    @*<script src="https://source.zoom.us/zoom-meeting-2.11.0.min.js"></script>*@
+
+    <!-- CDN for component view -->
+    <script src="https://source.zoom.us/zoom-meeting-embedded-2.11.0.min.js"></script>
+
+</head>
+<body>
+    <div>
+        <div id="meetingSDKElement">
+            <!-- Zoom Meeting SDK Rendered Here -->
+        </div>
+    </div>
+    <script>
+        const client = ZoomMtgEmbedded.createClient()
+        let meetingSDKElement = document.getElementById('meetingSDKElement')
+
+        client.init({
+            zoomAppRoot: meetingSDKElement,
+            language: 'en-US',
+            customize: {
+                video: {
+                    isResizable: true,
+                    viewSizes: {
+                        default: {
+                            width: 1000,
+                            height: 300
+                        },
+                        ribbon: {
+                            width: 300,
+                            height: 600
+                        }
+                    }
+                }
+            }
+        })
+        client.join({
+            sdkKey: "@ViewData["key"]",
+            signature: "@ViewData["signature"]", // role in SDK signature needs to be 1
+            password: "@Model.password",
+            meetingNumber: "@Model.Id",
+            userName: "@ViewData["name"]",
+            userId:"@ViewData["user_id"]",
+            @if (ViewData["zak"]!=null)
+            {
+            <text>zak: "@ViewData["zak"]"</text> // the host's zak token
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+﻿
+@model SyndicateIT.Model.ViewModel.Shared.AlertViewModel
+@if(Model.HasAlert == true)
+{
+<article class="col-sm-12 sortable-grid ui-sortable">
+    @Html.Hidden("HasAlert", Model.HasAlert)
+    <!-- Widget ID (each widget will need unique ID)-->
+    <div class="jarviswidget jarviswidgetTransparent" id="wid-id-x" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false" data-widget-custombutton="false" data-widget-sortable="false" role="widget">
+        <!-- widget div-->
+        <div role="content" style="background-color: transparent!important;border:0px;">
+            <div class="row">
+                <div class="">
+                    <div class="row" id="Alert-Type">
+                        <!-- NEW WIDGET START -->
+                        <article class="col-sm-12">
+                           
+                            @if (Model.AlertType == AlertType.Warning && Model.HasAlert == true)
+                            {
+                                <div class="alert alert-warning fade in">
+                                    <i class="fa-fw fa fa-warning"></i>
+                                    <strong>Warning</strong> @Model.Message
+                                </div>
+                            }
+                            else if (Model.AlertType == AlertType.Success && Model.HasAlert == true)
+                            {
+                                <div class="alert alert-success fade in">
+                                    <i class="fa-fw fa fa-check"></i>
+                                    <strong>Success</strong> @Model.Message
+                                </div>
+                            }
+                            else if (Model.AlertType == AlertType.Success && Model.HasAlert == true)
+                            {
+                                <div class="alert alert-info fade in">
+                                    <i class="fa-fw fa fa-info"></i>
+                                    <strong>Info!</strong> @Model.Message
+                                </div>
+                            }
+                            else if (Model.AlertType == AlertType.Danger && Model.HasAlert == true)
+                            {
+                                <div class="alert alert-danger fade in">
+                                    <i class="fa-fw fa fa-times"></i>
+                                    <strong>Error!</strong> @Model.Message
+                                </div>
+                            }
+
+                        </article>
+                        <!-- WIDGET END -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</article>
+}
+
+
+                   

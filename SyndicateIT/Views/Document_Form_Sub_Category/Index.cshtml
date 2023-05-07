@@ -1,0 +1,86 @@
+﻿@model SyndicateIT.DataLayer.DataContext.T_Document_Form_Sub_Category
+@{
+    ViewBag.Title = "Index";
+}
+<div id="content">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="row">
+                <a href="~/Document_Form_Category/index" class="btn btn-link">Categories</a> | <a href="~/Document_Form_Template/index" class="btn btn-link">Templates</a>
+            </div>
+            <h1 class="page-title txt-color-blueDark">
+                Document Form Sub Category
+                @Html.ActionLink("Create New", "Create", null, new { style = "float:right" })
+            </h1>
+        </div>
+    </div>
+    @using (Html.BeginForm("Search", "Document_Form_Sub_Category", FormMethod.Post, new { @class = "row search-md-form", data_enabled = true, role = "form" }))
+    {
+        <div class="col-md-4">
+            @Html.LabelFor(m => m.Document_Form_Category_Id, "Category")
+            @Html.DropDownListFor(m => m.Document_Form_Category_Id, null,"", new { @class = "form-control" })
+        </div>
+        <div class="col-md-4">
+            @Html.LabelFor(m => m.Title)
+            @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
+        </div>
+        <div class="col-md-2">
+            <label style="width:100%">&nbsp;</label>
+            <button type="submit" class="btn btn-block btn-serach">Search</button>
+        </div>
+    }
+    <br />
+    <div class="jarviswidget">
+        <div class="ui-jqgrid-view" style="padding:0">
+            <table class="ui-jqgrid-htable table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Title</th>
+                        <th>Nb Document Form Templates</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody class="tbody">
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<Script>
+    $(document).on("submit", "form.search-md-form", function (e) {
+        e.preventDefault();
+        var url = $(this).attr("action");
+        var dt = $(this).serialize();
+        $('tbody.tbody').html("<div class='loader'><img src=" + loader + " /></div>");
+        if ($(this).data("enabled")) $(this).data("enabled", false);
+        else return false;
+        $.post(url, dt, function (data) {
+            var st = '';
+            for (var i = 0; i < data.length; i++) {
+                st += `<tr>
+                    <td>${data[i].Document_Form_Category}</td>
+                    <td>${data[i].Title}</td>
+                    <td>${data[i].Document_Form_Templates}</td>
+                    <td>
+                        <a href='@Url.Content("~/Document_Form_Sub_Category/Edit/")${data[i].Id}'>Edit</a>
+                        ${(data[i].Document_Form_Templates != '0' ? '':
+                            `| <a href='@Url.Content("~/Document_Form_Sub_Category/Delete/")${data[i].Id}'>Delete</a>`
+                        )}
+                    </td>
+                </tr>`;
+            }
+            if (st == '') st = "<div>no data</div>"
+            $('tbody.tbody').html(st);
+        }).done(function () { $("form.search-md-form").data("enabled", true); })
+            .fail(function () {
+                $("form.search-md-form").data("enabled", true);
+                $('tbody.tbody').html("<tr><td>errrror</td><tr>");
+            });
+    });
+    $("select[name]").each(function (index) {
+        $(this).prepend(`<option></option>`);
+        $(this).val('');
+    })
+    $("form.search-md-form").submit();
+</Script>

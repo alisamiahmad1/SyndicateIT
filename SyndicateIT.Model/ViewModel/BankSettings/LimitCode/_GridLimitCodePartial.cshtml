@@ -1,0 +1,99 @@
+﻿@model SyndicateIT.Model.ViewModel.BankSettings.LimitCodeDefinitionViewModel
+
+@(Html.Kendo().Grid<SyndicateIT.Model.ViewModel.BankSettings.GridLimitCodeDefinitionViewModel>()
+    .Name("gridLimitCodeDefinition")
+      .TableHtmlAttributes(new { @class = "table table-striped table-hover" })
+    .Columns(columns =>
+    {
+        columns.Bound(p => p.PaymentTypeId);
+        columns.Bound(p => p.Name);
+        columns.Bound(p => p.LimitCode);
+        columns.Bound(p => p.BillingTypeId);
+        columns.Command(command => { command.Edit(); });
+    })
+    .ToolBar(toolbar => toolbar.Create())
+    .Editable(editable => editable.Mode(GridEditMode.InLine))
+    .Pageable()
+    .Sortable()
+    .Events(events => events.Save("onRequestEnd"))
+    .HtmlAttributes(new { style = "height:550px;" })
+    .Scrollable()
+    .Events(e => e.DataBound("onDataBound"))
+    .DataSource(dataSource => dataSource
+        .Ajax()
+        .PageSize(20)
+        .Events(events => events.Error("error_handler"))
+      
+        .Model(model => model.Id(p => p.PaymentTypeId))
+        .Create(update => update.Action("LimitCodeDefinition_Create", "BankSettings"))
+        .Read(read => read.Action("LimitCodeDefinition_Read", "BankSettings"))
+        .Update(update => update.Action("LimitCodeDefinition_Update", "BankSettings"))
+    )
+)
+<script type="text/javascript">
+    function error_handler(e) {
+        if (e.errors) {
+            var message = "Errors:\n";
+            $.each(e.errors, function (key, value) {
+                if ('errors' in value) {
+                    $.each(value.errors, function() {
+                        message += this + "\n";
+                    });
+                }            
+            });
+            alert(message);
+        }
+    }
+    function onRequestEnd() {
+        $('#gridLimitCodeDefinition').data('kendoGrid').dataSource.read();       
+    }
+    function onDataBound(e) {
+        var grid = $("#gridLimitCodeDefinition").data("kendoGrid");
+        var gridData = grid.dataSource.view();
+        for (var i = 0; i < gridData.length; i++) {
+            var currentUid = gridData[i].uid;
+            var currenRow = grid.table.find("tr[data-uid='" + currentUid + "']");
+            var editButton = $(currenRow).find(".k-grid-edit");
+            editButton.hide();
+        }
+    }
+</script>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

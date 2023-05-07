@@ -1,0 +1,28 @@
+﻿
+@model SyndicateIT.Model.ViewModel.ProfileManagement.ProfileDetails.DocumentViewModel
+@{
+    
+    string PublicResources = "~/Views/ProfileManagement/Profiles/ProfileDetails/PublicResources";
+}
+@Styles.Render("~/Content/Css/File")
+<script src="~/Scripts/plugin/fastclick/fastclick.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<article class="col-sm-12 sortable-grid ui-sortable">
+    <div role="tabpanel" class="tab-pane" id="document" style="margin-top:30px;">   
+        <div class="row">
+            <div class="col-md-3">
+                <div class="hpanel">
+                    <div class="panel-body">
+                        Files
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="row" id="listFile">
+                    @Html.Partial("~/Views/ProfileManagement/Profiles/ProfileDetails/_ListFilePartial.cshtml", Model.ListUser_Documents)
+                </div>
+            </div>
+        </div>
+    </div>
+</article>

@@ -1,0 +1,51 @@
+﻿
+@model SyndicateIT.Model.ViewModel.Report.ReportContentDetailsViewModel
+
+@(Html.Kendo().Grid<SyndicateIT.Model.ViewModel.Report.GridTransactionViewModel>()
+                            .Name("ReportTransactionGrid")
+                            .TableHtmlAttributes(new { @class = "table table-striped table-hover" })
+                            .Columns(columns =>
+                            {
+                                columns.Command(commands =>
+                                {
+                                    columns.Bound(c => c.TransactionID);
+                                    columns.Bound(c => c.CustomerNumber);
+                                    columns.Bound(c => c.CustomerName);
+                                    columns.Bound(c => c.PaymentTypeName);
+                                    columns.Bound(c => c.Provider);
+                                    columns.Bound(c => c.BillAmount);
+                                    columns.Bound(c => c.Fees);
+                                    columns.Bound(c => c.TotalAmount);
+                                    columns.Bound(c => c.AccountType);
+                                    columns.Bound(c => c.RecordDateString);
+                                    columns.Bound(p => p.Status).ClientTemplate("# if(Status == '0520') {#" +
+                                    "<span class='label label-success' style='font-size: 11px;'> Success</span>" +
+                                       "#} else {#" +
+                                    "<span class='label label-danger' style='font-size: 11px;'>Other</span>" +
+                                        "#}#")
+                                    .Title("Status");
+                                    columns.Bound(c => c.PaymentTypeID).Visible(false);
+                                    columns.Bound(c => c.AccountTypeID).Visible(false); ;
+
+                                });
+                            }
+                        )
+                        .DataSource(dataSource => dataSource
+                            .Ajax()
+                            .Read(read => read.Action("ReportTransaction_Read", "Report", new { searchFromDate = Model.FromDate, searchToDate = Model.ToDate, accountTypeCode = Model.AccountTypeID, paymentTypeID = Model.PaymentTypeID, isStatus = Model.Status }))
+                            .Model(model => { model.Id(c => c.TransactionID); })
+                            .PageSize(Constants.PAGESIZE)
+                            )
+                        .Pageable()
+                        .Sortable()
+                        .Selectable()
+)
+
+<script type="text/javascript">
+    $(document).ready(function () {     
+        $.validator.setDefaults({
+            ignore: ""
+        });
+       
+    });
+ </script>

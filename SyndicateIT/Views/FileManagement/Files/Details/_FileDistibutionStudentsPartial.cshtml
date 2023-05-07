@@ -1,0 +1,185 @@
+﻿@model SyndicateIT.Model.ViewModel.ServiceManagement.ServiceDetails.DistributionStudentsTableViewModel
+
+@Styles.Render("~/Content/DropDopSchedule")
+
+<div id="redips-drag">
+    <table cellpadding="0" cellspacing="0" width="100%" style="background-color: #fff;">
+        <tr>        
+            <td width="100%">
+                <div id="right">
+                    <table id="table2" style="background-color: #eee; width:100%;">
+                        <colgroup>
+                            @for (int t = 0; t < Model.DistributionStudentsRowsCols.Class_Column; t++)
+                            {
+                                <col width="150" />
+                            }
+                        </colgroup>
+                        <tbody>
+                            @for (int i = 0; i < Model.DistributionStudentsRowsCols.Class_Row; i++)
+                            {
+                                <tr>
+                                    @for (int j = 0; j < Model.DistributionStudentsRowsCols.Class_Column; j++)
+                                    {
+                                        var pDistributionStudents1 = Model.DistributionStudentsTableGrid.Where(p => p.Row == i && p.Col == j && p.Table_Number == 1).FirstOrDefault();
+                                        var pDistributionStudents2 = Model.DistributionStudentsTableGrid.Where(p => p.Row == i && p.Col == j && p.Table_Number == 2).FirstOrDefault();
+                                        string pDistributionStudents_ID1 = (pDistributionStudents1 == null) ? "" : pDistributionStudents1.DistributionStudents_ID.ToString();
+                                        string pDistributionStudents_ID2 = (pDistributionStudents2 == null) ? "" : pDistributionStudents2.DistributionStudents_ID.ToString();
+                                        var table0 = 1;
+                                        var table1 = 2;
+
+                                        <td class="rediSpace" style="border-width: 25px;">
+                                            <table width="100%" cellpadding="0" cellspacing="0">
+                                                <tr>
+                                                    <td id='td@(i)@(j)@(table0)'                                                       
+                                                        class="td-drag-drop " style="padding: 2%;width:100%;border: 1px solid #eee; border-bottom: 4px solid #fff!important;">
+                                                        @if (pDistributionStudents1 != null)
+                                                        {
+                                                            string User_ID = pDistributionStudents1.User_ID.ToString();
+                                                            if (!string.IsNullOrEmpty(User_ID))
+                                                            {
+                                                                <div id="btnUser@(i)@(j)" data-value="@User_ID" class="redips-drag redips-clone it inTbl" draggable="true" style="width:100%!important">
+                                                                    @pDistributionStudents1.UserName
+                                                                </div>
+                                                            }
+                                                        }
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td id='td@(i)@(j)@(table1)'
+                                                        data-Row="@(i)"
+                                                        data-Col='@(j)'
+                                                        data-Table='2'
+                                                        data-distributionStudents="@pDistributionStudents_ID2"
+                                                        ondrop='drop(event)'
+                                                        ondragover='allowDrop(event)'
+                                                        class="td-drag-drop" style="padding: 2%;width:100%;border: 1px solid #eee;">
+                                                        @if (pDistributionStudents2 != null)
+                                                        {
+                                                            string User_ID = pDistributionStudents2.User_ID.ToString();
+                                                            if (!string.IsNullOrEmpty(User_ID))
+                                                            {
+                                                                <div id="btnUser@(i)@(j)" data-value="@User_ID" class="redips-drag redips-clone it inTbl" draggable="true" ondragstart="drag(event)">
+                                                                    @pDistributionStudents2.UserName
+                                                                </div>
+                                                            }
+                                                        }
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    }
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div><!-- drag container -->
+<div id="message">Drag school subjects to the timetable (clone subjects with SHIFT key)</div>
+
+
+<script>
+    function allowDrop(ev) {
+        ev.preventDefault();
+    }
+
+    function drag(ev) {
+        ev.dataTransfer.setData("text", ev.target.id);
+    }
+
+
+           function drop(ev) {
+    ev.preventDefault();
+
+    var data = ev.dataTransfer.getData("text");
+
+    var parent = $("#" + data).closest("td");
+    var id = ev.target.id;
+    var distributionStudentsId = $("#" + data).closest("td").attr("data-distributionStudents");
+
+
+    if (id == "UserDistributionTrash") {
+        DeleteRecord(distributionStudentsId);
+        $("#" + data).remove();
+        $("#" + data).closest("td").attr("data-distributionStudents", "");
+    }
+
+    var obj = $(document.getElementById(data).outerHTML)
+    var dest = $("#" + id);
+    if (!obj.hasClass('inTbl')) {
+        obj = obj.attr("id", data + new Date().getTime()).addClass('inTbl');
+    }
+    else {
+        if (dest.is("td") || dest.closest("td").is("td")) {
+            DeleteRecord(distributionStudentsId);
+            $("#" + data).remove();
+            $("#" + data).closest("td").attr("data-distributionStudents", "");
+        }
+        else {
+            return;
+        }
+    }
+    if (!dest.is("td"))
+        dest = dest.closest("td");
+    dest.html(obj);
+    if (dest.attr("id") == parent.attr("id")) {
+        return;
+    }
+    SaveRecord(id);
+
+}
+
+function SaveRecord(element_ID) {
+    var myData = $("#scheduleContent").serialize();
+    var td_ID = td_IDs.indexOf(element_ID);
+    myData += "&Cycle_ID=" + $("#SearchCycle").data("kendoDropDownList").value();
+    myData += "&Class_ID=" + $("#SearchClass").data("kendoDropDownList").value();
+    myData += "&Division_ID=" + $("#SearchDivision").data("kendoDropDownList").value();
+    myData += "&DistributionStudents_ID=" + DistributionStudents_IDs[td_ID];
+    myData += "&User_ID=" + $("#" + element_ID).find(".inTbl").data("value");
+    myData += "&Col=" + $("#" + element_ID).data("col");
+    myData += "&Row=" + $("#" + element_ID).data("row");
+    myData += "&Table_Number=" + $("#" + element_ID).data("table");
+    $.post('@Html.GetUrl("SaveDistributionStudents", "ServiceManagement")', myData, function (data, textStatus, xhr) {
+        if (data[0] == "s") {
+            Schedule_IDs[td_ID] = data[1];
+            $("#" + element_ID).attr("data-distributionStudents", data[1]);
+        }
+        else {
+
+        }
+    })
+}
+var DistributionStudents_IDs = [];
+var td_IDs = [];
+
+var tdSDistributionStudents = $(".td-drag-drop");
+
+for (var i = 0; i < tdSDistributionStudents.length ; i++) {
+    DistributionStudents_IDs.push(tdSDistributionStudents.eq(i).data("schedule"));
+    td_IDs.push(tdSDistributionStudents.eq(i).attr("id"));
+}
+
+            function DeleteRecord(id) {
+                $.post('@Html.GetUrl("DeleteDistributionStudents", "ServiceManagement")', { pDistributionStudentsID: id }, function (data, textStatus, xhr) {
+                    if (data[0] == "s") {
+
+                    }
+                    else {
+
+                    }
+                })
+            }
+
+
+</script>
+
+
+
+
+
+
+

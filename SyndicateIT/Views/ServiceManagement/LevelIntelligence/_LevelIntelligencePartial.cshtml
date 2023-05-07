@@ -1,0 +1,142 @@
+﻿
+@model SyndicateIT.Model.ViewModel.ServiceManagement.ServiceDetails.LevelIntelligenceViewModel
+@{
+    string PublicResources = "~/Views/ServiceManagement/LevelIntelligence/_LevelIntelligencePartial.cshtml";
+}
+
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+@Html.Partial("~/Views/Shared/_AlertPartial.cshtml", Model.Alert)
+
+<article class="col-sm-12 sortable-grid ui-sortable">
+    @using (Html.BeginForm("LevelIntelligence", "ServiceManagement", FormMethod.Post, new { @class = "", role = "form", id = "Agenda-form" }))
+    {
+    <!-- Widget ID (each widget will need unique ID)-->
+        <div class="jarviswidget jarviswidgetTransparent" id="wid-id-x" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false" data-widget-custombutton="false" data-widget-sortable="false" role="widget">
+            <header role="heading">
+                <span class="widget-icon"> <i class="fa fa-align-justify"></i> </span>
+                <h2>Add New Level Intelligence</h2>
+                <span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span>
+            </header>
+            <!-- widget div-->
+            <div role="content">
+                <div class="row">
+                    <div class="widget-body">
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+                        <fieldset>
+                            <div class="form-group  col-sm-6">
+                                @Html.LabelFor(m => m.Cycle_ID, Html.Resource("Cycle_id", PublicResources), new { @class = "col-md-4 control-label" })
+                                <div class="col-md-6">
+                                    @(Html.Kendo().DropDownListFor(m => m.Cycle_ID)
+                                                .Name("Cycle_ID")
+                                                .DataTextField("Text")
+                                                .DataValueField("Value")
+                                                .OptionLabel(@Html.Resource("SelectCycle", PublicResources))
+                                                .HtmlAttributes(new { @class = "ui-select form-control-md10" })
+                                                .Value(Model.Cycle_ID.ToString())
+                                                .DataSource(source =>
+                                                {
+                                                    source.Read(read =>
+                                                    {
+                                                        read.Action("GetCycleTypesList", "ServiceManagement");
+                                                    });
+                                                }))
+                                    <span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error" data-for="Cycle_id" data-valmsg-for="Cycle_id" id="Cycle_id_validationMessage" style="display:none;" role="alert"><span class="k-icon k-warning"> </span> @Html.Resource("CycleRequired", PublicResources)</span>
+                                </div>
+                            </div>
+                            <div class="form-group  col-sm-6">
+                                @Html.LabelFor(m => m.Class_ID, Html.Resource("Class_ID", PublicResources), new { @class = "col-md-4  control-label" })
+                                <div class="col-md-6">
+                                    @(Html.Kendo().DropDownListFor(m => m.Class_ID)
+                                    .Name("Class_ID")
+                                    .DataTextField("Text")
+                                    .DataValueField("Value")
+                                    .OptionLabel(@Html.Resource("SelectClass_Id", PublicResources))
+                                    .HtmlAttributes(new { @class = "ui-select form-control-md10" })
+                                    .Value(Model.Class_ID.ToString())
+                                    .DataSource(source =>
+                                    {
+                                        source.Read(read =>
+                                        {
+                                            read.Action("GetClass", "ServiceManagement")
+                                            .Data("FilterServiceClass");
+                                        }).ServerFiltering(true);
+                                    })
+                                    .Enable(true)
+                                    .AutoBind(false)
+                                    .CascadeFrom("Cycle_id"))
+                                    <span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error" data-for="Class_ID" data-valmsg-for="Class_ID" id="Class_ID_validationMessage" style="display:none;" role="alert"><span class="k-icon k-warning"> </span> @Html.Resource("ClassRequired", PublicResources)</span>
+                                </div>
+                            </div>
+                            <div class="form-group  col-sm-6">
+                                @Html.LabelFor(m => m.Division_ID, Html.Resource("Division_ID", PublicResources), new { @class = "col-md-4  control-label" })
+                                <div class="col-md-6">
+                                    @(Html.Kendo().DropDownListFor(m => m.Division_ID)
+                                                .Name("Division_ID")
+                                                .DataTextField("Text")
+                                                .DataValueField("Value")
+                                                .OptionLabel(@Html.Resource("SelectDivision", PublicResources))
+                                                .HtmlAttributes(new { @class = "ui-select form-control-md10" })
+                                                .Value(Model.Division_ID.ToString())
+                                                .DataSource(source =>
+                                                {
+                                                    source.Read(read =>
+                                                    {
+                                                        read.Action("GetDivision", "ServiceManagement")
+                                                        .Data("FilterServiceDivision");
+                                                    }).ServerFiltering(true);
+                                                })
+                                                .Enable(true)
+                                                .AutoBind(false)
+                                                .CascadeFrom("Class_ID"))
+                                    <span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error" data-for="Division_ID" data-valmsg-for="Division_ID" id="Division_ID_validationMessage" style="display:none;" role="alert"><span class="k-icon k-warning"> </span> @Html.Resource("DivisionRequired", PublicResources)</span>
+                                </div>
+
+                            </div>
+                            <div class="form-group  col-sm-6">
+                                @Html.LabelFor(m => m.PeriodDate, Html.Resource("PeriodDate", PublicResources), new { @class = "col-md-4 control-label" })
+                                <div class="col-md-6">
+                                    @Html.Kendo().DatePickerFor(model => model.PeriodDate).HtmlAttributes(new { @class = "form-control form-control-md10", @maxlength = 200, @placeholder = "Enter  Date" }).Name("PeriodDate")
+                                    <span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error" data-for="PeriodDate" data-valmsg-for="PeriodDate" id="PeriodDate_validationMessage" style="display:none;" role="alert"><span class="k-icon k-warning"> </span>@Html.Resource("DateRequired", PublicResources)</span>
+                                </div>
+                            </div>
+                            <div class="form-group  col-sm-6"></div>
+                            <div class="form-group  col-sm-6">
+                                <button type="button" class="btn btn-serach " onclick="LoadLevelIntelligenceTable()" style="float:left;">Load</button>
+                            </div>
+                            <div class="form-group  col-sm-12">
+                                <p class="alert alert-info">
+                                    <strong>
+                                        use these load button for showing list of students.
+                                    </strong>
+                                </p>
+                                <div id="LevelIntelligenceTableId"></div>
+                            </div>
+                        </fieldset>
+                    </div>
+
+                </div>
+                <!-- end widget content -->
+            </div>
+        </div>
+    <!-- end widget -->
+        <div class="footer">
+            <button type="button" class="btn btn-primary general-btn" onclick="SaveLevelIntelligence();">Save</button>
+        </div>
+    }
+</article>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $.validator.setDefaults({
+            ignore: ""
+        });
+    });
+   $('#forumPost').summernote({
+					height : 180,
+					focus : false,
+					tabsize : 2
+				});
+
+</script>

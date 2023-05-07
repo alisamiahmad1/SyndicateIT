@@ -1,0 +1,162 @@
+﻿@model SyndicateIT.Model.ViewModel.ProfileManagement.ProfilesContentDetailsViewModel
+@{
+    Layout = null;
+    string resouceFilePath = "~/Views/ProfileManagement/Profiles/_ProfilesContentDetailsPartial.cshtml";
+}
+@Html.Partial("~/Views/Shared/_NavigationPartial.cshtml", @Model.Navigation)
+<script src="~/Scripts/Views/Enrollment/inquiry.js"></script>
+<script src="~/Scripts/Views/Profiles/profiles.js"></script>
+<div id="content">
+    <div class="row">
+        <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+            <h1 class="page-title txt-color-blueDark">
+                <i class="@Model.ClassTitle"></i> @Model.SubTitle
+            </h1>
+        </div>
+        <div class="col-xs-12 col-sm-5 col-md-5 col-lg-8">
+            <ul id="sparks" class="">
+                <li class="sparks-info">
+                    <h5>Data Entry Operator <span class="@Model.DataEntryOperatorClassCss">@Model.DataEntryOperatorStatus</span></h5>      
+                </li>
+                <li class="sparks-info">
+                    <h5> Entolment Committe <span class="@Model.EntolmentCommitteClassCss">@Model.EntolmentCommitteStatus</span></h5>
+                </li>
+                <li class="sparks-info">
+                    <h5>Financial Committe <span class="@Model.FinancialCommitteStatus"> @Model.FinancialCommitteStatus</span></h5>
+                </li>
+            </ul>
+        </div>
+    </div>   
+        
+        <div class="clearfix"></div>
+        <section id="widget-grid" class="">
+            <!-- row -->
+            <div class="row">
+                <!-- NEW WIDGET START -->
+                <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12 sortable-grid ui-sortable">
+                    <!-- Widget ID (each widget will need unique ID)-->
+                    <div class="jarviswidget jarviswidget-sortable" id="wid-id-x" data-widget-togglebutton="false" data-widget-editbutton="false" data-widget-fullscreenbutton="false" data-widget-colorbutton="false" data-widget-deletebutton="false" role="widget" style="">
+                        <header role="heading">
+
+                            <ul class="nav nav-tabs pull-right in" id="myTab">
+                                <li class="active" id="PersonalInformationsTabId">
+                                    <a data-toggle="tab" href="#" onclick="LoadPersonalInformations();" aria-expanded="true"><i class="fa fa-crop text-primary"></i> <span class="hidden-mobile hidden-tablet">@Html.Resource("PersonalInformation", resouceFilePath)</span></a>
+                                </li>
+                                <li class="" id="ContactDetailsTabId">
+                                    <a class="@Model.ClassCss" data-toggle="tab" href="#" onclick="LoadContactDetails();" aria-expanded="false"><i class="fa fa-crop text-primary"></i> <span class="hidden-mobile hidden-tablet">@Html.Resource("ContactDetails", resouceFilePath)</span></a>
+                                </li>
+                                @if (Model.UserType == UserType.Employees)
+                                {
+                                    <li class="" id="EmploymentTabId">
+                                        <a class="@Model.ClassCss" data-toggle="tab" href="#" onclick="LoadEmployment();" aria-expanded="false"><i class="fa fa-crop text-primary"></i> <span class="hidden-mobile hidden-tablet">@Html.Resource("Employment", resouceFilePath)</span></a>
+                                    </li>
+                                }
+
+                                <li class="" id="DocumentTabId">
+                                    <a class="@Model.ClassCss" data-toggle="tab" href="#" onclick="LoadDocument();" aria-expanded="false"><i class="fa fa-crop text-primary"></i> <span class="hidden-mobile hidden-tablet">@Html.Resource("Documents", resouceFilePath)</span></a>
+                                </li>
+                                @if (Model.UserType == UserType.Members && Model.SourceId != (int)ProfileSourceType.MyProfile)
+                                {
+                                    <li class="" id="ApplicationStatusTabId">
+                                        <a class="@Model.ClassCss" data-toggle="tab" href="#" onclick="LoadApplicationStatus();" aria-expanded="false"><i class="fa fa-crop text-primary"></i> <span class="hidden-mobile hidden-tablet">@Html.Resource("ApplicationStatus", resouceFilePath)</span></a>
+                                    </li>
+                                    <li class="" id="RegistrationTabId">
+                                        <a class="@Model.ClassCss" data-toggle="tab" href="#" onclick="LoadRegistration();" aria-expanded="false"><i class="fa fa-crop text-primary"></i> <span class="hidden-mobile hidden-tablet">@Html.Resource("Registration", resouceFilePath)</span></a>
+                                    </li>
+                                }
+                                <li class="" id="InsurranceTabId">
+                                    <a class="@Model.ClassCss" data-toggle="tab" href="#" onclick="LoadInsurrance();" aria-expanded="false"><i class="fa fa-crop text-primary"></i> <span class="hidden-mobile hidden-tablet">@Html.Resource("Insurance", resouceFilePath)</span></a>
+                                </li>
+                                <li class="" id="ExperienceTabId">
+                                    <a class="@Model.ClassCss" data-toggle="tab" href="#" onclick="LoadExperience();" aria-expanded="false"><i class="fa fa-crop text-primary"></i> <span class="hidden-mobile hidden-tablet">@Html.Resource("Experience", resouceFilePath)</span></a>
+                                </li>
+                                <li class="" id="EducationTabId">
+                                    <a class="@Model.ClassCss" data-toggle="tab" href="#" onclick="LoadEducation();" aria-expanded="false"><i class="fa fa-crop text-primary"></i> <span class="hidden-mobile hidden-tablet">@Html.Resource("Education", resouceFilePath)</span></a>
+                                </li>
+                                @if (Model.UserType == UserType.Members)
+                                {
+                                    <li class="" id="DependentTabId">
+                                        <a class="@Model.ClassCss" data-toggle="tab" href="#" onclick="LoadDependent();" aria-expanded="false"><i class="fa fa-crop text-primary"></i> <span class="hidden-mobile hidden-tablet">@Html.Resource("EmergencyContact", resouceFilePath)</span></a>
+                                    </li>
+                                }
+                                @if (Model.UserType == UserType.Agent)
+                                {
+                                    <li class="" id="AccountTabId">
+                                        <a class="@Model.ClassCss" data-toggle="tab" href="#" onclick="LoadAccount();" aria-expanded="false"><i class="fa fa-crop text-primary"></i> <span class="hidden-mobile hidden-tablet">@Html.Resource("Account", resouceFilePath)</span></a>
+                                    </li>
+                                    <li class="" id="TransactionTabId">
+                                        <a class="@Model.ClassCss" data-toggle="tab" href="#" onclick="LoadTransaction();" aria-expanded="false"><i class="fa fa-crop text-primary"></i> <span class="hidden-mobile hidden-tablet">@Html.Resource("Transaction", resouceFilePath)</span></a>
+                                    </li>
+                                }
+
+                                @if (SessionContent.Container.Login.UserRole == UserType.SuperAdministrator.ToString() || SessionContent.Container.Login.UserRole == UserType.Administrator.ToString())
+                                {
+                                    <li class="" id="SystemPrivilegesTabId">
+                                        <a class="@Model.ClassCss" data-toggle="tab" href="#" onclick="LoadSystemPrivileges();" aria-expanded="false"><i class="fa fa-crop text-primary"></i> <span class="hidden-mobile hidden-tablet">@Html.Resource("SystemPrivileges", resouceFilePath)</span></a>
+                                    </li>
+                                }
+                            </ul>
+                            <span class="jarviswidget-loader"><i clas s="fa fa-refresh fa-spin"></i></span>
+                        </header>
+                        <!-- widget div-->
+                        <div role="content" style="background-color: transparent!important;border-color: transparent!important;">
+                            <!-- widget edit box -->
+                            <div class="widget-body">
+                                <!-- content -->
+                                <div id="myTabContent" class="tab-content">
+                                    <!-- new tab: API interface -->
+                                    <div class="tab-pane fade clearfix active in" id="Main-ProfilesDetails">
+
+                                    </div>
+                                </div>
+                                <!-- end content -->
+                            </div>
+                        </div>
+                        <!-- end widget div -->
+                    </div>
+                    <!-- end widget -->
+                </article>
+                <!-- WIDGET END -->
+            </div>
+            <!-- end row -->
+        </section>
+    </div>
+    <script type="text/javascript">
+    var UploadFiles = [];
+    $(document).ready(function () {
+        $("#ProfilesUL").children().find('li').removeClass("active");
+        $("#Profiles").addClass("open");
+        @if (Model.UserType == UserType.Members)
+        {
+        <text>
+        $("#Members").addClass("active");
+        </text>
+         }
+        else if (Model.UserType == UserType.Employees)
+        {
+        <text>
+        $("#Employees").addClass("active");
+        </text>
+        }
+        else if (Model.UserType == UserType.MemberBoard)
+        {
+         <text>
+        $("#MemberBoard").addClass("active");
+        </text>
+        }
+
+        $("#ProfilesUL").show();
+        $("#Profiles").children().find('em').removeClass("fa fa-plus-square-o");
+        $("#Profiles").children().find('em').addClass("fa fa-minus-square-o");
+
+        LoadPersonalInformations();
+    });
+
+    </script>
+
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+
+

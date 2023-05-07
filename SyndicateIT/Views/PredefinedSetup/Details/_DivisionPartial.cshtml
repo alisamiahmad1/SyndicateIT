@@ -1,0 +1,57 @@
+﻿@model SyndicateIT.Model.ViewModel.SetupManagement.Divisiion.DivisionViewModel
+@using SyndicateIT.Views.App_GlobalResources
+@{
+    Layout = null;
+    string PublicResources = "~/Views/PredefinedSetup/Details/_SettingsContentPartial.cshtml";
+}
+
+    @using (Html.BeginForm("AddUpdateDivision", "Division", FormMethod.Post, new { @class = "smart-form", role = "form", id = "Division-form" }))
+    {
+        @Html.HiddenFor(m => m.Division_ID)
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        <fieldset>
+            <section class="form-group  col-sm-12">
+                @Html.Label(GeneralResources.IS_ACTIVE, new { @class = "col-md-2 control-label" })
+                <div class="col-md-6">
+                    <label class="checkbox">
+                        @Html.CheckBoxFor(m => m.IS_ACTIVE, new { @checked = "checked" })
+                        <i></i>
+                    </label>
+                </div>
+            </section>
+            <section class="form-group  col-sm-6">
+                @Html.LabelFor(m => m.Division_Name, Html.Resource("Division_Name", PublicResources), new { @class = "col-md-4 control-label" })
+                <div class="col-md-6">
+                    @Html.Kendo().TextBoxFor(model => model.Division_Name).HtmlAttributes(new { @class = "form-control form-control-md10" }).Name("Division_Name")
+                    <div class="text-danger field-validation-error" id="Division_Name_ValidationMsg" style="display:none;">
+                        <span for="SearchDivision" class=""> @Html.Resource("Division_Name_Required", PublicResources)</span>
+                    </div>
+                </div>
+            </section>
+            <section class="form-group  col-sm-6">
+                @Html.LabelFor(m => m.Class_ID, Html.Resource("Class_ID", PublicResources), new { @class = "col-md-4 control-label" })
+                <div class="col-md-6">
+                    @(Html.Kendo().DropDownListFor(m => m.Class_ID)
+                                                .DataTextField("Text")
+                                                .DataValueField("Value")
+                                                .OptionLabel("Select Class")
+                                                .HtmlAttributes(new { @class = "ui-select form-control-md10" })
+                                                .DataSource(source =>
+                                                {
+                                                    source.Read(read =>
+                                                    {
+                                                        read.Action("GetClass", "Division");
+                                                    });
+                                                }))
+                    <div class="text-danger field-validation-error" id="Class_ID_ValidationMsg" style="display:none;">
+                        <span for="Class_ID" class=""> @Html.Resource("Class_ID_Required", PublicResources)</span>
+                    </div>
+                </div>
+            </section>
+        </fieldset>
+    }
+
+<div class="footer">
+    <button type="button" class="btn btn-primary general-btn" onclick="SaveDivision();" style="width: 150px;margin-bottom: 22px;">Save Division</button>
+</div>

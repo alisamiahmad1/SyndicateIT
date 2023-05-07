@@ -1,0 +1,30 @@
+﻿@model List<SyndicateIT.DataLayer.DataContext.T_Meeting>
+@{
+    ViewBag.Title = "Index";
+}
+<div class="col-md-12">
+    <h2>My Meetings</h2>
+    <a href="~/Zoom/Save_Meeting">new Meeting</a>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>topic</th>
+                <th>created_at</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.topic</td>
+                    <td>@item.created_at.ToLongDateString()</td>
+                    <td>
+                        <a href="~/Zoom/Meet/@item.Id">Start Meeting</a> |
+                        <a href="~/Zoom/Delete_Meeting/@item.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

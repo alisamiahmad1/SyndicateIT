@@ -1,0 +1,139 @@
+﻿@model SyndicateIT.Model.ViewModel.Exam.ExamMaterialStudentsViewModel
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+@Html.Partial("~/Views/Shared/_AlertPartial.cshtml", Model.Alert)
+@{
+    string PublicResources = "~/Views/Exams/LoadExamsMaterials/PublicResource";
+}
+<div class="row">
+    <!-- NEW WIDGET START -->
+    <article class="col-sm-12 sortable-grid ui-sortable">
+        <!-- well -->
+        <div class="well" style="background-color: #fff;border: 1px solid #fff!important;">
+            @using (Html.BeginForm("SaveExamStudentMaterilas", "Limit", FormMethod.Post, new { @class = "", role = "form", id = "ExamStudentMaterilas-form" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+                <fieldset>
+                   @* <a href="javascript:void(0);" onclick="PrintByStudent();" class="btn bg-color-blue txt-color-white __web-inspector-hide-shortcut__" style="float: right;margin-bottom: 17px;">Print Student (@Model.MaterialName) </a>*@
+                    @*<div>
+                        <ul class="col-md-12 alert alert-success">
+                            <li class="col-md-4" style="margin-left:1%"> <span><label class="">Total Grade</label></span><strong style="padding-left:10px;">@Model.TotalGrad</strong></li>
+                            <li class="col-md-4"> <span><label class="">Coefficient Grade</label></span><strong style="padding-left:10px;">@Model.CoefficientGrade</strong></li>
+                            <li class="col-md-2"><strong>@Model.SuccessGrade</strong></li>
+                        </ul>
+                    </div>*@
+                </fieldset>
+                <fieldset class="tree" id="TreeExam">
+                    <ul role="tree">
+                        <li class="parent_li paymentType-content" role="treeitem">
+                            <span title="Collapse  this branch"><i class="fa fa-lg fa-minus-circle"></i> @Model.MaterialName</span>
+                            @*<span title="Collapse  this branch"><i class="fa fa-lg fa-minus-circle"></i> @Model.TotalExam</span>
+                                <span title="Collapse  this branch"><i class="fa fa-lg fa-minus-circle"></i> @Model.TotalCoefficient</span>
+                                <span title="Collapse  this branch"><i class="fa fa-lg fa-minus-circle"></i> @Model.AgerageSuccess</span>*@
+                            <ul role="group">
+                                @for (int i = 0; i < Model.ExamStudents.Count; i++)
+                                {
+                                    var pEnableValueCourse = "disabled";
+                                    if (Model.ExamStudents[i].ExamMaterialSkils == null || Model.ExamStudents[i].ExamMaterialSkils.Count == 0)
+                                    {
+                                        pEnableValueCourse = "";
+                                    }
+
+                                    var pExamStudents = @Model.ExamStudents[i];
+                                    var pNameMaterials = @Model.ExamStudents[i].StudentName.ToString().Replace(" ", "");
+                                    var pStudentId = @Model.ExamStudents[i].StudentId.ToString().Replace(" ", "");
+                                    var pNameMaterialsCoefficient = @Model.Coefficient.ToString().Replace(" ", "");
+                                    var pNameMaterialsGrade = @Model.GradeValue.ToString().Replace(" ", "");
+                                    <li class="parent_li student-content" role="treeitem" style="display: list-item;">
+                                        <span class="label label-success" title="Collapse this branch"><i class="fa fa-lg fa-minus-circle"></i> @pExamStudents.StudentName</span>
+                                        <ul role="group">
+                                            <li class="smart-li-form">
+                                                <label class="">@Html.Resource("Value", PublicResources)</label>
+                                                <label class="input">
+                                                    <input class="k-textbox k-textbox-Exam txt-Student" id="@pNameMaterialsGrade" name="@pNameMaterialsGrade" value="@Model.GradeValue.Value" StudentId="@pStudentId" min="0" max="100" @pEnableValueCourse>
+                                                </label>
+                                                <label class="">@Html.Resource("Coefficient", PublicResources)</label>
+                                                <label class="input">
+                                                    <input class="k-textbox k-textbox-Exam txt-Coefficient" id="@pNameMaterialsCoefficient" name="@pNameMaterialsCoefficient" value="@Model.Coefficient.ToString()" min="0" max="100" disabled>
+                                                </label>
+                                               
+                                                @for (int t = 0; t <  @Model.ExamStudents[i].ExamMaterialSkils.Count; t++)
+                                                {
+                                                    var pExamMaterialSkils = @Model.ExamStudents[i].ExamMaterialSkils[t];
+                                                    var pNameSkill = @Model.ExamStudents[i].ExamMaterialSkils[t].SkilsName.ToString().Replace(" ", "");
+                                                    var pSkilsId = @Model.ExamStudents[i].ExamMaterialSkils[t].SkilsId.ToString().Replace(" ", "");
+                                                    var pNameSkillCoefficient = @Model.ExamStudents[i].ExamMaterialSkils[t].Percentage.ToString().Replace(" ", "");
+                                                    <div class="smart-form">
+                                                        <fieldset>
+                                                            <section class="col col-3">
+                                                                <label class="label">&nbsp;</label>
+                                                                <label class="bg-color-blueLight label label-primary txt-center txt-color-white">
+                                                                    @pExamMaterialSkils.SkilsName
+                                                                </label>
+                                                            </section>
+                                                            <section class="col col-2">
+                                                                <label class="label">@Html.Resource("Value", PublicResources)</label>
+                                                                <label class="input">
+                                                                    <input class="k-textbox k-textbox-Exam txt-Skill" id="@pNameSkill" name="@pNameSkill" skillid="@pSkilsId" value="@pExamMaterialSkils.Value" min="0" max="100">
+                                                                </label>
+                                                            </section>
+                                                            <section class="col col-3">
+                                                                <label class="label">@Html.Resource("Coefficient", PublicResources)</label>
+                                                                <label class="input">
+                                                                    <input class="k-textbox k-textbox-Exam txt-Percentage" id="@pNameSkillCoefficient" name="@pNameSkillCoefficient" value="@pExamMaterialSkils.Percentage.ToString()" min="0" max="100" disabled>
+                                                                </label>
+                                                            </section>
+                                                        </fieldset>
+                                                    </div>
+                                                }
+                                                
+                                            </li>
+                                        </ul>
+                                    </li>
+                                }
+                            </ul>
+                        </li>
+                    </ul>
+
+                </fieldset>
+
+            }
+            <div class="footer">
+                <button type="button" class="btn btn-primary general-btn" onclick="SaveExamStudentMaterials();" style="width:20%;">Save</button>
+            </div>
+        </div>
+    </article>
+</div>
+<script type="text/javascript">
+    jQuery.fn.ForceNumericOnly =
+        function () {
+            return this.each(function () {
+                $(this).keydown(function (e) {
+                    var key = e.charCode || e.keyCode || 0;
+                    // allow backspace, tab, delete, enter, arrows, numbers and keypad numbers ONLY
+                    // home, end, period, and numpad decimal
+                    return (
+                        key == 8 ||
+                        key == 9 ||
+                        key == 13 ||
+                        key == 46 ||
+                        key == 110 ||
+                        key == 190 ||
+                        (key >= 35 && key <= 40) ||
+                        (key >= 48 && key <= 57) ||
+                        (key >= 96 && key <= 105));
+                });
+            });
+        };
+
+
+    var saveExamStudentMaterialsUrl = '@Html.GetUrl("AddUpdateExamStudentsMaterial", "ExamManagement")';
+    $(document).ready(function () {
+        $.validator.setDefaults({
+            ignore: ""
+        });
+
+    });
+    $(".k-textbox-Exam").ForceNumericOnly();
+</script>

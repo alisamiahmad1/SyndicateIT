@@ -1,0 +1,36 @@
+﻿@model List<SyndicateIT.Model.ViewModel.Common.CustomerAccountsViewModel>
+
+
+@if (Model != null && Model.Count > 0)
+{
+    <div class="table-responsive">
+
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>@Html.LabelFor(model => model[0].CustomerAccountType)</th>
+                    <th>@Html.LabelFor(model => model[0].AccountNumber)</th>
+                    <th>@Html.LabelFor(model => model[0].Balance)</th>
+                    <th>@Html.LabelFor(model => model[0].Currency)</th>
+                    <th>@Html.LabelFor(model => model[0].LastTransactionDate)</th>
+                    <th>@Html.LabelFor(model => model[0].Status)</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.Count; i++)
+                {
+                    <tr>
+                        <td>@Model[i].CustomerAccountType</td>
+                        <td>@Model[i].AccountNumber</td>
+                        <td>@Model[i].Balance</td>
+                        <td>@Model[i].Currency</td>
+                        <td>@Model[i].LastTransactionDateString</td>
+                        <td><span class="center-block padding-5 label label-success">@Model[i].StatusString</span></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+}
+

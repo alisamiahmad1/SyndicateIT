@@ -1,0 +1,164 @@
+﻿@model SyndicateIT.Model.ViewModel.ServiceManagement.ServicesSearchViewModel
+@{
+    Layout = null;
+    string PublicResources = "~/Views/ServiceManagement/_ServicesSearchPartial.cshtml";
+}
+@using (Html.BeginForm("SearchServices", "ServiceManagement", FormMethod.Post, new { @class = "smart-form", role = "form" , @id = "#scheduleContent" }))
+{
+    @Html.Hidden("UserTypeID", Model.ServiceTypeID);
+
+    if (Model.ServiceTypeID == (int)ServiceType.ExamProgram)
+    {
+        <section class="col col-3">
+            @Html.LabelFor(m => m.SearchExamName, Html.Resource("lblSearchExamName", PublicResources), new { @class = "label" })
+            @Html.Kendo().TextBoxFor(model => model.SearchExamName).HtmlAttributes(new { @class = "form-control  ", @maxlength = 200, @placeholder = "Enter Exam Name" }).Name("SearchExamName")
+            <span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error" data-for="SearchExamName" data-valmsg-for="SearchExamName" id="SearchExamName_validationMessage" style="display:none;" role="alert"><span class="k-icon k-warning"> </span> The Exam Name field is required.</span>
+        </section>
+    }
+    else
+    {
+
+        <section class="col col-2">
+            @Html.LabelFor(m => m.SearchCycle, Html.Resource("lblSearchCycle", PublicResources), new { @class = "label" })
+            @(Html.Kendo().DropDownListFor(m => m.SearchCycle)
+                    .Name("SearchCycle")
+                    .DataTextField("Text")
+                    .DataValueField("Value")
+                    .HtmlAttributes(new { @class = "form-control input-sm" })
+                    .Value(Model.SearchCycle.ToString())
+                    .DataSource(source =>
+                    {
+                        source.Read(read =>
+                        {
+                            read.Action("GetCycleTypesList", "ServiceManagement");
+                        });
+                    }))
+            <div class="text-danger field-validation-error" id="ErrorSearchCycle" style="display:none;">
+                <span for="SearchCycle" class=""> @Html.Resource("RequiredSearchCycle", PublicResources)</span>
+            </div>
+        </section>
+        <section class="col col-2">
+            @Html.LabelFor(m => m.SearchClass, Html.Resource("lblSearchClass", PublicResources), new { @class = "label" })
+            @(Html.Kendo().DropDownListFor(m => m.SearchClass)
+              .Name("SearchClass")
+              .DataTextField("Text")
+              .DataValueField("Value")
+              .OptionLabel(@Html.Resource("EnterSearchClass", PublicResources))
+              .HtmlAttributes(new { @class = "form-control input-sm" })
+              .Value(Model.SearchClass.ToString())
+              .Filter("startswith")
+             .DataSource(sourceClass =>
+             {
+                 sourceClass.Read(read =>
+                 {
+                     read.Action("GetClass", "ServiceManagement")
+                     .Data("FilterClass");
+                 }).ServerFiltering(true);
+             })
+            .Enable(true)
+            .AutoBind(false)
+            .CascadeFrom("SearchCycle"))
+            <div class="text-danger field-validation-error" id="ErrorSearchClass" style="display:none;">
+                <span for="SearchClass" class=""> @Html.Resource("RequiredSearchClass", PublicResources)</span>
+            </div>
+        </section>
+        <section class="col col-2">
+            @Html.LabelFor(m => m.SearchDivision, Html.Resource("lblSearchDivision", PublicResources), new { @class = "label" })
+            @(Html.Kendo().DropDownListFor(m => m.SearchDivision)
+                      .Name("SearchDivision")
+                      .DataTextField("Text")
+                      .DataValueField("Value")
+                      .OptionLabel(@Html.Resource("EnterDivision_Id", PublicResources))
+                      .HtmlAttributes(new { @class = "form-control input-sm" })
+                      .Value(Model.SearchDivision.ToString())
+                      .Filter("startswith")
+                      .DataSource(sourceDivision =>
+                      {
+                          sourceDivision.Read(read =>
+                          {
+                              read.Action("GetDivision", "ServiceManagement")
+                              .Data("FilterDivision");
+                          }).ServerFiltering(true);
+                      })
+                    .Enable(true)
+                    .AutoBind(false)
+                    .CascadeFrom("SearchClass"))
+            <div class="text-danger field-validation-error" id="ErrorSearchDivision" style="display:none;">
+                <span for="SearchDivision" class=""> @Html.Resource("RequiredSearchDivision", PublicResources)</span>
+            </div>
+        </section>
+    }
+
+    if (Model.ServiceTypeID == (int)ServiceType.Agenda)
+    {
+        <section class="col col-2">
+        @Html.LabelFor(m => m.SearchCourse, Html.Resource("lblSearchCourse", PublicResources), new { @class = "label" })
+        @(Html.Kendo().DropDownListFor(m => m.SearchCourse)
+                             .Name("SearchCourse")
+                             .DataTextField("Text")
+                             .DataValueField("Value")
+                             .OptionLabel(@Html.Resource("EnterCourse_Id", PublicResources))
+                             .HtmlAttributes(new { @class = "form-control input-sm" })
+                            .Value(Model.SearchCourse.ToString())
+                            .Filter("startswith")
+                            .DataSource(sourceCourse =>
+                            {
+                                sourceCourse.Read(read =>
+                                {
+                                    read.Action("GetCourse", "ServiceManagement")
+                                    .Data("FilterCourse");
+                                }).ServerFiltering(true);
+                            })
+                            .Enable(true)
+                            .AutoBind(false)
+                            .CascadeFrom("SearchDivision"))
+
+        <div class="text-danger field-validation-error" id="ErrorSearchCourse" style="display:none;">
+            <span for="SearchCourse" class=""> @Html.Resource("RequiredSearchCourse", PublicResources)</span>
+        </div>
+    </section>
+        <section class="col col-2">
+            @Html.LabelFor(m => m.SearchFromDate, Html.Resource("lblSearchFromDate", PublicResources), new { @class = "label" })
+            @Html.Kendo().DatePickerFor(model => model.SearchFromDate).HtmlAttributes(new { @class = "form-control  ", @maxlength = 200, @placeholder = "Enter Form Date" }).Name("SearchFromDate")
+            <span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error" data-for="SearchFromDate" data-valmsg-for="SearchFromDate" id="SearchFromDate_validationMessage" style="display:none;" role="alert"><span class="k-icon k-warning"> </span> The Date field is required.</span>
+        </section>
+        <section class="col col-2">
+            @Html.LabelFor(m => m.SearchToDate, Html.Resource("lblSearchToDate", PublicResources), new { @class = "label" })
+            @Html.Kendo().DatePickerFor(model => model.SearchToDate).HtmlAttributes(new { @class = "form-control  ", @maxlength = 200, @placeholder = "Enter To Date" }).Name("SearchToDate").Value(DateTime.Now)
+            <span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error" data-for="SearchToDate" data-valmsg-for="SearchToDate" id="SearchToDate_validationMessage" style="display:none;" role="alert"><span class="k-icon k-warning"> </span> The Date field is required.</span>
+        </section>
+    }
+    else if (Model.ServiceTypeID == (int)ServiceType.LevelIntelligence || Model.ServiceTypeID == (int)ServiceType.LevelBehavior || Model.ServiceTypeID == (int)ServiceType.Attendance || Model.ServiceTypeID == (int)ServiceType.DegreesParticipationActivites || Model.ServiceTypeID == (int)ServiceType.Duties || Model.ServiceTypeID == (int)ServiceType.AbsorptionGrades)
+    {
+        <section class="col col-2">
+            @Html.LabelFor(m => m.SearchPeriodMonth, Html.Resource("lblSearchPeriodMonth", PublicResources), new { @class = "label" })
+           @(Html.Kendo().DropDownListFor(m => m.SearchPeriodMonth)
+                    .Name("SearchPeriodMonth")
+                    .DataTextField("Text")
+                    .DataValueField("Value")
+                    //.OptionLabel(@Html.Resource("EnterMonth", PublicResources))
+                    .HtmlAttributes(new { @class = "form-control input-sm" })
+                    .Value(Model.SearchCycle.ToString())
+                    .DataSource(source =>
+                    {
+                        source.Read(read =>
+                        {
+                            read.Action("GetMonth", "ServiceManagement");
+                        });
+                    }))        
+            <span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error" data-for="SearchPeriodMonth" data-valmsg-for="SearchPeriodMonth" id="SearchPeriodMonth_validationMessage" style="display:none;" role="alert"><span class="k-icon k-warning"> </span> The Month field is required.</span>
+        </section>
+    }
+
+        <section class="col col-2 ">
+            <label class="label">&nbsp;</label>
+            <button type="button" class="btn btn-serach " onclick="SearchServices()">@Html.Resource("Search", PublicResources)</button>
+        </section>
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+        if ('@SessionContent.Container.Services.ServiceType' == '@ServiceType.ExamProgram') {
+            SearchServices();
+        }
+    });
+</script>

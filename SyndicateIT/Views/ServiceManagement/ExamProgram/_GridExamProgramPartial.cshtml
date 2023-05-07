@@ -1,0 +1,76 @@
+﻿
+@model SyndicateIT.Model.ViewModel.ServiceManagement.ServicesContentViewModel
+@(Html.Kendo().Grid<SyndicateIT.Model.ViewModel.Exam.GridExamsSetupViewModel>()
+        .Name("ExamsProgramGrid")
+        .TableHtmlAttributes(new { @class = "table table-striped table-hover" })
+        .Columns(columns =>
+        {
+            columns.Command(commands =>
+            {
+                columns.Bound(c => c.Name);
+                columns.Bound(p => p.Enabled).ClientTemplate("# if(Enabled == true) {#" +
+                "<span class='label label-success' style='font-size: 11px;'> Enable</span>" +
+                    "#} else {#" +
+                    " <span class='label label-warning' style='font-size: 11px;'>Disabled</span>" +
+                    "#}#")
+                    .Title("Enabled");
+               
+                columns.Bound(c => c.RecordDateString);
+                commands
+                    .Custom("EditExamsProgram")
+                    .Text("Edit")
+                    .Click("EditExamsProgram");
+                columns.Bound(c => c.ID).Visible(false);
+            });
+        }
+    )
+    .DataSource(dataSource => dataSource
+        .Ajax()
+        .Read(read => read.Action("ExamsProgram_Read", "ServiceManagement", new { searchExamName = Model.ServicesSearch.SearchExamName }))
+        .Model(model => { model.Id(c => c.ID); })
+        .PageSize(Constants.PAGESIZE)
+        )
+    .Pageable()
+    .Sortable()
+    .Selectable()
+)
+
+@section Scripts {
+     @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

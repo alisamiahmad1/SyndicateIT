@@ -1,0 +1,92 @@
+﻿@model SyndicateIT.Model.ViewModel.SetupManagement.Term.TermViewModel
+@using SyndicateIT.Views.App_GlobalResources
+@{
+    Layout = null;
+    string PublicResources = "~/Views/PredefinedSetup/Details/_SettingsContentPartial.cshtml";
+}
+
+ @using (Html.BeginForm("AddUpdateTerm", "Term", FormMethod.Post, new { @class = "smart-form", role = "form", id = "Term-form" }))
+    {
+        @Html.HiddenFor(m => m.Term_ID)
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        <fieldset>
+            <section class="form-group  col-sm-6">
+                @Html.Label(GeneralResources.IS_ACTIVE, new { @class = "col-md-4 control-label" })
+                <div class="col-md-6">
+                    <label class="checkbox">
+                        @Html.CheckBoxFor(m => m.IS_ACTIVE, new { @checked = "checked" })
+                        <i></i>
+                    </label>
+                </div>
+            </section>
+            <section class="form-group  col-sm-6">
+                @Html.LabelFor(m => m.Term_Name, Html.Resource("Term_Name", PublicResources), new { @class = "col-md-4 control-label" })
+                <div class="col-md-6">
+                    @Html.Kendo().TextBoxFor(model => model.Term_Name).HtmlAttributes(new { @class = "form-control form-control-md10" }).Name("Term_Name")
+                    <div class="text-danger field-validation-error" id="Term_Name_ValidationMsg" style="display:none;">
+                        <span for="SearchTerm" class=""> @Html.Resource("Term_Name_Required", PublicResources)</span>
+                    </div>
+                </div>
+            </section>
+            <section class="form-group  col-sm-6">
+                @Html.LabelFor(m => m.Term_From, Html.Resource("Term_From", PublicResources), new { @class = "col-md-4 control-label" })
+                <div class="col-md-6">
+                    @Html.Kendo().DatePickerFor(model => model.Term_From).HtmlAttributes(new { @class = "form-control  form-control-md10", @maxlength = 200, @placeholder = @Html.Resource("EnterFrom", PublicResources) }).Name("Term_From")
+                    <span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error" data-for="From" data-valmsg-for="Term_From" id="From_validationMessage" style="display:none;" role="alert"><span class="k-icon k-warning"> </span> @Html.Resource("FromValid", PublicResources)</span>
+                </div>
+            </section>
+            <section class="form-group  col-sm-6">
+                @Html.LabelFor(m => m.Term_To, Html.Resource("Term_To", PublicResources), new { @class = "col-md-4 control-label" })
+                <div class="col-md-6">
+                    @Html.Kendo().DatePickerFor(model => model.Term_To).HtmlAttributes(new { @class = "form-control  form-control-md10", @maxlength = 200, @placeholder = @Html.Resource("EnterTo", PublicResources) }).Name("Term_To")
+                    <span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error" data-for="Term_To" data-valmsg-for="Term_To" id="To_validationMessage" style="display:none;" role="alert"><span class="k-icon k-warning"> </span> @Html.Resource("ToValid", PublicResources)</span>
+                </div>
+            </section>
+            <section class="form-group  col-sm-6">
+                @Html.LabelFor(m => m.TermSucces, Html.Resource("TermSucces", PublicResources), new { @type = "number", @class = "col-md-4 control-label" })
+                <div class="col-md-6">
+                    @(Html.Kendo().NumericTextBoxFor(m => m.TermSucces).Min(0).HtmlAttributes(new { @class = "form-control form-control-md10" }))
+                    <div class="text-danger field-validation-error" id="Class_Row_ValidationMsg" style="display:none;">
+                        <span for="TermSucces" class=""> @Html.Resource("TermSucces_Required", PublicResources)</span>
+                    </div>
+                </div>
+            </section>
+            <section class="form-group  col-sm-6">
+                @Html.LabelFor(m => m.TermPercentage, Html.Resource("TermPercentage", PublicResources), new { @type = "number", @class = "col-md-4 control-label" })
+                <div class="col-md-6">
+                    @(Html.Kendo().NumericTextBoxFor(m => m.TermPercentage).Min(0).HtmlAttributes(new { @class = "form-control form-control-md10" }))
+                    <div class="text-danger field-validation-error" id="Class_Row_ValidationMsg" style="display:none;">
+                        <span for="TermPercentage" class=""> @Html.Resource("TermPercentage_Required", PublicResources)</span>
+                    </div>
+                </div>
+            </section>
+            <section class="form-group  col-sm-6">
+                @Html.LabelFor(m => m.ParentTerm, Html.Resource("ParentTerm", PublicResources), new { @class = "col-md-4 control-label" })
+                <div class="col-md-6">
+                    @(Html.Kendo().DropDownListFor(m => m.ParentTerm)
+                                                  .DataTextField("Text")
+                                                  .DataValueField("Value")
+                                                  .OptionLabel("Select Parent Term")
+                                                  .Value(Model.ParentTerm.ToString())
+                                                  .Filter("startswith")
+                                                   .HtmlAttributes(new { @class = "ui-select form-control-md10" })
+                                                  .DataSource(source =>
+                                                  {
+                                                      source.Read(read =>
+                                                      {
+                                                          read.Action("GetTermList", "TermMonth");
+                                                      });
+                                                  }))
+                    <div class="text-danger field-validation-error" id="Term_Name_ValidationMsg" style="display:none;">
+
+                    </div>
+
+                </div>
+            </section>
+
+        </fieldset>
+    }
+<div class="footer">
+    <button type="button" class="btn btn-primary general-btn" onclick="SaveTerm();" style="width: 150px;margin-bottom: 22px;">Save Term</button>
+</div>

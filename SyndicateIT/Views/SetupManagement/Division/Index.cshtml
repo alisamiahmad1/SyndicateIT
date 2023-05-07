@@ -1,0 +1,29 @@
+﻿@model  SyndicateIT.Model.ViewModel.SetupManagement.Divisiion.DivisionContentViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string PublicResources = "~/Views/SetupManagement/Division/PublicResource";
+}
+@Scripts.Render("~/Scripts/Division")
+@Scripts.Render("~/Scripts/translate")
+@*@Html.Partial("~/Views/Shared/_NavigationPartial.cshtml", @Model.Navigation)*@
+<div id="DivisionContent">
+    @Html.Partial("~/Views/SetupManagement/Division/_DivisionContentPartial.cshtml", Model);
+</div>
+<script type="text/javascript">
+    var DivisionSearchURL = '@Html.GetUrl("LoadSearchDivision", "Division")';
+    var DivisionDeleteURL = '@Html.GetUrl("DivisionDelete", "Division")';
+    var loadDivisionURL = '@Html.GetUrl("LoadDivision", "Division")';
+    var loader = '@Utilities.GetAbsotuleUrl("~/Content/image/ajax-loader.gif")';
+    var saveDivisionUrl = '@Html.GetUrl("AddUpdateDivision", "Division")';
+    var messageDelete = '@Html.Resource("MessageDelete", PublicResources)';
+    var loadTranslationDivisionURL = '@Html.GetUrl("LoadTranslateDivision", "Division")';
+
+    $("#SchoolSettings", $("#nav")).addClass("active open");
+    $("#SchoolSettings Ul", $("#nav")).show();
+
+</script>
+@section Scripts {
+    @Scripts.Render("~/bundles/kendo/js")
+}
+

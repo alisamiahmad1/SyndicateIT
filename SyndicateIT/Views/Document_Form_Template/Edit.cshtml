@@ -1,0 +1,111 @@
+﻿@model SyndicateIT.DataLayer.DataContext.T_Document_Form_Template
+@{
+    ViewBag.Title = "Edit";
+}
+
+<script src="//cdn.ckeditor.com/4.21.0/full/ckeditor.js"></script>
+<div id="content">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-title txt-color-blueDark">
+                Edit Template
+                @Html.ActionLink("Back to List", "Index", null, new { style = "float:right" })
+            </h1>
+        </div>
+    </div>
+    <div class="row">
+        <ul>
+            <li>every input must be like this {{t}}</li>
+            <li>we can set like this {{t:name:value:attributes}}</li>
+            <li>name represent the name of input</li>
+            <li>value represent the value of input</li>
+            <li>attributes represent all more attributes</li>
+            <li>{{t:::required}} mean input required without name or value</li>
+            <li>the caractere "t" represent the type of input</li>
+            <li>
+                the input type is
+                <ul>
+                    <li>t for text</li>
+                    <li>a for textarea</li>
+                    <li>r for radio button  /// value is required or all radio with same name have same value</li>
+                    <li>c for checkbox</li>
+                    <li>s for select       /// the separator between values is - for exampl {{s:name:v1-v2-v3}}</li>
+                    <li>g for sign box</li>
+                    <li>f for file, the value is the description of file</li>
+                </ul>
+            </li>
+        </ul>
+        @using (Html.BeginForm("Edit", "Document_Form_Template", FormMethod.Post, new { @class = "", role = "form" }))
+        {
+            <fieldset>
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group  col-md-4">
+                    @Html.Label("Document_Form_Category_Id", "Category", htmlAttributes: new { @class = "control-label" })
+                    @Html.DropDownList("Document_Form_Category_Id", null, htmlAttributes: new { @class = "form-control" })
+                </div>
+                <div class="form-group  col-md-4">
+                    @Html.LabelFor(model => model.Document_Form_Sub_Category_Id, "Sub Category", htmlAttributes: new { @class = "control-label" })
+                    @Html.DropDownListFor(model => model.Document_Form_Sub_Category_Id, null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Document_Form_Sub_Category_Id, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group  col-md-4">
+                    @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label" })
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group  col-md-12">
+                    @Html.LabelFor(model => model.Template, htmlAttributes: new { @class = "control-label" })
+                    <textarea name="Template" id="Template">@Html.Raw(Model.Template)</textarea>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <input type="submit" value="Edit" class="btn btn-default" />
+                    </div>
+                </div>
+            </fieldset>
+        }
+    </div>
+</div>
+<script>
+    $(document).on("change", "#Document_Form_Category_Id", function () {
+        if ($("#Document_Form_Category_Id").val() != "") {
+            var selected_cat = $("#Document_Form_Category_Id :selected").text();
+            var cat = $("#Document_Form_Sub_Category_Id :selected").closest('optgroup').attr("label");
+            if (selected_cat != cat) $("#Document_Form_Sub_Category_Id").val("");
+            $("#Document_Form_Sub_Category_Id optgroup").hide();
+            $("#Document_Form_Sub_Category_Id optgroup[label='" + selected_cat + "']").show();
+        } else {
+            $("#Document_Form_Sub_Category_Id").val("");
+            $("#Document_Form_Sub_Category_Id optgroup").show();
+        }
+    });
+
+        if (CKEDITOR.env.ie && CKEDITOR.env.version < 9)
+        CKEDITOR.tools.enableHtml5Elements(document);
+
+
+        CKEDITOR.config.language = 'en';
+        CKEDITOR.config.height = 400;
+        CKEDITOR.config.width = 'auto';
+
+
+
+        CKEDITOR.config.toolbar = [
+        {name: 'document', items: ['Source', '-', 'NewPage', 'ExportPdf', 'Preview', 'Print'] },
+        {name: 'clipboard', items: ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo'] },
+        {name: 'editing', items: ['Find', 'Replace', '-', 'SelectAll'] },
+            //{name: 'forms', items: ['Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 'HiddenField'] },
+        {name: 'insert', items: ['Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak'] },
+        '/',
+        {name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'CopyFormatting', 'RemoveFormat'] },
+        {name: 'paragraph', items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'EditDiv', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl', 'Language'] },
+        '/',
+        {name: 'styles', items: ['Styles', 'Format', 'Font', 'FontSize'] },
+        {name: 'colors', items: ['TextColor', 'BGColor'] },
+        {name: 'tools', items: ['Maximize', 'ShowBlocks'] },
+        ];
+
+        CKEDITOR.replace('Template');
+
+</script>

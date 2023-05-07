@@ -1,0 +1,166 @@
+﻿@model SyndicateIT.Model.ViewModel.SetupManagement.TermMonth.TermMonthViewModel
+@using SyndicateIT.Views.App_GlobalResources
+@{
+    Layout = null;
+    string PublicResources = "~/Views/PredefinedSetup/Details/_SettingsContentPartial.cshtml";
+}
+
+ 
+    @using (Html.BeginForm("AddUpdateTermMonth", "TermMonth", FormMethod.Post, new { @class = "smart-form", role = "form", id = "TermMonth-form" }))
+    {
+        @Html.HiddenFor(m => m.Term_Month_ID)
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        <fieldset>
+            <section class="form-group  col-sm-6">
+                @Html.Label(GeneralResources.IS_ACTIVE, new { @class = "col-md-4 control-label" })
+                <div class="col-md-6">
+                    <label class="checkbox">
+                        @Html.CheckBoxFor(m => m.IS_ACTIVE, new { @checked = "checked" })
+                        <i></i>
+                    </label>
+                </div>
+            </section>
+            <section class="form-group  col-sm-6">
+                @Html.LabelFor(m => m.PeriodDate, Html.Resource("PeriodDate", PublicResources), new { @class = "col-md-4 control-label" })
+                <div class="col-md-6">
+                    @Html.Kendo().DatePickerFor(model => model.PeriodDate).HtmlAttributes(new { @class = "form-control form-control-md10", @maxlength = 200, @placeholder = @Html.Resource("EnterFrom", PublicResources) }).Name("PeriodDate")
+                    <div class="text-danger field-validation-error" id="ErrorPeriodDate" style="display:none;">
+                        <span for="PeriodDate" class=""> PeriodDate is not valid</span>
+                    </div>
+                </div>
+            </section>
+            <section class="form-group  col-sm-6">
+                @Html.LabelFor(m => m.Cycle_ID, Html.Resource("lblSearchCycle", PublicResources), new { @class = "col-md-4 control-label" })
+                <div class="col-md-6">
+                    @(Html.Kendo().DropDownListFor(m => m.Cycle_ID)
+                                                .Name("Cycle_ID")
+                                                .DataTextField("Text")
+                                                .DataValueField("Value")
+                                                .OptionLabel(@Html.Resource("EnterSearchCycle", PublicResources))
+                                                .HtmlAttributes(new { @class = "ui-select form-control-md10" })
+                                                .DataSource(source =>
+                                                {
+                                                    source.Read(read =>
+                                                    {
+                                                        read.Action("GetCycleTypesList", "ServiceManagement");
+                                                    });
+                                                }))
+                    <div class="text-danger field-validation-error" id="ErrorSearchCycle" style="display:none;">
+                        <span for="SearchCycle" class=""> @Html.Resource("RequiredSearchCycle", PublicResources)</span>
+                    </div>
+                </div>
+            </section>
+            <section class="form-group  col-sm-6">
+                @Html.LabelFor(m => m.Class_ID, Html.Resource("lblSearchClass", PublicResources), new { @class = "col-md-4 control-label" })
+                <div class="col-md-6">
+                    @(Html.Kendo().DropDownListFor(m => m.Class_ID)
+                                                .Name("Class_ID")
+                                                .DataTextField("Text")
+                                                .DataValueField("Value")
+                                                .OptionLabel(@Html.Resource("EnterSearchClass", PublicResources))
+                                                .HtmlAttributes(new { @class = "ui-select form-control-md10" })
+                                                .Value(Model.Class_ID.ToString())
+                                                .Filter("startswith")
+                                                .DataSource(source =>
+                                                {
+                                                    source.Read(read =>
+                                                    {
+                                                        read.Action("GetClass", "ServiceManagement")
+                                                        .Data("FilterClass");
+                                                    }).ServerFiltering(true);
+                                                })
+                                                .Enable(true)
+                                                .AutoBind(false)
+                                                .CascadeFrom("Cycle_ID"))
+                    <div class="text-danger field-validation-error" id="ErrorSearchClass" style="display:none;">
+                        <span for="SearchClass" class=""> @Html.Resource("RequiredSearchClass", PublicResources)</span>
+                    </div>
+                </div>
+            </section>
+            <section class="form-group  col-sm-6">
+                @Html.LabelFor(m => m.Division_ID, Html.Resource("lblSearchDivision", PublicResources), new { @class = "col-md-4 control-label" })
+                <div class="col-md-6">
+                    @(Html.Kendo().DropDownListFor(m => m.Division_ID)
+                                                .Name("Division_ID")
+                                                .DataTextField("Text")
+                                                .DataValueField("Value")
+                                                .OptionLabel(@Html.Resource("EnterDivision_Id", PublicResources))
+                                                .HtmlAttributes(new { @class = "ui-select form-control-md10" })
+                                                .Value(Model.Division_ID.ToString())
+                                                .Filter("startswith")
+                                                .DataSource(source =>
+                                                {
+                                                    source.Read(read =>
+                                                    {
+                                                        read.Action("GetDivision", "ServiceManagement")
+                                                        .Data("FilterDivision");
+                                                    }).ServerFiltering(true);
+                                                })
+                                                .Enable(true)
+                                                .AutoBind(false)
+                                                .CascadeFrom("Class_ID"))
+                    <div class="text-danger field-validation-error" id="ErrorSearchDivision" style="display:none;">
+                        <span for="SearchDivision" class=""> @Html.Resource("RequiredSearchDivision", PublicResources)</span>
+                    </div>
+                </div>
+            </section>
+            <section class="form-group  col-sm-6">
+                @Html.LabelFor(m => m.Course_ID, Html.Resource("lblSearchCourse", PublicResources), new { @class = "col-md-4 control-label" })
+                <div class="col-md-6">
+                    @(Html.Kendo().DropDownListFor(m => m.Course_ID)
+                                                .Name("Course_ID")
+                                                .DataTextField("Text")
+                                                .DataValueField("Value")
+                                                 .OptionLabel(@Html.Resource("EnterCourse_ID", PublicResources))
+                                                  .HtmlAttributes(new { @class = "ui-select form-control-md10" })
+                                                .Value(Model.Course_ID.ToString())
+                                                .Filter("startswith")
+                                                .DataSource(source =>
+                                                {
+                                                    source.Read(read =>
+                                                    {
+                                                        read.Action("GetCourse", "ServiceManagement")
+                                                        .Data("FilterCourse");
+                                                    }).ServerFiltering(true);
+                                                })
+                                                .Enable(true)
+                                                .AutoBind(false)
+                                                .CascadeFrom("Division_ID"))
+                    <div class="text-danger field-validation-error" id="ErrorSearchCourse" style="display:none;">
+                        <span for="SearchCourse" class=""> @Html.Resource("RequiredSearchCourse", PublicResources)</span>
+                    </div>
+                </div>
+            </section>
+            <section class="form-group  col-sm-6">
+                @Html.LabelFor(m => m.Term_ID, GeneralResources.Term_ID, new { @class = "col-md-4 control-label" })
+                <div class="col-md-6">
+                    @(Html.Kendo().DropDownListFor(m => m.Term_ID)
+                                              .DataTextField("Text")
+                                              .DataValueField("Value")
+                                              .Value(Model.Term_ID.ToString())
+                                              .Filter("startswith")
+                                                 .HtmlAttributes(new { @class = "ui-select form-control-md10" })
+                                              .DataSource(source =>
+                                              {
+                                                  source.Read(read =>
+                                                  {
+                                                      read.Action("GetTermList", "TermMonth");
+                                                  });
+                                              }))
+                    <div class="text-danger field-validation-error" id="ErrorSearchTerm_ID" style="display:none;">
+                        <span for="SearchTerm_ID" class=""> Term_ID is not valid</span>
+                    </div>
+                </div>
+            </section>
+
+
+        </fieldset>
+    }
+
+
+
+
+<div class="footer">
+    <button type="button" class="btn btn-primary general-btn" onclick="SaveTermMonth();" style="width: 150px;margin-bottom: 22px;">Save Term Month</button>
+</div>

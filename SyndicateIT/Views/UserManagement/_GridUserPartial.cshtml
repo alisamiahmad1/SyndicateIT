@@ -1,0 +1,54 @@
+﻿@{  string resouceFilePath = "~/Views/UserManagement/_GridUserPartial.cshtml";}
+@(Html.Kendo().Grid<SyndicateIT.Model.ViewModel.UserManagement.UserManagementViewModel>()
+        .Name("Users")
+        .TableHtmlAttributes(new { @class = "table table-striped table-hover" })
+        .Columns(columns =>
+        {
+            columns.Bound(c => c.Username).Width("20%");
+            columns.Bound(c => c.Email).Width("20%");
+            columns.Bound(c => c.Branch).Width("10%");
+            columns.Bound(c => c.Role).Width("10%");
+            columns.Bound(c => c.CreationDateString).Width("10%");
+            columns.Bound(c => c.Status).Width("10%");
+            columns.Command(commands =>
+            {
+                commands
+                    .Custom("EditUser")
+                    .Text(@Html.Resource("Edit", resouceFilePath))
+                    .Click("EditUser");
+                commands
+                   .Custom("ActiveUser")
+                   .Text(@Html.Resource("Active", resouceFilePath))
+                   .Click("ActiveUser");
+
+                commands
+                   .Custom("DeactiveUser")
+                   .Text(@Html.Resource("Deactive", resouceFilePath))
+                   .Click("DeactiveUser");
+            }).Width("30%");
+        }
+    )
+    .DataSource(dataSource => dataSource
+        .Ajax()
+        .Read(read => read.Action("Users_Read", "UserManagement"))
+        .Model(model => { model.Id(c => c.ID); })
+            .PageSize(Constants.PAGESIZE)
+     )
+    .Events(events => events.DataBound("onDataBound"))
+    .Pageable()
+    .Sortable()
+    .Selectable()
+)
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#Grid_User').show();
+        $("AdministrationUL").children().find('li').removeClass("active");
+        $("#Index").addClass("active");
+        $("#Administration").addClass("open");
+        $("#AdministrationUL").show();
+        $("#Administration").children().find('em').removeClass("fa fa-plus-square-o");
+        $("#Administration").children().find('em').addClass("fa fa-minus-square-o");
+    });
+
+</script>
+

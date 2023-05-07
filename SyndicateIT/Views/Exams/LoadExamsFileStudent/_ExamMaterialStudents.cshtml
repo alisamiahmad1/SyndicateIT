@@ -1,0 +1,262 @@
+﻿@model SyndicateIT.Model.ViewModel.Exam.ExamStudentMaterialsViewModel
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+@Html.Partial("~/Views/Shared/_AlertPartial.cshtml", Model.Alert)
+@{
+    string PublicResources = "~/Views/Exams/LoadExamsFileStudent/_ExamsFileStudents.cshtml";
+}
+<div class="row">
+    <!-- NEW WIDGET START -->
+    <article class="col-sm-12 sortable-grid ui-sortable">
+        <!-- well -->
+        <div class="well" style="background-color: #fff;border: 1px solid #fff!important;">
+            @using (Html.BeginForm("SaveExamMaterialStudents", "ExamManagement", FormMethod.Post, new { @class = "", role = "form", id = "ExamMaterialStudents-form" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+
+                if (Model.ExamMaterials != null && Model.ExamMaterials.Count > 0)
+                {
+                    <fieldset>
+                        @if (SessionContent.Container.Exams.CurrentCycleD != (int)Cycle.PreeSchool)
+                    {
+                            <div>
+                                <ul class="col-md-12 alert alert-success">
+                                    <li class="col-md-4" style="margin-left:1%"> <span><label class="">@Html.Resource("TotalGrade", PublicResources)</label></span><strong style="padding-left:10px;">@Model.TotalGrad</strong></li>
+                                    <li class="col-md-4"> <span><label class="">@Html.Resource("CoefficientGrade", PublicResources)</label></span><strong style="padding-left:10px;">@Model.CoefficientGrade</strong></li>
+                                    <li class="col-md-2"><strong>@Model.SuccessGrade</strong></li>
+                                </ul>
+                            </div>
+                        }
+                    </fieldset>
+
+                 <fieldset class="tree" id="TreeExam">
+                    <ul role="tree">
+                        <li class="parent_li paymentType-content" role="treeitem">
+                            <span title="Collapse  this branch" style="font-size:20px;"><i class="fa fa-lg fa-minus-circle"></i> @Model.StudentName</span>
+                            <ul role="group">
+                                @for (int i = 0; i < Model.ExamMaterials.Count; i++)
+                                {
+
+                                    var pExamMaterials = @Model.ExamMaterials[i];
+                                    var pNameMaterials = @Model.ExamMaterials[i].MaterialName.ToString().Replace(" ", "");
+                                    var pMaterialId = @Model.ExamMaterials[i].MaterialId.ToString().Replace(" ", "");
+                                    var pMaterialTotalValue = @Model.ExamMaterials[i].TotalValue;
+                                    var pMaterialTotalId = "MaterialTotal" + "_" + i;
+                                    var pMaterialTotalTermMonthId = "MaterialTermMonth" + "_" + i;
+                                    var pMaterialCoefficientId = "MaterialCoefficient" + "_" + i;
+
+                                    <li class="parent_li student-content" role="treeitem" style="display: list-item;">
+                                        <span class="label label-success" title="Collapse this branch" style="font-size:18px;"><i class="fa fa-lg fa-minus-circle"></i> @pExamMaterials.MaterialName</span>
+                                        <ul role="group">                                          
+                                            @if (@Model.ExamMaterials[i] != null)
+                                            {
+                                                var pMaterialCoefficientTotalValue = @Model.ExamMaterials[i].ExamMaterilasTermMonths.Count > 0 ? @Model.ExamMaterials[i].ExamMaterilasTermMonths[0].Coefficient : 0;
+                                                <li class="smart-li-form" style="padding:10px">
+                                                    @if (SessionContent.Container.Exams.CurrentCycleD != (int)Cycle.PreeSchool)
+                                                    {
+                                                        <span class="label label-warning" title="Collapse this branch" style="width: 20%;padding: 1%;font-size:12px;"><b>@Html.Resource("Total", PublicResources) </b>&nbsp;&nbsp;( @pMaterialTotalValue )</span>
+                                                        <span class="label label-warning" title="Collapse this branch" style="width: 20%;padding: 1%;font-size:12px;"><b>@Html.Resource("Coefficient", PublicResources) </b>&nbsp;&nbsp;( @pMaterialCoefficientTotalValue )</span>
+                                                    }                                                  
+                                                </li>
+
+                                                for (int k = 0; k < Model.ExamMaterials[i].ExamMaterilasTermMonths.Count; k++)
+                                                {
+                                                    var pTermMonthId = "TermMonth" + "_" + i + "_" + k;
+                                                    var pTermMaterialId = "Material" + "_" + i + "_" + k;
+                                                    var pTermCoefficientId = "Coefficient" + "_" + i + "_" + k;
+                                                    var pEnableValueCourse = "disabled";
+                                                    if (Model.ExamMaterials[i].ExamMaterilasTermMonths[k].ExamStudentSkils.Count == 0)
+                                                    {
+                                                        pEnableValueCourse = "";
+                                                    }
+
+                                                    <li class="smart-li-form" style="padding:10px">
+                                                        @if (SessionContent.Container.Exams.CurrentCycleD != (int)Cycle.PreeSchool)
+                                                        {
+                                                            <label class="" style="padding-right: 15px;padding-left: 15px;">Value</label>
+                                                            <label class="input">
+                                                                <input class="k-textbox k-textbox-Exam txt-Material-TermMonth" id="@pTermMaterialId" name="@pTermMaterialId" onkeyup="this.value = minmax(this.value, @pMaterialCoefficientTotalValue)" value="@Model.ExamMaterials[i].ExamMaterilasTermMonths[k].Value" termMonthName="@Model.ExamMaterials[i].ExamMaterilasTermMonths[k].TermMonthname" termMonthId="@Model.ExamMaterials[i].ExamMaterilasTermMonths[k].TermMonthId" min="0" max="100" disabled />
+                                                            </label>
+                                                        }                                                       
+
+                                                        <label class="" style="padding-right: 15px;padding-left: 15px;">Term Month</label>
+                                                        <label class="input">
+                                                            <input class="k-textbox k-textbox-Exam txt-Coefficient" id="@pTermMonthId" name="@pTermMonthId" value="@Model.ExamMaterials[i].ExamMaterilasTermMonths[k].TermMonthname" min="0" disabled>
+                                                        </label>
+                                                        @for (int t = 0; t < Model.ExamMaterials[i].ExamMaterilasTermMonths[k].ExamStudentSkils.Count; t++)
+                                                        {
+                                                            var pExamStudentSkils = Model.ExamMaterials[i].ExamMaterilasTermMonths[k].ExamStudentSkils[t];
+                                                            var pNameSkill = Model.ExamMaterials[i].ExamMaterilasTermMonths[k].ExamStudentSkils[t].SkilsName.ToString().Replace(" ", "");
+                                                            var pSkilsId = Model.ExamMaterials[i].ExamMaterilasTermMonths[k].ExamStudentSkils[t].SkilsId.ToString().Replace(" ", "");
+                                                            var pNameSkillCoefficient = Model.ExamMaterials[i].ExamMaterilasTermMonths[k].ExamStudentSkils[t].Percentage.ToString().Replace(" ", "");
+
+                                                            var pTermMaterialSkillsId = "Skills" + "_" + i + "_" + k + "_" + t;
+                                                            var pTermCoefficientSkillsId = "Coefficient" + "_" + i + "_" + "_" + t;
+
+                                                            <div class="smart-form">
+                                                                @if (SessionContent.Container.Exams.CurrentCycleD != (int)Cycle.PreeSchool)
+                                                                {
+                                                                    <fieldset>
+                                                                        <section class="col col-3">
+                                                                            <label class="label">&nbsp;</label>
+                                                                            <span class="bg-color-pinkDark  label label-primary txt-center txt-color-white">
+                                                                                @pExamStudentSkils.SkilsName
+                                                                            </span>
+                                                                        </section>
+                                                                        <section class="col col-2">
+                                                                            <label class="label">Value</label>
+                                                                            <label class="input">
+                                                                                <input class="k-textbox k-textbox-Exam txt-Skill"  id="@pTermMaterialSkillsId" name="@pTermMaterialSkillsId" skillid="@pSkilsId" value="@pExamStudentSkils.Value" min="0" disabled>
+                                                                            </label>
+                                                                        </section>
+                                                                        <section class="col col-3">
+                                                                            <label class="label">Coefficient</label>
+                                                                            <label class="input">
+                                                                                <input class="k-textbox k-textbox-Exam txt-Percentage" id="@pTermCoefficientSkillsId" name="@pTermCoefficientSkillsId" value="@pExamStudentSkils.Percentage.ToString()" min="0" disabled>
+                                                                            </label>
+                                                                        </section>
+                                                                    </fieldset>
+                                                                }
+                                                                else
+                                                                {
+                                                                    var AchivedChecked = @pExamStudentSkils.Value == 1 ? "checked" : "";
+                                                                    var NotAchivedChecked = @pExamStudentSkils.Value == 2 ? "checked" : "";
+                                                                    var InAchivedChecked = @pExamStudentSkils.Value == 3 ? "checked" : "";
+
+                                                                    <fieldset>
+                                                                        <input type="hidden" class="txt-Percentage" id="@pTermCoefficientSkillsId" name="@pTermCoefficientSkillsId" value="0" min="0">
+                                                                        <section class="col col-6">
+                                                                            <label class="label">&nbsp;</label>
+                                                                            <span class="bg-color-pinkDark  label label-primary txt-center txt-color-white" style="font-size:16px;">
+                                                                                @pExamStudentSkils.SkilsName
+                                                                            </span>
+                                                                        </section>
+                                                                        <section class="col col-6">
+                                                                            <label class="label">Value</label>
+                                                                            <label class="input">
+                                                                                <label class="radio" style="float:left;padding-right:10px;font-size: 11px;">
+                                                                                    <input type="radio" class="txt-Skill" name="@pTermMaterialSkillsId" skillid="@pSkilsId" value="1" @AchivedChecked disabled>
+                                                                                    <i></i>@pExamStudentSkils.LangAcquired
+                                                                                </label>
+                                                                                <label class="radio" style="float:left;padding-right:10px;font-size: 11px;">
+                                                                                    <input type="radio" class="txt-Skill" name="@pTermMaterialSkillsId" skillid="@pSkilsId" value="2" @NotAchivedChecked disabled>
+                                                                                    <i></i>@pExamStudentSkils.LangNotAcquired
+                                                                                </label>
+                                                                                <label class="radio" style="float:left;font-size: 11px;">
+                                                                                    <input type="radio" class="txt-Skill" name="@pTermMaterialSkillsId" skillid="@pSkilsId" value="3" @InAchivedChecked >
+                                                                                    <i></i>@pExamStudentSkils.LangInProgress
+                                                                                </label>
+                                                                            </label>
+                                                                        </section>
+                                                                    </fieldset>
+                                                                }
+                                                            </div>
+                                                        }
+                                                    </li>
+                                                }
+                                            }
+                                        </ul>
+                                    </li>
+                                }
+                            </ul>
+                        </li>
+                        @if (SessionContent.Container.Exams.CurrentCycleD == (int)Cycle.PreeSchool)
+                        {
+                            <li>
+                                <div class="alert alert-success alert-block">
+                                    <h4 class="alert-heading">English Notes</h4>
+                                </div>
+                                <span class = "k-textbox" style ="width: 100%;height: 100px;">@Model.EnglishNotes</span>                              
+                            </li>
+                            <li>
+                                <div class="alert alert-success alert-block">
+                                    <h4 class="alert-heading">Arabic Notes</h4>
+                                </div>
+                                <span class="k-textbox" style="width: 100%;height: 100px;">@Model.ArabicNotes</span>    
+                             </li>
+                            <li>
+                                <div class="alert alert-success alert-block">
+                                    <h4 class="alert-heading">French Notes</h4>
+                                </div>
+                                <span class="k-textbox" style="width: 100%;height: 100px;">@Model.FrenchNotes</span>                                   
+                            </li>
+                        }
+                        else
+                        {                           
+                            <li>
+                                <div class="alert alert-success alert-block">
+                                    <h4 class="alert-heading">Arabic Notes</h4>
+                                </div>
+                                <span class="k-textbox" style="width: 100%;height: 100px;">@Model.ArabicNotes</span>                                    
+                            </li>                          
+                        }
+                    </ul>
+                </fieldset>
+
+                }
+                else
+                {
+                    <ul class="col-md-12 alert alert-warning"> Data Not Available</ul>
+                }
+            }
+
+</div>
+    </article>
+</div>
+@*<div class="footer">
+        <button type="button" class="btn btn-primary general-btn" onclick="SaveExamMaterilaStudents();" style="width:20%;">@Html.Resource("Save", PublicResources)</button>
+    </div>*@
+<script type="text/javascript">
+    function minmax(value, max)
+    {
+        if(parseInt(value) > max)
+            return max;
+        else return value;
+    }
+
+    jQuery.fn.ForceNumericOnly =
+        function () {
+            return this.each(function () {
+                $(this).keydown(function (e) {
+                    var key = e.charCode || e.keyCode || 0;
+                    // allow backspace, tab, delete, enter, arrows, numbers and keypad numbers ONLY
+                    // home, end, period, and numpad decimal
+                    return (
+                        key == 8 ||
+                        key == 9 ||
+                        key == 13 ||
+                        key == 46 ||
+                        key == 110 ||
+                        key == 190 ||
+                        (key >= 35 && key <= 40) ||
+                        (key >= 48 && key <= 57) ||
+                        (key >= 96 && key <= 105));
+                });
+            });
+        };
+
+
+    var saveExamMaterialStudentsUrl = '@Html.GetUrl("AddUpdateExamMaterialStudents", "ExamManagement")';
+    $(document).ready(function () {
+        $.validator.setDefaults({
+            ignore: ""
+        });
+
+
+
+    });
+    $(".k-textbox-Exam").ForceNumericOnly();
+    $('.tree > ul').attr('role', 'tree').find('ul').attr('role', 'group');
+    $('.tree').find('li:has(ul)').addClass('parent_li').attr('role', 'treeitem').find(' > span').attr('title', 'Collapse this branch').on('click', function (e) {
+        var children = $(this).parent('li.parent_li').find(' > ul > li');
+        if (children.is(':visible')) {
+            children.hide('fast');
+            $(this).attr('title', 'Expand this branch').find(' > i').removeClass().addClass('fa fa-lg fa-plus-circle');
+        } else {
+            children.show('fast');
+            $(this).attr('title', 'Collapse this branch').find(' > i').removeClass().addClass('fa fa-lg fa-minus-circle');
+        }
+        e.stopPropagation();
+    });
+</script>

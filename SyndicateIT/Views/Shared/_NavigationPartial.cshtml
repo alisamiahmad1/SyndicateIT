@@ -1,0 +1,29 @@
+﻿@model List<SyndicateIT.Model.ViewModel.Shared.NavigationViewModel>
+
+
+@if (!Model.IsNullOrEmpty() && Model.Count > 1)
+{
+     <!-- RIBBON -->
+    <div id="ribbon">
+        <!-- breadcrumb -->
+        <ol class="breadcrumb">
+            @for (int i = 0; i < Model.Count; i++)
+            {
+                if (Model[i].HasNavigation && (i < Model.Count - 1))
+                {
+                    <li><a href="@Model[i].NavigationUrl" style="color:#a90329!important">@Model[i].NavigationName</a></li>
+                }
+                else
+                {
+                    <li>@Model[i].NavigationName</li>
+                }
+            }         
+        </ol>
+    </div>
+    <!-- END RIBBON -->
+}
+
+
+
+
+

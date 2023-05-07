@@ -1,0 +1,102 @@
+﻿
+@model List<SyndicateIT.Model.ViewModel.ProfileManagement.ProfileDetails.DependentViewModel>
+@{
+    Layout = null;
+    string PublicResources = "~/Views/ProfileManagement/Profiles/ProfileDetails/PublicResources";
+}
+
+<article class="col-sm-12 sortable-grid ui-sortable">
+    <div class="alert alert-success alert-block">
+        <h4 class="alert-heading">@Html.Resource("LblListDependent", PublicResources)</h4>
+    </div>
+    @for (int i = 0; i < Model.Count; i++)
+    {
+
+        <div class="jarviswidget jarviswidget-color-orange jarviswidget-sortable" id="wid-id-@i" data-widget-editbutton="false" role="widget" style="">
+            <header role="heading">
+                <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                <h3 class="widget-h3"> @Model[i].FullName()</h3>
+                <span class="jarviswidget-loader" style="display: none;"><i class="fa fa-refresh fa-spin"></i></span>
+            </header>
+
+            <!-- widget div-->
+            <div role="content">
+                <div class="row">
+                    <div class="widget-body">
+
+
+                        @using (Html.BeginForm("DeleteDependent", "ProfileManagement", FormMethod.Post, new { @class = "", role = "form", id = "DependentList-form" }))
+                        {
+                            @Html.Hidden("User_Relation_ID", Model[i].User_Relation_ID)
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true)
+                            <fieldset>
+
+                                <div class="form-group  col-sm-6">
+                                    @Html.LabelFor(m => m[i].FirstName, Html.Resource("LblFirstName", PublicResources), new { @class = "col-md-4 control-label" })
+                                    <div class="col-md-6">
+                                        <b class="pull-left"> @Model[i].FirstName</b>
+                                    </div>
+                                </div>
+                                <div class="form-group  col-sm-6">
+                                    @Html.LabelFor(m => m[i].LastName, Html.Resource("LblLastName", PublicResources), new { @class = "col-md-4 control-label" })
+                                    <div class="col-md-6">
+                                        <b class="pull-left"> @Model[i].LastName</b>
+                                    </div>
+                                </div>
+                                <div class="form-group  col-sm-6">
+                                    @Html.LabelFor(m => m[i].Email, Html.Resource("LblEmail", PublicResources), new { @class = "col-md-4 control-label" })
+                                    <div class="col-md-6">
+                                        <b class="pull-left"> @Model[i].Email</b>
+                                    </div>
+                                </div>
+                                <div class="form-group  col-sm-6">
+                                    @Html.LabelFor(m => m[i].Mobile, Html.Resource("LblMobile", PublicResources), new { @class = "col-md-4 control-label" })
+                                    <div class="col-md-6">
+                                        <b class="pull-left"> @Model[i].Mobile</b>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group  col-sm-6">
+                                    @Html.LabelFor(m => m[i].HasEmergencyContact, Html.Resource("LblHasEmergencyContact", PublicResources), new { @class = "col-md-4 control-label" })
+                                    <div class="col-md-6">
+                                        <b class="pull-left"> @Model[i].HasEmergencyContact</b>
+                                    </div>
+                                </div>
+                                <div class="form-group  col-sm-6">
+                                    @Html.LabelFor(m => m[i].IsMemberOfSchool, Html.Resource("LblIsMemberOfSchool", PublicResources), new { @class = "col-md-4 control-label" })
+                                    <div class="col-md-6">
+                                        <b class="pull-left"> @Model[i].IsMemberOfSchool</b>
+                                    </div>
+                                </div>
+                                <div class="form-group  col-sm-6">
+                                    @Html.LabelFor(m => m[i].Relation_NAME, Html.Resource("LblRelation_Type_ID", PublicResources), new { @class = "col-md-4 control-label" })
+                                    <div class="col-md-6">
+                                        <b class="pull-left col-sm-6"><span class="center-block padding-5 label label-info">@Model[i].Relation_NAME</span> </b>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-sm-6">
+                                    @Html.LabelFor(m => m[i].DateOfBirth, Html.Resource("LblDateOfBirth", PublicResources), new { @class = "col-md-4 control-label" })
+                                    <div class="col-md-6">
+                                        <b class="pull-left"> @Model[i].DateOfBirth</b>
+                                    </div>
+                                </div>
+                                <div class="form-group  col-sm-6">
+                                    <div class="col-md-6">
+                                        <b class="pull-left"> <button onclick="DeleteDependent(@i);" class="btn btn-sm btn-danger disabled pull-left" type="button">  @Html.Resource("LblDelete", PublicResources)</button></b>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        }
+                    </div>
+                </div>
+            </div>
+            <!-- end widget content -->
+        </div>
+        <!-- end widget -->
+
+    }
+</article>
+

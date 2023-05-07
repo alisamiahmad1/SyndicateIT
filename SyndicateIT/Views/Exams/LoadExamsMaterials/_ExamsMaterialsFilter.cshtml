@@ -1,0 +1,152 @@
+﻿@model SyndicateIT.Model.ViewModel.Exam.ExamMaterialContentViewModel
+@using SyndicateIT.Views.App_GlobalResources
+@{
+    
+    string PublicResources = "~/Views/Exams/LoadExamsMaterials/PublicResource";
+}
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>         
+<div class="row">
+  <div class="col-sm-12 col-md-12 col-lg-3">
+     <!-- new widget -->
+       <div class="jarviswidget jarviswidget-color-blueDark">
+                <header style="border-color: #B2B5B9!important;background: #B2B5B9;">
+                    <h2><span class="badge bg-color-orange" style="margin-right:10px;">@Html.Resource("Step", PublicResources) 1 </span> @Html.Resource("SelectDivision", PublicResources) </h2>
+                </header>
+                <!-- widget div-->
+                <div>
+                    <div class="widget-body">
+                        <!-- content goes here -->
+                        <div id="add-event-form">
+                            <fieldset>  
+                                <div class="form-group">
+                                   @Html.LabelFor(m => m.Cycle_ID, Html.Resource("Cycle_id", PublicResources), new { @class = "col-md-10 control-label" })
+                                    <div class="col-md-10">
+                                        @(Html.Kendo().DropDownListFor(m => m.Cycle_ID)
+                                                .DataTextField("Text")
+                                                .DataValueField("Value")
+                                                .OptionLabel(@Html.Resource("EnterCycle", PublicResources))
+                                                .HtmlAttributes(new { @class = "ui-select form-control-md10" })
+                                                //.Value(Model.StageID)
+                                                .DataSource(source =>
+                                                {
+                                                    source.Read(read =>
+                                                    {
+                                                        read.Action("GetCycleTypesList", "UserManagement");
+                                                    });
+                                                })
+                                        )
+                                        <div class="text-danger field-validation-error" id="CycleID_validationMessage" style="display:none;">
+                                            <span for="Cycle_id" class=""> @Html.Resource("Cycle_id_Required", PublicResources)</span>
+                                        </div>                                    
+                                    </div>
+                                </div>   
+                                <div class="form-group">
+                                     @Html.LabelFor(m => m.Class_ID, Html.Resource("Class_ID", PublicResources), new { @class = "col-md-10 control-label" })
+                                    <div class="col-md-10">
+                                      @(Html.Kendo().DropDownListFor(m => m.Class_ID)
+                                                //.Name("Class_ID")
+                                                .DataTextField("Text")
+                                                .DataValueField("Value")
+                                                .OptionLabel(@Html.Resource("EnterClass", PublicResources))
+                                                  .HtmlAttributes(new { @class = "ui-select form-control-md10" })
+                                                .Value(Model.Class_ID.ToString())
+                                                .Filter("startswith")
+                                                .DataSource(source =>
+                                                {
+                                                    source.Read(read =>
+                                                    {
+                                                        read.Action("GetClass", "ProfileManagement")
+                                                        .Data("FilterClass");
+                                                    }).ServerFiltering(true);
+                                                })
+                                                .Enable(true)
+                                                .AutoBind(false)
+                                                .CascadeFrom("Cycle_ID"))
+                                        <div class="text-danger field-validation-error" id="ClassID_validationMessage" style="display:none;">
+                                            <span for="Class_ID" class=""> @Html.Resource("Class_ID_Required", PublicResources)</span>
+                                        </div>
+                                    </div>
+                                </div>                               
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Division_ID, Html.Resource("Division_ID", PublicResources), new { @class = "col-md-10  control-label" })
+                                    <div class="col-md-10">
+                                        @(Html.Kendo().DropDownListFor(m => m.Division_ID)
+                                                .Name("Division_ID")
+                                                .DataTextField("Text")
+                                                .DataValueField("Value")
+                                                 .OptionLabel(@Html.Resource("EnterDivision", PublicResources))
+                                                  .HtmlAttributes(new { @class = "ui-select form-control-md10" })
+                                                .Value(Model.Division_ID.ToString())
+                                                .Filter("startswith")
+                                                .Events(e =>
+                                                {
+
+                                                    e.Change("ViewMaterials")/*.Select("select")*/;
+                                                })
+                                                //.SelectedIndex(Model.Profile_GenderId)
+                                                .DataSource(source =>
+                                                {
+                                                    source.Read(read =>
+                                                    {
+                                                        read.Action("GetDivision", "ProfileManagement")
+                                                        .Data("FilterDivision");
+                                                    }).ServerFiltering(true);
+                                                })
+                                                .Enable(true)
+                                                .AutoBind(false)
+                                                .CascadeFrom("Class_ID"))
+                                        <div class="text-danger field-validation-error" id="DivisionID_validationMessage" style="display:none;">
+                                            <span for="Division_ID" class=""> @Html.Resource("Division_ID_Required", PublicResources)</span>
+                                        </div>
+                                    </div>
+                                </div>                                  
+                             </fieldset>
+                            @*<div class="form-actions" id="add-Exam-Students" >
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <button class="btn btn-default" type="button" id="add-event" onclick="ViewMaterials();">
+                                            @Html.Resource("ViewMaterials", PublicResources)
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>*@
+                        </div>
+                        <!-- end content -->
+                    </div>
+                </div>
+                <!-- end widget div -->
+            </div>
+     <!-- end widget -->     
+     <div id="ExamMaterialsTemplates-container" style="display:none"></div>
+      <div id="PrintExamMaterials-container" style="display:none"></div>
+  </div>
+  <div class="col-sm-12 col-md-12 col-lg-9">
+            <!-- new widget -->
+            <div class="jarviswidget jarviswidget-color-blueDark">
+                 <header style="border-color: #B2B5B9!important;background: #B2B5B9;">
+                     <h2><span class="badge bg-color-orange" style="margin-right:10px;">@Html.Resource("Step", PublicResources) 3 </span>@Html.Resource("LoadstudentsMaterial", PublicResources) </h2>                   
+                </header>
+                <!-- widget div-->
+                <div>
+                    <div class="widget-body no-padding" style="margin:0px!important">
+                        <div class="fc fc-ltr fc-unthemed" id="ExamMaterialStudents-Content">no data available </div>
+                                           
+                       </div>                       
+                        <!-- end widget div -->
+                    </div>
+                    <!-- end widget -->
+                </div>
+              <div class="footer" id="Material-Students" style="display:none;">
+                  <button type="button" class="btn btn-primary general-btn" onclick="SaveExamStudentMaterials();" style="width:20%;">@Html.Resource("Save", PublicResources)</button>
+              </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        
+    });
+</script>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

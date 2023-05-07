@@ -1,0 +1,225 @@
+﻿
+@model SyndicateIT.Model.ViewModel.ProfileManagement.ProfileDetails.InsuranceViewModel
+
+@{
+    Layout = null;
+    string PublicResources = "~/Views/ProfileManagement/Profiles/ProfileDetails/PublicResources";
+}
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+@Html.Partial("~/Views/Shared/_AlertPartial.cshtml", Model.Alert)
+
+<article class="col-sm-12 sortable-grid ui-sortable">
+    @using (Html.BeginForm("SaveInsurance", "ProfileManagement", FormMethod.Post, new { @class = "", role = "form", id = "Insurance-form" }))
+    {
+        @Html.HiddenFor(m => m.Insurance_Id)
+    <!-- Widget ID (each widget will need unique ID)-->
+        <div class="jarviswidget jarviswidgetTransparent" id="wid-id-x" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false" data-widget-custombutton="false" data-widget-sortable="false" role="widget">
+            <header role="heading">
+                <span class="widget-icon"> <i class="fa fa-align-justify"></i> </span>
+                <h2>@Html.Resource("InsuranceandGuarantee", PublicResources)</h2>
+                <span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span>
+            </header>
+            <!-- widget div-->
+            <div role="content">
+                <div class="row">
+                    <div class="widget-body">
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+                        <fieldset>
+                            <div class="form-group  col-sm-12">
+                                @Html.LabelFor(m => m.HasInsurance, Html.Resource("HasInsurance", PublicResources), new { @class = "col-md-4 control-label" })
+                                <div class="col-md-7">
+                                    @(Html.Kendo().RadioButtonFor(m => m.HasInsurance).Label("True").Value(true).Enable(@Model.IsEdit))
+                                    &nbsp;
+                                    @(Html.Kendo().RadioButtonFor(m => m.HasInsurance).Label("False").Value(false).Enable(@Model.IsEdit))
+                                </div>
+                            </div>
+                            <div class="col-sm-12" id="InsuranceId">
+                                <div class="form-group  col-sm-6">
+                                    @Html.LabelFor(m => m.TypeInsurance_Id, Html.Resource("TypeInsurance_Id", PublicResources), new { @class = "col-md-4 control-label" })
+                                    <div class="col-md-7">
+                                        @(Html.Kendo().DropDownListFor(m => m.TypeInsurance_Id)
+                                                        .DataTextField("Text")
+                                                        .DataValueField("Value")
+                                                        .Enable(@Model.IsEdit)
+                                                        .OptionLabel(@Html.Resource("SelectTypeInsurance", PublicResources))
+                                                        .HtmlAttributes(new { @class = "ui-select form-control-md10" })
+                                                        .Value(Model.TypeInsurance_Id.ToString())
+                                                        .Filter("startswith")
+                                                        .DataSource(source =>
+                                                        {
+                                                            source.Read(read =>
+                                                            {
+                                                                read.Action("GetTypeInsurance", "ProfileManagement");
+                                                            });
+                                                        }))
+                                        <span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error" data-for="TypeInsurance_Id" data-valmsg-for="TypeInsurance_Id" id="TypeInsurance_Id_validationMessage" style="display:none;" role="alert"><span class="k-icon k-warning"> </span>@Html.Resource("RequiredTypeInsurance", PublicResources)</span>
+                                    </div>
+                                </div>
+                                <div class="form-group  col-sm-6">
+                                    @Html.LabelFor(m => m.DegreeInsurance_Id, Html.Resource("DegreeInsurance_Id", PublicResources), new { @class = "col-md-4 control-label" })
+                                    <div class="col-md-7">
+                                        @(Html.Kendo().DropDownListFor(m => m.DegreeInsurance_Id)
+                                                        .DataTextField("Text")
+                                                        .DataValueField("Value")
+                                                        .Enable(@Model.IsEdit)
+                                                         .OptionLabel(@Html.Resource("SelectDegreeInsurance", PublicResources))
+                                                        .OptionLabel("Select Degree Insurance")
+                                                        .HtmlAttributes(new { @class = "ui-select form-control-md10" })
+                                                        .Value(Model.DegreeInsurance_Id.ToString())
+                                                        .Filter("startswith")
+
+                                                        .DataSource(source =>
+                                                        {
+                                                            source.Read(read =>
+                                                            {
+                                                                read.Action("GetDegreeInsurance", "ProfileManagement");
+                                                            });
+                                                        }))
+                                        <span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error" data-for="DegreeInsurance" data-valmsg-for="DegreeInsurance" id="DegreeInsurance_validationMessage" style="display:none;" role="alert"><span class="k-icon k-warning"> </span>@Html.Resource("RequiredDegreeInsurance", PublicResources)</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-group  col-sm-12">
+                                    @Html.LabelFor(m => m.TypeInsuranceNotes, Html.Resource("TypeInsuranceNotes", PublicResources), new { @class = "col-md-2 control-label" })
+                                    <div class="col-md-9">
+                                        @Html.TextArea("TypeInsuranceNotes", Model.TypeInsuranceNotes, new { @class = "k-textbox", style = "width: 100%;height: 100px;" })
+                                    </div>
+                                </div>                            
+                            </div>
+                        </fieldset>
+                        <fieldset style="border-top: 1px solid rgba(0,0,0,.1); margin-top:20px;">
+                            <div class="form-group  col-sm-12" style=" margin-top:10px;">
+                                @Html.LabelFor(m => m.HasGuarantee, Html.Resource("HasGuarantee", PublicResources), new { @class = "col-md-4 control-label" })
+                                <div class="col-md-7">
+                                    @(Html.Kendo().RadioButtonFor(m => m.HasGuarantee).Label("True").Value(true).Enable(@Model.IsEdit))
+                                    &nbsp;
+                                    @(Html.Kendo().RadioButtonFor(m => m.HasGuarantee).Label("False").Value(false).Enable(@Model.IsEdit))
+                                </div>
+                            </div>
+                            <div class="col-sm-12" id="GuaranteeId">
+                                <div class="form-group  col-sm-6">
+                                    @Html.LabelFor(m => m.TypeGuarantee_Id, Html.Resource("TypeGuarantee_Id", PublicResources), new { @class = "col-md-4 control-label" })
+                                    <div class="col-md-7">
+                                        @(Html.Kendo().DropDownListFor(m => m.TypeGuarantee_Id)
+                                                        .DataTextField("Text")
+                                                        .DataValueField("Value")
+                                                        .Enable(@Model.IsEdit)
+                                                        .OptionLabel(@Html.Resource("SelectTypeGuarantee", PublicResources))
+                                                        .HtmlAttributes(new { @class = "ui-select form-control-md10" })
+                                                        .Value(Model.TypeGuarantee_Id.ToString())
+                                                        .Filter("startswith")
+                                                         .DataSource(source =>
+                                                         {
+                                                             source.Read(read =>
+                                                             {
+                                                                 read.Action("GetTypeGuarantee", "ProfileManagement");
+                                                             });
+                                                         }))
+                                        <span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error" data-for="TypeGuarantee" data-valmsg-for="TypeGuarantee" id="TypeGuarantee_validationMessage" style="display:none;" role="alert"><span class="k-icon k-warning"> </span>@Html.Resource("RequiredTypeGuarantee", PublicResources)</span>
+                                    </div>
+                                </div>
+                                <div class="form-group  col-sm-6">
+                                    @Html.LabelFor(m => m.DegreeGuarantee_Id, Html.Resource("DegreeGuarantee_Id", PublicResources), new { @class = "col-md-4 control-label" })
+                                    <div class="col-md-7">
+                                        @(Html.Kendo().DropDownListFor(m => m.DegreeGuarantee_Id)
+                                                        .DataTextField("Text")
+                                                        .DataValueField("Value")
+                                                        .Enable(@Model.IsEdit)
+                                                        .OptionLabel(@Html.Resource("SelectDegreeGuarantee", PublicResources))
+                                                        .HtmlAttributes(new { @class = "ui-select form-control-md10" })
+                                                        .Value(Model.DegreeGuarantee_Id.ToString())
+                                                        .Filter("startswith")
+                                                        .DataSource(source =>
+                                                        {
+                                                            source.Read(read =>
+                                                            {
+                                                                read.Action("GetDegreeGuarantee", "ProfileManagement");
+                                                            });
+                                                        }))
+                                        <span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error" data-for="DegreeGuarantee" data-valmsg-for="DegreeGuarantee" id="DegreeGuarantee_validationMessage" style="display:none;" role="alert"><span class="k-icon k-warning"> </span>@Html.Resource("RequiredDegreeGuarantee", PublicResources)</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-group  col-sm-12">
+                                    @Html.LabelFor(m => m.DegreeGuaranteeNotes, Html.Resource("DegreeGuaranteeNotes", PublicResources), new { @class = "col-md-2 control-label" })
+                                    <div class="col-md-9">
+                                        @Html.TextArea("DegreeGuaranteeNotes", Model.DegreeGuaranteeNotes, new { @class = "k-textbox", style = "width: 100%;height: 100px;" })
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+            <!-- end widget content -->
+        </div>
+    <!-- end widget -->
+        if (Model.IsEdit)
+        {
+            <div class="footer">
+                <button type="button" class="btn btn-primary general-btn" onclick="SaveInsurance();">@Html.Resource("save", PublicResources)</button>
+            </div>
+        }
+
+
+
+
+    }
+</article>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        HasInsurance();
+        HasGuarantee();
+        $(':radio[name=HasInsurance]').change(function () {
+            var value = $(this).val();
+            if (value == 'True') {
+                $("#InsuranceId").show();
+            }
+            else {
+                $("#InsuranceId").hide();
+                $("#TypeGuarantee_Id").data("kendoDropDownList").value("0")
+                $("#DegreeGuarantee_Id").data("kendoDropDownList").value("0")
+            }
+        });
+        $(':radio[name=HasGuarantee]').change(function () {
+            var value = $(this).val();
+            if (value == 'True') {
+                $("#GuaranteeId").show();
+            }
+            else {
+                $("#GuaranteeId").hide();
+                $("#TypeInsurance_Id").data("kendoDropDownList").value("0")
+                $("#DegreeInsurance_Id").data("kendoDropDownList").value("0")
+            }
+        });
+
+
+        $.validator.setDefaults({
+            ignore: ""
+        });
+
+    });
+
+    function HasInsurance()
+    {
+        if ('@Model.HasInsurance' == "True") {
+            $("#InsuranceId").show();
+        }
+        else {
+            $("#InsuranceId").hide();
+        }
+    }
+    function HasGuarantee() {
+        if ('@Model.HasGuarantee' == "True") {
+            $("#GuaranteeId").show();
+        }
+        else {
+            $("#GuaranteeId").hide();
+        }
+    }
+</script>

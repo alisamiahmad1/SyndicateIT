@@ -1,0 +1,45 @@
+﻿@model SyndicateIT.DataLayer.DataContext.T_Election_Vote
+@{
+    var candidates = ViewData["candidates"] as List<SelectListItem>;
+
+}
+<script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
+@if (ViewData["error"] != null)
+            {
+                <div>@ViewData["error"]</div>
+            }
+<form method="post" class="col-md-8" action="~/Election/Vote">
+    <div class="form-group">
+        @Html.LabelFor(m => m.Candidate_Id, "Candidate")
+        @Html.DropDownListFor(m => m.Candidate_Id, candidates, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.Label("Code")
+        @Html.TextBox("Code", "", new { @class = "form-control" })
+    </div>
+    <div class="form-group" style="border:2px solid black;width:300px;margin:auto;">
+        <input type="hidden" name="signature" id="signature" />
+        <canvas style="width:300px;height:200px;" class="sgn"></canvas>
+        <button type="button" class="button sgn-clear" data-action="clear">Clear</button>
+    </div>
+    <button type="submit">vote</button>
+</form>
+<script>
+    var   canvas = document.querySelector("canvas.sgn");
+    var  signaturePad = new SignaturePad(canvas, {});
+        $('form').submit(function (event) {
+            event.preventDefault();
+            if (signaturePad.isEmpty()) {
+                alert('signature is required');
+                return;
+            }
+            var data = signaturePad.toDataURL().split(",")[1];
+            $("#signature").val(data);
+            debugger
+            $(this).unbind('submit').submit();
+        })
+        $(".button.sgn-clear").click(function () {
+            signaturePad.clear();
+        });
+    
+</script>

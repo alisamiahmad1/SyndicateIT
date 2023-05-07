@@ -1,0 +1,29 @@
+﻿@model  SyndicateIT.Model.ViewModel.SetupManagement.DocumentExtension.DocumentExtensionContentViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string PublicResources = "~/Views/SetupManagement/DocumentExtension/PublicResource";
+}
+@Scripts.Render("~/Scripts/DocumentExtension")
+@Scripts.Render("~/Scripts/translate")
+@*@Html.Partial("~/Views/Shared/_NavigationPartial.cshtml", @Model.Navigation)*@
+<div id="DocumentExtensionContent">
+    @Html.Partial("~/Views/SetupManagement/DocumentExtension/_DocumentExtensionContentPartial.cshtml", Model);
+</div>
+<script type="text/javascript">
+    var DocumentExtensionSearchURL = '@Html.GetUrl("LoadSearchDocumentExtension", "DocumentExtension")';
+    var DocumentExtensionDeleteURL = '@Html.GetUrl("DocumentExtensionDelete", "DocumentExtension")';
+    var loadDocumentExtensionURL = '@Html.GetUrl("LoadDocumentExtension", "DocumentExtension")';
+    var loader = '@Utilities.GetAbsotuleUrl("~/Content/image/ajax-loader.gif")';
+    var saveDocumentExtensionUrl = '@Html.GetUrl("AddUpdateDocumentExtension", "DocumentExtension")';
+    var messageDelete = '@Html.Resource("MessageDelete", PublicResources)';
+    var loadTranslationDocumentExtensionURL = '@Html.GetUrl("LoadTranslateDocumentExtension", "DocumentExtension")';
+
+    $("#SchoolSettings", $("#nav")).addClass("active open");
+    $("#SchoolSettings Ul", $("#nav")).show();
+
+</script>
+@section Scripts {
+    @Scripts.Render("~/bundles/kendo/js")
+}
+

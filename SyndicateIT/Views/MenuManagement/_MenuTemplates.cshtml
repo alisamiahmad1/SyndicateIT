@@ -1,0 +1,85 @@
+﻿
+@model SyndicateIT.Model.ViewModel.MenuManagement.MenuManagementViewModel
+    
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/Views/Templates/templates.js"></script>
+<div class="row">
+    <article class="col-sm-12 sortable-grid ui-sortable">
+        <br />
+        <div class="row" id="TempalteAlert-Type" style="display:none;">
+            <article class="col-sm-12">
+                <div class="alert alert-danger fade in">
+                    <i class="fa-fw fa fa-times"></i>
+                    <strong>Warning </strong><span id="TempalteAlert-Warning">Please fill in required fields</span>
+                </div>
+            </article>
+        </div>
+    </article>
+    <!-- NEW WIDGET START -->
+    <article class="col-sm-12 sortable-grid ui-sortable">
+        <!-- well -->
+        <div class="well" style="background-color: #fff;border: 1px solid #fff!important;">
+            <fieldset class="tree" id="TreeRole">
+                <ul role="tree">
+                    <li class="parent_li level1-content" role="treeitem">
+                        <span title="Collapse  this branch"><i class="fa fa-lg fa-minus-circle"></i> @Model.RoleName</span>
+                        <ul role="group">
+                            @for (int i = 0; i < Model.Menus.Count; i++)
+                            {
+                                var level1 = @Model.Menus[i];
+                                <li class="parent_li level2-content" role="treeitem" style="display: list-item;">
+                                    @Html.Hidden("MenuLevel1_" + @i, level1.MenuID)
+                                    @Html.Hidden("RoleID_" + @i, level1.RoleID)
+                                    <span class="label label-success" title="Collapse this branch"><i class="fa fa-lg fa-minus-circle"></i> @level1.MenuDescription</span>
+                                    <ul role="group">
+                                        @if (level1.MenuSubList != null && level1.MenuSubList.Count > 0)
+                                        {
+                                            for (int j = 0; j < level1.MenuSubList.Count; j++)
+                                            {
+                                                var level2 = @level1.MenuSubList[j];
+                                                <li class="smart-li-form">
+                                                    @{var t = i + "_" + j;}
+                                                    @Html.Hidden("MenuLevel2_" + @t, level2.MenuID)
+                                                    <input type="checkbox" class="checkbox-Bracket" id="MenuCheckbox_@t" name="checkbox" @level2.Checked><i>@level2.MenuDescription</i>
+                                                </li>
+                                                            }
+                                                        }
+                                                        else 
+                                                        {
+                                                            <li class="smart-li-form">
+                                                                @{var t = i + "_" + 0;}
+                                                                @Html.Hidden("MenuLevel2_" + @t, level1.MenuID)
+                                                                <input type="checkbox" class="checkbox-Bracket" id="MenuCheckbox_@t" name="checkbox" @level1.Checked><i>@level1.MenuDescription (@level1.MenuAction)</i>
+                                                            </li>
+                                                                    }
+                                    </ul>
+                                </li>
+                            }
+                        </ul>
+                    </li>
+                </ul>
+            </fieldset>
+        </div>
+    </article>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $.validator.setDefaults({
+            ignore: ""
+        });
+        $('.tree > ul').attr('role', 'tree').find('ul').attr('role', 'group');
+        $('.tree').find('li:has(ul)').addClass('parent_li').attr('role', 'treeitem').find(' > span').attr('title', 'Collapse this branch').on('click', function (e) {
+            var children = $(this).parent('li.parent_li').find(' > ul > li');
+            if (children.is(':visible')) {
+                children.hide('fast');
+                $(this).attr('title', 'Expand this branch').find(' > i').removeClass().addClass('fa fa-lg fa-plus-circle');
+            } else {
+                children.show('fast');
+                $(this).attr('title', 'Collapse this branch').find(' > i').removeClass().addClass('fa fa-lg fa-minus-circle');
+            }
+            e.stopPropagation();
+        });
+    });
+
+</script>

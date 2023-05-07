@@ -1,0 +1,508 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{40A7A8AA-F8EF-4C82-B5CE-9EC05085ACC8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SyndicateIT.DataLayer</RootNamespace>
+    <AssemblyName>SyndicateIT.DataLayer</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DataContext\AspNetRole.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\AspNetUser.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\AspNetUserClaim.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\AspNetUserLogin.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\AspNetUserRole.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\Branch.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\Branches_By_Language.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\Company.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\Company_Addresses.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\Company_Addresses_By_Language.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\Company_By_Language.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\Company_DocumentExtension.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\Company_Type.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\Company_Type_BY_LANGUAGE.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\Corporate.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\Corporate_By_Language.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\COUNTRY.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\COUNTRY_BY_LANGUAGE.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\DegreesParticipation.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\Degree_Guarantee.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\Degree_Guarantee_By_Language.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\Degree_Insurance.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\Degree_Insurance_By_Language.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\DEPARTMENT.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\DEPARTMENT_BY_LANGUAGE.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\Document_Extension.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\Document_Extension_By_Language.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\Educationalsystem.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\Educationalsystem_By_Language.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\GENDER.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\GENDER_BY_LANGUAGE.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\Insurance.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\JOB.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\JOB_BY_LANGUAGE.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\Kaddaa.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\Kaddaa_BY_LANGUAGE.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\LANGUAGE.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\LANGUAGE_BY_COUNTRY.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\Marital_Status.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\Marital_Status_By_Language.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\MenuItem.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\MenuItemold.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\MenuItemRole.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\Phone_Type.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\Phone_Type_BY_LANGUAGE.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\Place.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\Place_BY_LANGUAGE.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\Region.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\Region_BY_LANGUAGE.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\Relation_Types.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\Relation_Types_By_Language.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\RELIGION.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\RELIGION_BY_LANGUAGE.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\ROLE.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\ROLE_BY_LANGUAGE.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\SHIFT.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\SHIFT_BY_LANGUAGE.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\SOCIAL.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\SOCIAL_BY_LANGUAGE.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\Status.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\STATUS_BY_LANGUAGE.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\SyndicatDataModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SyndicatDataModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\SyndicatDataModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\SyndicatDataModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SyndicatDataModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\sysdiagram.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\TBL_Academic_Year.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\TBL_ApplicationStatus.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\TBL_Insurances.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\TBL_Nationality.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\TBL_Nationality_By_Language.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\TBL_Relation_Types.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\TBL_Relation_Types_By_Language.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\Tbl_Titles.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\Tbl_Titles_By_Language.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\Tbl_User_Contact.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\Tbl_User_Course.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\Tbl_User_Documents.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\TBL_User_Education.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\Tbl_User_Employment.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\TBL_User_Experience.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\TBL_User_Relations.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\TypeGuarantee.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\TypeGuaranteeByLanguage.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\TypeInsurance.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\TypeInsuranceByLanguage.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\T_Candidate.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\T_Document_Form.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\T_Document_Form_Category.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\T_Document_Form_Data.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\T_Document_Form_Sub_Category.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\T_Document_Form_Template.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\T_Document_Template.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\T_Election.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\T_Election_Vote.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\T_Form.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\T_Form_Data.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\T_Meeting.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\T_Meeting_User.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\T_Template_Variable.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\T_Voter_Code.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\User.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\User_Documents.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\User_Phone.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\User_Registration.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\User_Relations.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\USP_GET_Branches_Result.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\USP_GET_Branches_Result1.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\USP_GET_Corporate_Result.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\USP_GET_Country_Result.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\USP_Get_Degree_Guarantee_Result.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\USP_GET_DEPARTMENT_Result.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\USP_GET_Document_Extension_Result.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\USP_GET_Educationalsystem_Result.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\USP_GET_Gender_Result.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\USP_GET_JOB_Result.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\USP_GET_Kaddaa_Result.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\USP_GET_Language_Result.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\USP_GET_Marital_Status_Result.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\USP_GET_Nationality_Result.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\USP_GET_Phone_Type_Result.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\USP_GET_Place_Result.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\USP_GET_Region_Result.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\USP_GET_Relation_Types_Result.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\USP_GET_Religion_Result.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\USP_GET_ROLE_Result.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\USP_GET_SHIFT_Result.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\USP_GET_Status_Result.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\USP_Get_TypeGuarantee_Result.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\USP_Get_TypeInsurance_Result.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\USP_GET_Users_Result.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\USP_GET_Users_Result1.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\USP_GET_User_Documents_Result.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\USP_GET_User_Phone_Result.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\USP_GET_User_Registartion_Result.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\USP_GET_User_Relations_Result.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\USP_GET_User_School_History_Result.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataContext\USP_Insurance_Result.cs">
+      <DependentUpon>SyndicatDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="DataContext\SyndicatDataModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>SyndicatDataModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <None Include="DataContext\SyndicatDataModel.edmx.diagram">
+      <DependentUpon>SyndicatDataModel.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DataContext\SyndicatDataModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>SyndicatDataModel.Context.cs</LastGenOutput>
+      <DependentUpon>SyndicatDataModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="DataContext\SyndicatDataModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SyndicatDataModel.edmx</DependentUpon>
+      <LastGenOutput>SyndicatDataModel.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

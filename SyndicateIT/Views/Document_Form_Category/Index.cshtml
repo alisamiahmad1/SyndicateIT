@@ -1,0 +1,76 @@
+﻿@model SyndicateIT.DataLayer.DataContext.T_Document_Form_Category
+@{
+    ViewBag.Title = "Index";
+}
+<div id="content">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="row">
+                <a href="~/Document_Form_Sub_Category/index" class="btn btn-link">Sub Categories</a> | <a href="~/Document_Form_Template/index" class="btn btn-link">Templates</a>
+            </div>
+            <h1 class="page-title txt-color-blueDark">
+                Documen Form Category
+                @Html.ActionLink("Create New", "Create", null, new { style = "float:right" })
+            </h1>
+        </div>
+    </div>
+    @using (Html.BeginForm("Search", "Document_Form_Category", FormMethod.Post, new { @class = "row search-md-form", data_enabled = true, role = "form" }))
+    {
+        <div class="col-md-4">
+            @Html.LabelFor(m => m.Title)
+            @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
+        </div>
+        <div class="col-md-2">
+            <label style="width:100%">&nbsp;</label>
+            <button type="submit" class="btn btn-serach">Search</button>
+        </div>
+    }
+    <br />
+    <div class="jarviswidget">
+        <div class="ui-jqgrid-view" style="padding:0">
+            <table class="ui-jqgrid-htable table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Nb Sub Categories</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody class="tbody">
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<Script>
+    $(document).on("submit", "form.search-md-form", function (e) {
+        e.preventDefault();
+        var url = $(this).attr("action");
+        var dt = $(this).serialize();
+        $('tbody.tbody').html("<div class='loader'><img src=" + loader + " /></div>");
+        if ($(this).data("enabled")) $(this).data("enabled", false);
+        else return false;
+        $.post(url, dt, function (data) {
+            var st = '';
+            for (var i = 0; i < data.length; i++) {
+                st += `<tr>
+                    <td>${data[i].Title}</td>
+                    <td>${data[i].Sub_Categories}</td>
+                    <td>
+                        <a href='@Url.Content("~/Document_Form_Category/Edit/")${data[i].Id}'>Edit</a>
+                        ${(data[i].Sub_Categories != '0' ? '':
+                            `| <a href='@Url.Content("~/Document_Form_Category/Delete/")${data[i].Id}'>Delete</a>`
+                        )}
+                    </td>
+                </tr>`;
+            }
+            if (st == '') st ="<div>no data</div>"
+            $('tbody.tbody').html(st);
+        }).done(function () { $("form.search-md-form").data("enabled", true); })
+            .fail(function () {
+                $("form.search-md-form").data("enabled", true);
+                $('tbody.tbody').html("<tr><td>errrror</td><tr>");
+            });
+    });
+    $("form.search-md-form").submit();
+</Script>

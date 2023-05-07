@@ -1,0 +1,118 @@
+﻿
+@model SyndicateIT.Model.ViewModel.ProfileManagement.ProfileDetails.EducationViewModel
+@{
+    Layout = null;
+    string PublicResources = "~/Views/ProfileManagement/Profiles/ProfileDetails/PublicResources";
+}
+
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+@Html.Partial("~/Views/Shared/_AlertPartial.cshtml", Model.Alert)
+
+<article class="col-sm-12 sortable-grid ui-sortable">
+    @using (Html.BeginForm("SaveEducation", "ProfileManagement", FormMethod.Post, new { @class = "", role = "form", id = "Education-form" }))
+    {
+        <!-- Widget ID (each widget will need unique ID)-->
+        <div class="jarviswidget jarviswidgetTransparent" id="wid-id-x" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false" data-widget-custombutton="false" data-widget-sortable="false" role="widget">
+            <header role="heading">
+                <span class="widget-icon"> <i class="fa fa-align-justify"></i> </span>
+                <h2>@Html.Resource("LblEducationInfo", PublicResources)</h2>
+                <span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span>
+            </header>
+            <!-- widget div-->
+            <div role="content">
+
+                <div class="row">
+                    <div class="widget-body">
+                        @Html.Hidden("Education_ID", Model.Education_ID)
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+                        <fieldset>
+                            <div class="form-group  col-sm-6">
+                                @Html.LabelFor(m => m.School, Html.Resource("School", PublicResources), new { @class = "col-md-4 control-label" })
+                                <div class="col-md-7">
+                                    @Html.Kendo().TextBoxFor(model => model.School).HtmlAttributes(new { @class = "form-control  form-control-md10", @maxlength = 150, @placeholder = @Html.Resource("SelectSchool", PublicResources) }).Name("School").Enable(@Model.IsEdit)
+                                    <span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error" data-for="School" data-valmsg-for="School" id="School_validationMessage" style="display:none;" role="alert"><span class="k-icon k-warning"> </span>@Html.Resource("RequiredSchool", PublicResources)</span>
+                                </div>
+                            </div>
+                            <div class="form-group  col-sm-6">
+                                @Html.LabelFor(m => m.Degree, Html.Resource("Degree", PublicResources), new { @class = "col-md-4 control-label" })
+                                <div class="col-md-7">
+                                    @Html.Kendo().TextBoxFor(model => model.Degree).HtmlAttributes(new { @class = "form-control  form-control-md10", @maxlength = 150, @placeholder = @Html.Resource("SelectDegree", PublicResources) }).Name("Degree").Enable(@Model.IsEdit)
+                                    <span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error" data-for="Degree" data-valmsg-for="Degree" id="Degree_validationMessage" style="display:none;" role="alert"><span class="k-icon k-warning"> </span> @Html.Resource("RequiredDegree", PublicResources)</span>
+                                </div>
+                            </div>
+                            <div class="form-group  col-sm-6">
+                                @Html.LabelFor(m => m.Grade, Html.Resource("Grade", PublicResources), new { @class = "col-md-4 control-label" })
+                                <div class="col-md-7">
+                                    @Html.Kendo().TextBoxFor(model => model.Grade).HtmlAttributes(new { @class = "form-control  form-control-md10", @maxlength = 150, @placeholder = @Html.Resource("SelectGrade", PublicResources) }).Name("Grade").Enable(@Model.IsEdit)
+                                    <span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error" data-for="Grade" data-valmsg-for="Grade" id="Grade_validationMessage" style="display:none;" role="alert"><span class="k-icon k-warning"> </span> @Html.Resource("RequiredGrade", PublicResources)</span>
+                                </div>
+                            </div>
+                            <div class="form-group  col-sm-12">
+                                @Html.LabelFor(m => m.ActivitiesSocieties, Html.Resource("ActivitiesSocieties", PublicResources), new { @class = "col-md-2 control-label" })
+                                <div class="col-md-10">
+                                    @Html.TextArea("ActivitiesSocieties", Model.Description, new { @class = "k-ActivitiesSocieties", style = "width: 100%;height: 100px;" })
+                                </div>
+                            </div>
+                            <div class="form-group  col-sm-6">
+                                @Html.LabelFor(m => m.FromDate, Html.Resource("FromDate", PublicResources), new { @class = "col-md-4 control-label" })
+                                <div class="col-md-7">
+                                    @Html.Kendo().DatePickerFor(model => model.FromDate).HtmlAttributes(new { @class = "form-control  form-control-md10", @maxlength = 200, @placeholder = @Html.Resource("SelectFromDate", PublicResources) }).Name("FromDate").Enable(@Model.IsEdit)
+                                    <span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error" data-for="FromDate" data-valmsg-for="FromDate" id="FromDate_validationMessage" style="display:none;" role="alert"><span class="k-icon k-warning"> </span>@Html.Resource("RequiredFromDate", PublicResources)</span>
+                                </div>
+                            </div>
+                            <div class="form-group  col-sm-6">
+                                @Html.LabelFor(m => m.ToDate, Html.Resource("ToDate", PublicResources), new { @class = "col-md-4 control-label" })
+                                <div class="col-md-7">
+                                    @Html.Kendo().DatePickerFor(model => model.ToDate).HtmlAttributes(new { @class = "form-control  form-control-md10", @maxlength = 200, @placeholder = @Html.Resource("SelectToDate", PublicResources) }).Name("ToDate").Enable(@Model.IsEdit)
+                                    <span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error" data-for="ToDate" data-valmsg-for="ToDate" id="ToDate_validationMessage" style="display:none;" role="alert"><span class="k-icon k-warning"> </span>@Html.Resource("RequiredToDate", PublicResources)</span>
+                                </div>
+                            </div>
+                            <div class="form-group  col-sm-12">
+                                @Html.LabelFor(m => m.Description, Html.Resource("Description", PublicResources), new { @class = "col-md-2 control-label" })
+                                <div class="col-md-10">
+                                    @Html.TextArea("Description", Model.Description, new { @class = "k-textbox", style = "width: 100%;height: 100px;" })
+                                </div>
+                            </div>
+                            @if (@Model.IsEdit == true)
+                            {
+                                <div class="col-lg-2">
+                                    <button type="button" onclick="SaveEducation();" class="btn bg-color-orange txt-color-white" data-toggle="#phoneInfo">
+                                        @Html.Resource("LblAddEducation", PublicResources)
+                                    </button>
+                                </div>
+                            }
+                        </fieldset>
+                    </div>
+                </div>
+
+            </div>
+            <!-- end widget content -->
+        </div>
+        <!-- end widget -->
+    }
+    @Html.Partial("~/Views/ProfileManagement/Profiles/ProfileDetails/_ListEducationPartial.cshtml", Model.Educations)
+</article>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        HideEducationtValidation();
+        $.validator.setDefaults({
+            ignore: ""
+        });
+
+    });
+
+    if ('@SessionContent.Container.Profiles.IsLoadProfilesContent' == "true") {
+
+    }
+    else {
+        //$('#HoursPerDay').val("");
+        //$('#WorkingDays').val("");
+        //$('#Shift').val("");
+        //$('#IssuingCountry').val("");
+    }
+
+</script>

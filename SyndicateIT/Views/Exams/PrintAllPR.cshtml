@@ -1,0 +1,18 @@
+﻿@model List<SyndicateIT.Model.ViewModel.Exam.TablePRViewModel>
+
+<html lang="en-us" style="margin: 0;padding: 0; min-height: 100%;position: relative;font-size: 10px;font-family: sans-serif;">
+<head style=""></head>
+ <body style="font-family: 'Open Sans',Arial,Helvetica,Sans-Serif;color: #333;background-color: #fff;">
+     @for (int i = 0; i < Model.Count; i++)
+     {
+         @Html.Partial("~/Views/Exams/PrintPR.cshtml", Model[i])
+        <div style="page-break-after:always;">&nbsp;</div>
+     }
+ </body>
+</html>
+
+
+
+    
+
+

@@ -1,0 +1,49 @@
+﻿
+@model SyndicateIT.Model.ViewModel.SetupManagement.Educationalsystem.EducationalsystemContentViewModel
+@using SyndicateIT.Views.App_GlobalResources
+@{
+    Layout = null;
+    string PublicResources = "~/Views/SetupManagement/Educationalsystem/PublicResource";
+}
+@using (Html.BeginForm("SearchEducationalsystem", "Educationalsystem", FormMethod.Post, new { @class = "smart-form", role = "form" }))
+{
+    <section class="col col-3">
+        @Html.LabelFor(m => m.Educationalsystem_Name, Html.Resource("Educationalsystem_Name", PublicResources), new { @class = " label" })
+        @(Html.Kendo().TextBoxFor(m => m.Educationalsystem_Name))
+        <div class="text-danger field-validation-error" id="ErrorSearchEducationalsystem" style="display:none;">
+            <span for="SearchEducationalsystem" class=""> Educationalsystem Name is not valid</span>
+        </div>
+    </section>
+    <section class="col col-3">
+        @Html.LabelFor(m => m.LANGUAGE_ID, GeneralResources.LANGUAGE_ID, new { @class = " label" })
+        <div class="col-md-7">
+            @(Html.Kendo().DropDownListFor(m => m.LANGUAGE_ID)
+                          .DataTextField("Text")
+                          .DataValueField("Value")
+                          .Value(Model.LANGUAGE_ID.ToString())
+                          .Filter("startswith")
+                          .DataSource(source =>
+                          {
+                              source.Read(read =>
+                              {
+                                  read.Action("GetLanguageList", "Educationalsystem");
+                              });
+                          }))
+            <div class="text-danger field-validation-error" id="ErrorSearchLANGUAGE_ID" style="display:none;">
+                <span for="SearchLANGUAGE_ID" class=""> LANGUAGE_ID is not valid</span>
+            </div>
+        </div>
+    </section>
+    <section class="col col-3">
+        <label class="label">&nbsp;</label>
+        @Html.CheckBoxFor(m => m.IS_ACTIVE, new { @checked = "checked" })
+        <i></i>@GeneralResources.IS_ACTIVE
+    </section>
+    <section class="col col-2">
+        <label class="label">&nbsp;</label>
+        <button type="button" class="btn btn-serach " onclick="SearchEducationalsystem(true)">Search</button>
+    </section>
+}
+@section Scripts {
+    @Scripts.Render("~/Scripts/Educationalsystem")
+}

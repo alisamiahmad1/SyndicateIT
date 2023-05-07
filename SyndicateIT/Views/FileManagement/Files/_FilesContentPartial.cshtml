@@ -1,0 +1,76 @@
+﻿@model SyndicateIT.Model.ViewModel.FileManagement.FilesContentViewModel
+
+@Html.Partial("~/Views/Shared/_NavigationPartial.cshtml", @Model.Navigation)
+<script src="~/Scripts/Views/Files/files.js"></script>
+<div id="content">
+    @Html.Hidden("FileType", Model.FileType)
+    <div class="row">
+        <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+            <h1 class="page-title txt-color-blueDark">
+                <i class="@Model.ClassTitle"></i> @Model.Title<span></span>
+            </h1>
+        </div>
+       
+    </div>
+    <section id="Gender-content" class="">
+            <div class="row">
+                <!-- NEW WIDGET START -->
+                <article class="col-sm-12 sortable-grid ui-sortable">
+                    <!-- Widget ID (each widget will need unique ID)-->
+                    <div class="jarviswidget jarviswidgetTransparent" id="wid-id-x" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false" data-widget-custombutton="false" data-widget-sortable="false" role="widget">
+                        <header role="heading">
+                            <span class="widget-icon"> <i class="fa fa-align-justify"></i> </span>
+                            <h2>@Model.CommitteName</h2>
+                            <span class="jarviswidget-loader"><i class="fa fa-lg fa-fw fa-th-list"></i></span>
+                        </header>
+                        <!-- widget div-->
+                        <div class="row" style="background-color:none!important;">
+                            <div class="alert alert-info fade in">
+                                <button class="close" data-dismiss="alert">
+                                    ×
+                                </button>
+                                <i class="fa-fw fa fa-info"></i>
+                                <strong>Info!</strong> @Model.FileTypeName
+                            </div>
+                        </div>
+                        <!-- end widget content -->
+                    </div>
+                    <!-- end widget -->
+                </article>
+                <!-- WIDGET END -->
+                <!-- NEW WIDGET START -->
+                <!-- WIDGET END -->
+            </div>
+        </section>
+    <div class="widget-body " id="File-List"></div>
+    
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        SearchFiles();
+        $("#FilesUL").children().find('li').removeClass("active");
+        $("#Files").addClass("open");
+        @if (Model.FileType == FileType.EnrolmentCommitte.ToString())
+        {
+        <text>
+        $("#FilesUL #EnrolmentCommitte").addClass("active");
+        </text>
+         }
+        else if (Model.FileType == FileType.FinancialCommitte.ToString())
+        {
+        <text>
+        $("#FilesUL #FinancialCommitte").addClass("active");
+        </text>
+        }
+       
+        $("#FilesUL").show();
+        $("#Files").children().find('em').removeClass("fa fa-plus-square-o");
+        $("#Files").children().find('em').addClass("fa fa-minus-square-o");
+    });
+
+</script>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

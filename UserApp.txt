@@ -1,0 +1,7 @@
+Type                         UserName                                     New UserName                            Password
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+Super Admin                  f.ahmad@lebaneseitsyndicate.org              admin@EdTech.app                        P@ssw0rd
+Data Entry Operator          a.ahmad@lebaneseitsyndicate.org              dataEntry@EdTech.app                    P@ssw0rd
+Enrolment Committe           m.zgheib@lebaneseitsyndicate.org             EnrCommitte@EdTech.app                  P@ssw0rd
+Financial Committe           g.khoueiry@lebaneseitsyndicate.org           FinCommitte@EdTech.app                  P@ssw0rd
+Member Board                 ali123@hotmail.com                           rami@EdTech.app                         P@ssw0rd

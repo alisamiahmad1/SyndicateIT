@@ -1,0 +1,90 @@
+﻿@model SyndicateIT.Model.ViewModel.ServiceManagement.ServiceDetails.ScheduleTableViewModel
+
+@Styles.Render("~/Content/DropDopSchedule")
+@{
+    var freeDay = Model.ScheduleTimes.Where(p => p.Deny_Day != -1 && p.Allow_Day == -1).Select(s => s.Deny_Day).FirstOrDefault();
+    var generalTimes = Model.ScheduleTimes.Where(p => p.Allow_Day == -1).ToList();
+    var date = Model.ScheduleDate.Date;
+}
+
+<!-- tables inside this DIV could have draggable content -->
+<div id="redips-drag">
+    <table cellpadding="0" cellspacing="0" width="100%" style="background-color: #fff;">
+        <tr>          
+            <td width="100%">
+                <div id="right">
+                    <table id="table2" style="background-color: #eee; width:100%;">
+                        <colgroup>
+                            <col width="15%" />
+                            <col width="17%" />
+                            <col width="17%" />
+                            <col width="17%" />
+                            <col width="17%" />
+                            <col width="17%" />
+                        </colgroup>
+                        <tbody>
+                            <tr>
+                                <!-- if checkbox is checked, clone school subjects to the whole table row  -->
+                                <td class="redips-mark blank">
+                                    Time
+                                </td>
+                                @{ var countDays = 5 + (freeDay > 6 ? 1 : 0);}
+                                @for (int i = 1; i < 7; i++)
+                                {
+                                    if (i != freeDay)
+                                    {
+                                        var dateNext = date.AddDays(i);
+                                        <td class="redips-mark dark">
+                                            @((DayOfWeek)i)
+                                            <br />@dateNext.ToShortDateString()
+                                        </td>
+                                    }
+                                }
+                            </tr>
+                            @for (int j = 1; j < generalTimes.Count; j++)
+                            {
+                                <tr>
+                                    <td class="redips-mark dark">@generalTimes[j].From_Time - @generalTimes[j].To_Time</td>
+                                    @for (int i = 1; i < 7; i++)
+                                    {
+                                        if (i != freeDay)
+                                        {
+                                            if (generalTimes[j].is_Free_Time)
+                                            {
+                                                <td class="redips-mark lunch" id='td@(i)@(j)' style="padding: 2%;">Free Time</td>
+                                                continue;
+                                            }
+                                            var dateNext = date.AddDays(i);
+                                            var schedule = Model.ScheduleTableGrid.Where(p => p.Schedule_Day == i && p.Schedule_Times_ID == generalTimes[j].Schedule_Times_ID).FirstOrDefault();
+                                            string Schedule_ID = (schedule == null) ? "" : schedule.Schedule_ID.ToString();
+                                            <td id='td@(i)@(j)'                                               
+                                                class="td-drag-drop" style="padding: 2%;">
+                                                @if (schedule != null)
+                                                {
+                                                    string Course_ID = schedule.Course_ID.ToString();
+                                                    if (!string.IsNullOrEmpty(Course_ID))
+                                                    {
+                                                        <div id="btnSchedule@(i)@(j)" data-value="@Course_ID" class="redips-drag redips-clone bi inTbl" draggable="true" >
+                                                            @schedule.CourseName
+                                                        </div>
+                                                    }
+                                                }
+                                            </td>
+                                        }
+                                    }
+                                </tr>
+                            }
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </td>
+        </tr>
+    </table>
+
+
+
+</div><!-- drag container -->
+
+

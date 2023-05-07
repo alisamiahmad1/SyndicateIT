@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="0acbf08b1baf4e7a9f2c1a77238c2dc9" Name="Diagram1">
+        <EntityTypeShape EntityType="SyndicatDataModel.AspNetRole" Width="1.5" PointX="0.75" PointY="2.125" />
+        <EntityTypeShape EntityType="SyndicatDataModel.AspNetUserClaim" Width="1.5" PointX="15.75" PointY="7.125" />
+        <EntityTypeShape EntityType="SyndicatDataModel.AspNetUserLogin" Width="1.5" PointX="2.75" PointY="2.125" />
+        <EntityTypeShape EntityType="SyndicatDataModel.AspNetUserRole" Width="1.5" PointX="10.75" PointY="18.125" />
+        <EntityTypeShape EntityType="SyndicatDataModel.AspNetUser" Width="1.5" PointX="12.75" PointY="18.125" />
+        <EntityTypeShape EntityType="SyndicatDataModel.Branch" Width="1.5" PointX="5.75" PointY="19.125" />
+        <EntityTypeShape EntityType="SyndicatDataModel.Branches_By_Language" Width="1.5" PointX="17.75" PointY="7.125" />
+        <EntityTypeShape EntityType="SyndicatDataModel.Company" Width="1.5" PointX="3" PointY="4.875" />
+        <EntityTypeShape EntityType="SyndicatDataModel.Company_Addresses" Width="1.5" PointX="5.25" PointY="4.5" />
+        <EntityTypeShape EntityType="SyndicatDataModel.Company_Addresses_By_Language" Width="1.5" PointX="7.75" PointY="19.125" />
+        <EntityTypeShape EntityType="SyndicatDataModel.Company_By_Language" Width="1.5" PointX="14.75" PointY="19.125" />
+        <EntityTypeShape EntityType="SyndicatDataModel.Company_DocumentExtension" Width="1.5" PointX="8.25" PointY="5.625" />
+        <EntityTypeShape EntityType="SyndicatDataModel.Company_Type" Width="1.5" PointX="0.75" PointY="5.75" />
+        <EntityTypeShape EntityType="SyndicatDataModel.Company_Type_BY_LANGUAGE" Width="1.5" PointX="16.75" PointY="19.125" />
+        <EntityTypeShape EntityType="SyndicatDataModel.Corporate" Width="1.5" PointX="18.75" PointY="19.125" />
+        <EntityTypeShape EntityType="SyndicatDataModel.COUNTRY" Width="1.5" PointX="19.75" PointY="7.125" />
+        <EntityTypeShape EntityType="SyndicatDataModel.COUNTRY_BY_LANGUAGE" Width="1.5" PointX="19.75" PointY="11.125" />
+        <EntityTypeShape EntityType="SyndicatDataModel.Degree_Guarantee" Width="1.5" PointX="9.75" PointY="21.125" />
+        <EntityTypeShape EntityType="SyndicatDataModel.Degree_Guarantee_By_Language" Width="1.5" PointX="20.75" PointY="2.125" />
+        <EntityTypeShape EntityType="SyndicatDataModel.Degree_Insurance" Width="1.5" PointX="20.75" PointY="19.125" />
+        <EntityTypeShape EntityType="SyndicatDataModel.Degree_Insurance_By_Language" Width="1.5" PointX="0.75" PointY="23.125" />
+        <EntityTypeShape EntityType="SyndicatDataModel.DegreesParticipation" Width="1.5" PointX="2.75" PointY="23.125" />
+        <EntityTypeShape EntityType="SyndicatDataModel.DEPARTMENT" Width="1.5" PointX="21.75" PointY="6.125" />
+        <EntityTypeShape EntityType="SyndicatDataModel.DEPARTMENT_BY_LANGUAGE" Width="1.5" PointX="21.75" PointY="10.125" />
+        <EntityTypeShape EntityType="SyndicatDataModel.Document_Extension" Width="1.5" PointX="6" PointY="0.75" />
+        <EntityTypeShape EntityType="SyndicatDataModel.Document_Extension_By_Language" Width="1.5" PointX="20.75" PointY="23.125" />
+        <EntityTypeShape EntityType="SyndicatDataModel.Educationalsystem" Width="1.5" PointX="22.75" PointY="2.125" />
+        <EntityTypeShape EntityType="SyndicatDataModel.Educationalsystem_By_Language" Width="1.5" PointX="4.75" PointY="24.125" />
+        <EntityTypeShape EntityType="SyndicatDataModel.GENDER" Width="1.5" PointX="6.75" PointY="24.125" />
+        <EntityTypeShape EntityType="SyndicatDataModel.GENDER_BY_LANGUAGE" Width="1.5" PointX="11.75" PointY="24.125" />
+        <EntityTypeShape EntityType="SyndicatDataModel.Insurance" Width="1.5" PointX="13.75" PointY="24.125" />
+        <EntityTypeShape EntityType="SyndicatDataModel.JOB" Width="1.5" PointX="15.75" PointY="24.125" />
+        <EntityTypeShape EntityType="SyndicatDataModel.JOB_BY_LANGUAGE" Width="1.5" PointX="22.75" PointY="18.125" />
+        <EntityTypeShape EntityType="SyndicatDataModel.Kaddaa" Width="1.5" PointX="3" PointY="10.875" />
+        <EntityTypeShape EntityType="SyndicatDataModel.Kaddaa_BY_LANGUAGE" Width="1.5" PointX="22.75" PointY="22.125" />
+        <EntityTypeShape EntityType="SyndicatDataModel.LANGUAGE" Width="1.5" PointX="23.75" PointY="6.125" />
+        <EntityTypeShape EntityType="SyndicatDataModel.LANGUAGE_BY_COUNTRY" Width="1.5" PointX="23.75" PointY="10.125" />
+        <EntityTypeShape EntityType="SyndicatDataModel.Marital_Status" Width="1.5" PointX="8.75" PointY="25.125" />
+        <EntityTypeShape EntityType="SyndicatDataModel.Marital_Status_By_Language" Width="1.5" PointX="23.75" PointY="14.125" />
+        <EntityTypeShape EntityType="SyndicatDataModel.MenuItem" Width="1.5" PointX="17.75" PointY="25.125" />
+        <EntityTypeShape EntityType="SyndicatDataModel.MenuItemold" Width="1.5" PointX="24.75" PointY="2.125" />
+        <EntityTypeShape EntityType="SyndicatDataModel.MenuItemRole" Width="1.5" PointX="24.75" PointY="18.125" />
+        <EntityTypeShape EntityType="SyndicatDataModel.Phone_Type" Width="1.5" PointX="5.75" PointY="15.5" />
+        <EntityTypeShape EntityType="SyndicatDataModel.Phone_Type_BY_LANGUAGE" Width="1.5" PointX="24.75" PointY="21.125" />
+        <EntityTypeShape EntityType="SyndicatDataModel.Place" Width="1.5" PointX="3" PointY="14.5" />
+        <EntityTypeShape EntityType="SyndicatDataModel.Place_BY_LANGUAGE" Width="1.5" PointX="22.75" PointY="26.125" />
+        <EntityTypeShape EntityType="SyndicatDataModel.Region" Width="1.5" PointX="3" PointY="18.625" />
+        <EntityTypeShape EntityType="SyndicatDataModel.Region_BY_LANGUAGE" Width="1.5" PointX="24.75" PointY="25.125" />
+        <EntityTypeShape EntityType="SyndicatDataModel.Relation_Types" Width="1.5" PointX="25.75" PointY="6.125" />
+        <EntityTypeShape EntityType="SyndicatDataModel.Relation_Types_By_Language" Width="1.5" PointX="25.75" PointY="10.125" />
+        <EntityTypeShape EntityType="SyndicatDataModel.RELIGION" Width="1.5" PointX="25.75" PointY="14.125" />
+        <EntityTypeShape EntityType="SyndicatDataModel.RELIGION_BY_LANGUAGE" Width="1.5" PointX="19.75" PointY="27.125" />
+        <EntityTypeShape EntityType="SyndicatDataModel.ROLE" Width="1.5" PointX="26.75" PointY="2.125" />
+        <EntityTypeShape EntityType="SyndicatDataModel.ROLE_BY_LANGUAGE" Width="1.5" PointX="0.75" PointY="28.125" />
+        <EntityTypeShape EntityType="SyndicatDataModel.SHIFT" Width="1.5" PointX="2.75" PointY="28.125" />
+        <EntityTypeShape EntityType="SyndicatDataModel.SHIFT_BY_LANGUAGE" Width="1.5" PointX="4.75" PointY="28.125" />
+        <EntityTypeShape EntityType="SyndicatDataModel.SOCIAL" Width="1.5" PointX="10.75" PointY="28.125" />
+        <EntityTypeShape EntityType="SyndicatDataModel.SOCIAL_BY_LANGUAGE" Width="1.5" PointX="26.75" PointY="18.125" />
+        <EntityTypeShape EntityType="SyndicatDataModel.Status" Width="1.5" PointX="26.75" PointY="22.125" />
+        <EntityTypeShape EntityType="SyndicatDataModel.STATUS_BY_LANGUAGE" Width="1.5" PointX="26.75" PointY="26.125" />
+        <EntityTypeShape EntityType="SyndicatDataModel.sysdiagram" Width="1.5" PointX="27.75" PointY="6.125" />
+        <EntityTypeShape EntityType="SyndicatDataModel.T_Candidate" Width="1.5" PointX="10.75" PointY="1" />
+        <EntityTypeShape EntityType="SyndicatDataModel.T_Document_Form" Width="1.5" PointX="19.5" PointY="14.75" />
+        <EntityTypeShape EntityType="SyndicatDataModel.T_Document_Form_Category" Width="1.5" PointX="12.75" PointY="15.5" />
+        <EntityTypeShape EntityType="SyndicatDataModel.T_Document_Form_Data" Width="1.5" PointX="21.75" PointY="15.5" />
+        <EntityTypeShape EntityType="SyndicatDataModel.T_Document_Form_Sub_Category" Width="1.5" PointX="15" PointY="15.375" />
+        <EntityTypeShape EntityType="SyndicatDataModel.T_Document_Form_Template" Width="1.5" PointX="17.25" PointY="14.375" />
+        <EntityTypeShape EntityType="SyndicatDataModel.T_Document_Template" Width="1.5" PointX="7.75" PointY="10.375" />
+        <EntityTypeShape EntityType="SyndicatDataModel.T_Election" Width="1.5" PointX="10.75" PointY="3.625" />
+        <EntityTypeShape EntityType="SyndicatDataModel.T_Election_Vote" Width="1.5" PointX="13" PointY="3.75" />
+        <EntityTypeShape EntityType="SyndicatDataModel.T_Form" Width="1.5" PointX="10" PointY="10.75" />
+        <EntityTypeShape EntityType="SyndicatDataModel.T_Form_Data" Width="1.5" PointX="12.25" PointY="11.25" />
+        <EntityTypeShape EntityType="SyndicatDataModel.T_Meeting" Width="1.5" PointX="14.75" PointY="10.375" />
+        <EntityTypeShape EntityType="SyndicatDataModel.T_Meeting_User" Width="1.5" PointX="17" PointY="10.75" />
+        <EntityTypeShape EntityType="SyndicatDataModel.T_Template_Variable" Width="1.5" PointX="6.75" PointY="29.125" />
+        <EntityTypeShape EntityType="SyndicatDataModel.T_Voter_Code" Width="1.5" PointX="13" PointY="6.875" />
+        <EntityTypeShape EntityType="SyndicatDataModel.TBL_Academic_Year" Width="1.5" PointX="27.75" PointY="9.125" />
+        <EntityTypeShape EntityType="SyndicatDataModel.TBL_ApplicationStatus" Width="1.5" PointX="27.75" PointY="13.125" />
+        <EntityTypeShape EntityType="SyndicatDataModel.TBL_Insurances" Width="1.5" PointX="12.75" PointY="29.125" />
+        <EntityTypeShape EntityType="SyndicatDataModel.TBL_Nationality" Width="1.5" PointX="14.75" PointY="29.125" />
+        <EntityTypeShape EntityType="SyndicatDataModel.TBL_Nationality_By_Language" Width="1.5" PointX="16.75" PointY="29.125" />
+        <EntityTypeShape EntityType="SyndicatDataModel.TBL_Relation_Types" Width="1.5" PointX="15.75" PointY="2.5" />
+        <EntityTypeShape EntityType="SyndicatDataModel.TBL_Relation_Types_By_Language" Width="1.5" PointX="18" PointY="2.375" />
+        <EntityTypeShape EntityType="SyndicatDataModel.Tbl_Titles" Width="1.5" PointX="28.75" PointY="2.125" />
+        <EntityTypeShape EntityType="SyndicatDataModel.Tbl_Titles_By_Language" Width="1.5" PointX="28.75" PointY="17.125" />
+        <EntityTypeShape EntityType="SyndicatDataModel.Tbl_User_Contact" Width="1.5" PointX="28.75" PointY="21.125" />
+        <EntityTypeShape EntityType="SyndicatDataModel.Tbl_User_Course" Width="1.5" PointX="21.75" PointY="30.125" />
+        <EntityTypeShape EntityType="SyndicatDataModel.Tbl_User_Documents" Width="1.5" PointX="23.75" PointY="30.125" />
+        <EntityTypeShape EntityType="SyndicatDataModel.TBL_User_Education" Width="1.5" PointX="28.75" PointY="27.125" />
+        <EntityTypeShape EntityType="SyndicatDataModel.Tbl_User_Employment" Width="1.5" PointX="25.75" PointY="30.125" />
+        <EntityTypeShape EntityType="SyndicatDataModel.TBL_User_Experience" Width="1.5" PointX="29.75" PointY="6.125" />
+        <EntityTypeShape EntityType="SyndicatDataModel.TBL_User_Relations" Width="1.5" PointX="29.75" PointY="11.125" />
+        <EntityTypeShape EntityType="SyndicatDataModel.TypeGuarantee" Width="1.5" PointX="18.75" PointY="31.125" />
+        <EntityTypeShape EntityType="SyndicatDataModel.TypeGuaranteeByLanguage" Width="1.5" PointX="30.75" PointY="2.125" />
+        <EntityTypeShape EntityType="SyndicatDataModel.TypeInsurance" Width="1.5" PointX="0.75" PointY="32.125" />
+        <EntityTypeShape EntityType="SyndicatDataModel.TypeInsuranceByLanguage" Width="1.5" PointX="2.75" PointY="32.125" />
+        <EntityTypeShape EntityType="SyndicatDataModel.User_Documents" Width="1.5" PointX="8.75" PointY="32.125" />
+        <EntityTypeShape EntityType="SyndicatDataModel.User_Phone" Width="1.5" PointX="8" PointY="15.375" />
+        <EntityTypeShape EntityType="SyndicatDataModel.User_Registration" Width="1.5" PointX="30.75" PointY="17.125" />
+        <EntityTypeShape EntityType="SyndicatDataModel.User_Relations" Width="1.5" PointX="30.75" PointY="22.125" />
+        <EntityTypeShape EntityType="SyndicatDataModel.User" Width="1.5" PointX="30.75" PointY="28.125" />
+        <EntityTypeShape EntityType="SyndicatDataModel.Corporate_By_Language" Width="1.5" PointX="27.75" PointY="32.125" />
+        <AssociationConnector Association="SyndicatDataModel.FK_Company_CompanyAddress" />
+        <AssociationConnector Association="SyndicatDataModel.FK_Company_CompanyType" />
+        <AssociationConnector Association="SyndicatDataModel.FK_TBL_Company_Addresses_TBL_Company" />
+        <AssociationConnector Association="SyndicatDataModel.FK_TBL_Company_Document_Extension_TBL_Company" />
+        <AssociationConnector Association="SyndicatDataModel.FK_TBL_Company_Addresses_TBL_STP_Kaddaa" />
+        <AssociationConnector Association="SyndicatDataModel.FK_TBL_Company_Addresses_TBL_STP_Place" />
+        <AssociationConnector Association="SyndicatDataModel.FK_TBL_Company_Addresses_TBL_STP_Region" />
+        <AssociationConnector Association="SyndicatDataModel.FK_TBL_Company_DocumentExtension_TBL_STP_Document_Extension" />
+        <AssociationConnector Association="SyndicatDataModel.FK_User_Phone_Phone_Type" />
+        <AssociationConnector Association="SyndicatDataModel.FK_T_Election_Vote_T_Candidate" />
+        <AssociationConnector Association="SyndicatDataModel.FK_T_Document_Form_Data_T_Document_Form" />
+        <AssociationConnector Association="SyndicatDataModel.FK_T_Document_Form_T_Document_Form_Template" />
+        <AssociationConnector Association="SyndicatDataModel.FK_T_Document_Form_Sub_Category_T_Document_Form_Category" />
+        <AssociationConnector Association="SyndicatDataModel.FK_T_Document_Form_Template_T_Document_Form_Sub_Category" />
+        <AssociationConnector Association="SyndicatDataModel.FK_T_Form_T_Document_Template" />
+        <AssociationConnector Association="SyndicatDataModel.FK_T_Election_Vote_T_Election" />
+        <AssociationConnector Association="SyndicatDataModel.FK_T_Voter_Code_T_Election" />
+        <AssociationConnector Association="SyndicatDataModel.FK_T_Form_Data_T_Form" />
+        <AssociationConnector Association="SyndicatDataModel.FK_T_Meeting_User_T_Meeting" />
+        <AssociationConnector Association="SyndicatDataModel.FK_TBL_Relation_Types_By_Language_TBL_Relation_Types" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

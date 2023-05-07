@@ -1,0 +1,114 @@
+﻿@model SyndicateIT.DataLayer.DataContext.T_Document_Form_Template
+@{
+    ViewBag.Title = "Index";
+}
+<div id="content">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="row">
+                <a href="~/Document_Form_Sub_Category/index" class="btn btn-link">Sub Categories</a>
+            </div>
+            <h1 class="page-title txt-color-blueDark">
+                Document Form Template
+                @Html.ActionLink("Create New", "Create", null, new { style = "float:right" })
+            </h1>
+        </div>
+    </div>
+    @using (Html.BeginForm("Search", "Document_Form_Template", FormMethod.Post, new { @class = "row search-md-form", data_enabled = true, role = "form" }))
+    {
+        <div class="col-md-4">
+            @Html.Label("Document_Form_Category_Id", "Category")
+            @Html.DropDownList("Document_Form_Category_Id", null, "", new { @class = "form-control" })
+        </div>
+        <div class="col-md-4">
+            @Html.LabelFor(m => m.Document_Form_Sub_Category_Id, "Sub Category")
+            @Html.DropDownListFor(m => m.Document_Form_Sub_Category_Id, null, "", new { @class = "form-control" })
+        </div>
+        <div class="col-md-4">
+            @Html.LabelFor(m => m.Name)
+            @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+        </div>
+        <div class="col-md-2">
+            <label style="width:100%">&nbsp;</label>
+            <button type="submit" class="btn btn-block btn-serach">Search</button>
+        </div>
+    }
+    <br />
+    <div class="jarviswidget">
+        <div class="ui-jqgrid-view" style="padding:0">
+            <table class="ui-jqgrid-htable table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Document Form Category</th>
+                        <th>Document Form Sub Category</th>
+                        <th>Document Forms</th>
+                        <th>Is Publish</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody class="tbody">
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<Script>
+    $(document).on("submit", "form.search-md-form", function (e) {
+        e.preventDefault();
+        var url = $(this).attr("action");
+        var dt = $(this).serialize();
+        $('tbody.tbody').html("<div class='loader'><img src=" + loader + " /></div>");
+        if ($(this).data("enabled")) $(this).data("enabled", false);
+        else return false;
+        $.post(url, dt, function (data) {
+            var st = '';
+            for (var i = 0; i < data.length; i++) {
+                st += `<tr>
+                    <td>${data[i].Name}</td>
+                    <td>${data[i].Document_Form_Category}</td>
+                    <td>${data[i].Document_Form_Sub_Category}</td>
+                    <td>${data[i].Document_Forms}</td>
+                    <td>${data[i].Is_Publish}</td>
+                    <td>${(data[i].Is_Publish?
+                        `<a href='@Url.Content("~/Document_Form/index?Template_Id=")${data[i].Id}'>Forms</a>
+                        | <a href='@Url.Content("~/Document_Form/Create?Template_Id=")${data[i].Id}'>Fill Form</a>`:
+                        `<a href='@Url.Content("~/Document_Form_Template/Edit/")${data[i].Id}'>Edit</a>
+                        | <a href='@Url.Content("~/Document_Form_Template/Publish/")${data[i].Id}'>Publish</a>`
+                    )}
+                       | <a href='@Url.Content("~/Document_Form_Template/ShowClientForm/")${data[i].Id}'>Show Template</a>
+                    ${(data[i].Document_Forms != '' ? '' : `| <a href='@Url.Content("~/Document_Form_Template/Delete/")${data[i].Id}'>Delete</a>`)}
+
+                    </td>
+                </tr>`;
+            }
+            if (st == '') st = "<div>no data</div>"
+            $('tbody.tbody').html(st);
+        }).done(function () { $("form.search-md-form").data("enabled", true); })
+            .fail(function () {
+                $("form.search-md-form").data("enabled", true);
+                $('tbody.tbody').html("<tr><td>errrror</td><tr>");
+            });
+    });
+    $("form.search-md-form").submit();
+    $(document).on("change", "#Document_Form_Category_Id", function () {
+        if ($("#Document_Form_Category_Id").val() != "") {
+            var selected_cat = $("#Document_Form_Category_Id :selected").text();
+            var cat = $("#Document_Form_Sub_Category_Id :selected").closest('optgroup').attr("label");
+            if (selected_cat != cat) $("#Document_Form_Sub_Category_Id").val("");
+            $("#Document_Form_Sub_Category_Id optgroup").hide();
+            $("#Document_Form_Sub_Category_Id optgroup[label='" + selected_cat + "']").show();
+        } else {
+            $("#Document_Form_Sub_Category_Id").val("");
+            $("#Document_Form_Sub_Category_Id optgroup").show();
+        }
+    });
+    //$(document).on("change", "#Document_Form_Sub_Category_Id", function () {
+    //    var cat = $("#Document_Form_Category_Id :selected").text();
+    //    var selected_cat= $("#Document_Form_Sub_Category_Id :selected").closest('optgroup').attr("label");
+    //    if (selected_cat != '' && selected_cat != cat) {
+    //        $("#Document_Form_Category_Id").val($("#Document_Form_Category_Id option:contains("+cat+")").attr('value'));
+    //    }
+    //});
+    //$("#Document_Form_Sub_Category_Id").change();
+</Script>

@@ -1,0 +1,84 @@
+﻿@model List<SyndicateIT.Model.ViewModel.ServiceManagement.ServiceDetails.JoinCourcesViewModel>
+<div class="tree smart-form">
+    <ul role="tree" >
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            var joinClass = Model[i].JoinClass;
+            <li class="parent_li" role="treeitem">
+                <span title="Collapse this branch"><i class="fa fa-lg fa-folder-open"></i> @Model[i].Cycle</span>
+                <ul role="group">
+                    @for (int j = 0; j < joinClass.Count; j++)
+                    {
+                        var joinDivision = joinClass[j].JoinDivision;
+                        <li class="parent_li" role="treeitem">
+                            <span title="Collapse this branch"><i class="fa fa-lg fa-minus-circle"></i> @joinClass[j].Class</span>
+                            <ul role="group">
+                                @for (int t = 0; t < joinDivision.Count; t++)
+                                {
+                                    var JoinDate = joinDivision[t].JoinDate;
+                                    <li class="parent_li" role="treeitem">
+                                        <span title="Expand this branch"><i class="fa fa-lg fa-Divisionplus-circle"></i> @joinDivision[t].Division</span>
+                                        <ul role="group">
+                                            @for (int s = 0; s < JoinDate.Count; s++)
+                                            {
+                                                var JoinCourse = JoinDate[s].JoinCourse;
+
+                                                @*<li>
+                                                        <span class="label label-warning"><i class="icon-leaf"></i> @JoinCourse[s].Course</span>
+                                                    </li>*@
+                                                <li>
+                                                    <span class="label label-warning" title="Collapse this branch"><i class="fa fa-lg fa-minus-circle"></i> @JoinDate[s].Date</span>
+                                                    <ul role="group">
+                                                        @for (int u = 0; u < JoinCourse.Count; u++)
+                                                        {
+                                                            <li>
+                                                                <span><i class="fa fa-clock-o"></i> @JoinCourse[u].Time </span> – @JoinCourse[u].Course
+                                                            </li>
+                                                        }
+                                                    </ul>
+                                                </li>
+                                            }
+                                        </ul>
+                                    </li>
+                                }
+
+
+                            </ul>
+                        </li>
+                    }
+
+                </ul>
+            </li>
+        }
+    </ul>
+</div>
+
+
+
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $.validator.setDefaults({
+            ignore: ""
+        });
+
+        $('.tree > ul').attr('role', 'tree').find('ul').attr('role', 'group');
+        $('.tree').find('li:has(ul)').addClass('parent_li').attr('role', 'treeitem').find(' > span').attr('title', 'Collapse this branch').on('click', function (e) {
+            var children = $(this).parent('li.parent_li').find(' > ul > li');
+            if (children.is(':visible')) {
+                children.hide('fast');
+                $(this).attr('title', 'Expand this branch').find(' > i').removeClass().addClass('fa fa-lg fa-plus-circle');
+            } else {
+                children.show('fast');
+                $(this).attr('title', 'Collapse this branch').find(' > i').removeClass().addClass('fa fa-lg fa-minus-circle');
+            }
+            e.stopPropagation();
+        });
+
+    });
+
+
+</script>

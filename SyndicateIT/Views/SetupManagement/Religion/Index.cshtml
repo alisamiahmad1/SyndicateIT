@@ -1,0 +1,29 @@
+﻿@model  SyndicateIT.Model.ViewModel.SetupManagement.Religion.ReligionContentViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string PublicResources = "~/Views/SetupManagement/Religion/PublicResource";
+}
+@Scripts.Render("~/Scripts/Religion")
+@Scripts.Render("~/Scripts/translate")
+@*@Html.Partial("~/Views/Shared/_NavigationPartial.cshtml", @Model.Navigation)*@
+<div id="ReligionContent">
+    @Html.Partial("~/Views/SetupManagement/Religion/_ReligionContentPartial.cshtml", Model);
+</div>
+<script type="text/javascript">
+    var ReligionSearchURL = '@Html.GetUrl("LoadSearchReligion", "Religion")';
+    var ReligionDeleteURL = '@Html.GetUrl("ReligionDelete", "Religion")';
+    var loadReligionURL = '@Html.GetUrl("LoadReligion", "Religion")';
+    var loader = '@Utilities.GetAbsotuleUrl("~/Content/image/ajax-loader.gif")';
+    var saveReligionUrl = '@Html.GetUrl("AddUpdateReligion", "Religion")';
+    var messageDelete = '@Html.Resource("MessageDelete", PublicResources)';
+    var loadTranslationReligionURL = '@Html.GetUrl("LoadTranslateReligion", "Religion")';
+
+    $("#SchoolSettings", $("#nav")).addClass("active open");
+    $("#SchoolSettings Ul", $("#nav")).show();
+
+</script>
+@section Scripts {
+    @Scripts.Render("~/bundles/kendo/js")
+}
+

@@ -1,0 +1,111 @@
+﻿@model SyndicateIT.Model.ViewModel.Exam.TablePRViewModel
+@{
+    Layout = null;
+    string PublicResources = "~/Views/Exams/SignsExam/_TablePRExamPartial.cshtml";
+}
+
+<table width="100%" cellpadding="0" cellspacing="0">
+    <tr>
+        <td>
+            <table width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                    <td>
+                        <table cellpadding="0" cellspacing="0" class="col-md-12">
+                            <tr>
+                                <td class="col-md-4">
+                                    <table width="100%" cellpadding="0" cellspacing="0">
+                                        <tr>
+                                            <td style="padding: 8px 10px;text-align: right;">@Model.Class</td>
+                                            <td style="padding: 8px 10px;" class="font-md">@Html.Resource("Class", PublicResources)</td>
+
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 8px 10px;text-align: right;">@Model.Division</td>
+                                            <td style="padding: 8px 10px;" class="font-md">@Html.Resource("Division", PublicResources)</td>
+
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 8px 10px;text-align: right;">@Model.NumberStudent</td>
+                                            <td style="padding: 8px 10px;" class="font-md">@Html.Resource("NumberStudents", PublicResources)</td>
+
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td class="col-md-4">&nbsp;</td>
+                                <td class="col-md-4">
+                                    <table width="100%" cellpadding="0" cellspacing="0">
+                                        <tr>
+                                            <td colspan="2" class="txt-center font-xl" style="padding: 8px 10px;text-align:center;">@Html.Resource("SchoolNameAr", PublicResources)</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" class="txt-center font-xl" style="padding: 8px 10px;text-align:center;">@Html.Resource("SchoolName", PublicResources)</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 8px 10px;text-align: right;">@Model.NameStudent</td>
+                                            <td style="padding: 8px 10px; float:right" class="font-md">@Html.Resource("Name", PublicResources)</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td class="col-md-12" style="padding: 8px 10px;">
+            <table cellpadding="0" cellspacing="0" class="col-md-12">
+                <tr>
+                    <td style="text-align:center;" class="font-xl">
+                       @Html.Resource("SignExamTitle", PublicResources)  @Model.ClassNameAlfa                     
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <table width="100%" cellpadding="0" cellspacing="0">
+                @for (int i = 0; i < Model.ItemSubjectPR.Count; i++)
+                {                   
+                    <tr>
+                        <td><h3>@Model.ItemSubjectPR[i].Subject</h3></td>
+                    </tr>
+                    for (int t = 0; t < Model.ItemSubjectPR[i].ItemCoursePR.Count; t++)
+                    {
+                        var ItemCourseData = Model.ItemSubjectPR[i].ItemCoursePR[t];
+                        <tr>
+                            <td>
+                                <table class="table table-bordered table-striped responsive-utilities col-md-12">
+                                    <thead>
+                                        <tr>
+                                            <th class="col-md-2 text-center" style="background-color: rgba(61, 106, 124, 0.15);border: 1px solid rgba(61, 106, 124, 0.2);">@ItemCourseData.Name</th>
+                                            <th class="col-md-3 text-center" style="background-color: rgba(61, 106, 124, 0.15);border: 1px solid rgba(61, 106, 124, 0.2);">@ItemCourseData.FirstTerm</th>
+                                            <th class="col-md-3 text-center" style="background-color: rgba(61, 106, 124, 0.15);border: 1px solid rgba(61, 106, 124, 0.2);">@ItemCourseData.SecondTerm </th>
+                                            <th class="col-md-2 text-center" style="background-color: rgba(61, 106, 124, 0.15);border: 1px solid rgba(61, 106, 124, 0.2);">@ItemCourseData.ThirdTerm </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>                                       
+                                        @for (int j = 0; j < ItemCourseData.ItemSkilsPR.Count; j++)
+                                        {
+
+                                          <tr style="background-color: #fff;">
+                                            <th class="is-visible text-center">@ItemCourseData.ItemSkilsPR[j].Name</th>
+                                            <td class="is-visible text-center">@ItemCourseData.ItemSkilsPR[j].FirstTermValue</td>
+                                            <td class="is-hidden text-center">@ItemCourseData.ItemSkilsPR[j].SecondTermValue</td>                                           
+                                            <td class="is-hidden text-center">@ItemCourseData.ItemSkilsPR[j].ThirdTermValue</td>
+                                        </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    }
+
+                }
+                             
+            </table>
+        </td>
+    </tr>
+</table>

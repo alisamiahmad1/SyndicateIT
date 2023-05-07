@@ -1,0 +1,168 @@
+﻿@model SyndicateIT.Model.ViewModel.FileManagement.FilesContentDetailsViewModel
+@{
+    var sourceId = 1;
+    string PublicResources = "~/Views/FileManagement/Files/_FilesContentDetailsPartial.cshtml";
+   sourceId = (int)ProfileSourceType.FileStudents;
+    
+
+}
+
+@Html.Partial("~/Views/Shared/_NavigationPartial.cshtml", @Model.Navigation)
+<div id="content">
+    <div class="row">
+        <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+            <h1 class="page-title txt-color-blueDark">
+                <i class="@Model.ClassTitle"></i> @Model.SubTitle
+            </h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="well well-sm">
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <div class="well well-light well-sm no-margin no-padding">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div id="myCarousel" class="carousel fade profile-carousel">
+                                        <div class="air air-bottom-right padding-10">
+                                            <a href="javascript:void(0);" class="btn txt-color-white bg-color-teal btn-sm" onclick="ViewFileExam('@Model.FileId',@sourceId);">
+                                               <i class="fa fa-check"></i>@Html.Resource("StudentNotes", PublicResources) </a>&nbsp; 
+                                                <a href="javascript:void(0);" class="btn txt-color-white bg-color-pinkDark btn-sm" onclick="ViewPeronalDetail('@Model.FileId',@sourceId);">
+                                                   <i class="fa fa-link"></i>@Html.Resource("PersonalInformation", PublicResources)
+                                                </a>
+                                        </div>
+                                        <div class="air air-top-left padding-10">
+                                            <h4 class="txt-color-white font-md">@Model.FileDetails.DateString</h4>
+                                        </div>
+                                        <div class="carousel-inner">
+                                            <!-- Slide 1 -->  
+                                            <div class="item active">
+                                                <img src="~/Content/image/profileHeader.jpg" alt="demo user">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="row">
+                                        <div class="col-sm-3 profile-pic">
+                                            <img src="~/Content/image/male.png" alt="demo user">
+                                            <div class="padding-10">
+                                                @*<h4 class="font-md">
+                                                    <span class="label label-info pull-right">@Html.Resource("Success", PublicResources)</span>
+                                                    <br>
+                                                    <br>
+                                                    <strong ><span style="color:#214e75">@Html.Resource("Note", PublicResources) :</span> 70/100</strong>                                               
+                                                 </h4>*@                                               
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <h1>
+                                                @Model.FileDetails.FirstName <span class="semi-bold">@Model.FileDetails.LastName</span>
+                                                <br>
+                                                <small> @Model.FileDetails.Cycle_Title, @Model.FileDetails.Class_Title, @Model.FileDetails.Division_Name</small>
+                                            </h1>
+                                            <ul class="list-unstyled">
+                                                <li>
+                                                    <p class="text-muted">
+                                                        <i class="fa fa-phone"></i>&nbsp;&nbsp;(<span class="txt-color-darken">961</span>) <span class="txt-color-darken">@Model.FileDetails.MobileNumber</span>
+                                                    </p>
+                                                </li>
+                                                <li>
+                                                    <p class="text-muted">
+                                                        <i class="fa fa-envelope"></i>&nbsp;&nbsp;<a href="mailto:@Model.FileDetails.Email">@Model.FileDetails.Email</a>
+                                                    </p>
+                                                </li>                                               
+                                            </ul>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <h1><small>@Html.Resource("Address", PublicResources)</small></h1>
+                                            <ul class="list-inline friends-list">
+                                                <li>
+                                                   @Model.FileDetails.Street, @Model.FileDetails.Place_Name, @Model.FileDetails.Region_Name, @Model.FileDetails.COUNTRY_NAME
+                                                </li>                                                
+                                            </ul>                                         
+                                         </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <hr>
+                                    <div class="padding-10">
+
+                                        <ul class="nav nav-tabs tabs-pull-right">
+                                            <li class="active">
+                                                <a href="#" onclick="LoadFileAgenda();" data-toggle="tab">@Html.Resource("Agenda", PublicResources)</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" onclick="LoadFileSchedule();" data-toggle="tab">@Html.Resource("Schedule", PublicResources)</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" onclick="LoadFileAttendance();" data-toggle="tab">@Html.Resource("Attendance", PublicResources)</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" onclick="LoadFileDistibutionStudents();" data-toggle="tab">@Html.Resource("DistibutionStudents", PublicResources)</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" onclick="LoadFileExamProgram();" data-toggle="tab">@Html.Resource("ExamProgram", PublicResources)</a>
+                                            </li>
+                                            @*<li>
+                                                <a href="#" onclick="LoadFileDocument();" data-toggle="tab">@Html.Resource("Document", PublicResources)</a>
+                                            </li>*@
+                                            @if (@Model.FileDetails.IsActive == true)
+                                            {
+                                                <li class="pull-left">
+                                                    <span class="margin-top-10 display-inline"><i class="fa fa-rss text-success"></i>@Html.Resource("Activity", PublicResources) </span>
+                                                </li>
+                                            }
+                                            else
+                                            {
+                                                <li class="pull-left">
+                                                    <span class="margin-top-10 display-inline"><i class="fa fa-rss text-warning"></i>@Html.Resource("InActivity", PublicResources) InActivity</span>
+                                                </li>
+                                            }                                           
+                                        </ul>
+                                        <div class="tab-content padding-top-10"  id="Main-FilesesDetails">                                          
+                                      </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end row -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        LoadFileAgenda();
+        $("#FilesUL").children().find('li').removeClass("active");
+        $("#Files").addClass("open");
+        @if (Model.FileType == FileType.EnrolmentCommitte.ToString())
+        {
+        <text>
+        $("#EnrolmentCommitte").addClass("active");
+        </text>
+                }
+        else if (Model.FileType == FileType.FinancialCommitte.ToString())
+        {
+        <text>
+        $("#FinancialCommitte").addClass("active");
+        </text>
+        }       
+        $("#FileTypesUL").show();
+        $("#FileTypes").children().find('em').removeClass("fa fa-plus-square-o");
+        $("#FileTypes").children().find('em').addClass("fa fa-minus-square-o");
+    });
+
+</script>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+

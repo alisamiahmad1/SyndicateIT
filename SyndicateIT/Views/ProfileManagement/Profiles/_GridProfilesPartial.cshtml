@@ -1,0 +1,77 @@
+﻿
+@model SyndicateIT.Model.ViewModel.ProfileManagement.ProfilesContentViewModel
+
+@(Html.Kendo().Grid<SyndicateIT.Model.ViewModel.ProfileManagement.GridProfilesViewModel>()
+        .Name("ProfilesGrid")
+        .TableHtmlAttributes(new { @class = "table table-striped table-hover" })
+        .Columns(columns =>
+        {
+            columns.Command(commands =>
+            {
+                columns.Bound(c => c.FirstName);
+                columns.Bound(c => c.LastName);
+                columns.Bound(c => c.DateBirthString);
+                columns.Bound(p => p.Enabled).ClientTemplate("# if(Enabled == true) {#" +
+                "<span class='label label-success' style='font-size: 11px;'> Enable</span>" +
+                    "#} else {#" +
+                    " <span class='label label-warning' style='font-size: 11px;'>Disabled</span>" +
+                    "#}#")
+                    .Title("Status");
+                commands
+                    .Custom("EditProfiles")
+                    .Text("Edit")
+                    .Click("EditProfiles");
+                columns.Bound(c => c.ProfileID).Visible(false);
+            });
+        }
+    )
+    .DataSource(dataSource => dataSource
+        .Ajax()
+        .Read(read => read.Action("ProfileList_Read", "ProfileManagement", new { userType = Model.UserType, SearchFirstName = Model.ProfilesSearch.SearchFirstName, SearchLastName = Model.ProfilesSearch.SearchLastName,  SearchCycle = Model.ProfilesSearch.SearchCycle,  SearchClass = Model.ProfilesSearch.SearchClass,  SearchDivision = Model.ProfilesSearch.SearchDivision }))
+        .Model(model => { model.Id(c => c.ProfileID); })
+        .PageSize(Constants.PAGESIZE)
+        )
+    .Pageable()
+    .Sortable()
+    .Selectable()
+)
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

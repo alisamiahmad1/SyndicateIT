@@ -1,0 +1,29 @@
+﻿@model  SyndicateIT.Model.ViewModel.SetupManagement.Term.TermContentViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string PublicResources = "~/Views/SetupManagement/Term/PublicResource";
+}
+@Scripts.Render("~/Scripts/Term")
+@Scripts.Render("~/Scripts/translate")
+@*@Html.Partial("~/Views/Shared/_NavigationPartial.cshtml", @Model.Navigation)*@
+<div id="TermContent">
+    @Html.Partial("~/Views/SetupManagement/Term/_TermContentPartial.cshtml", Model);
+</div>
+<script type="text/javascript">
+    var TermSearchURL = '@Html.GetUrl("LoadSearchTerm", "Term")';
+    var TermDeleteURL = '@Html.GetUrl("TermDelete", "Term")';
+    var loadTermURL = '@Html.GetUrl("LoadTerm", "Term")';
+    var loader = '@Utilities.GetAbsotuleUrl("~/Content/image/ajax-loader.gif")';
+    var saveTermUrl = '@Html.GetUrl("AddUpdateTerm", "Term")';
+    var messageDelete = '@Html.Resource("MessageDelete", PublicResources)';
+    var loadTranslationTermURL = '@Html.GetUrl("LoadTranslateTerm", "Term")';
+
+    $("#SchoolSettings", $("#nav")).addClass("active open");
+    $("#SchoolSettings Ul", $("#nav")).show();
+
+</script>
+@section Scripts {
+    @Scripts.Render("~/bundles/kendo/js")
+}
+

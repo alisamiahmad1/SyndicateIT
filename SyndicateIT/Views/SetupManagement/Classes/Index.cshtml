@@ -1,0 +1,29 @@
+﻿@model  SyndicateIT.Model.ViewModel.SetupManagement.Classes.ClassesContentViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string PublicResources = "~/Views/SetupManagement/Classes/PublicResource";
+}
+@Scripts.Render("~/Scripts/Classes")
+@Scripts.Render("~/Scripts/translate")
+@*@Html.Partial("~/Views/Shared/_NavigationPartial.cshtml", @Model.Navigation)*@
+<div id="ClassesContent">
+    @Html.Partial("~/Views/SetupManagement/Classes/_ClassesContentPartial.cshtml", Model);
+</div>
+<script type="text/javascript">
+    var ClassesSearchURL = '@Html.GetUrl("LoadSearchClasses", "Classes")';
+    var ClassesDeleteURL = '@Html.GetUrl("ClassesDelete", "Classes")';
+    var loadClassesURL = '@Html.GetUrl("LoadClasses", "Classes")';
+    var loader = '@Utilities.GetAbsotuleUrl("~/Content/image/ajax-loader.gif")';
+    var saveClassesUrl = '@Html.GetUrl("AddUpdateClasses", "Classes")';
+    var messageDelete = '@Html.Resource("MessageDelete", PublicResources)';
+    var loadTranslationClassesURL = '@Html.GetUrl("LoadTranslateClasses", "Classes")';
+
+    $("#SchoolSettings", $("#nav")).addClass("active open");
+    $("#SchoolSettings Ul", $("#nav")).show();
+
+</script>
+@section Scripts {
+    @Scripts.Render("~/bundles/kendo/js")
+}
+

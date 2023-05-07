@@ -1,0 +1,29 @@
+﻿@model  SyndicateIT.Model.ViewModel.SetupManagement.PhoneType.PhoneTypeContentViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string PublicResources = "~/Views/SetupManagement/PhoneType/PublicResource";
+}
+@Scripts.Render("~/Scripts/PhoneType")
+@Scripts.Render("~/Scripts/translate")
+@*@Html.Partial("~/Views/Shared/_NavigationPartial.cshtml", @Model.Navigation)*@
+<div id="PhoneTypeContent">
+    @Html.Partial("~/Views/SetupManagement/PhoneType/_PhoneTypeContentPartial.cshtml", Model);
+</div>
+<script type="text/javascript">
+    var PhoneTypeSearchURL = '@Html.GetUrl("LoadSearchPhoneType", "PhoneType")';
+    var PhoneTypeDeleteURL = '@Html.GetUrl("PhoneTypeDelete", "PhoneType")';
+    var loadPhoneTypeURL = '@Html.GetUrl("LoadPhoneType", "PhoneType")';
+    var loader = '@Utilities.GetAbsotuleUrl("~/Content/image/ajax-loader.gif")';
+    var savePhoneTypeUrl = '@Html.GetUrl("AddUpdatePhoneType", "PhoneType")';
+    var messageDelete = '@Html.Resource("MessageDelete", PublicResources)';
+    var loadTranslationPhoneTypeURL = '@Html.GetUrl("LoadTranslatePhoneType", "PhoneType")';
+
+    $("#SchoolSettings", $("#nav")).addClass("active open");
+    $("#SchoolSettings Ul", $("#nav")).show();
+
+</script>
+@section Scripts {
+    @Scripts.Render("~/bundles/kendo/js")
+}
+

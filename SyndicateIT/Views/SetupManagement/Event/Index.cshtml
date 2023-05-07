@@ -1,0 +1,35 @@
+﻿@model  SyndicateIT.Model.ViewModel.SetupManagement.Event.EventContentViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string PublicResources = "~/Views/SetupManagement/Event/PublicResource";
+}
+@Scripts.Render("~/Scripts/Event")
+@Scripts.Render("~/Scripts/translate")
+@*@Html.Partial("~/Views/Shared/_NavigationPartial.cshtml", @Model.Navigation)*@
+<div id="EventContent">
+    @Html.Partial("~/Views/SetupManagement/Event/_EventContentPartial.cshtml", Model);
+</div>
+<script type="text/javascript">
+    var EventSearchURL = '@Html.GetUrl("LoadSearchEvent", "Event")';
+    var EventDeleteURL = '@Html.GetUrl("EventDelete", "Event")';
+    var loadEventURL = '@Html.GetUrl("LoadEvent", "Event")';
+    var loader = '@Utilities.GetAbsotuleUrl("~/Content/image/ajax-loader.gif")';
+    var saveEventUrl = '@Html.GetUrl("AddUpdateEvent", "Event")';
+    var messageDelete = '@Html.Resource("MessageDelete", PublicResources)';
+    var loadTranslationEventURL = '@Html.GetUrl("LoadTranslateEvent", "Event")';
+      
+    $("#ChannelsUL").children().find('li').removeClass("active");
+    $(".Event").addClass("active");
+    $("#Channels").addClass("open");
+    $("#ChannelsUL").show();
+    $("#Channels").children().find('em').removeClass("fa fa-plus-square-o");
+    $("#Channels").children().find('em').addClass("fa fa-minus-square-o");
+
+
+
+</script>
+@section Scripts {
+    @Scripts.Render("~/bundles/kendo/js")
+}
+

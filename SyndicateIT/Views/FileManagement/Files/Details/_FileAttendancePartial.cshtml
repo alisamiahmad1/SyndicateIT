@@ -1,0 +1,179 @@
+﻿@model List<SyndicateIT.Model.ViewModel.ServiceManagement.ServiceDetails.ServiceMonthlyTableViewModel>
+<style>
+    .show-grid [class^="col-"] {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        background-color: rgba(61, 106, 124, 0.15);
+        border: 1px solid rgba(61, 106, 124, 0.2);
+    }
+
+    .show-grid {
+        margin-bottom: 15px;
+    }
+
+    th small {
+        font-size: 12px;
+        display: block;
+        color: #8D8D8D;
+        font-weight: normal;
+    }
+
+    /*
+           * Responsive tests
+           *
+           * Generate a set of tests to show the responsive utilities in action.
+           */
+
+    /* Responsive (scrollable) doc tables */
+    .table-responsive .highlight pre {
+        white-space: normal;
+    }
+
+    /* Utility classes table  */
+    .bs-table th small,
+    .responsive-utilities th small {
+        display: block;
+        font-weight: normal;
+        color: #999;
+        font-size: 12px;
+    }
+
+    .responsive-utilities tbody th {
+        font-weight: normal;
+    }
+
+    .responsive-utilities td {
+        text-align: center;
+    }
+
+        .responsive-utilities td.is-visible {
+            color: rgba(61, 106, 124, 1);
+            background-color: rgba(61, 106, 124, 0.07) !important;
+        }
+
+        .responsive-utilities td.is-hidden {
+            color: #ccc;
+            background-color: #f9f9f9 !important;
+        }
+
+    /* Responsive tests */
+    .responsive-utilities-test {
+        margin-top: 5px;
+    }
+
+        .responsive-utilities-test .col-xs-6 {
+            margin-bottom: 10px;
+        }
+
+        .responsive-utilities-test span {
+            padding: 15px 10px;
+            font-size: 14px;
+            font-weight: bold;
+            line-height: 1.1;
+            text-align: center;
+            border-radius: 4px;
+        }
+
+    .visible-on .col-xs-6 .hidden-xs,
+    .visible-on .col-xs-6 .hidden-sm,
+    .visible-on .col-xs-6 .hidden-md,
+    .visible-on .col-xs-6 .hidden-lg,
+    .hidden-on .col-xs-6 .visible-xs,
+    .hidden-on .col-xs-6 .visible-sm,
+    .hidden-on .col-xs-6 .visible-md,
+    .hidden-on .col-xs-6 .visible-lg {
+        color: #999;
+        border: 1px solid #ddd;
+    }
+
+    .visible-on .col-xs-6 .visible-xs,
+    .visible-on .col-xs-6 .visible-sm,
+    .visible-on .col-xs-6 .visible-md,
+    .visible-on .col-xs-6 .visible-lg,
+    .hidden-on .col-xs-6 .hidden-xs,
+    .hidden-on .col-xs-6 .hidden-sm,
+    .hidden-on .col-xs-6 .hidden-md,
+    .hidden-on .col-xs-6 .hidden-lg {
+        color: #468847;
+        background-color: #dff0d8;
+        border: 1px solid #d6e9c6;
+    }
+</style>
+
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+<div id="content">
+    <article class="col-sm-12 sortable-grid ui-sortable">
+        <p class="alert alert-info " style=" height: 40px;">
+            <strong>
+                <span class="col-md-4"> A:Abcence</span>
+                <span class="col-md-4"> B:Present</span>                
+            </strong>
+        </p>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="">
+                    <table class="table table-bordered table-striped responsive-utilities">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>1</th>
+                                <th>2</th>
+                                <th>3</th>
+                                <th>4</th>
+                                <th>5</th>
+                                <th>6</th>
+                                <th>7</th>
+                                <th>8</th>
+                                <th>9</th>
+                                <th>10</th>
+                                <th>11</th>
+                                <th>12</th>
+                                <th>13</th>
+                                <th>14</th>
+                                <th>15</th>
+                                <th>16</th>
+                                <th>17</th>
+                                <th>18</th>
+                                <th>19</th>
+                                <th>20</th>                                
+                                <th>21</th>
+                                <th>22</th>
+                                <th>23</th>
+                                <th>24</th>
+                                <th>25</th>
+                                <th>26</th>
+                                <th>27</th>
+                                <th>28</th>
+                                <th>29</th>
+                                <th>30</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                           @for (int i = 0; i < Model.Count; i++)
+                           {
+                            <tr>
+                                <th><code>@Model[i].MonthName</code></th>
+                                @for (int j = 0; j < Model[i].ItemList.Count; j++)
+                                {
+                                    <td class="@Model[i].ItemList[j].Value">@Model[i].ItemList[j].Text</td>
+                                }
+                            </tr>
+                           }                 
+                        </tbody>                     
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </article>
+</div>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $.validator.setDefaults({
+                ignore: ""
+            });
+        });
+
+    </script>

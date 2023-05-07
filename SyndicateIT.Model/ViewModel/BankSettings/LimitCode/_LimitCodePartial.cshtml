@@ -1,0 +1,72 @@
+﻿@model SyndicateIT.Model.ViewModel.BankSettings.LimitCodeDefinitionViewModel
+
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<div id="content">
+    <div class="row">
+        <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+            <h1 class="page-title txt-color-blueDark">
+                <i class="@Model.ClassTitle"></i> @Model.Title<span></span>
+            </h1>
+        </div>
+    </div> 
+@if (SessionContent.Container.Login.MackerChecker != null && SessionContent.Container.Login.MackerChecker.IsDiseableMenuItem == true)
+{
+    <div class="widget-body">
+        <p class="alert alert-success"> <i class="fa fa-lock"></i> Locked Limit Code . Change Request is Opened by Another user or is pending  </p>
+
+    </div>
+}
+else
+{
+   <section id="widget-grid" class="">
+                <div class="row">
+                    <!-- NEW WIDGET START -->
+                    <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12 sortable-grid ui-sortable">
+                        <!-- Widget ID (each widget will need unique ID)-->
+                        <div class="jarviswidget jarviswidget-color-blueDark jarviswidget-sortable" id="wid-id-0" data-widget-editbutton="false" role="widget">
+                            <header role="heading">
+                                <div class="jarviswidget-ctrls" role="menu">
+                                    <a href="javascript:void(0);" class="button-icon jarviswidget-toggle-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Collapse">
+                                        <i class="fa fa-minus "></i>
+                                    </a>
+                                    <a href="javascript:void(0);" class="button-icon jarviswidget-fullscreen-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Fullscreen">
+                                        <i class="fa fa-expand "></i>
+                                    </a>
+                                </div>
+                                <span class="widget-icon"> <i class="@Model.ClassTitle"></i> </span>
+                                <h3 class="widget-h3"> Limit Code List</h3>
+                                <span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span>
+                            </header>
+                            <!-- widget div-->
+                            <div role="content" id="Grid_User">
+                                <!-- widget edit box -->
+                                <div class="jarviswidget-editbox">
+                                    <!-- This area used as dropdown edit box -->
+                                </div>
+                                <!-- end widget edit box -->
+                                <!-- widget content -->
+                                <div class="widget-body">
+                                    @Html.Partial("~/Views/BankSettings/LimitCode/_GridLimitCodePartial.cshtml", Model)
+                                </div>
+                                <!-- end widget content -->
+                            </div>
+                            <!-- end widget div -->
+                        </div>
+                        <!-- end widget -->
+                    </article>
+                </div>
+            </section>
+}
+</div>
+<script type="text/javascript">
+            $(document).ready(function () {
+                $("#BankSettingsUL").children().find('li').removeClass("active");
+                $("#LimitCodeDefinitions").addClass("active");
+                $("#BankSettings").addClass("open");
+                $("#BankSettingsUL").show();
+                $("#BankSettings").children().find('em').removeClass("fa fa-plus-square-o");
+                $("#BankSettings").children().find('em').addClass("fa fa-minus-square-o");
+            });
+
+</script>

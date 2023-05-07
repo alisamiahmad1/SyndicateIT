@@ -1,0 +1,101 @@
+﻿
+@model SyndicateIT.Model.ViewModel.SetupManagement.Divisiion.DivisionContentViewModel
+@using SyndicateIT.Views.App_GlobalResources
+@{
+    Layout = null;
+    string PublicResources = "~/Views/SetupManagement/Division/PublicResource";
+}
+@using (Html.BeginForm("SearchDivision", "Division", FormMethod.Post, new { @class = "smart-form", role = "form" }))
+{
+    <fieldset>
+        <section class="col col-3">
+            @Html.LabelFor(m => m.Division_Name, Html.Resource("Class_Title", PublicResources), new { @class = " label" })
+            @(Html.Kendo().TextBoxFor(m => m.Division_Name))
+            <div class="text-danger field-validation-error" id="ErrorSearchDivision" style="display:none;">
+                <span for="SearchDivision" class=""> Division Name is not valid</span>
+            </div>
+        </section>
+        <section class="col col-3">
+            @Html.LabelFor(m => m.Language_ID, GeneralResources.LANGUAGE_ID, new { @class = " label" })
+            <div class="col-md-7">
+                @(Html.Kendo().DropDownListFor(m => m.Language_ID)
+                          .DataTextField("Text")
+                          .DataValueField("Value")
+                          .Value(Model.Language_ID.ToString())
+                          .Filter("startswith")
+                          .DataSource(source =>
+                          {
+                              source.Read(read =>
+                              {
+                                  read.Action("GetLanguageList", "Division");
+                              });
+                          }))
+                <div class="text-danger field-validation-error" id="ErrorSearchLanguage_ID" style="display:none;">
+                    <span for="SearchLanguage_ID" class=""> Language_ID is not valid</span>
+                </div>
+            </div>
+        </section>
+        <section class="col col-3">
+            <label class="label">&nbsp;</label>
+            @Html.CheckBoxFor(m => m.IS_ACTIVE, new { @checked = "checked" })
+            <i></i>@GeneralResources.IS_ACTIVE
+        </section>
+       
+    </fieldset>
+    <fieldset>
+       <section class="col col-3">
+                @Html.LabelFor(m => m.Cycle_ID, Html.Resource("Cycle_id", PublicResources), new { @class = "col-md-10 control-label" })
+                <div class="col-md-10">
+                    @(Html.Kendo().DropDownListFor(m => m.Cycle_ID)
+                                                .DataTextField("Text")
+                                                .DataValueField("Value")
+                                                .OptionLabel(@Html.Resource("EnterCycle", PublicResources))
+                                                .HtmlAttributes(new { @class = "ui-select form-control-md10" })
+                                                //.Value(Model.StageID)
+                                                .DataSource(source =>
+                                                {
+                                                    source.Read(read =>
+                                                    {
+                                                        read.Action("GetCycleTypesList", "UserManagement");
+                                                    });
+                                                })
+                    )
+
+                </div>
+            </section>
+       <section class="col col-3">
+                @Html.LabelFor(m => m.Class_ID, Html.Resource("Class_ID", PublicResources), new { @class = "col-md-10 control-label" })
+                <div class="col-md-10">
+                    @(Html.Kendo().DropDownListFor(m => m.Class_ID)
+                                                //.Name("Class_ID")
+                                                .DataTextField("Text")
+                                                .DataValueField("Value")
+                                                .OptionLabel(@Html.Resource("EnterClass", PublicResources))
+                                                  .HtmlAttributes(new { @class = "ui-select form-control-md10" })
+                                                .Value(Model.Class_ID.ToString())
+                                                .Filter("startswith")
+                                                .DataSource(source =>
+                                                {
+                                                    source.Read(read =>
+                                                    {
+                                                        read.Action("GetClass", "ProfileManagement")
+                                                        .Data("FilterSearchClass");
+                                                    }).ServerFiltering(true);
+                                                })
+                                                .Enable(true)
+                                                .AutoBind(false)
+                                                .CascadeFrom("Cycle_ID"))
+                    <div class="text-danger field-validation-error" id="ClassID_validationMessage" style="display:none;">
+                        <span for="Class_ID" class=""> @Html.Resource("Class_ID_Required", PublicResources)</span>
+                    </div>
+                </div>
+            </section>
+        <section class="col col-2">
+            <label class="label">&nbsp;</label>
+            <button type="button" class="btn btn-serach " onclick="SearchDivision(true)">Search</button>
+        </section>
+     </fieldset>       
+  }
+  @section Scripts {
+       @Scripts.Render("~/Scripts/Division")
+ }

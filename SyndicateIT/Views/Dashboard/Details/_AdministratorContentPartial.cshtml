@@ -1,0 +1,449 @@
+﻿@model SyndicateIT.Model.ViewModel.Dashboard.AdministratorContentViewModel
+@Styles.Render("~/Content/Css/File")
+@Html.Partial("~/Views/Shared/_NavigationPartial.cshtml", @Model.Navigation)
+@{
+    string PublicResources = "~/Views/Dashboard/Details/_AdministratorContentPartial.cshtml";
+    var sourceId = (int)ProfileSourceType.DashboardAdmin;
+    var fileType = SessionContent.Container.Files.FileType;
+}
+<style>
+    .show-grid [class^="col-"] {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        background-color: rgba(61, 106, 124, 0.15);
+        border: 1px solid rgba(61, 106, 124, 0.2);
+    }
+
+    .show-grid {
+        margin-bottom: 15px;
+    }
+
+    th small {
+        font-size: 12px;
+        display: block;
+        color: #8D8D8D;
+        font-weight: normal;
+    }
+
+    /*
+           * Responsive tests
+           *
+           * Generate a set of tests to show the responsive utilities in action.
+           */
+
+    /* Responsive (scrollable) doc tables */
+    .table-responsive .highlight pre {
+        white-space: normal;
+    }
+
+    /* Utility classes table  */
+    .bs-table th small,
+    .responsive-utilities th small {
+        display: block;
+        font-weight: normal;
+        color: #999;
+        font-size: 12px;
+    }
+
+    .responsive-utilities tbody th {
+        font-weight: normal;
+    }
+
+    .responsive-utilities td {
+        text-align: center;
+    }
+
+        .responsive-utilities td.is-visible {
+            color: rgba(61, 106, 124, 1);
+            background-color: rgba(61, 106, 124, 0.07) !important;
+        }
+
+        .responsive-utilities td.is-hidden {
+            color: #ccc;
+            background-color: #f9f9f9 !important;
+        }
+
+    /* Responsive tests */
+    .responsive-utilities-test {
+        margin-top: 5px;
+    }
+
+        .responsive-utilities-test .col-xs-6 {
+            margin-bottom: 10px;
+        }
+
+        .responsive-utilities-test span {
+            padding: 15px 10px;
+            font-size: 14px;
+            font-weight: bold;
+            line-height: 1.1;
+            text-align: center;
+            border-radius: 4px;
+        }
+
+    .visible-on .col-xs-6 .hidden-xs,
+    .visible-on .col-xs-6 .hidden-sm,
+    .visible-on .col-xs-6 .hidden-md,
+    .visible-on .col-xs-6 .hidden-lg,
+    .hidden-on .col-xs-6 .visible-xs,
+    .hidden-on .col-xs-6 .visible-sm,
+    .hidden-on .col-xs-6 .visible-md,
+    .hidden-on .col-xs-6 .visible-lg {
+        color: #999;
+        border: 1px solid #ddd;
+    }
+
+    .visible-on .col-xs-6 .visible-xs,
+    .visible-on .col-xs-6 .visible-sm,
+    .visible-on .col-xs-6 .visible-md,
+    .visible-on .col-xs-6 .visible-lg,
+    .hidden-on .col-xs-6 .hidden-xs,
+    .hidden-on .col-xs-6 .hidden-sm,
+    .hidden-on .col-xs-6 .hidden-md,
+    .hidden-on .col-xs-6 .hidden-lg {
+        color: #468847;
+        background-color: #dff0d8;
+        border: 1px solid #d6e9c6;
+    }
+</style>
+
+<script src="~/Scripts/Views/Dashboard/admin.js" type="text/javascript"></script>
+<div id="content">
+    @Html.Hidden("FileType", Model.FileType)
+    <div class="row">
+        <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+            <h1 class="page-title txt-color-blueDark">
+                <i class="@Model.ClassTitle"></i> @Model.Title<span></span>
+            </h1>
+        </div>       
+    </div>
+    <div class="row" style="margin-left: 0px!important;">
+        <div class="col-lg-2 col-md-12">
+            <section class="page-block profile-block">
+                <div class="inner">
+                    <div class="details">
+                        <div class="thumb">
+                            <img src="~/Content/image/profile-default-photo.png" height="80px" width="80px">
+                        </div>
+                        <label>@Model.Username</label>
+                        <span><em>@Model.UserRole</em></span>
+                        <span>@Model.Email</span>
+                        <span>@Model.DateBirth</span>                      
+                    </div>
+                    <div class="percentage">
+                        <label onclick="ViewPeronalDetail('@Model.ProfileID',@sourceId);" style="cursor:pointer; color:#fb8c00">@Html.Resource("ViewProfileInformation", PublicResources)</label>                       
+                        <div class="percentage-bar">
+                            <div style="width:60%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div class="col-lg-3 col-md-12">
+            <section class="page-block total-spend-block">
+                <div class="inner">
+                    <div class="total">
+                        <label style="font-size: 14px;">@Html.Resource("NumberUserEnabled", PublicResources)</label>
+                        <span>@Model.TotalUserEnable<span> / </span>@Model.TotalUser</span>
+                    </div>
+                        @if (Model.HasAgenda == true)
+                        {
+                            <div class="pending" style="margin-bottom: 14px;padding-top: 23px;background-color:#a3c45f">
+                                <span><a href="@Model.NavigationAgendaUrl" style="cursor:pointer; color:#fff;font-size: 16px;">@Html.Resource("ViewAgendaDetails", PublicResources)</a></span>
+                            </div>
+                        }
+                        @if (Model.HasExamManagement == true)
+                        {
+                            <div class="pending" style="padding-top: 23px;background-color:#e75e7c">
+                                <span><a href="@Model.NavigationExamUrl" style="cursor:pointer; color:#fff;font-size: 16px;">@Html.Resource("ViewExamDetails", PublicResources)</a></span>
+                            </div>
+                        }              
+                 </div>
+            </section>
+        </div>
+        <div class="col-lg-7 col-md-12">
+            <section class="page-block travel-purpose-block">
+                <div class="inner">
+                    @if (Model.HasProfileStudents == true)
+                    {
+                        <div class="row entitlement">
+                            <label>@Html.Resource("Students", PublicResources)</label>
+                            <span><a href="@Model.NavigationStudentsUrl" style="cursor:pointer; color:#fb8c00;font-size: 13px;">@Html.Resource("ViewProfilesDetails", PublicResources)</a></span>
+                            <strong>Number of Student @Model.NumberStudent</strong>
+                        </div>
+                    }
+                    @if (Model.HasProfileParents == true)
+                    {
+                        <div class="row training">
+                            <label>@Html.Resource("Parents", PublicResources)</label>
+                            <span><a href="@Model.NavigationParentsUrl" style="cursor:pointer; color:#fb8c00;font-size: 13px;">@Html.Resource("ViewProfilesDetails", PublicResources)</a></span>
+                            <strong>Number of Parent @Model.NumberParent</strong>
+                        </div>
+                    }
+                    @if (Model.HasProfileTeachers == true)
+                    {
+                        <div class="row meetings">
+                            <label>@Html.Resource("Teachers", PublicResources)</label>
+                            <span><a href="@Model.NavigationTeachersUrl" style="cursor:pointer; color:#fb8c00;font-size: 13px;">@Html.Resource("ViewProfilesDetails", PublicResources)</a></span>
+                            <strong>Number of Teacher @Model.NumberTeacher</strong>
+                        </div>
+                    }
+                    @if (Model.HasProfileEmployees == true)
+                    {
+                        <div class="row tech-support">
+                            <label>@Html.Resource("AdministratorsEmployees", PublicResources)</label>
+                            <span><a href="@Model.NavigationEmployeesUrl" style="cursor:pointer; color:#fb8c00;font-size: 13px;">@Html.Resource("ViewProfilesDetails", PublicResources)</a></span>
+                            <strong>Number of Administrators/Employees @Model.NumberEmployee</strong>
+                        </div>
+                    }               
+                </div>
+            </section>
+        </div>
+    </div>
+    <div class="container-fluid">
+        @if (Model.HasSchedule == true || Model.HasPeriodSchedule == true || Model.HasDistributionStudents == true || Model.HasExamProgram == true)
+        {
+            <div class="alert alert-info">
+                <strong>@Html.Resource("Section", PublicResources) :</strong>@Html.Resource("ServicesManagement", PublicResources) 
+            </div>
+        }       
+        <div class="row">
+            @if (Model.HasSchedule == true)
+            {
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="card card-stats">
+                        <div class="card-header" data-background-color="orange">
+                            <i class="fa fa-lg fa-fw  fa-tags"></i>
+                        </div>
+                        <div class="card-content">
+                            <p class="category">@Html.Resource("Schedule", PublicResources)</p>
+                            <h3 class="title"></h3>
+                        </div>
+                        <div class="card-footer">
+                            <div class="stats">
+                                <i class="fa fa-lg fa-fw fa-edit"></i>
+                                <a href="@Model.NavigationScheduleUrl">@Html.Resource("ViewDetails", PublicResources) </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            @if (Model.HasPeriodSchedule == true)
+            {
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="card card-stats">
+                        <div class="card-header" data-background-color="green">
+                            <i class="fa fa-lg fa-fw  fa-tags"></i>
+                        </div>
+                        <div class="card-content">
+                            <p class="category">@Html.Resource("PeriodSchedule", PublicResources)</p>
+                            <h3 class="title"></h3>
+                        </div>
+                        <div class="card-footer">
+                            <div class="stats">
+                                <i class="fa fa-lg fa-fw fa-edit"></i>
+                                <a href="@Model.NavigationPeriodScheduleUrl">@Html.Resource("ViewDetails", PublicResources)</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+           }
+            @if (Model.HasDistributionStudents == true)
+            {
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="card card-stats">
+                        <div class="card-header" data-background-color="red">
+                            <i class="fa fa-lg fa-fw  fa-tags"></i>
+                        </div>
+                        <div class="card-content">
+                            <p class="category">@Html.Resource("DistributionStudents", PublicResources)</p>
+                            <h3 class="title"></h3>
+                        </div>
+                        <div class="card-footer">
+                            <div class="stats">
+                                <i class="fa fa-lg fa-fw fa-edit"></i>
+                                <a href="@Model.NavigationDistributionStudentsUrl">@Html.Resource("ViewDetails", PublicResources)</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }           
+            @if (Model.HasExamProgram == true)
+            {
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header" data-background-color="blue">
+                        <i class="fa fa-lg fa-fw  fa-tags"></i>
+                    </div>
+                    <div class="card-content">
+                        <p class="category">@Html.Resource("ExamProgram", PublicResources) </p>
+                        <h3 class="title"></h3>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="fa fa-lg fa-fw fa-edit"></i>
+                            <a href="@Model.NavigationExamProgramUrl">@Html.Resource("ViewDetails", PublicResources)</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+        @if (Model.HasAttendacePreSchool == true || Model.HasAttendaceElementary == true || Model.HasAttendaceIntermediate == true )
+        {
+            <div class="alert alert-danger">
+                <strong>>@Html.Resource("Section", PublicResources):</strong>@Html.Resource("Attendances", PublicResources) 
+            </div>
+        }
+        <div class="row">
+            @if (Model.HasAttendacePreSchool == true)
+            {
+                <div class="col-lg-4 col-md-12">
+                    <div class="card">
+                        <div class="card-header" style="background-color:#62cb31">
+                            <h4 class="title">@Html.Resource("PRESCHOOL", PublicResources)</h4>
+                            <p class="category">Number of Abcence @Model.PreSchoolList.Count</p>
+                        </div>
+                        <div class="card-content table-responsive">
+                            <table class="table table-hover">
+                                <thead class="text-warning">
+                                    <tr>
+                                        <th>@Html.Resource("Name", PublicResources) </th>
+                                        <th>@Html.Resource("Class", PublicResources) </th>
+                                        <th>@Html.Resource("Division", PublicResources) </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @for (int i = 0; i < Model.PreSchoolList.Count; i++)
+                                    {
+                                        <tr>
+                                            <td>@Model.PreSchoolList[i].FullName</td>
+                                            <td>@Model.PreSchoolList[i].ClassName</td>
+                                            <td>@Model.PreSchoolList[i].DivisionName</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            }
+           
+            @if (Model.HasAttendaceElementary == true)
+            {
+                <div class="col-lg-4 col-md-12">
+                    <div class="card">
+                        <div class="card-header" style="background-color:#3498db">
+                            <h4 class="title">@Html.Resource("ELEMENTARY", PublicResources)</h4>
+                            <p class="category">Number of Abcence @Model.ElementaryList.Count</p>
+                        </div>
+                        <div class="card-content table-responsive">
+                            <table class="table table-hover">
+                                <thead class="text-warning">
+                                    <tr>
+                                        <th>@Html.Resource("Name", PublicResources) </th>
+                                        <th>@Html.Resource("Class", PublicResources) </th>
+                                        <th>@Html.Resource("Division", PublicResources) </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @for (int i = 0; i < Model.ElementaryList.Count; i++)
+                                    {
+                                        <tr>
+                                            <td>@Model.ElementaryList[i].FullName</td>
+                                            <td>@Model.ElementaryList[i].ClassName</td>
+                                            <td>@Model.ElementaryList[i].DivisionName</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            }
+           
+            @if (Model.HasAttendaceIntermediate == true)
+            {
+                <div class="col-lg-4 col-md-12">
+                    <div class="card">
+                        <div class="card-header" style="background-color:#9b59b6">
+                            <h4 class="title">@Html.Resource("INTERMEDIATE", PublicResources)</h4>
+                            <p class="category">Number of Abcence @Model.IntermediateList.Count </p>
+                        </div>
+                        <div class="card-content table-responsive">
+                            <table class="table table-hover">
+                                <thead class="text-warning">
+                                    <tr>
+                                        <th>@Html.Resource("Name", PublicResources) </th>
+                                        <th>@Html.Resource("Class", PublicResources) </th>
+                                        <th>@Html.Resource("Division", PublicResources) </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @for (int i = 0; i < Model.IntermediateList.Count; i++)
+                                    {
+                                        <tr>
+                                            <td>@Model.IntermediateList[i].FullName</td>
+                                            <td>@Model.IntermediateList[i].ClassName</td>
+                                            <td>@Model.IntermediateList[i].DivisionName</td>
+                                        </tr>
+                                    }
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            }
+           
+        </div>
+        @if (Model.HasDuties == true || Model.HasLevelBehavior == true || Model.HasLevelIntelligence == true || Model.HasAbsorptionGrades == true || Model.HasDegreesParticipation == true)
+        {
+             <div class="alert alert-warning">
+                <strong>@Html.Resource("Section", PublicResources):</strong>@Html.Resource("StudentLevelsGrades", PublicResources) 
+            </div>
+        }
+        <div class="row top-cols wide top-cars">
+            <ul class="top-cars-details">           
+               @if (Model.HasDuties == true)
+                {
+                    <li class="red-bg">
+                        <label>@Html.Resource("Duties", PublicResources)</label>
+                        <b><a href="@Model.NavigationDutiesUrl" style="color:#000!important">@Html.Resource("ViewDetails", PublicResources)</a></b>
+                    </li>
+                }
+                @if (Model.HasLevelBehavior == true)
+                {
+                    <li class="blue-bg">
+                        <label>@Html.Resource("LevelBehavior", PublicResources)</label>
+                        <b><a href="@Model.NavigationLevelBehaviorUrl" style="color:#000!important">@Html.Resource("ViewDetails", PublicResources)</a></b>
+                    </li>
+                }
+                @if (Model.HasLevelIntelligence == true)
+                {
+                    <li class="pistache-bg">
+                        <label>@Html.Resource("Levelntelligence", PublicResources)</label>
+                        <b><a href="@Model.NavigationLevelIntelligenceUrl" style="color:#000!important">@Html.Resource("ViewDetails", PublicResources)</a></b>
+                    </li>
+                }
+                @if (Model.HasAbsorptionGrades == true)
+                {
+                    <li class="pink-bg">
+                        <label>@Html.Resource("AbsorptionGrades", PublicResources)</label>
+                        <b><a href="@Model.NavigationAbsorptionGradesUrl" style="color:#000!important">@Html.Resource("ViewDetails", PublicResources)</a></b>
+                    </li>
+                }
+                @if (Model.HasDegreesParticipation == true)
+                {
+                    <li class="last orange-bg">
+                        <label>@Html.Resource("Degreesparticipation", PublicResources)</label>
+                        <b><a href="@Model.NavigationDegreesParticipationUrl" style="color:#000!important">@Html.Resource("ViewDetails", PublicResources)</a></b>
+                    </li>
+                }                
+            </ul>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

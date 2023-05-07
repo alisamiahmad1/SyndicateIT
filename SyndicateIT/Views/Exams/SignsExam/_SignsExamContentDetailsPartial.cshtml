@@ -1,0 +1,111 @@
+﻿@model SyndicateIT.Model.ViewModel.Exam.SignsExamsContentDetailsViewModel
+@{
+    Layout = null;
+    string PublicResources = "~/Views/Exams/SignsExam/_SignsExamContentDetailsPartial.cshtml";
+}
+@Html.Partial("~/Views/Shared/_NavigationPartial.cshtml", @Model.Navigation)
+
+<script src="~/Scripts/Views/Exams/signsexams.js"></script>
+ <!-- row -->
+<div class="row">
+   
+    <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12 sortable-grid ui-sortable">
+        <!-- Widget ID (each widget will need unique ID)-->
+        <div class="jarviswidget jarviswidget-sortable" id="wid-id-h" data-widget-editbutton="false" data-widget-deletebutton="false" role="widget">
+            <!-- widget div-->
+            <div role="content" style="background-color:transparent!important;border-color: transparent!important;">
+
+                <!-- widget edit box -->
+                <div class="jarviswidget-editbox">
+                    <!-- This area used as dropdown edit box -->
+                </div>
+                <!-- end widget edit box -->
+                <!-- widget content -->
+                <div class="widget-body">
+                    <div class="row">
+                        <form id="wizard-1" novalidate="novalidate">
+                            <div id="bootstrap-wizard-1" class="col-sm-12">
+                                @if (Model.CycleTypeId != (int)Cycle.PreeSchool)
+                                {
+                                    var witdh = (100 / Model.ListTerm.Count)+ "%!important";
+
+                                    <div class="form-bootstrapWizard">
+                                      <ul class="bootstrapWizard form-wizard">
+                                       @for (int i = 0; i < Model.ListTerm.Count; i++)
+                                       {
+                                           if (i == 0)
+                                           {
+                                            <li class="active" data-target="#step@(i+1)" style="width:@witdh" data-value="@Model.ListTerm[i].Value">
+                                                <a href="#tab@(i+1)" data-toggle="tab" onclick="ViewSignExam('@Model.ListTerm[i].Value');" > <span class="step">@(i + 1)</span> <span class="title">@Model.ListTerm[i].Text</span> </a>
+                                            </li>
+                                           }
+                                           else
+                                           {
+                                            <li  data-target="#step@(i+1)" style="width:@witdh" data-value="@Model.ListTerm[i].Value">
+                                                <a href="#tab@(i+1)" data-toggle="tab" onclick="ViewSignExam('@Model.ListTerm[i].Value');"> <span class="step">@(i + 1)</span> <span class="title">@Model.ListTerm[i].Text</span> </a>
+                                            </li>
+                                           }
+
+                                       }
+                                      </ul>
+                                     <div class="clearfix"></div>
+                                   </div>
+                                  }
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="Main-exams">
+                                        <br /><br /><br />
+                                        <div class="widget-body-toolbar col-sm-12" style="margin: -13px 0px 13px!important;background-color: #b09b5b;">
+                                            <div class="col-sm-4">
+                                                @*<div class="input-group ">
+                                                    <input class="form-control" type="text" placeholder="@Html.Resource("StudentFilter", PublicResources)">
+                                                    <div class="input-group-btn">
+                                                        <button class="btn btn-default" type="button">
+                                                            <i class="fa fa-search"></i>@Html.Resource("Filter", PublicResources) 
+                                                        </button>
+                                                    </div>
+                                                </div>*@
+                                            </div>
+                                            <div class="col-sm-8 text-align-right">
+                                                <div class="btn-group">                                
+                                                     <a href="javascript:void(0)" class="glyphicon glyphicon-print" style="font-size:20px; color:#2196F3; cursor:pointer;" onclick="PrintAllStudent()">  </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br /><br />
+                                        <div id="Template-PS">
+                                            @if (Model.CycleTypeId == (int)Cycle.PreeSchool)
+                                            {
+                                                for (int i = 0; i < Model.TablePR.Count(); i++)
+                                                {
+                                                    Model.TablePR[i].GridId = i;
+                                                    @Html.Partial("~/Views/Exams/SignsExam/_TemplatePRExamPartial.cshtml", Model.TablePR[i])
+                                                }
+                                            }
+                                            else
+                                            {
+                                                for (int i = 0; i < Model.TablePS.Count(); i++)
+                                                {
+                                                    Model.TablePS[i].GridId = i;
+                                                    @Html.Partial("~/Views/Exams/SignsExam/_TemplatePSExamPartial.cshtml", Model.TablePS[i])
+                                                }
+                                            }
+
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- end widget content -->
+            </div>
+            <!-- end widget div -->
+        </div>
+        <!-- end widget -->
+    </article>
+    <!-- WIDGET END -->
+</div>
+<!-- end row -->
+
+

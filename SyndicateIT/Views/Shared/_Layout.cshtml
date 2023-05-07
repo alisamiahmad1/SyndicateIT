@@ -1,0 +1,137 @@
+﻿<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <title> @ViewBag.Title - IT Syndicate in Lebanon</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/smartadmin")
+    @Styles.Render("~/Content/rtl")
+    @Styles.Render("~/Content/demo")
+    @Styles.Render("~/Content/kendo/css")
+    <!-- #FAVICONS -->
+   
+
+    <script>
+        var loader = '@Utilities.GetAbsotuleUrl("~/Content/image/ajax-loader.gif")';
+    </script>
+
+    <!-- #GOOGLE FONT -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
+
+    <link rel="stylesheet" type="text/css" media="print" href="~/Content/Print.css">
+</head>
+<body class="desktop-detected  pace-done">  
+    <!-- #HEADER -->
+    <header id="header">        
+        @Html.Partial("_HeaderPartial")            
+    </header>
+    <!-- END HEADER -->
+
+    <!-- #NAVIGATION -->
+    <!-- Left panel : Navigation area -->
+    <!-- Note: This width of the aside area can be adjusted through LESS variables -->
+    <aside id="left-panel">
+        @Html.Partial("_LeftPanelPartial")    
+    </aside>
+    <!-- END NAVIGATION -->
+
+    <!-- MAIN PANEL -->
+    <div id="main" role="main">
+        @RenderBody()
+    </div>
+    <!-- END MAIN PANEL -->
+
+    <!-- PAGE FOOTER -->
+    <div class="page-footer">     
+        @Html.Partial("_FooterPartial")          
+    </div>
+    <!-- END PAGE FOOTER -->
+
+    <!-- SHORTCUT AREA : With large tiles (activated via clicking user name tag)
+            Note: These tiles are completely responsive,
+            you can add as many as you like
+            -->
+    <div id="shortcut">
+        @Html.Partial("_ShortcutPartial")        
+    </div>
+    <!-- END SHORTCUT AREA -->
+
+    <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
+    @*<script data-pace-options='{ "restartOnRequestAfter": true }' src="~/Scripts/plugin/pace/pace.min.js"></script>*@
+
+    <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script>
+			if (!window.jQuery) {
+			    document.write('<script src="~/Scripts/libs/jquery-2.1.1.min.js"><\/script>');
+			}
+    </script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+    <script>
+			if (!window.jQuery.ui) {
+			    document.write('<script src="~/Scripts/libs/jquery-ui-1.10.3.min.js"><\/script>');
+			}
+    </script>
+    <!-- Your GOOGLE ANALYTICS CODE Below -->
+    <script type="text/javascript">
+            $(document).ready(function () {
+                $.active = false;
+                $('body').bind('click keypress', function () { $.active = true; });
+                if ($("#IsLogin").val() == "True") {
+                    checkActivity(900000, 60000, 0); // timeout = 15 minutes, interval = 1 minute.
+                }
+                pageSetUp();
+            });
+            function checkActivity(timeout, interval, elapsed) {
+                if ($.active) {
+                    elapsed = 0;
+                    $.active = false;
+                }
+                if (elapsed < timeout) {
+                    elapsed += interval;
+                    setTimeout(function () {
+                        checkActivity(timeout, interval, elapsed);
+                    }, interval);
+                } else {
+                    BootstrapDialog.alert('Your session has expired due to inactivity, click OK to login.', function () {
+                        window.location.href = logOffURL;
+                    });
+                }
+            }
+           var logOffURL = '@Html.GetUrl("TimeOut", "Account", SessionContent.Current.Corporate.IsSecure)';
+			var _gaq = _gaq || [];
+				_gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
+				_gaq.push(['_trackPageview']);
+
+			(function() {
+				var ga = document.createElement('script');
+				ga.type = 'text/javascript';
+				ga.async = true;
+				ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				var s = document.getElementsByTagName('script')[0];
+				s.parentNode.insertBefore(ga, s);
+			})();
+
+    </script>
+
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/modernizr")
+        @Scripts.Render("~/bundles/bootstrap")
+        @Scripts.Render("~/bundles/appconfig")
+        @Scripts.Render("~/bundles/plugin")
+        @Scripts.Render("~/bundles/smartwidgets")
+        @Scripts.Render("~/bundles/notification")
+        @Scripts.Render("~/bundles/appmin")   
+        @Scripts.Render("~/bundles/datatables")   
+        @Scripts.Render("~/bundles/kendo/js") 
+        @RenderSection("scripts", required: false)   
+
+   
+</body>
+</html>

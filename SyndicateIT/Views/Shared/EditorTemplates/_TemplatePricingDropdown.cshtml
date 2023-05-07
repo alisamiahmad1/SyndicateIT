@@ -1,0 +1,21 @@
+﻿
+@(Html.Kendo().DropDownListFor(m => m)
+    .DataValueField("Text")
+    .DataTextField("Value")
+    .DataSource(d =>
+        //get the additional data using function in the main view
+        d.Read(r => r.Action("GetTemplatePricingByBillingType", "Plans").Data("getParentID()"))
+
+    )
+)
+
+<script type="text/javascript">
+    function getParentID() {
+        alert("1");
+        var row = $(event.srcElement).closest("tr");
+        var grid = $(event.srcElement).closest("[data-role=grid]").data("kendoGrid");
+        var dataItem = grid.dataItem(row);
+        //where the OrderID is the model ID
+        return { id: dataItem.BillingTypeID }
+    }
+</script>

@@ -1,0 +1,113 @@
+﻿@model SyndicateIT.Model.ViewModel.Exam.CheckingTagsContentDetailsViewModel
+@{
+    Layout = null;
+    string PublicResources = "~/Views/Exams/CheckingTags/_CheckingTagsContentDetailsPartial.cshtml";
+}
+@Html.Partial("~/Views/Shared/_NavigationPartial.cshtml", @Model.Navigation)
+
+<script src="~/Scripts/Views/Exams/signsexams.js"></script>
+<!-- row -->
+<div class="row">
+    <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12 sortable-grid ui-sortable">
+        <!-- Widget ID (each widget will need unique ID)-->
+        <div class="jarviswidget jarviswidget-sortable" id="wid-id-h" data-widget-editbutton="false" data-widget-deletebutton="false" role="widget">
+            <!-- widget div-->
+            <div role="content" style="background-color:transparent!important;border-color: transparent!important;">
+
+                <!-- widget edit box -->
+                <div class="jarviswidget-editbox">
+                    <!-- This area used as dropdown edit box -->
+                </div>
+                <!-- end widget edit box -->
+                <!-- widget content -->
+                <div class="widget-body">
+                    <div class="row">
+                        <form id="wizard-1" novalidate="novalidate">
+                            <div id="bootstrap-wizard-1" class="col-sm-12">
+                                @if (Model.CycleTypeId != (int)Cycle.PreeSchool)
+                                {
+                                    var witdh = (100 / Model.ListTerm.Count) + "%!important";
+                                    <div class="form-bootstrapWizard">
+                                        <ul class="bootstrapWizard form-wizard">                                           
+                                            @for (int i = 0; i < Model.ListTerm.Count; i++)
+                                            {
+                                                if (i == 0)
+                                                {
+                                                    <li class="active" data-target="#step@(i+1)" style="width:@witdh" data-value="@Model.ListTerm[i].Value">
+                                                        <a href="#tab@(i+1)" data-toggle="tab" onclick="ViewChekingTags('@Model.ListTerm[i].Value');"> <span class="step">@(i + 1)</span> <span class="title">@Model.ListTerm[i].Text</span> </a>
+                                                    </li>
+                                                }
+                                                else
+                                                {
+                                                    <li data-target="#step@(i+1)" style="width:@witdh" data-value="@Model.ListTerm[i].Value">
+                                                        <a href="#tab@(i+1)" data-toggle="tab" onclick="ViewChekingTags('@Model.ListTerm[i].Value');"> <span class="step">@(i + 1)</span> <span class="title">@Model.ListTerm[i].Text</span> </a>
+                                                    </li>
+                                                }
+
+                                            }
+                                        </ul>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                }
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="Main-exams">
+                                        <br /><br /><br />
+                                        <div class="widget-body-toolbar col-sm-12" style="margin: -13px 0px 13px!important;background-color: #b09b5b;">
+                                            <div class="col-sm-4">
+                                                @*<div class="input-group ">
+                                                        <input class="form-control" type="text" placeholder="@Html.Resource("StudentFilter", PublicResources)">
+                                                        <div class="input-group-btn">
+                                                            <button class="btn btn-default" type="button">
+                                                                <i class="fa fa-search"></i>@Html.Resource("Filter", PublicResources)
+                                                            </button>
+                                                        </div>
+                                                    </div>*@
+                                            </div>
+                                            <div class="col-sm-8 text-align-right">
+                                                <div class="btn-group">
+                                                    <a href="javascript:void(0)" class="glyphicon glyphicon-print" style="font-size:20px; color:#2196F3; cursor:pointer;" onclick="PrintAllStudent()">  </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br /><br />
+                                        <div id="Template-CheckingTags">
+                                           @Html.Partial("~/Views/Exams/CheckingTags/_TableCTExamPartial.cshtml", Model.TableCT)
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- end widget content -->
+            </div>
+            <!-- end widget div -->
+        </div>
+        <!-- end widget -->
+    </article>
+    <!-- WIDGET END -->
+</div>
+<!-- end row -->
+
+<script>
+
+    $(document).on("click", ".glyphicon-print", function (type) {
+
+        var print = eval($(this).data("target"));
+
+        var mywindow = window.open('', 'PRINT', 'height=400,width=600');
+
+        mywindow.document.write('<html><head>');
+        mywindow.document.write('</head><body><style type="text/css">media print {html { margin: 0; padding: 0;min-height: 100%;position: relative;font-size: 10px;font-family: sans-serif;}body {font-family: "Open Sans",Arial,Helvetica,Sans-Serif;font-size: 10px;line-height: 1.42857143;color: #333;background-color: #fff;} padding-10 {padding: 0px!important;}*, :after, :before {-webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box;}table {background-color: transparent; border-collapse: collapse;border-spacing: 0;display: table;border-spacing: 0;} tbody {display: table-row-group;vertical-align: middle;border-color: inherit;}tr {display: table-row; vertical-align: inherit; border-color: inherit;} td, th { padding: 0;  display: table-cell;vertical-align: inherit;}.col-md-12 { width: 100%; float: left; position: relative; min-height: 1px; padding-left: 13px; padding-right: 13px;}.col-md-4 { width: 33.33333333%;min-height: 1px;padding-left: 13px; padding-right: 13px;}table td[class*=col-], table th[class*=col-] { position: static; float: none; display: table-cell;}.font-xl { font-size: 200%!important;}.font-md {font-size: 130%!important;}.table-bordered, .table-bordered>tbody>tr>td, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>td, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>thead>tr>th {border: 1px solid #ddd;}.table { width: 100%;max-width: 100%;margin-bottom: 18px;}thead { display: table-header-group;vertical-align: middle; border-color: inherit;}.fc-head-container thead tr, .table thead tr {background-color: #eee;background-image: -webkit-gradient(linear,0 0,0 100%,from(#f2f2f2),to(#fafafa)); background-image: -webkit-linear-gradient(top,#f2f2f2 0,#fafafa 100%);background-image: -moz-linear-gradient(top,#f2f2f2 0,#fafafa 100%);background-image: -ms-linear-gradient(top,#f2f2f2 0,#fafafa 100%);background-image: -o-linear-gradient(top,#f2f2f2 0,#fafafa 100%);background-image: -linear-gradient(top,#f2f2f2 0,#fafafa 100%);font-size: 12px;}.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th { padding: 8px 10px;}table.table-bordered tbody td, table.table-bordered tbody th {border-left-width: 0;border-bottom-width: 0;}.table-bordered, .table-bordered>tbody>tr>td, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>td, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>thead>tr>th { border: 1px solid #ddd;}.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th { line-height: 1.42857143; vertical-align: top;}.col-md-2 {width: 16.66666667%;}.text-align-center, .text-center {text-align: center!important;}.table-bordered, .table-bordered>tbody>tr>td, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>td, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>thead>tr>th { border: 1px solid #ddd;}}</style>');
+        mywindow.document.write('<style></style');
+        mywindow.document.write(print);
+        mywindow.document.write('</body></html>');
+
+        mywindow.document.close(); // necessary for IE >= 10
+        mywindow.focus(); // necessary for IE >= 10*/
+
+        mywindow.print();
+        mywindow.close();
+
+    })
+</script>

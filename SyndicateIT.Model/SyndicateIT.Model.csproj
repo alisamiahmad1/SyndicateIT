@@ -1,0 +1,349 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D22AFFB8-F602-4C21-BD58-6C091A3CAB3B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SyndicateIT.Model</RootNamespace>
+    <AssemblyName>SyndicateIT.Model</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\..\..\SMARTwEB\HosueReport\BOH\BOH.Dll\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\..\..\SMARTwEB\HosueReport\BOH\BOH.Dll\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\..\..\SMARTwEB\HosueReport\BOH\BOH.Dll\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Kendo.Mvc">
+      <HintPath>..\..\..\SMARTwEB\HosueReport\BOH\BOH.Dll\Kendo.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\..\..\SMARTwEB\HosueReport\BOH\BOH.Dll\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\SMARTwEB\HosueReport\BOH\BOH.Dll\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Mvc">
+      <HintPath>..\..\..\SMARTwEB\HosueReport\BOH\BOH.Dll\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DomainModelBase.cs" />
+    <Compile Include="DomainModel\ApplicationStore\ApplicationStoreDomainModel.cs" />
+    <Compile Include="DomainModel\AutoMapper\AutoMapperExtension.cs" />
+    <Compile Include="DomainModel\AutoMapper\AuttoMapperSettings.cs" />
+    <Compile Include="DomainModel\Corporte\CorporateDomaineModel.cs" />
+    <Compile Include="DomainModel\DegreeGuarantee\DegreeGuaranteeDomainModel.cs" />
+    <Compile Include="DomainModel\DegreeInsurance\DegreeInsuranceDomainModel.cs" />
+    <Compile Include="DomainModel\DomainModelBase.cs" />
+    <Compile Include="DomainModel\FileManagement\FileManagementDomainModel.cs" />
+    <Compile Include="DomainModel\GuaranteeType\GuaranteeTypeDomainModel.cs" />
+    <Compile Include="DomainModel\IDomainModelBase.cs" />
+    <Compile Include="DomainModel\InsuranceType\InsuranceTypeDomainModel.cs" />
+    <Compile Include="DomainModel\Insurance\InsurancesDomainModel.cs" />
+    <Compile Include="DomainModel\Login\LoginDomaineModel.cs" />
+    <Compile Include="DomainModel\MenuManagement\MenuManagementDomainModel.cs" />
+    <Compile Include="DomainModel\Menu\MenuDomainModel.cs" />
+    <Compile Include="DomainModel\ProfileManagement\ProfileManagementDomainModel.cs" />
+    <Compile Include="DomainModel\ProfileManagement\User_ContactDomainModel.cs" />
+    <Compile Include="DomainModel\RoleManagement\RoleManagementDomainModel.cs" />
+    <Compile Include="DomainModel\SetupManagement\Branches\BranchesDomainModel.cs" />
+    <Compile Include="DomainModel\SetupManagement\Corporate\CorporateDomainModel.cs" />
+    <Compile Include="DomainModel\SetupManagement\Country\CountryDomaineModel.cs" />
+    <Compile Include="DomainModel\SetupManagement\DegreeGuarantee\DegreeGuaranteeDomainModel.cs" />
+    <Compile Include="DomainModel\SetupManagement\Department\DepartmentDomaineModel.cs" />
+    <Compile Include="DomainModel\SetupManagement\DocumentExtension\DocumentExtensionDomainModel.cs" />
+    <Compile Include="DomainModel\SetupManagement\Educationalsystem\EducationalsystemDomainModel.cs" />
+    <Compile Include="DomainModel\SetupManagement\Gender\GenderDomainModel.cs" />
+    <Compile Include="DomainModel\SetupManagement\Job\JobDomaineModel.cs" />
+    <Compile Include="DomainModel\SetupManagement\Kaddaa\KaddaaDomainModel.cs" />
+    <Compile Include="DomainModel\SetupManagement\Language\LanguageDomainModel.cs" />
+    <Compile Include="DomainModel\SetupManagement\MaritalStatus\MaritalStatusDomainModel.cs" />
+    <Compile Include="DomainModel\SetupManagement\Nationality\NationalityDomaineModel.cs" />
+    <Compile Include="DomainModel\SetupManagement\PhoneType\PhoneTypeDomainModel.cs" />
+    <Compile Include="DomainModel\SetupManagement\Place\PlaceDomainModel.cs" />
+    <Compile Include="DomainModel\SetupManagement\Region\RegionDomainModel.cs" />
+    <Compile Include="DomainModel\SetupManagement\RelationTypes\RelationTypesDomainModel.cs" />
+    <Compile Include="DomainModel\SetupManagement\Religion\ReligionDomainModel.cs" />
+    <Compile Include="DomainModel\SetupManagement\ROLE\ROLEDomainModel.cs" />
+    <Compile Include="DomainModel\SetupManagement\Shift\ShiftDomaineModel.cs" />
+    <Compile Include="DomainModel\SetupManagement\Status\StatusDomainModel.cs" />
+    <Compile Include="DomainModel\SetupManagement\Translation\TranslationDomainModel.cs" />
+    <Compile Include="DomainModel\UserManagement\Resources\UserManagementDomainModel.Designer.cs" />
+    <Compile Include="DomainModel\UserManagement\UserManagementDomainModel.cs" />
+    <Compile Include="DomainModel\User_Documents\User_DocumentsDomainModel.cs" />
+    <Compile Include="DomainModel\User_Relation\User_RelationDomainModel.cs" />
+    <Compile Include="IDomainModelBase.cs" />
+    <Compile Include="ProcessorModel\IProcessorBase.cs" />
+    <Compile Include="ProcessorModel\ProcessorBase.cs" />
+    <Compile Include="ProcessorModel\ProfileManagement\ProfileManagementProcessor.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UtilityModel\ApplicationStore.cs" />
+    <Compile Include="UtilityModel\EmailSettings.cs" />
+    <Compile Include="UtilityModel\Session\ContainerEntities\Files\Files.cs" />
+    <Compile Include="UtilityModel\Session\ContainerEntities\ISessionElement.cs" />
+    <Compile Include="UtilityModel\Session\ContainerEntities\Login\Login.cs" />
+    <Compile Include="UtilityModel\Session\ContainerEntities\Profiles\Profiles.cs" />
+    <Compile Include="UtilityModel\Session\ContainerEntities\RoleManagement\RoleManagement.cs" />
+    <Compile Include="UtilityModel\Session\ContainerEntities\SessionElement.cs" />
+    <Compile Include="UtilityModel\Session\ContainerEntities\UserManagement\UserManagement.cs" />
+    <Compile Include="UtilityModel\Session\ContentEntities\CorporateEntity.cs" />
+    <Compile Include="UtilityModel\Session\ISessionObject.cs" />
+    <Compile Include="UtilityModel\Session\SessionContainer.cs" />
+    <Compile Include="UtilityModel\Session\SessionContent.cs" />
+    <Compile Include="UtilityModel\Session\SessionObject.cs" />
+    <Compile Include="ViewModel\DegreeGuarantee\DegreeGuaranteeContentViewModel.cs" />
+    <Compile Include="ViewModel\DegreeGuarantee\DegreeGuaranteeGridViewModel.cs" />
+    <Compile Include="ViewModel\DegreeGuarantee\DegreeGuaranteeViewModel.cs" />
+    <Compile Include="ViewModel\DegreeInsurance\DegreeInsuranceContentViewModel.cs" />
+    <Compile Include="ViewModel\DegreeInsurance\DegreeInsuranceGridViewModel.cs" />
+    <Compile Include="ViewModel\DegreeInsurance\DegreeInsuranceViewModel.cs" />
+    <Compile Include="ViewModel\FileManagement\FileDetailsViewModel.cs" />
+    <Compile Include="ViewModel\FileManagement\FilesContentDetailsViewModel.cs" />
+    <Compile Include="ViewModel\FileManagement\FilesContentViewModel.cs" />
+    <Compile Include="ViewModel\FileManagement\FilesSearchViewModel.cs" />
+    <Compile Include="ViewModel\FileManagement\GridFilesViewModel.cs" />
+    <Compile Include="ViewModel\FileManagement\ListFileViewModel.cs" />
+    <Compile Include="ViewModel\FileManagement\ProfilesViewModel.cs" />
+    <Compile Include="ViewModel\GuaranteeType\GuaranteeTypeContentViewModel.cs" />
+    <Compile Include="ViewModel\GuaranteeType\GuaranteeTypeGridViewModel.cs" />
+    <Compile Include="ViewModel\GuaranteeType\GuaranteeTypeViewModel.cs" />
+    <Compile Include="ViewModel\InsuranceType\InsuranceTypeContentViewModel.cs" />
+    <Compile Include="ViewModel\InsuranceType\InsuranceTypeGridViewModel.cs" />
+    <Compile Include="ViewModel\InsuranceType\InsuranceTypeViewModel.cs" />
+    <Compile Include="ViewModel\Insurance\InsurancesContentViewModel.cs" />
+    <Compile Include="ViewModel\Insurance\InsurancesGridViewModel.cs" />
+    <Compile Include="ViewModel\MenuManagement\MenuItemRoleViewModel.cs" />
+    <Compile Include="ViewModel\MenuManagement\MenuItemsViewModel.cs" />
+    <Compile Include="ViewModel\MenuManagement\MenuManagementContentViewModel.cs" />
+    <Compile Include="ViewModel\MenuManagement\MenuManagementViewModel.cs" />
+    <Compile Include="ViewModel\PredefinedSetup\PredefinedSetupContentViewModel.cs" />
+    <Compile Include="ViewModel\PredefinedSetup\PredefinedSetupViewModel.cs" />
+    <Compile Include="ViewModel\ProfileManagement\GridProfilesViewModel.cs" />
+    <Compile Include="ViewModel\ProfileManagement\guid.cs" />
+    <Compile Include="ViewModel\ProfileManagement\LoginResult.cs" />
+    <Compile Include="ViewModel\ProfileManagement\ProfileDetails\TransactionViewModel.cs" />
+    <Compile Include="ViewModel\ProfileManagement\ProfileDetails\AssignmentContentViewModel.cs" />
+    <Compile Include="ViewModel\ProfileManagement\ProfileDetails\AssignmentGridViewModel.cs" />
+    <Compile Include="ViewModel\ProfileManagement\ProfileDetails\AssignmentViewModel.cs" />
+    <Compile Include="ViewModel\ProfileManagement\ProfileDetails\ContactInformationsViewModel.cs" />
+    <Compile Include="ViewModel\ProfileManagement\ProfileDetails\DependentContentViewModel.cs" />
+    <Compile Include="ViewModel\ProfileManagement\ProfileDetails\DependentGridViewModel.cs" />
+    <Compile Include="ViewModel\ProfileManagement\ProfileDetails\DependentViewModel.cs" />
+    <Compile Include="ViewModel\ProfileManagement\ProfileDetails\DocumentViewModel.cs" />
+    <Compile Include="ViewModel\ProfileManagement\ProfileDetails\EducationViewModel.cs" />
+    <Compile Include="ViewModel\ProfileManagement\ProfileDetails\AccountViewModel.cs" />
+    <Compile Include="ViewModel\ProfileManagement\ProfileDetails\ExperienceViewModel.cs" />
+    <Compile Include="ViewModel\ProfileManagement\ProfileDetails\EmploymentViewModel.cs" />
+    <Compile Include="ViewModel\ProfileManagement\ProfileDetails\InsuranceViewModel.cs" />
+    <Compile Include="ViewModel\ProfileManagement\ProfileDetails\JoinCourcesViewModel.cs" />
+    <Compile Include="ViewModel\ProfileManagement\ProfileDetails\PersonalInformationsContentViewModel.cs" />
+    <Compile Include="ViewModel\ProfileManagement\ProfileDetails\PersonalInformationsGridViewModel.cs" />
+    <Compile Include="ViewModel\ProfileManagement\ProfileDetails\PersonalInformationsViewModel.cs" />
+    <Compile Include="ViewModel\ProfileManagement\ProfileDetails\RegistrationViewModel.cs" />
+    <Compile Include="ViewModel\ProfileManagement\ProfileDetails\ApplicationStatusViewModel.cs" />
+    <Compile Include="ViewModel\ProfileManagement\ProfileDetails\SchoolHistoryViewModel.cs" />
+    <Compile Include="ViewModel\ProfileManagement\ProfileDetails\SystemPrivilegesViewModel.cs" />
+    <Compile Include="ViewModel\ProfileManagement\ProfileDetails\User_ContactViewModel.cs" />
+    <Compile Include="ViewModel\ProfileManagement\ProfilesContentDetailsViewModel.cs" />
+    <Compile Include="ViewModel\ProfileManagement\ProfilesContentViewModel.cs" />
+    <Compile Include="ViewModel\ProfileManagement\ProfilesSearchViewModel.cs" />
+    <Compile Include="ViewModel\ProfileManagement\ProfilesViewModel.cs" />
+    <Compile Include="ViewModel\RoleManagement\GridRoleManagementViewModel.cs" />
+    <Compile Include="ViewModel\RoleManagement\RoleManagementContentViewModel.cs" />
+    <Compile Include="ViewModel\SetupManagement\Branches\BranchesContentViewModel.cs" />
+    <Compile Include="ViewModel\SetupManagement\Branches\BranchesGridViewModel.cs" />
+    <Compile Include="ViewModel\SetupManagement\Branches\BranchesViewModel.cs" />
+    <Compile Include="ViewModel\SetupManagement\Corporate\CorporateContentViewModel.cs" />
+    <Compile Include="ViewModel\SetupManagement\Corporate\CorporateGridViewModel.cs" />
+    <Compile Include="ViewModel\SetupManagement\Corporate\CorporateViewModel.cs" />
+    <Compile Include="ViewModel\SetupManagement\Country\CountryContentViewModel.cs" />
+    <Compile Include="ViewModel\SetupManagement\Country\CountryGridViewModel.cs" />
+    <Compile Include="ViewModel\SetupManagement\Country\CountryViewModel.cs" />
+    <Compile Include="ViewModel\SetupManagement\DegreeGuarantee\DegreeGuaranteeContentViewModel.cs" />
+    <Compile Include="ViewModel\SetupManagement\DegreeGuarantee\DegreeGuaranteeGridViewModel.cs" />
+    <Compile Include="ViewModel\SetupManagement\DegreeGuarantee\DegreeGuaranteeViewModel.cs" />
+    <Compile Include="ViewModel\SetupManagement\DegreeInsurance\DegreeInsuranceContentViewModel.cs" />
+    <Compile Include="ViewModel\SetupManagement\DegreeInsurance\DegreeInsuranceGridViewModel.cs" />
+    <Compile Include="ViewModel\SetupManagement\DegreeInsurance\DegreeInsuranceViewModel.cs" />
+    <Compile Include="ViewModel\SetupManagement\Department\DepartmentContentViewModel.cs" />
+    <Compile Include="ViewModel\SetupManagement\Department\DepartmentGridViewModel.cs" />
+    <Compile Include="ViewModel\SetupManagement\Department\DepartmentViewModel.cs" />
+    <Compile Include="ViewModel\SetupManagement\Divisiion\DivisionContentViewModel.cs" />
+    <Compile Include="ViewModel\SetupManagement\Divisiion\DivisionGridViewModel.cs" />
+    <Compile Include="ViewModel\SetupManagement\Divisiion\DivisionViewModel.cs" />
+    <Compile Include="ViewModel\SetupManagement\DocumentExtension\DocumentExtensionContentViewModel.cs" />
+    <Compile Include="ViewModel\SetupManagement\DocumentExtension\DocumentExtensionGridViewModel.cs" />
+    <Compile Include="ViewModel\SetupManagement\DocumentExtension\DocumentExtensionViewModel.cs" />
+    <Compile Include="ViewModel\SetupManagement\Educationalsystem\EducationalsystemContentViewModel.cs" />
+    <Compile Include="ViewModel\SetupManagement\Educationalsystem\EducationalsystemGridViewModel.cs" />
+    <Compile Include="ViewModel\SetupManagement\Educationalsystem\EducationalsystemViewModel.cs" />
+    <Compile Include="ViewModel\SetupManagement\Gender\GenderContentViewModel.cs" />
+    <Compile Include="ViewModel\SetupManagement\Gender\GenderGridViewModel.cs" />
+    <Compile Include="ViewModel\SetupManagement\Gender\GenderViewModel.cs" />
+    <Compile Include="ViewModel\SetupManagement\Job\JobContentViewModel.cs" />
+    <Compile Include="ViewModel\SetupManagement\Job\JobGridViewModel.cs" />
+    <Compile Include="ViewModel\SetupManagement\Job\JobViewModel.cs" />
+    <Compile Include="ViewModel\SetupManagement\Kaddaa\KaddaaContentViewModel.cs" />
+    <Compile Include="ViewModel\SetupManagement\Kaddaa\KaddaaGridViewModel.cs" />
+    <Compile Include="ViewModel\SetupManagement\Kaddaa\KaddaaViewModel.cs" />
+    <Compile Include="ViewModel\SetupManagement\Language\LanguageContentViewModel.cs" />
+    <Compile Include="ViewModel\SetupManagement\Language\LanguageGridViewModel.cs" />
+    <Compile Include="ViewModel\SetupManagement\Language\LanguageViewModel.cs" />
+    <Compile Include="ViewModel\SetupManagement\MaritalStatus\MaritalStatusContentViewModel.cs" />
+    <Compile Include="ViewModel\SetupManagement\MaritalStatus\MaritalStatusGridViewModel.cs" />
+    <Compile Include="ViewModel\SetupManagement\MaritalStatus\MaritalStatusViewModel.cs" />
+    <Compile Include="ViewModel\SetupManagement\Nationality\NationalityContentViewModel.cs" />
+    <Compile Include="ViewModel\SetupManagement\Nationality\NationalityGridViewModel.cs" />
+    <Compile Include="ViewModel\SetupManagement\Nationality\NationalityViewModel.cs" />
+    <Compile Include="ViewModel\SetupManagement\PhoneType\PhoneTypeContentViewModel.cs" />
+    <Compile Include="ViewModel\SetupManagement\PhoneType\PhoneTypeGridViewModel.cs" />
+    <Compile Include="ViewModel\SetupManagement\PhoneType\PhoneTypeViewModel.cs" />
+    <Compile Include="ViewModel\SetupManagement\Place\PlaceContentViewModel.cs" />
+    <Compile Include="ViewModel\SetupManagement\Place\PlaceGridViewModel.cs" />
+    <Compile Include="ViewModel\SetupManagement\Place\PlaceViewModel.cs" />
+    <Compile Include="ViewModel\SetupManagement\Region\RegionContentViewModel.cs" />
+    <Compile Include="ViewModel\SetupManagement\Region\RegionGridViewModel.cs" />
+    <Compile Include="ViewModel\SetupManagement\Region\RegionViewModel.cs" />
+    <Compile Include="ViewModel\SetupManagement\RelationTypes\RelationTypesContentViewModel.cs" />
+    <Compile Include="ViewModel\SetupManagement\RelationTypes\RelationTypesGridViewModel.cs" />
+    <Compile Include="ViewModel\SetupManagement\RelationTypes\RelationTypesViewModel.cs" />
+    <Compile Include="ViewModel\SetupManagement\Religion\ReligionContentViewModel.cs" />
+    <Compile Include="ViewModel\SetupManagement\Religion\ReligionGridViewModel.cs" />
+    <Compile Include="ViewModel\SetupManagement\Religion\ReligionViewModel.cs" />
+    <Compile Include="ViewModel\SetupManagement\ROLE\ROLEContentViewModel.cs" />
+    <Compile Include="ViewModel\SetupManagement\ROLE\ROLEGridViewModel.cs" />
+    <Compile Include="ViewModel\SetupManagement\ROLE\ROLEViewModel.cs" />
+    <Compile Include="ViewModel\SetupManagement\Shift\ShiftContentViewModel.cs" />
+    <Compile Include="ViewModel\SetupManagement\Shift\ShiftGridViewModel.cs" />
+    <Compile Include="ViewModel\SetupManagement\Shift\ShiftViewModel.cs" />
+    <Compile Include="ViewModel\SetupManagement\Status\StatusContentViewModel.cs" />
+    <Compile Include="ViewModel\SetupManagement\Status\StatusGridViewModel.cs" />
+    <Compile Include="ViewModel\SetupManagement\Status\StatusViewModel.cs" />
+    <Compile Include="ViewModel\SetupManagement\Translation\TranslationContentViewModel.cs" />
+    <Compile Include="ViewModel\SetupManagement\Translation\TranslationViewModel.cs" />
+    <Compile Include="ViewModel\Shared\AlertViewModel.cs" />
+    <Compile Include="ViewModel\Shared\ListViewModel.cs" />
+    <Compile Include="ViewModel\Shared\NavigationViewModel.cs" />
+    <Compile Include="ViewModel\Shared\TemplateExcelViewModel.cs" />
+    <Compile Include="ViewModel\UserManagement\EditUserViewModel.cs" />
+    <Compile Include="ViewModel\UserManagement\EmailUserViewModel.cs" />
+    <Compile Include="ViewModel\UserManagement\ResetPasswordConfirmation.cs" />
+    <Compile Include="ViewModel\UserManagement\Resources\EditUserViewModel.Designer.cs" />
+    <Compile Include="ViewModel\UserManagement\Resources\EmailUserViewModel.Designer.cs" />
+    <Compile Include="ViewModel\UserManagement\Resources\ResetPasswordConfirmation.Designer.cs" />
+    <Compile Include="ViewModel\UserManagement\Resources\UserManagementViewModel.Designer.cs" />
+    <Compile Include="ViewModel\UserManagement\Resources\UserViewModel.Designer.cs" />
+    <Compile Include="ViewModel\UserManagement\UserManagementContentViewModel.cs" />
+    <Compile Include="ViewModel\UserManagement\UserManagementViewModel.cs" />
+    <Compile Include="ViewModel\UserManagement\UserViewModel.cs" />
+    <Compile Include="ViewModel\UsersContext.cs" />
+    <Compile Include="ViewModel\User_Documents\User_DocumentsContentViewModel.cs" />
+    <Compile Include="ViewModel\User_Documents\User_DocumentsGridViewModel.cs" />
+    <Compile Include="ViewModel\User_Documents\User_DocumentsViewModel.cs" />
+    <Compile Include="ViewModel\User_Relation\User_RelationContentViewModel.cs" />
+    <Compile Include="ViewModel\User_Relation\User_RelationGridViewModel.cs" />
+    <Compile Include="ViewModel\User_Relation\User_RelationViewModel.cs" />
+    <Compile Include="ViewModel\ViewModelBase.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="DomainModel\UserManagement\Resources\UserManagementDomainModel.resx" />
+    <EmbeddedResource Include="ViewModel\UserManagement\Resources\EditUserViewModel.resx" />
+    <EmbeddedResource Include="ViewModel\UserManagement\Resources\EmailUserViewModel.resx" />
+    <EmbeddedResource Include="ViewModel\UserManagement\Resources\ResetPasswordConfirmation.resx" />
+    <EmbeddedResource Include="ViewModel\UserManagement\Resources\UserManagementViewModel.resx" />
+    <EmbeddedResource Include="ViewModel\UserManagement\Resources\UserViewModel.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ViewModel\BankSettings\Index.cshtml" />
+    <None Include="ViewModel\BankSettings\LimitCode\_GridLimitCodePartial.cshtml" />
+    <None Include="ViewModel\BankSettings\LimitCode\_LimitCodePartial.cshtml" />
+    <None Include="ViewModel\Common\_CustomerAccountsPartial.cshtml" />
+    <None Include="ViewModel\Home\About.cshtml" />
+    <None Include="ViewModel\Home\Contact.cshtml" />
+    <None Include="ViewModel\Home\Index.cshtml" />
+    <None Include="ViewModel\Manage\AddPhoneNumber.cshtml" />
+    <None Include="ViewModel\Manage\ChangePassword.cshtml" />
+    <None Include="ViewModel\Manage\Index.cshtml" />
+    <None Include="ViewModel\Manage\ManageLogins.cshtml" />
+    <None Include="ViewModel\Manage\SetPassword.cshtml" />
+    <None Include="ViewModel\Manage\VerifyPhoneNumber.cshtml" />
+    <None Include="ViewModel\Web.config" />
+    <None Include="ViewModel\_ViewStart.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SkySchoolBook.Helper\SkySchoolBook.Helper.csproj">
+      <Project>{2efa702b-e261-43e8-a75b-0804ad73f09f}</Project>
+      <Name>SkySchoolBook.Helper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SyndicateIT.DataLayer\SyndicateIT.DataLayer.csproj">
+      <Project>{40a7a8aa-f8ef-4c82-b5ce-9ec05085acc8}</Project>
+      <Name>SyndicateIT.DataLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SyndicateIT.UtilityComponent\SyndicateIT.UtilityComponent.csproj">
+      <Project>{759b482c-af02-42af-b981-1139545dcdc0}</Project>
+      <Name>SyndicateIT.UtilityComponent</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ViewModel\Base\" />
+    <Folder Include="ViewModel\Error\" />
+    <Folder Include="ViewModel\Insurances\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

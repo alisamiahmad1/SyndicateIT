@@ -1,0 +1,33 @@
+﻿@model SyndicateIT.Model.ViewModel.ProfileManagement.ProfilesSearchViewModel
+@{
+    Layout = null;
+    string resouceFilePath = "~/Views/ProfileManagement/Profiles/_ProfilesSearchPartial.cshtml";
+}
+@using (Html.BeginForm("SearchProfiles", "ProfileManagement", FormMethod.Post, new { @class = "smart-form", role = "form" }))
+{
+    @Html.Hidden("UserTypeID", Model.UserTypeID);    
+    
+    <section class="col col-3">
+        @Html.Label(@Html.Resource("SearchFirstName", resouceFilePath), new { @class = "label" })
+        @(Html.Kendo().TextBoxFor(m => m.SearchFirstName))
+        <div class="text-danger field-validation-error" id="ErrorSearchFirstName" style="display:none;">
+            <span for="SearchFirstName" class=""> @Html.Resource("FirstNameValid", resouceFilePath)</span>
+        </div>       
+    </section>
+    <section class="col col-3">     
+        @Html.Label(@Html.Resource("SearchLastName", resouceFilePath), new { @class = "label" })
+        @(Html.Kendo().TextBoxFor(m => m.SearchLastName))
+        <div class="text-danger field-validation-error" id="ErrorSearchLastName" style="display:none;">
+            <span for="SearchLastName" class=""> @Html.Resource("LastNameValid", resouceFilePath)</span>
+        </div>
+    </section>
+        <section class="col col-2 ">
+            <label class="label">&nbsp;</label>
+            <button type="button" class="btn btn-serach " onclick="SearchProfiles()">@Html.Resource("Search", resouceFilePath)</button>
+        </section>
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+        SearchProfiles();
+    });
+</script>

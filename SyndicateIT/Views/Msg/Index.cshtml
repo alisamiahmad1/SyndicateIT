@@ -1,0 +1,256 @@
+﻿@model SyndicateIT.Model.ViewModel.Msg.MsgContentViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Msg";
+}
+<style>
+    .col-content, .sub-col-content {
+     
+        background-color: white;
+        min-height: 750px;
+        padding-top: 20px;
+    }
+   </style>
+
+<script>
+
+
+    function FilterClass() {
+        return { Cycle_ID: $("#Cycle_ID").data("kendoDropDownList").value() };
+    }
+    function FilterDivision() {
+        return { Class_ID: $("#Class_ID").data("kendoDropDownList").value() };
+    }
+
+</script>
+
+
+<div id="content" style="opacity: 1;">
+    <div class="inbox-nav-bar no-content-padding">
+        <h1 class="page-title txt-color-blueDark hidden-tablet">
+            <i class="fa fa-fw fa-envelope-o"></i> Inbox &nbsp;          
+        </h1> 
+
+    </div>
+    <div class="col-content no-content-padding">
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12  sub-col-content">
+
+            <br />
+            <a href="#" id="btn-compose" class="btn btn-primary btn-block"> <strong>Compose</strong> </a>
+            <br />
+            <ul class="inbox-menu-lg inbox-menu">
+                <li id="btn-refresh" class="text-right">  <a href="#" rel="tooltip" title="" data-placement="right" data-original-title="Refresh" class="txt-color-darken"><span style="float: left;font-weight: 200;text-transform: uppercase;color: #838383;font-size:11px!important">Folder</span><i class="fa fa-refresh"></i></a></li>
+                <li class="btn-li" id="recive">
+                    <a class="inbox-load" href="#"> Inbox (<span></span>) </a>
+                </li>
+                <li class="btn-li" id="sent">
+                    <a href="#">Sent</a>
+                </li>
+                <li class="btn-li" id="trach">
+                    <a href="#">Trash</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12 sub-col-content" id="inbox-content">
+        </div>
+    </div>
+
+</div>
+
+<script>
+    var checkAll = false;
+    var loader = "<div style=' margin-left: 50%; margin-top:10px; width: 250px; height: 70px;'><img src='@Utilities.GetAbsotuleUrl("~/Content/image/ajax-loader.gif")' /></div>";
+    var currentPage = "";
+    var data = {};
+    var msgContent = $('#inbox-content');
+    function loadPage(action, data) {
+        msgContent.html(loader);
+        $(".inbox-menu").find(".btn-li.active").removeClass("active");
+        $.post('@Html.GetUrl("", "Msg")/' + action, data, function (data, textStatus, xhr) {
+            if (action == currentPage) {
+                msgContent.html(data);
+            }
+        });
+    }
+    $("#btn-compose").click(function () {
+        currentPage = "compose";
+        loadPage(currentPage, data);
+    });
+    $(".btn-li").click(function () {
+        currentPage = $(this).attr("id");
+        loadPage(currentPage, data);
+        $(this).addClass("active");
+    })
+    $("#btn-refresh").click(function () {
+        loadPage(currentPage, data);
+    })
+    $(document).on("click", ".MsgContent", function () {
+        currentPage = "View";
+        var Msg_ID = $(this).closest("tr").attr("id");
+        data = { Msg_ID: Msg_ID };
+        loadPage(currentPage, data);
+    })
+    $(document).on("click", "#checkAll", function () {
+        checkAll = !checkAll;
+        var checkbox = msgContent.find("[type='checkbox']");
+        checkbox.prop("checked", checkAll);
+        checkAllCount();
+    })
+    $("#recive").click();
+    $(document).on("click", "#inbox-table .checkbox", function () {
+        checkAllCount();
+    })
+    function checkAllCount() {
+        var rowsCheckbox = msgContent.find("[type='checkbox']");
+        var allCount = 0;
+        for (var i = 1; i < rowsCheckbox.length; i++) {
+            if (rowsCheckbox.eq(i).prop("checked") == true) {
+                allCount++;
+            }
+        }
+        $el(".checkAllCount").html("<span class='font-lg text-success'>" + allCount + " Massege</span>")
+    }
+
+    // in compose
+    $(document).on("click", ".btn-has-attachement", function () {
+        var files = $(document).find(".div-attachement");
+        files.toggleClass("hidden");
+        if (files.hasClass("hidden")) {
+            $(document).find(".k-upload span.k-delete").each(function () {
+                $(this).closest("button").click();
+            });
+        }
+    })
+    $(document).on("click", "#toggle-recivers", function () {
+        $(this).toggleClass("fa-plus").toggleClass("fa-minus");
+        $(document).find("#recivers-row").toggleClass("hidden");
+    })
+    $(document).on("click", "#toggle-attachement", function () {
+        var files = $(document).find("#attachement-row");
+        files.toggleClass("hidden");
+        if (files.hasClass("hidden")) {
+            files.find(".k-upload span.k-delete").each(function () {
+                $(this).closest("button").click();
+            });
+        }
+    })
+
+    $(document).on("click", "#btn-send-compose", function () {
+        var data = new FormData();
+        var inputs = $(this).closest("form").find('input,select,textarea');
+        for (var i = 0; i < inputs.length; i++) {
+            var name = inputs.eq(i).attr("name");
+            var value = "";
+            if (inputs.eq(i).attr("type") == "file") {
+                var files = inputs.eq(i).prop("files");
+                for (var j = 0 ; j < files.length; j++) {
+                    value = files[j];
+                    data.append(name, value);
+                }
+                continue;
+            }
+            if (inputs.eq(i).data("role") == "MultiSelect") {
+                var values = inputs.eq(i).data("MultiSelect").value();
+                for (var j = 0; j < values.length; j++) {
+                    data.append(name + "[" + j + "]", values[j]);
+                }
+                continue;
+            }
+            if (inputs.eq(i).data("role") == "editor") {
+                value = inputs.eq(i).data("kendoEditor").value();
+            }
+            else {
+                value = inputs.eq(i).val();
+            }
+            if (value != "") {
+                data.append(name, value);
+            }
+        }
+        $.ajax({
+            type: "POST",
+            url: '@Html.GetUrl("SendMsg", "Msg")',
+            contentType: "multipart/form-data",
+            data: data,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                if (data[0] == "s") {
+                    $el(".resultMsg").html("<div class='alert alert-success'>Send Success</div>");
+                    setTimeout(function () { $("#sent").click(); }, 3000);
+                }
+                else {
+                    $el(".resultMsg").html("<div class='alert alert-danger'><strong>error</strong> "+data[1]+"</div>");
+                }
+            },
+            error: function () {
+
+            }
+        });
+
+        return false;
+    })
+    var $el = function (selector) { return $(document).find(selector); }
+    function findUsers(){
+        $el("#lstUsers select .k-delete").click();
+
+        $el("#lstUsers select").html("");
+        var select = $el("#lstUsers select").clone();
+        $el("#lstUsers").html(select);
+
+        $.post('@Html.GetUrl("GetExamStudentTemplatesData", "Msg")', { stageId: $el("#Cycle_ID").val(), classId: $el("#Class_ID").val(), divisionId: $el("#Division_ID").val() }, function (data, textStatus, xhr) {
+            if (data.length > 0) {
+                for (var i = 0; i < data.length; i++) {
+                    $el("#lstUsers select").append("<option value='" + data[i].Value + "'>" + data[i].Text + "</option>");
+                }
+                $el("#lstUsers").show();
+                $el("#lstUsers select").kendoMultiSelect({
+                    autoClose: false
+                });
+            }
+        });
+    }
+    
+    $(document).on("click", ".MsgToTrash,#MsgsDelete", function () {
+        var dataIDs = "";
+        var myData = new FormData();
+        if ($(this).attr("id") == "MsgsDelete") {
+            var rowsCheckbox = msgContent.find("[type='checkbox']");
+            for (var i = 1; i < rowsCheckbox.length; i++) {
+                var row = rowsCheckbox.eq(i);
+                if (row.prop("checked") == true) {
+                    var id = row.closest("tr").attr("id");
+                    if (dataIDs != "") dataIDs += ",";
+                    dataIDs += "#" + id;
+                    myData.append("MsgsID[" + (i - 1) + "]", id);
+                }
+            }
+        }
+        else {
+            var id = $(this).closest("tr").attr("id");
+            myData.append("MsgsID[0]", id);
+            dataIDs = "#" + id;
+        }
+        $.ajax({
+            type: "POST",
+            url: '@Html.GetUrl("MsgToTrash", "Msg")',
+            contentType: "multipart/form-data",
+            data: myData,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                if (data[0] == "s") {
+                    debugger
+                    $(document).find(dataIDs).remove();
+                    return true;
+                }
+                alert(data[1]);
+                return false;
+            },
+            error: function () {
+            }
+        });
+    })
+    
+</script>

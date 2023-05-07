@@ -1,0 +1,816 @@
+﻿
+@model SyndicateIT.Model.ViewModel.ProfileManagement.ProfileDetails.PersonalInformationsViewModel
+@{
+    Layout = null;
+    string PublicResources = "~/Views/ProfileManagement/Profiles/ProfileDetails/PublicResources";
+}
+
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+@Html.Partial("~/Views/Shared/_AlertPartial.cshtml", Model.Alert)
+
+<article class="col-sm-12 sortable-grid ui-sortable">
+    @using (Html.BeginForm("SavePersonalInformations", "ProfileManagement", FormMethod.Post, new { @class = "", role = "form", id = "PersonalInformations-form" }))
+    {
+        <!-- Widget ID (each widget will need unique ID)-->
+        <div class="jarviswidget jarviswidgetTransparent" id="wid-id-x" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false" data-widget-custombutton="false" data-widget-sortable="false" role="widget">
+            <header role="heading">
+                <span class="widget-icon"> <i class="fa fa-align-justify"></i> </span>
+                <h2>@Html.Resource("LblProfileInfo", PublicResources)</h2>
+                <span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span>
+            </header>
+            <!-- widget div-->
+            <div role="content">
+                <div class="row">
+                    <div class="widget-body">
+
+                        @Html.HiddenFor(m => m.User_ID, Model.User_ID)
+
+                        @Html.Hidden("SpeakingProficiencyArabic", Model.SpeakingProficiencyArabic)
+                        @Html.Hidden("ReadingProficiencyArabic", Model.ReadingProficiencyArabic)
+                        @Html.Hidden("WritingProficiencyArabic", Model.WritingProficiencyArabic)
+                        @Html.Hidden("SpeakingProficiencyAnglais", Model.SpeakingProficiencyAnglais)
+                        @Html.Hidden("ReadingProficiencyAnglais", Model.ReadingProficiencyAnglais)
+                        @Html.Hidden("WritingProficiencyAnglais", Model.WritingProficiencyAnglais)
+                        @Html.Hidden("SpeakingProficiencyFrench", Model.SpeakingProficiencyFrench)
+                        @Html.Hidden("ReadingProficiencyFrench", Model.ReadingProficiencyFrench)
+                        @Html.Hidden("WritingProficiencyFrench", Model.WritingProficiencyFrench)
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+                        <fieldset>
+                            <div class="form-group  col-sm-12">&nbsp;</div>
+                            <div class="form-group  col-sm-6">
+                                @Html.LabelFor(m => m.FirstName, Html.Resource("LblFirstName", PublicResources), new { @class = "col-md-4 control-label" })
+                                <div class="col-md-7">
+                                    @Html.Kendo().TextBoxFor(model => model.FirstName).HtmlAttributes(new { @class = "form-control  form-control-md10", @maxlength = 150, @placeholder = @Html.Resource("EnterFirstName", PublicResources) }).Name("FirstName").Enable(@Model.IsEdit)
+                                    <span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error" data-for="FirstName" data-valmsg-for="FirstName" id="FirstName_validationMessage" style="display:none;" role="alert"><span class="k-icon k-warning"> </span>@Html.Resource("RequierdFirstName", PublicResources)</span>
+                                </div>
+                            </div>
+                            <div class="form-group  col-sm-6">
+                                @Html.LabelFor(m => m.FirstNameName_Ar, Html.Resource("LblFirstNameName_Ar", PublicResources), new { @class = "col-md-4 control-label" })
+                                <div class="col-md-7">
+                                    @Html.Kendo().TextBoxFor(model => model.FirstNameName_Ar).HtmlAttributes(new { @class = "form-control  form-control-md10", @maxlength = 150, @placeholder = @Html.Resource("EnterFirstNameName_Ar", PublicResources) }).Name("FirstNameName_Ar").Enable(@Model.IsEdit)
+                                    <span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error" data-for="FirstName" data-valmsg-for="FirstNameName_Ar" id="FirstNameName_Ar_validationMessage" style="display:none;" role="alert"><span class="k-icon k-warning"> </span> @Html.Resource("RequierdFirstNameName_Ar", PublicResources)</span>
+                                </div>
+                            </div>
+                            <div class="form-group  col-sm-6">
+                                @Html.LabelFor(m => m.MIddleName, Html.Resource("LblMIddleName", PublicResources), new { @class = "col-md-4 control-label" })
+                                <div class="col-md-7">
+                                    @Html.Kendo().TextBoxFor(model => model.MIddleName).HtmlAttributes(new { @class = "form-control  form-control-md10", @maxlength = 150, @placeholder = @Html.Resource("EnterMIddleName", PublicResources) }).Name("MIddleName").Enable(@Model.IsEdit)
+                                    <span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error" data-for="MiddleName" data-valmsg-for="MiddleName" id="MiddleName_validationMessage" style="display:none;" role="alert"><span class="k-icon k-warning"> </span> @Html.Resource("RequierdMIddleName", PublicResources)</span>
+                                </div>
+                            </div>
+                            <div class="form-group  col-sm-6">
+                                @Html.LabelFor(m => m.MiddleName_Ar, Html.Resource("LblMiddleName_Ar", PublicResources), new { @class = "col-md-4 control-label" })
+                                <div class="col-md-7">
+                                    @Html.Kendo().TextBoxFor(model => model.MiddleName_Ar).HtmlAttributes(new { @class = "form-control  form-control-md10", @maxlength = 150, @placeholder = @Html.Resource("EnterMiddleName_Ar", PublicResources) }).Name("MiddleName_Ar").Enable(@Model.IsEdit)
+                                    <span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error" data-for="MiddleName_Ar" data-valmsg-for="MiddleName_Ar" id="MiddleName_Ar_validationMessage" style="display:none;" role="alert"><span class="k-icon k-warning"> </span>@Html.Resource("RequierdMiddleName_Ar", PublicResources)</span>
+                                </div>
+                            </div>
+                            <div class="form-group  col-sm-6">
+                                @Html.LabelFor(m => m.LastName, Html.Resource("LblLastName", PublicResources), new { @class = "col-md-4 control-label" })
+                                <div class="col-md-7">
+                                    @Html.Kendo().TextBoxFor(model => model.LastName).HtmlAttributes(new { @class = "form-control  form-control-md10", @maxlength = 150, @placeholder = @Html.Resource("EnterLastName", PublicResources) }).Name("LastName").Enable(@Model.IsEdit)
+                                    <span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error" data-for="LastName" data-valmsg-for="LastName" id="LastName_validationMessage" style="display:none;" role="alert"><span class="k-icon k-warning"> </span> @Html.Resource("RequierdLastName", PublicResources)</span>
+                                </div>
+                            </div>
+                            <div class="form-group  col-sm-6">
+                                @Html.LabelFor(m => m.LastName_Ar, Html.Resource("LblLastName_Ar", PublicResources), new { @class = "col-md-4 control-label" })
+                                <div class="col-md-7">
+                                    @Html.Kendo().TextBoxFor(model => model.LastName_Ar).HtmlAttributes(new { @class = "form-control  form-control-md10", @maxlength = 150, @placeholder = @Html.Resource("EnterLastName_Ar", PublicResources) }).Name("LastName_Ar").Enable(@Model.IsEdit)
+                                    <span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error" data-for="LastName_Ar" data-valmsg-for="LastName" id="LastName_Ar_validationMessage" style="display:none;" role="alert"><span class="k-icon k-warning"> </span>@Html.Resource("RequierdLastName_Ar", PublicResources)</span>
+                                </div>
+                            </div>
+                            <div class="form-group  col-sm-6">
+                                @Html.LabelFor(m => m.MotherName, Html.Resource("LblMotherName", PublicResources), new { @class = "col-md-4 control-label" })
+                                <div class="col-md-7">
+                                    @Html.Kendo().TextBoxFor(model => model.MotherName).HtmlAttributes(new { @class = "form-control  form-control-md10", @maxlength = 200, @placeholder = @Html.Resource("EnterMotherName", PublicResources) }).Name("MotherName").Enable(@Model.IsEdit)
+                                    <span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error" data-for="MotherName" data-valmsg-for="MotherName" id="MotherName_validationMessage" style="display:none;" role="alert"><span class="k-icon k-warning"> </span> @Html.Resource("RequierdMotherName", PublicResources)</span>
+                                </div>
+                            </div>
+                            <div class="form-group  col-sm-6">
+                                @Html.LabelFor(m => m.MotherName_Ar, Html.Resource("LblMotherName_Ar", PublicResources), new { @class = "col-md-4 control-label" })
+                                <div class="col-md-7">
+                                    @Html.Kendo().TextBoxFor(model => model.MotherName_Ar).HtmlAttributes(new { @class = "form-control  form-control-md10", @maxlength = 200, @placeholder = @Html.Resource("EnterMotherName_Ar", PublicResources) }).Name("MotherName_Ar").Enable(@Model.IsEdit)
+                                    <span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error" data-for="MotherName_Ar" data-valmsg-for="MotherName_Ar" id="MotherName_Ar_validationMessage" style="display:none;" role="alert"><span class="k-icon k-warning"> </span> @Html.Resource("RequierdMotherName_Ar", PublicResources)</span>
+                                </div>
+                            </div>
+                            <div class="form-group  col-sm-6">
+                                @Html.LabelFor(m => m.Email, Html.Resource("LblEmail", PublicResources), new { @class = "col-md-4 control-label" })
+                                <div class="col-md-7">
+                                    @Html.Kendo().TextBoxFor(model => model.Email).HtmlAttributes(new { @class = "form-control  form-control-md10", @maxlength = 200, @placeholder = @Html.Resource("EnterEmail", PublicResources) }).Name("Email").Enable(@Model.IsEdit)
+                                    <span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error" data-for="Email" data-valmsg-for="Email" id="Email_validationMessage" style="display:none;" role="alert"><span class="k-icon k-warning"> </span> @Html.Resource("RequierdEmail", PublicResources)</span>
+                                </div>
+                            </div>
+                            <div class="form-group  col-sm-6">
+                                @Html.LabelFor(m => m.Date_Of_Birth, Html.Resource("LblDate_Of_Birth", PublicResources), new { @class = "col-md-4 control-label" })
+                                <div class="col-md-7" style="padding: 0 !important;">
+                                    @Html.Kendo().DatePickerFor(model => model.Date_Of_Birth).HtmlAttributes(new { @class = "form-control  form-control-md10", @maxlength = 200, @placeholder = @Html.Resource("EnterDate_Of_Birth", PublicResources) }).Name("Date_Of_Birth").Enable(@Model.IsEdit)
+                                    <span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error" data-for="Date_Of_Birth" data-valmsg-for="Date_Of_Birth" id="Date_Of_Birth_validationMessage" style="display:none;" role="alert"><span class="k-icon k-warning"> </span>@Html.Resource("RequierdDate_Of_Birth", PublicResources)</span>
+                                </div>
+
+                            </div>
+
+                            <div class="form-group  col-sm-6">
+                                @Html.LabelFor(m => m.UserName, Html.Resource("LblUserName", PublicResources), new { @class = "col-md-4 control-label" })
+                                <div class="col-md-7">
+                                    @Html.Kendo().TextBoxFor(model => model.UserName).HtmlAttributes(new { @class = "form-control  form-control-md10", @maxlength = 50, @placeholder = @Html.Resource("EnterUserName", PublicResources) }).Name("UserName").Enable(@Model.IsEdit)
+                                    <span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error" data-for="UserName" data-valmsg-for="UserName" id="UserName_validationMessage" style="display:none;" role="alert"><span class="k-icon k-warning"> </span> @Html.Resource("RequierdUserName", PublicResources)</span>
+                                </div>
+                            </div>
+                            @if (SessionContent.Container.Profiles.SourceID != (int)ProfileSourceType.MyProfile)
+                            {
+                                <div class="form-group  col-sm-6">
+                                    @Html.LabelFor(m => m.SerialNumber, Html.Resource("LblSerialNumber", PublicResources), new { @class = "col-md-4 control-label" })
+                                    <div class="col-md-7">
+                                        @Html.Kendo().TextBoxFor(model => model.SerialNumber).HtmlAttributes(new { @class = "form-control  form-control-md10", @maxlength = 200, @placeholder = @Html.Resource("EnterSerialNumber", PublicResources) }).Name("SerialNumber").Enable(@Model.IsEdit)
+                                    </div>
+                                </div>
+                            }
+                            <div class="form-group  col-sm-6">
+                                @Html.LabelFor(m => m.Genders_Id, Html.Resource("LblGenders_Id", PublicResources), new { @class = "col-md-4 control-label" })
+                                <div class="col-md-7">
+                                    @(Html.Kendo().DropDownListFor(m => m.Genders_Id)
+                                                                                                        .DataTextField("Text")
+                                                                                                        .DataValueField("Value")
+                                                                                                        .OptionLabel(@Html.Resource("EnterGenders_Id", PublicResources))
+
+                                                                                                        .Enable(@Model.IsEdit)
+                                                                                                        .HtmlAttributes(new { @class = "ui-select form-control-md10" })
+                                                                                                        .Value(Model.Genders_Id.ToString())
+
+                                                                                                        .DataSource(source =>
+                                                                                                        {
+                                                                                                            source.Read(read =>
+                                                                                                            {
+                                                                                                                read.Action("GetGender", "ProfileManagement");
+                                                                                                            });
+                                                                                                        })
+                                    )
+                                </div>
+                            </div>
+                            <div class="form-group  col-sm-6">
+                                @Html.LabelFor(m => m.Maritals_ID, Html.Resource("LblMaritals_ID", PublicResources), new { @class = "col-md-4 control-label" })
+                                <div class="col-md-7">
+                                    @(Html.Kendo().DropDownListFor(m => m.Maritals_ID)
+                                                                                                        .DataTextField("Text")
+                                                                                                        .DataValueField("Value")
+                                                                                                        .OptionLabel(@Html.Resource("EnterMaritals_ID", PublicResources))
+
+                                                                                                        .Enable(@Model.IsEdit)
+                                                                                                        .HtmlAttributes(new { @class = "ui-select form-control-md10" })
+                                                                                                        .Value(Model.Maritals_ID.ToString())
+
+                                                                                                        .DataSource(source =>
+                                                                                                        {
+                                                                                                            source.Read(read =>
+                                                                                                            {
+                                                                                                                read.Action("GetMarital_Status", "ProfileManagement");
+                                                                                                            });
+                                                                                                        })
+                                    )
+                                </div>
+                            </div>
+                            <div class="form-group  col-sm-6">
+                                @Html.LabelFor(m => m.Country_ID, Html.Resource("LblCountry_ID", PublicResources), new { @class = "col-md-4 control-label" })
+                                <div class="col-md-7">
+                                    @(Html.Kendo().DropDownListFor(m => m.Country_ID)
+                                                                                                        .DataTextField("Text")
+                                                                                                        .Name("Country_ID")
+                                                                                                        .DataValueField("Value")
+                                                                                                        .OptionLabel(@Html.Resource("EnterCountry_ID", PublicResources))
+                                                                                                        .HtmlAttributes(new { @class = "ui-select form-control-md10" })
+                                                                                                        .Value(Model.Country_ID.ToString())
+                                                                                                        .Enable(@Model.IsEdit)
+                                                                                                        .DataSource(source =>
+                                                                                                        {
+                                                                                                            source.Read(read =>
+                                                                                                            {
+                                                                                                                read.Action("GetCountry", "ProfileManagement");
+                                                                                                            });
+                                                                                                        }))
+                                </div>
+                            </div>
+
+                            <div class="form-group  col-sm-6">
+                                @Html.LabelFor(m => m.Place_Of_Birth, Html.Resource("LblPlace_Of_Birth", PublicResources), new { @class = "col-md-4 control-label" })
+                                <div class="col-md-7">
+                                    @(Html.Kendo().DropDownListFor(m => m.Place_Of_Birth)
+                                                                                                        .DataTextField("Text")
+                                                                                                        .Name("Place_Of_Birth")
+                                                                                                        .DataValueField("Value")
+                                                                                                        .OptionLabel(@Html.Resource("EnterPlace_Of_Birth", PublicResources))
+                                                                                                        .HtmlAttributes(new { @class = "ui-select form-control-md10" })
+                                                                                                        .Enable(@Model.IsEdit)
+                                                                                                        .Value(Model.Place_Of_Birth.ToString())
+
+                                                                                                        .DataSource(source =>
+                                                                                                        {
+                                                                                                            source.Read(read =>
+                                                                                                            {
+                                                                                                                read.Action("GetPlaceOfBirth", "ProfileManagement").Data("FilterPlaceOfBirth");
+                                                                                                            });
+
+
+
+                                                                                                        }).CascadeFrom("Country_ID"))
+                                    <span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error" data-for="Place_Of_Birth" data-valmsg-for="Place_Of_Birth" id="Place_Of_Birth_validationMessage" style="display:none;" role="alert"><span class="k-icon k-warning"> </span> @Html.Resource("RequierdPlace_Of_Birth", PublicResources)</span>
+
+                                </div>
+                            </div>
+                            <div class="form-group  col-sm-6">
+                                @Html.LabelFor(m => m.FirstNationality, Html.Resource("LblFirstNationality", PublicResources), new { @class = "col-md-4 control-label" })
+                                <div class="col-md-7">
+                                    @(Html.Kendo().DropDownListFor(m => m.FirstNationality)
+                                                                                                        .DataTextField("Text")
+                                                                                                        .DataValueField("Value")
+                                                                                                        .OptionLabel(@Html.Resource("EnterFirstNationality", PublicResources))
+
+                                                                                                        .Enable(@Model.IsEdit)
+                                                                                                        .HtmlAttributes(new { @class = "ui-select form-control-md10" })
+                                                                                                        .Value(Model.FirstNationality.ToString())
+
+                                                                                                        .DataSource(source =>
+                                                                                                        {
+                                                                                                            source.Read(read =>
+                                                                                                            {
+                                                                                                                read.Action("GetNationality", "ProfileManagement");
+                                                                                                            });
+                                                                                                        }))
+                                    <span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error" data-for="FirstNationality" data-valmsg-for="FirstNationality" id="FirstNationality_validationMessage" style="display:none;" role="alert"><span class="k-icon k-warning"> </span> @Html.Resource("RequierdFirstNationality", PublicResources)</span>
+
+                                </div>
+                            </div>
+                            <div class="form-group  col-sm-6">
+                                @Html.LabelFor(m => m.SecondNationality, Html.Resource("LblSecondNationality", PublicResources), new { @class = "col-md-4 control-label" })
+                                <div class="col-md-7">
+                                    @(Html.Kendo().DropDownListFor(m => m.SecondNationality)
+                                                                                                        .DataTextField("Text")
+                                                                                                        .DataValueField("Value")
+                                                                                                        .Enable(@Model.IsEdit)
+                                                                                                        .OptionLabel(@Html.Resource("EnterSecondNationality", PublicResources))
+                                                                                                        .HtmlAttributes(new { @class = "ui-select form-control-md10" })
+                                                                                                        .Value(Model.SecondNationality.ToString())
+                                                                                                        .DataSource(source =>
+                                                                                                        {
+                                                                                                            source.Read(read =>
+                                                                                                            {
+                                                                                                                read.Action("GetNationality", "ProfileManagement");
+                                                                                                            });
+                                                                                                        }))
+                                </div>
+                            </div>
+
+                            <div class="form-group  col-sm-6">
+                                @Html.LabelFor(m => m.Religions_ID, Html.Resource("LblReligions_ID", PublicResources), new { @class = "col-md-4 control-label" })
+                                <div class="col-md-7">
+                                    @(Html.Kendo().DropDownListFor(m => m.Religions_ID)
+                                                                                                        .DataTextField("Text")
+                                                                                                        .DataValueField("Value")
+                                                                                                        .OptionLabel(@Html.Resource("EnterReligions_ID", PublicResources))
+
+                                                                                                        .Enable(@Model.IsEdit)
+                                                                                                        .HtmlAttributes(new { @class = "ui-select form-control-md10" })
+                                                                                                        .Value(Model.Religions_ID.ToString())
+
+                                                                                                        .DataSource(source =>
+                                                                                                        {
+                                                                                                            source.Read(read =>
+                                                                                                            {
+                                                                                                                read.Action("GetReligionName", "ProfileManagement");
+                                                                                                            });
+                                                                                                        })
+                                    )
+                                </div>
+                            </div>
+                            <div class="form-group  col-sm-6">
+                                @Html.LabelFor(m => m.Subjects_ID, Html.Resource("EducationSystem", PublicResources), new { @class = "col-md-4 control-label" })
+                                <div class="col-md-7">
+                                    @(Html.Kendo().DropDownListFor(m => m.Subjects_ID)
+                                                                                                        .DataTextField("Text")
+                                                                                                        .DataValueField("Value")
+                                                                                                        .OptionLabel(@Html.Resource("EnterEducationSystem", PublicResources))
+
+                                                                                                        .Enable(@Model.IsEdit)
+                                                                                                        .HtmlAttributes(new { @class = "ui-select form-control-md10" })
+                                                                                                        .Value(Model.Subjects_ID.ToString())
+
+                                                                                                        .DataSource(source =>
+                                                                                                        {
+                                                                                                            source.Read(read =>
+                                                                                                            {
+                                                                                                                read.Action("GetEducationalSystem", "ProfileManagement");
+                                                                                                            });
+                                                                                                        })
+                                    )
+                                </div>
+                            </div>
+
+                            <div class="form-group  col-sm-6">
+                                @Html.LabelFor(m => m.Roles_ID, Html.Resource("LblRoles_ID", PublicResources), new { @class = "col-md-4 control-label" })
+                                <div class="col-md-7">
+                                    @(Html.Kendo().DropDownListFor(m => m.Roles_ID)
+                                                                                                     .DataTextField("Text")
+                                                                                                    .DataValueField("Value")
+                                                                                                    .OptionLabel(@Html.Resource("EnterRoles_ID", PublicResources))
+                                                                                                    .HtmlAttributes(new { @class = "ui-select form-control-md10" })
+                                                                                                    .Value(Model.Roles_ID.ToString())
+                                                                                                    .Enable(@Model.IsEdit)
+                                                                                                    .DataSource(source =>
+                                                                                                    {
+                                                                                                        source.Read(read =>
+                                                                                                        {
+                                                                                                            read.Action("GetRoleWithTypeList", "UserManagement", new { type = Model.UserType });
+                                                                                                        });
+                                                                                                    })
+                                    )
+                                    <span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error" data-for="Roles_ID" data-valmsg-for="Roles_ID" id="Roles_ID_validationMessage" style="display:none;" role="alert"><span class="k-icon k-warning"> </span> @Html.Resource("RequierdRoles", PublicResources)</span>
+                                </div>
+                            </div>
+                            @if (SessionContent.Container.Profiles.SourceID != (int)ProfileSourceType.MyProfile)
+                            {
+                                <div class="form-group  col-sm-6">
+                                    @Html.LabelFor(m => m.UserReference_ID, Html.Resource("LblUserReference_ID", PublicResources), new { @class = "col-md-4 control-label" })
+                                    <div class="col-md-7">
+                                        @(Html.Kendo().DropDownListFor(m => m.UserReference_ID)
+                                                                                                         .DataTextField("Text")
+                                                                                                        .DataValueField("Value")
+                                                                                                        .OptionLabel(@Html.Resource("EnterUserReference_ID", PublicResources))
+                                                                                                        .HtmlAttributes(new { @class = "ui-select form-control-md10" })
+                                                                                                        .Value(Model.UserReference_ID.ToString())
+                                                                                                        .Enable(@Model.IsEdit)
+                                                                                                        .DataSource(source =>
+                                                                                                        {
+                                                                                                            source.Read(read =>
+                                                                                                            {
+                                                                                                                read.Action("GetUserReferenceList", "UserManagement", new { type = Model.UserType });
+                                                                                                            });
+                                                                                                        })
+                                        )
+                                        <span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error" data-for="UserReference_ID" data-valmsg-for="UserReference_ID" id="UserReference_ID_validationMessage" style="display:none;" role="alert"><span class="k-icon k-warning"> </span> @Html.Resource("RequierdUserReference", PublicResources)</span>
+                                    </div>
+                                </div>
+
+                            }
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+            <!-- end widget content -->
+        </div>
+        <!-- end widget -->
+        if (SessionContent.Container.Profiles.SourceID != (int)ProfileSourceType.MyProfile)
+        {
+            <!-- Widget ID (each widget will need unique ID)-->
+            <div class="jarviswidget jarviswidgetTransparent" id="wid-id-x" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false" data-widget-custombutton="false" data-widget-sortable="false" role="widget">
+                <header role="heading">
+                    <span class="widget-icon"> <i class="fa fa-align-justify"></i> </span>
+                    <h2>@Html.Resource("LblApplication", PublicResources)</h2>
+                    <span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span>
+                </header>
+                <!-- widget div-->
+                <div role="content">
+
+                    <div class="row">
+                        <div class="widget-body">
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true)
+                            <fieldset>
+
+                                <div class="form-group  col-sm-6">
+                                    <i class="fa fa-check col-md-1"></i> @Html.LabelFor(m => m.ApplicationNumber, Html.Resource("LblApplicationNumber", PublicResources), new { @class = "col-md-3 control-label" })
+                                    <div class="col-md-7">
+                                        @Html.Kendo().TextBoxFor(model => model.ApplicationNumber).HtmlAttributes(new { @class = "form-control  form-control-md10", @maxlength = 150, @placeholder = @Html.Resource("EnterApplicationNumber", PublicResources) }).Name("ApplicationNumber").Enable(@Model.IsEdit)
+                                        <span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error" data-for="RegisteryNumber" data-valmsg-for="ApplicationNumber" id="ApplicationNumber_validationMessage" style="display:none;" role="alert"><span class="k-icon k-warning"> </span>@Html.Resource("RequierdApplicationNumber", PublicResources)</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group  col-sm-6">
+                                    <i class="fa fa-check col-md-1"></i> @Html.LabelFor(m => m.ApplicationDate, Html.Resource("LblApplicationDate", PublicResources), new { @class = "col-md-3 control-label" })
+                                    <div class="col-md-7">
+                                        @Html.Kendo().DatePickerFor(model => model.ApplicationDate).HtmlAttributes(new { @class = "form-control  form-control-md10", @maxlength = 200, @placeholder = @Html.Resource("EnterApplicationDate", PublicResources) }).Name("ApplicationDate").Enable(@Model.IsEdit)
+                                        <span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error" data-for="ApplicationDate" data-valmsg-for="ApplicationDate" id="ApplicationDate_validationMessage" style="display:none;" role="alert"><span class="k-icon k-warning"> </span>@Html.Resource("RequierdApplicationDate", PublicResources)</span>
+                                    </div>
+                                </div>
+                                <div class="form-group  col-sm-6">
+                                    <i class="fa fa-check col-md-1"></i> @Html.LabelFor(m => m.RegisteryNumber, Html.Resource("LblRegisteryNumber", PublicResources), new { @class = "col-md-3 control-label" })
+                                    <div class="col-md-7">
+                                        @Html.Kendo().TextBoxFor(model => model.RegisteryNumber).HtmlAttributes(new { @class = "form-control  form-control-md10", @maxlength = 150, @placeholder = @Html.Resource("EnterRegisteryNumber", PublicResources) }).Name("RegisteryNumber").Enable(@Model.IsEdit)
+                                        <span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error" data-for="RegisteryNumber" data-valmsg-for="RegisteryNumber" id="RegisteryNumber_validationMessage" style="display:none;" role="alert"><span class="k-icon k-warning"> </span>@Html.Resource("RequierdRegisteryNumber", PublicResources)</span>
+                                    </div>
+                                </div>
+                                <div class="form-group  col-sm-6">
+                                    <i class="fa fa-check col-md-1"></i> @Html.LabelFor(m => m.RegisteryPlace, Html.Resource("LblRegisteryPlace", PublicResources), new { @class = "col-md-3 control-label" })
+                                    <div class="col-md-7">
+                                        @Html.Kendo().TextBoxFor(model => model.RegisteryPlace).HtmlAttributes(new { @class = "form-control  form-control-md10", @maxlength = 150, @placeholder = @Html.Resource("EnterRegisteryPlace", PublicResources) }).Name("RegisteryPlace").Enable(@Model.IsEdit)
+                                        <span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error" data-for="RegisteryPlace" data-valmsg-for="RegisteryPlace" id="RegisteryPlace_validationMessage" style="display:none;" role="alert"><span class="k-icon k-warning"> </span>@Html.Resource("RequierdRegisteryPlace", PublicResources)</span>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- end widget content -->
+            </div>
+        }
+        <!-- Wi <!-- end widgetdget ID (each widget will need unique ID)-->
+        <div class="jarviswidget jarviswidgetTransparent" id="wid-id-x" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false" data-widget-custombutton="false" data-widget-sortable="false" role="widget">
+            <header role="heading">
+                <span class="widget-icon"> <i class="fa fa-align-justify"></i> </span>
+                <h2>@Html.Resource("LblSocialNetworking", PublicResources)</h2>
+                <span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span>
+            </header>
+            <!-- widget div-->
+            <div role="content">
+
+                <div class="row">
+                    <div class="widget-body">
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+                        <fieldset>
+                            <div class="form-group  col-sm-6">
+                                <i class="fa fa-twitter col-md-1"></i>@Html.LabelFor(m => m.twitter, Html.Resource("Lbltwitter", PublicResources), new { @class = "col-md-3 control-label" })
+                                <div class="col-md-7">
+                                    @Html.Kendo().TextBoxFor(model => model.twitter).HtmlAttributes(new { @class = "form-control  form-control-md10", @maxlength = 150, @placeholder = @Html.Resource("Entertwitter", PublicResources) }).Name("twitter").Enable(@Model.IsEdit)
+                                </div>
+                            </div>
+                            <div class="form-group  col-sm-6">
+                                <i class="fa fa-facebook col-md-1"></i> @Html.LabelFor(m => m.Facebook_ID, Html.Resource("LblFacebook_ID", PublicResources), new { @class = "col-md-3 control-label" })
+                                <div class="col-md-7">
+                                    @Html.Kendo().TextBoxFor(model => model.Facebook_ID).HtmlAttributes(new { @class = "form-control  form-control-md10", @maxlength = 150, @placeholder = @Html.Resource("EnterFacebook_ID", PublicResources) }).Name("Facebook_ID").Enable(@Model.IsEdit)
+                                </div>
+                            </div>
+                            <div class="form-group  col-sm-6">
+                                <i class="fa fa-google-plus col-md-1"></i> @Html.LabelFor(m => m.Google_ID, Html.Resource("LblGoogle_ID", PublicResources), new { @class = "col-md-3 control-label" })
+                                <div class="col-md-7">
+                                    @Html.Kendo().TextBoxFor(model => model.Google_ID).HtmlAttributes(new { @class = "form-control  form-control-md10", @maxlength = 150, @placeholder = @Html.Resource("EnterGoogle_ID", PublicResources) }).Name("Google_ID").Enable(@Model.IsEdit)
+                                </div>
+                            </div>
+                            <div class="form-group  col-sm-6">
+                                <i class="fa fa-linkedin col-md-1"></i> @Html.LabelFor(m => m.linkedin, Html.Resource("Lbllinkedin", PublicResources), new { @class = "col-md-3 control-label" })
+                                <div class="col-md-7">
+                                    @Html.Kendo().TextBoxFor(model => model.linkedin).HtmlAttributes(new { @class = "form-control  form-control-md10", @maxlength = 150, @placeholder = @Html.Resource("Enterlinkedin", PublicResources) }).Name("linkedin").Enable(@Model.IsEdit)
+                                </div>
+                            </div>
+
+                        </fieldset>
+                    </div>
+                </div>
+
+            </div>
+            <!-- end widget content -->
+        </div>
+        <!-- end widget
+
+
+         <!-- Widget ID (each widget will need unique ID)-->
+        <div class="jarviswidget jarviswidgetTransparent" id="wid-id-x" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false" data-widget-custombutton="false" data-widget-sortable="false" role="widget">
+            <header role="heading">
+                <span class="widget-icon"> <i class="fa fa-align-justify"></i> </span>
+                <h2>@Html.Resource("LblUsePhone", PublicResources)</h2>
+                <span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span>
+            </header>
+            <!-- widget div-->
+            <div role="content">
+
+                <div class="row">
+                    <div class="widget-body">
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+                        <fieldset>
+                            <div class="form-group  col-sm-6">
+                                <i class="fa fa-fax col-md-1"></i>@Html.LabelFor(m => m.MobileNumber, Html.Resource("LblMobileNumber", PublicResources), new { @class = "col-md-3 control-label" })
+                                <div class="col-md-7">
+                                    @Html.Kendo().TextBoxFor(model => model.MobileNumber).HtmlAttributes(new { @class = "form-control  form-control-md10", @maxlength = 150, @placeholder = @Html.Resource("EnterMobileNumber", PublicResources) }).Name("MobileNumber").Enable(@Model.IsEdit)
+
+
+                                </div>
+                            </div>
+                            <div class="form-group  col-sm-6">
+                                <i class="fa fa-fax col-md-1"></i> @Html.LabelFor(m => m.PhoneNumber, Html.Resource("LblPhoneNumber", PublicResources), new { @class = "col-md-3 control-label" })
+                                <div class="col-md-7">
+                                    @Html.Kendo().TextBoxFor(model => model.PhoneNumber).HtmlAttributes(new { @class = "form-control  form-control-md10", @maxlength = 150, @placeholder = @Html.Resource("EnterPhoneNumber", PublicResources) }).Name("PhoneNumber").Enable(@Model.IsEdit)
+                                </div>
+                            </div>
+                            <div class="form-group  col-sm-6">
+                                <i class="fa fa-fax col-md-1"></i>@Html.LabelFor(m => m.MobileAlternateNumber, Html.Resource("LblMobileAlternateNumber", PublicResources), new { @class = "col-md-3 control-label" })
+                                <div class="col-md-7">
+                                    @Html.Kendo().TextBoxFor(model => model.MobileAlternateNumber).HtmlAttributes(new { @class = "form-control  form-control-md10", @maxlength = 150, @placeholder = @Html.Resource("EnterMobileAlternateNumber", PublicResources) }).Name("MobileAlternateNumber").Enable(@Model.IsEdit)
+                                </div>
+                            </div>
+                            <div class="form-group  col-sm-6">
+                                <i class="fa fa-fax col-md-1"></i> @Html.LabelFor(m => m.PhoneAlternateNumber, Html.Resource("LblPhoneAlternateNumber", PublicResources), new { @class = "col-md-3 control-label" })
+                                <div class="col-md-7">
+                                    @Html.Kendo().TextBoxFor(model => model.PhoneAlternateNumber).HtmlAttributes(new { @class = "form-control  form-control-md10", @maxlength = 150, @placeholder = @Html.Resource("EnterPhoneAlternateNumber", PublicResources) }).Name("PhoneAlternateNumber").Enable(@Model.IsEdit)
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+            <!-- end widget content -->
+        </div>
+        <!-- end widget
+
+
+
+           <!-- Widget ID (each widget will need unique ID)-->
+        <div class="jarviswidget jarviswidgetTransparent" id="wid-id-x" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false" data-widget-custombutton="false" data-widget-sortable="false" role="widget">
+            <header role="heading">
+                <span class="widget-icon"> <i class="fa fa-align-justify"></i> </span>
+                <h2>@Html.Resource("LblLanguages", PublicResources)</h2>
+                <span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span>
+            </header>
+            <!-- widget div-->
+            <div role="content">
+
+                <div class="row">
+                    <div class="widget-body">
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+                        <fieldset class="smart-form ">
+                            <header class="label bg-color-blueLight " style="color:#ffffff; padding:10px;">
+                                @Html.Resource("LblArabic", PublicResources)
+                            </header>
+                            <fieldset>
+                                <div class="form-group  col-sm-4">
+                                    @Html.Label(@Html.Resource("LblSpeaking", PublicResources), new { @class = "col-md-4 control-label" })
+                                    <div class="col-md-4">
+                                        <div class="rating">
+
+                                            @for (int i = 5; i > Model.SpeakingProficiencyArabicCount; i--)
+                                            {
+                                                <input type="radio" name="SpeakingProficiencyArabic" id="SpeakingProficiencyArabic-@i">
+                                                <label for="SpeakingProficiencyArabic-@i" id="SpeakingProficiencyArabicc-@i"><i class="fa fa-star"></i></label>
+                                            }
+                                            @for (int i = Model.SpeakingProficiencyArabicCount; i > 0; i--)
+                                            {
+                                                if (i == Model.SpeakingProficiencyArabicCount)
+                                                {
+                                                    <input type="radio" name="SpeakingProficiencyArabic" id="SpeakingProficiencyArabic-@i" checked>
+                                                    <label for="SpeakingProficiencyArabic-@i" id="SpeakingProficiencyArabicc-@i"><i class="fa fa-star"></i></label>
+                                                }
+                                                else
+                                                {
+                                                    <input type="radio" name="SpeakingProficiencyArabic" id="SpeakingProficiencyArabic-@i">
+                                                    <label for="SpeakingProficiencyArabic-@i" id="SpeakingProficiencyArabicc-@i"><i class="fa fa-star"></i></label>
+                                                }
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group  col-sm-4">
+                                    @Html.Label(@Html.Resource("LblReading", PublicResources), new { @class = "col-md-4 control-label" })
+                                    <div class="col-md-4">
+                                        <div class="rating">
+                                            @for (int i = 5; i > Model.ReadingProficiencyArabicCount; i--)
+                                            {
+                                                <input type="radio" name="ReadingProficiencyArabic" id="ReadingProficiencyArabic-@i">
+                                                <label for="ReadingProficiencyArabic-@i"><i class="fa fa-star"></i></label>
+                                            }
+                                            @for (int i = Model.ReadingProficiencyArabicCount; i > 0; i--)
+                                            {
+                                                if (i == Model.ReadingProficiencyArabicCount)
+                                                {
+                                                    <input type="radio" name="ReadingProficiencyArabic" id="ReadingProficiencyArabic-@i" checked>
+                                                    <label for="ReadingProficiencyArabic-@i"><i class="fa fa-star"></i></label>
+                                                }
+                                                else
+                                                {
+                                                    <input type="radio" name="ReadingProficiencyArabic" id="ReadingProficiencyArabic-@i">
+                                                    <label for="ReadingProficiencyArabic-@i"><i class="fa fa-star"></i></label>
+                                                }
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group  col-sm-4">
+                                    @Html.Label(@Html.Resource("LblWriting", PublicResources), new { @class = "col-md-4 control-label" })
+                                    <div class="col-md-4">
+                                        <div class="rating">
+                                            @for (int i = 5; i > Model.WritingProficiencyArabicCount; i--)
+                                            {
+                                                <input type="radio" name="WritingProficiencyArabic" id="WritingProficiencyArabic-@i">
+                                                <label for="WritingProficiencyArabic-@i"><i class="fa fa-star"></i></label>
+                                            }
+                                            @for (int i = Model.WritingProficiencyArabicCount; i > 0; i--)
+                                            {
+                                                if (i == Model.WritingProficiencyArabicCount)
+                                                {
+                                                    <input type="radio" name="WritingProficiencyArabic" id="WritingProficiencyArabic-@i" checked>
+                                                    <label for="WritingProficiencyArabic-@i"><i class="fa fa-star"></i></label>
+                                                }
+                                                else
+                                                {
+                                                    <input type="radio" name="WritingProficiencyArabic" id="WritingProficiencyArabic-@i">
+                                                    <label for="WritingProficiencyArabic-@i"><i class="fa fa-star"></i></label>
+                                                }
+
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </fieldset>
+                            <header class="label bg-color-blueLight" style="color:#ffffff; padding:10px;">
+                                @Html.Resource("LblAnglais", PublicResources)
+                            </header>
+                            <fieldset>
+                                <div class="form-group  col-sm-4">
+                                    @Html.Label(@Html.Resource("LblSpeaking", PublicResources), new { @class = "col-md-4 control-label" })
+                                    <div class="col-md-4">
+                                        <div class="rating">
+
+                                            @for (int i = 5; i > Model.SpeakingProficiencyAnglaisCount; i--)
+                                            {
+                                                <input type="radio" name="SpeakingProficiencyAnglais" id="SpeakingProficiencyAnglais-@i">
+                                                <label for="SpeakingProficiencyAnglais-@i"><i class="fa fa-star"></i></label>
+                                            }
+                                            @for (int i = Model.SpeakingProficiencyAnglaisCount; i > 0; i--)
+                                            {
+                                                if (i == Model.SpeakingProficiencyAnglaisCount)
+                                                {
+                                                    <input type="radio" name="SpeakingProficiencyAnglais" id="SpeakingProficiencyAnglais-@i" checked>
+                                                    <label for="SpeakingProficiencyAnglais-@i"><i class="fa fa-star" id="SpeakingProficiencyArabicStar-@i"></i></label>
+                                                }
+                                                else
+                                                {
+                                                    <input type="radio" name="SpeakingProficiencyAnglais" id="SpeakingProficiencyAnglais-@i">
+                                                    <label for="SpeakingProficiencyAnglais-@i"><i class="fa fa-star"></i></label>
+                                                }
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group  col-sm-4">
+                                    @Html.Label(@Html.Resource("LblReading", PublicResources), new { @class = "col-md-4 control-label" })
+                                    <div class="col-md-4">
+                                        <div class="rating">
+                                            @for (int i = 5; i > Model.ReadingProficiencyAnglaisCount; i--)
+                                            {
+                                                <input type="radio" name="ReadingProficiencyAnglais" id="ReadingProficiencyAnglais-@i">
+                                                <label for="ReadingProficiencyAnglais-@i"><i class="fa fa-star"></i></label>
+                                            }
+                                            @for (int i = Model.ReadingProficiencyAnglaisCount; i > 0; i--)
+                                            {
+                                                if (i == Model.ReadingProficiencyAnglaisCount)
+                                                {
+                                                    <input type="radio" name="ReadingProficiencyAnglais" id="ReadingProficiencyAnglais-@i" checked>
+                                                    <label for="ReadingProficiencyAnglais-@i"><i class="fa fa-star"></i></label>
+                                                }
+                                                else
+                                                {
+                                                    <input type="radio" name="ReadingProficiencyAnglais" id="ReadingProficiencyAnglais-@i">
+                                                    <label for="ReadingProficiencyAnglais-@i"><i class="fa fa-star"></i></label>
+                                                }
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group  col-sm-4">
+                                    @Html.Label(@Html.Resource("LblWriting", PublicResources), new { @class = "col-md-4 control-label" })
+                                    <div class="col-md-4">
+                                        <div class="rating">
+                                            @for (int i = 5; i > Model.WritingProficiencyAnglaisCount; i--)
+                                            {
+                                                <input type="radio" name="WritingProficiencyAnglais" id="WritingProficiencyAnglais-@i">
+                                                <label for="WritingProficiencyAnglais-@i"><i class="fa fa-star"></i></label>
+                                            }
+                                            @for (int i = Model.WritingProficiencyAnglaisCount; i > 0; i--)
+                                            {
+                                                if (i == Model.WritingProficiencyAnglaisCount)
+                                                {
+                                                    <input type="radio" name="WritingProficiencyAnglais" id="WritingProficiencyAnglais-@i" checked>
+                                                    <label for="WritingProficiencyAnglais-@i"><i class="fa fa-star"></i></label>
+                                                }
+                                                else
+                                                {
+                                                    <input type="radio" name="WritingProficiencyAnglais" id="WritingProficiencyAnglais-@i">
+                                                    <label for="WritingProficiencyAnglais-@i"><i class="fa fa-star"></i></label>
+                                                }
+
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </fieldset>
+                            <header class="label bg-color-blueLight" style="color:#ffffff; padding:10px;">
+                                @Html.Resource("LblFrench", PublicResources)
+                            </header>
+                            <fieldset>
+                                <div class="form-group  col-sm-4">
+                                    @Html.Label(@Html.Resource("LblSpeaking", PublicResources), new { @class = "col-md-4 control-label" })
+                                    <div class="col-md-4">
+                                        <div class="rating">
+
+                                            @for (int i = 5; i > Model.SpeakingProficiencyFrenchCount; i--)
+                                            {
+                                                <input type="radio" name="SpeakingProficiencyFrench" id="SpeakingProficiencyFrench-@i">
+                                                <label for="SpeakingProficiencyFrench-@i"><i class="fa fa-star"></i></label>
+                                            }
+                                            @for (int i = Model.SpeakingProficiencyFrenchCount; i > 0; i--)
+                                            {
+                                                if (i == Model.SpeakingProficiencyFrenchCount)
+                                                {
+                                                    <input type="radio" name="SpeakingProficiencyFrench" id="SpeakingProficiencyFrench-@i" checked>
+                                                    <label for="SpeakingProficiencyFrench-@i"><i class="fa fa-star"></i></label>
+                                                }
+                                                else
+                                                {
+                                                    <input type="radio" name="SpeakingProficiencyFrench" id="SpeakingProficiencyFrench-@i">
+                                                    <label for="SpeakingProficiencyFrench-@i"><i class="fa fa-star"></i></label>
+                                                }
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group  col-sm-4">
+                                    @Html.Label(@Html.Resource("LblReading", PublicResources), new { @class = "col-md-4 control-label" })
+                                    <div class="col-md-4">
+                                        <div class="rating">
+                                            @for (int i = 5; i > Model.ReadingProficiencyFrenchCount; i--)
+                                            {
+                                                <input type="radio" name="ReadingProficiencyFrench" id="ReadingProficiencyFrench-@i">
+                                                <label for="ReadingProficiencyFrench-@i"><i class="fa fa-star"></i></label>
+                                            }
+                                            @for (int i = Model.ReadingProficiencyFrenchCount; i > 0; i--)
+                                            {
+                                                if (i == Model.ReadingProficiencyFrenchCount)
+                                                {
+                                                    <input type="radio" name="ReadingProficiencyFrench" id="ReadingProficiencyFrench-@i" checked>
+                                                    <label for="ReadingProficiencyFrench-@i"><i class="fa fa-star"></i></label>
+                                                }
+                                                else
+                                                {
+                                                    <input type="radio" name="ReadingProficiencyFrench" id="ReadingProficiencyFrench-@i">
+                                                    <label for="ReadingProficiencyFrench-@i"><i class="fa fa-star"></i></label>
+                                                }
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group  col-sm-4">
+                                    @Html.Label(@Html.Resource("LblWriting", PublicResources), new { @class = "col-md-4 control-label" })
+                                    <div class="col-md-4">
+                                        <div class="rating">
+                                            @for (int i = 5; i > Model.WritingProficiencyFrenchCount; i--)
+                                            {
+                                                <input type="radio" name="WritingProficiencyFrench" id="WritingProficiencyFrench-@i">
+                                                <label for="WritingProficiencyFrench-@i"><i class="fa fa-star"></i></label>
+                                            }
+                                            @for (int i = Model.WritingProficiencyFrenchCount; i > 0; i--)
+                                            {
+                                                if (i == Model.WritingProficiencyFrenchCount)
+                                                {
+                                                    <input type="radio" name="WritingProficiencyFrench" id="WritingProficiencyFrench-@i" checked>
+                                                    <label for="WritingProficiencyFrench-@i"><i class="fa fa-star"></i></label>
+                                                }
+                                                else
+                                                {
+                                                    <input type="radio" name="WritingProficiencyFrench" id="WritingProficiencyFrench-@i">
+                                                    <label for="WritingProficiencyFrench-@i"><i class="fa fa-star"></i></label>
+                                                }
+
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </fieldset>
+
+
+                        </fieldset>
+                    </div>
+                </div>
+
+            </div>
+            <!-- end widget content -->
+        </div>
+        <!-- end widget -->
+
+
+        if (Model.IsEdit == true)
+        {
+            <div class="footer">
+                <button type="button" class="btn btn-primary general-btn" onclick="SavePersonalInformation();">@Html.Resource("save", PublicResources)</button>
+            </div>
+        }
+    }
+</article>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+         
+        HidePersonalInformation();
+      
+        $.validator.setDefaults({
+            ignore: ""
+        });
+        IntiliaizeStar();      
+          var sourceId = '@SessionContent.Container.Profiles.SourceID';
+    });
+    
+    
+</script>

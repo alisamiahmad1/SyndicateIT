@@ -1,0 +1,29 @@
+﻿@model  SyndicateIT.Model.ViewModel.SetupManagement.Educationalsystem.EducationalsystemContentViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string PublicResources = "~/Views/SetupManagement/Educationalsystem/PublicResource";
+}
+@Scripts.Render("~/Scripts/Educationalsystem")
+@Scripts.Render("~/Scripts/translate")
+@*@Html.Partial("~/Views/Shared/_NavigationPartial.cshtml", @Model.Navigation)*@
+<div id="EducationalsystemContent">
+    @Html.Partial("~/Views/SetupManagement/Educationalsystem/_EducationalsystemContentPartial.cshtml", Model);
+</div>
+<script type="text/javascript">
+    var EducationalsystemSearchURL = '@Html.GetUrl("LoadSearchEducationalsystem", "Educationalsystem")';
+    var EducationalsystemDeleteURL = '@Html.GetUrl("EducationalsystemDelete", "Educationalsystem")';
+    var loadEducationalsystemURL = '@Html.GetUrl("LoadEducationalsystem", "Educationalsystem")';
+    var loader = '@Utilities.GetAbsotuleUrl("~/Content/image/ajax-loader.gif")';
+    var saveEducationalsystemUrl = '@Html.GetUrl("AddUpdateEducationalsystem", "Educationalsystem")';
+    var messageDelete = '@Html.Resource("MessageDelete", PublicResources)';
+    var loadTranslationEducationalsystemURL = '@Html.GetUrl("LoadTranslateEducationalsystem", "Educationalsystem")';
+
+    $("#SchoolSettings", $("#nav")).addClass("active open");
+    $("#SchoolSettings Ul", $("#nav")).show();
+
+</script>
+@section Scripts {
+    @Scripts.Render("~/bundles/kendo/js")
+}
+

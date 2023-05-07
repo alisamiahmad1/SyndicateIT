@@ -1,0 +1,60 @@
+﻿@model SyndicateIT.Model.ViewModel.ServiceManagement.ServiceDetails.AgendaDailyViewModel
+
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<div id="content">
+    <section id="Gender-content" class="">
+        <div class="row">
+            <!-- NEW WIDGET START -->
+            <article class="col-sm-12 sortable-grid ui-sortable">
+                <!-- Widget ID (each widget will need unique ID)-->
+                <div class="jarviswidget jarviswidgetTransparent" id="wid-id-x" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false" data-widget-custombutton="false" data-widget-sortable="false" role="widget">
+                    <header role="heading">
+                        <span class="widget-icon"> <i class="fa fa-align-justify"></i> </span>
+                        <h2>Search</h2>
+                        <span class="jarviswidget-loader"><i class="fa fa-lg fa-fw fa-th-list"></i></span>
+                    </header>
+                    <!-- widget div-->
+                    <div role="content">
+                        <div class="row">
+                            @using (Html.BeginForm("SearchAgenda", "ServiceManagement", FormMethod.Post, new { @class = "smart-form", role = "form" }))
+                            {
+                                <div class="col-sm-12 col-md-10">                                  
+                                    <section class="col col-3">
+                                        @Html.LabelFor(m => m.SearchDate, new { @class = "label" })
+                                        @Html.Kendo().DatePickerFor(model => model.SearchDate).HtmlAttributes(new { @class = "form-control  ", @maxlength = 200, @placeholder = "Enter Form Date" }).Name("SearchDate")
+                                        <span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error" data-for="SearchDate" data-valmsg-for="SearchDate" id="SearchDate_validationMessage" style="display:none;" role="alert"><span class="k-icon k-warning"> </span> The Date field is required.</span>
+                                    </section>
+                                </div>
+
+                                <div class="col-sm-12 col-md-2">
+                                    <section class="col col-6 ">
+                                        <label class="label">&nbsp;</label>
+                                        <button type="button" class="btn btn-serach " onclick="SearchAgenda()">Search</button>
+                                    </section>
+                                </div>
+                            }
+
+
+                        </div>
+                    </div>
+                    <!-- end widget content -->
+                </div>
+                <!-- end widget -->
+            </article>
+            <!-- WIDGET END -->
+            <!-- NEW WIDGET START -->
+            <!-- WIDGET END -->
+        </div>
+    </section>
+    <article class="col-sm-12 sortable-grid ui-sortable" id="Agenda-Daily-List"></article>
+</div>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            SearchAgenda();
+            $.validator.setDefaults({
+                ignore: ""
+            });
+        });
+
+    </script>

@@ -1,0 +1,78 @@
+﻿
+@model SyndicateIT.Model.ViewModel.SetupManagement.Subjects.SubjectsViewModel
+@using SyndicateIT.Views.App_GlobalResources
+@{
+    Layout = null;
+    string PublicResources = "~/Views/SetupManagement/Subjects/PublicResource";
+}
+@Html.Partial("~/Views/Shared/_NavigationPartial.cshtml", @Model.Navigation)
+<div id="content">
+    <div class="row">
+        <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+            <h1 class="page-title txt-color-blueDark">
+                <i class="@Model.ClassTitle"></i> @Model.Title<span></span>
+            </h1>
+        </div>
+    </div>
+    @Html.Partial("~/Views/Shared/_AlertPartial.cshtml", Model.Alert)
+    <section id="widget-grid" class="">
+        <!-- row -->
+        <div class="row">
+            <article class="col-sm-12 sortable-grid ui-sortable">
+                <!-- Widget ID (each widget will need unique ID)-->
+                <div class="jarviswidget jarviswidgetTransparent" id="wid-id-x" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false" data-widget-custombutton="false" data-widget-sortable="false" role="widget">
+                    <header role="heading"></header>
+                    <!-- widget div-->
+                    <div role="content">
+                        <div class="row">
+                            <div class="widget-body">
+                                @using (Html.BeginForm("AddUpdateSubjects", "Subjects", FormMethod.Post, new { @class = "smart-form", role = "form", id = "Subjects-form" }))
+                                {
+                                    @Html.HiddenFor(m => m.Subject_ID)
+                                    @Html.AntiForgeryToken()
+                                    @Html.ValidationSummary(true)
+                                    <fieldset>
+                                        <section class="form-group  col-sm-6">
+                                            @Html.Label(GeneralResources.IS_ACTIVE, new { @class = "col-md-4 control-label" })
+                                            <div class="col-md-6">
+                                                <label class="checkbox">
+                                                    @Html.CheckBoxFor(m => m.IS_ACTIVE, new { @checked = "checked" })
+                                                    <i></i>
+                                                </label>
+                                            </div>
+                                        </section>
+                                        <section class="form-group  col-sm-6">
+                                            @Html.LabelFor(m => m.Subject_Name, Html.Resource("Subject_Name", PublicResources), new { @class = "col-md-4 control-label" })
+                                            <div class="col-md-6">
+                                                @Html.Kendo().TextBoxFor(model => model.Subject_Name).HtmlAttributes(new { @class = "form-control form-control-md10" }).Name("Subject_Name")
+                                                <div class="text-danger field-validation-error" id="Subject_Name_ValidationMsg" style="display:none;">
+                                                    <span for="SearchSubjects" class=""> @Html.Resource("Subject_Name_Required", PublicResources)</span>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        <section class="form-group  col-sm-12">
+                                            @Html.LabelFor(m => m.Subject_Description, Html.Resource("Subject_Description", PublicResources), new { @class = "col-md-2 text-left control-label" })
+                                            <div class="col-md-9">
+                                                @(Html.Kendo().EditorFor(m => m.Subject_Description).Tools(tools => tools.Clear().Bold().Italic().Underline().Strikethrough().JustifyCenter().JustifyFull().JustifyLeft().JustifyRight().CreateLink().Unlink().TableEditing().FontColor().BackColor().Pdf().ViewHtml()))
+                                          </div>
+                                        </section>                                       
+                                    </fieldset>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end widget content -->
+                </div>
+                <div class="footer">
+                    <button type="button" class="btn btn-primary general-btn" onclick="SaveSubjects();">@GeneralResources.save</button>
+                </div>
+                <!-- end widget -->
+            </article>
+        </div>
+    </section>
+</div>
+@section Scripts {
+    @Scripts.Render("~/Scripts/Subjects")
+}
+
+

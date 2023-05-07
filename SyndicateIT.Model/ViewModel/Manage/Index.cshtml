@@ -1,0 +1,114 @@
+﻿@model SyndicateIT.Models.IndexViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Manage";
+    string resouceFilePath = "~/Views/UserManagement/Index.cshtml";
+}
+<div id="ribbon">
+    <!-- breadcrumb -->
+    <ol class="breadcrumb">
+        <li>Manage</li>
+        <li>My Profile</li>
+    </ol>
+</div>
+<div id="content">
+    <div class="row">
+        <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+            <h1 class="page-title txt-color-blueDark">
+                <i class="fa fa-lg fa-fw fa-comment-o"></i> @ViewBag.Title<span></span>
+            </h1>
+        </div>
+    </div>
+</div>
+<div id="content">
+    <div class="row">
+        <div class="col-xs-12 col-sm-7 col-md-7 col-lg-11">
+            <!-- row -->
+            <div class="row">
+                @if (!string.IsNullOrEmpty(@ViewBag.StatusMessage))
+                {
+                    <article class="col-sm-12">
+                        <div class="alert alert-success fade in">
+                            <i class="fa-fw fa fa-check"></i>
+                            <strong>Success</strong> @ViewBag.StatusMessage.
+                        </div>
+                    </article>
+                }
+               
+                <div class="col-sm-12 col-md-12 col-lg-11">
+                    <!-- well -->
+                    <div class="">
+                        <h3>Change your account settings</h3>
+                        <div class="modal-dialog demo-modal">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Profile Details</h4>
+                                </div>
+                                <div class="modal-body" style="color:#808080">
+                                    <div class="row">
+                                        <section class="col col-lg-3">
+                                            <label class="">
+                                                First Name
+                                            </label>
+                                        </section>
+                                        <section class="col col-lg-3">
+                                            <label class="" style="color:#000000">
+                                                @SessionContent.Container.Login.FirstName
+                                            </label>
+                                        </section>
+                                        <section class="col col-lg-3">
+                                            <label class="">
+                                                Last Name
+                                            </label>
+                                        </section>
+                                        <section class="col col-lg-3">
+                                            <label class="" style="color:#000000">
+                                                @SessionContent.Container.Login.LastName
+                                            </label>
+                                        </section>
+                                    </div>
+                                    <div class="row">
+                                        <section class="col col-lg-3">
+                                            <label class="">
+                                               Username Name
+                                            </label>
+                                        </section>
+                                        <section class="col col-lg-3">
+                                            <label class="" style="color:#000000">
+                                                @SessionContent.Container.Login.Email
+                                            </label>
+                                        </section>
+                                        <section class="col col-lg-3">
+                                            <label class="">
+                                                Role
+                                            </label>
+                                        </section>
+                                        <section class="col col-lg-3">
+                                            <label class="" style="color:#000000">
+                                                @SessionContent.Container.Login.UserRole
+                                            </label>
+                                        </section>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    @if (Model.HasPassword)
+                                    {
+                                        @Html.ActionLink("Change your password", "ChangePassword")
+                                    }
+                                    else
+                                    {
+                                        @Html.ActionLink("Create", "SetPassword")
+                                    }
+                                </div>
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal-dialog -->
+
+                    </div>
+                    <!-- end well-->
+
+                </div>
+            </div>
+            </div>
+        </div>
+ </div>
+

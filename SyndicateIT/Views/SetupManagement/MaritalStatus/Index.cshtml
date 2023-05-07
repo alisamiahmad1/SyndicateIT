@@ -1,0 +1,29 @@
+﻿@model  SyndicateIT.Model.ViewModel.SetupManagement.MaritalStatus.MaritalStatusContentViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string PublicResources = "~/Views/SetupManagement/MaritalStatus/PublicResource";
+}
+@Scripts.Render("~/Scripts/MaritalStatus")
+@Scripts.Render("~/Scripts/translate")
+@*@Html.Partial("~/Views/Shared/_NavigationPartial.cshtml", @Model.Navigation)*@
+<div id="MaritalStatusContent">
+    @Html.Partial("~/Views/SetupManagement/MaritalStatus/_MaritalStatusContentPartial.cshtml", Model);
+</div>
+<script type="text/javascript">
+    var MaritalStatusSearchURL = '@Html.GetUrl("LoadSearchMaritalStatus", "MaritalStatus")';
+    var MaritalStatusDeleteURL = '@Html.GetUrl("MaritalStatusDelete", "MaritalStatus")';
+    var loadMaritalStatusURL = '@Html.GetUrl("LoadMaritalStatus", "MaritalStatus")';
+    var loader = '@Utilities.GetAbsotuleUrl("~/Content/image/ajax-loader.gif")';
+    var saveMaritalStatusUrl = '@Html.GetUrl("AddUpdateMaritalStatus", "MaritalStatus")';
+    var messageDelete = '@Html.Resource("MessageDelete", PublicResources)';
+    var loadTranslationMaritalStatusURL = '@Html.GetUrl("LoadTranslateMaritalStatus", "MaritalStatus")';
+
+    $("#SchoolSettings", $("#nav")).addClass("active open");
+    $("#SchoolSettings Ul", $("#nav")).show();
+
+</script>
+@section Scripts {
+    @Scripts.Render("~/bundles/kendo/js")
+}
+

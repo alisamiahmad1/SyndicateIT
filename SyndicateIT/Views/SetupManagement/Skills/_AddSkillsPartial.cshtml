@@ -1,0 +1,232 @@
+﻿
+@model SyndicateIT.Model.ViewModel.SetupManagement.skills.skillsViewModel
+@using SyndicateIT.Views.App_GlobalResources
+@{
+    Layout = null;
+    string PublicResources = "~/Views/SetupManagement/Skills/PublicResource";
+}
+@Html.Partial("~/Views/Shared/_NavigationPartial.cshtml", @Model.Navigation)
+<div id="content">
+    <div class="row">
+        <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+            <h1 class="page-title txt-color-blueDark">
+                <i class="@Model.ClassTitle"></i> @Model.Title<span></span>
+            </h1>
+        </div>
+    </div>
+    @Html.Partial("~/Views/Shared/_AlertPartial.cshtml", Model.Alert)
+    <section id="widget-grid" class="">
+        <!-- row -->
+        <div class="row">
+            <article class="col-sm-12 sortable-grid ui-sortable">
+                <!-- Widget ID (each widget will need unique ID)-->
+                <div class="jarviswidget jarviswidgetTransparent" id="wid-id-x" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false" data-widget-custombutton="false" data-widget-sortable="false" role="widget">
+                    <header role="heading"></header>
+                    <!-- widget div-->
+                    <div role="content">
+                        <div class="row">
+                            <div class="widget-body">
+                                @using (Html.BeginForm("AddUpdateSkills", "Skills", FormMethod.Post, new { @class = "smart-form", role = "form", id = "Skills-form" }))
+                                {
+                                    @Html.HiddenFor(m => m.Skill_ID)
+                                    @Html.AntiForgeryToken()
+                                    @Html.ValidationSummary(true)
+                                    <fieldset>
+                                        <section class="form-group  col-sm-12">
+                                            @Html.Label(GeneralResources.IS_ACTIVE, new { @class = "col-md-2 control-label" })
+                                            <div class="col-md-10">
+                                                <label class="checkbox">
+                                                    @Html.CheckBoxFor(m => m.IS_ACTIVE, new { @checked = "checked" })
+                                                    <i></i>
+                                                </label>
+                                            </div>
+                                        </section>
+                                        <section class="form-group  col-sm-6">
+                                            @Html.LabelFor(m => m.Skill_Name, Html.Resource("Skill_Name", PublicResources), new { @class = "col-md-4 control-label" })
+                                            <div class="col-md-6">
+                                                @Html.Kendo().TextBoxFor(model => model.Skill_Name).HtmlAttributes(new { @class = "form-control form-control-md10" }).Name("Skill_Name")
+                                                <div class="text-danger field-validation-error" id="Skill_Name_ValidationMsg" style="display:none;">
+                                                    <span for="SearchSkills" class=""> @Html.Resource("Skill_Name_Required", PublicResources)</span>
+                                                </div>
+                                            </div>
+                                        </section>
+
+                                        <section class="form-group  col-sm-6">
+                                            @Html.LabelFor(m => m.Cycle_id, Html.Resource("Cycle_id", PublicResources), new { @class = "col-md-4 control-label" })
+                                            <div class="col-md-6">
+                                                @(Html.Kendo().DropDownListFor(m => m.Cycle_id)
+                                                .DataTextField("Text")
+                                                .DataValueField("Value")
+                                                .OptionLabel("Select Stage")
+                                                .HtmlAttributes(new { @class = "ui-select form-control-md10" })
+                                                .DataSource(source =>
+                                                {
+                                                    source.Read(read =>
+                                                    {
+                                                        read.Action("GetCycleTypesList", "Skills");
+                                                    });
+                                                }))
+                                                <div class="text-danger field-validation-error" id="Cycle_id_ValidationMsg" style="display:none;">
+                                                    <span for="Cycle_id" class=""> @Html.Resource("Cycle_id_Required", PublicResources)</span>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        <section class="form-group  col-sm-6">
+                                            @Html.LabelFor(m => m.Class_ID, Html.Resource("Class_ID", PublicResources), new { @class = "col-md-4 text-center control-label" })
+                                            <div class="col-md-6">
+                                                @(Html.Kendo().DropDownListFor(m => m.Class_ID)
+                                                .DataTextField("Text")
+                                                .DataValueField("Value")
+                                                .OptionLabel("Select Class")
+                                                .HtmlAttributes(new { @class = "ui-select form-control-md10" })
+
+                                                  .Value(Model.Class_ID.ToString())
+                                                         .DataSource(source =>
+                                                            {
+                                                                source.Read(read =>
+                                                                {
+                                                                    read.Action("GetClass", "Skills")
+                                                                    .Data("FilterStage");
+                                                                }).ServerFiltering(true);
+                                                            })
+                                                        .Enable(true)
+                                                        .AutoBind(false)
+                                                        .CascadeFrom("Cycle_id"))
+                                                <div class="text-danger field-validation-error" id="Class_ID_ValidationMsg" style="display:none;">
+                                                    <span for="Class_ID" class=""> @Html.Resource("Class_ID_Required", PublicResources)</span>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        <section class="form-group  col-sm-6">
+                                            @Html.LabelFor(m => m.Division_ID, Html.Resource("Division_ID", PublicResources), new { @class = "col-md-4  control-label" })
+                                            <div class="col-md-6">
+                                                @(Html.Kendo().DropDownListFor(m => m.Division_ID)
+                                                .DataTextField("Text")
+                                                .DataValueField("Value")
+                                                .OptionLabel("Select Division")
+                                                .HtmlAttributes(new { @class = "ui-select form-control-md10" })
+                                                .Value(Model.Division_ID.ToString())
+                                                         .DataSource(source =>
+                                                            {
+                                                                source.Read(read =>
+                                                                {
+                                                                    read.Action("GetDivision", "Skills")
+                                                                    .Data("FilterClass");
+                                                                }).ServerFiltering(true);
+                                                            })
+                                                        .Enable(true)
+                                                        .AutoBind(false)
+                                                        .CascadeFrom("Class_ID")
+                                                )
+                                                <div class="text-danger field-validation-error" id="Division_ID_ValidationMsg" style="display:none;">
+                                                    <span for="Division_ID" class=""> @Html.Resource("Division_ID_Required", PublicResources)</span>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        <section class="form-group  col-sm-6">
+                                            @Html.LabelFor(m => m.Subject_ID, Html.Resource("Subject_ID", PublicResources), new { @class = "col-md-4 text-center control-label" })
+                                            <div class="col-md-6">
+                                                @(Html.Kendo().DropDownListFor(m => m.Subject_ID)
+                                                .DataTextField("Text")
+                                                .DataValueField("Value")
+                                                .OptionLabel("Select Subject")
+                                                .HtmlAttributes(new { @class = "ui-select form-control-md10" })
+                                                .DataSource(source =>
+                                                {
+                                                    source.Read(read =>
+                                                    {
+                                                        read.Action("GetSubjectName", "Skills");
+                                                    });
+                                                }))
+                                                <div class="text-danger field-validation-error" id="Subject_ID_ValidationMsg" style="display:none;">
+                                                    <span for="Subject_ID" class=""> @Html.Resource("Subject_ID_Required", PublicResources)</span>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        <section class="form-group  col-sm-6">
+                                            @Html.LabelFor(m => m.Course_ID, Html.Resource("Course_ID", PublicResources), new { @class = "col-md-4 control-label" })
+                                            <div class="col-md-6">
+                                                @(Html.Kendo().DropDownListFor(m => m.Course_ID)
+                                                .DataTextField("Text")
+                                                .DataValueField("Value")
+                                                .OptionLabel("Select Course")
+                                                .HtmlAttributes(new { @class = "ui-select form-control-md10" })
+                                                .DataSource(source =>
+                                                {
+                                                    source.Read(read =>
+                                                    {
+                                                        read.Action("GetCourse", "Skills").Data("FilterDivision"); ;
+                                                    }).ServerFiltering(true);
+                                                })
+                                               .Enable(true)
+                                                .AutoBind(false)
+                                                .CascadeFrom("Division_ID"))
+                                                <div class="text-danger field-validation-error" id="Course_ID_ValidationMsg" style="display:none;">
+                                                    <span for="Course_ID" class=""> @Html.Resource("Course_ID_Required", PublicResources)</span>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        <section id="SecCoeficientGrade" class="form-group  col-sm-6">
+                                            @Html.LabelFor(m => m.Coeficient_Grade, Html.Resource("Coeficient_Grade", PublicResources), new { @class = "col-md-4 control-label" })
+                                            <div class="col-md-6">
+                                                @Html.Kendo().TextBoxFor(model => model.Coeficient_Grade).HtmlAttributes(new { @class = "form-control form-control-md10" }).Name("Coeficient_Grade")
+                                                <div class="text-danger field-validation-error" id="Coeficient_Grade_ValidationMsg" style="display:none;">
+                                                    <span for="Coeficient_Grade" class=""> @Html.Resource("Coeficient_Grade_Required", PublicResources)</span>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        <section id="SecKjCoeficientGrade" class="form-group  col-sm-6">
+                                            @Html.LabelFor(m => m.Coeficient_KJGrade, Html.Resource("Coeficient_KJGrade", PublicResources), new { @class = "col-md-4 text-center control-label" })
+                                            <div class="col-md-6">
+                                                @(Html.Kendo().DropDownListFor(m => m.Coeficient_KJGrade)
+                                                .DataTextField("Text")
+                                                .DataValueField("Value")
+                                                .OptionLabel("Select Grade")
+                                                .HtmlAttributes(new { @class = "ui-select form-control-md10" })
+                                                .DataSource(source =>
+                                                {
+                                                    source.Read(read =>
+                                                    {
+                                                        read.Action("GetCoeficientSkill", "Skills");
+                                                    });
+                                                }))
+                                                <div class="text-danger field-validation-error" id="Coeficient_KJGrade_ValidationMsg" style="display:none;">
+                                                    <span for="Coeficient_KJGrade" class=""> @Html.Resource("Coeficient_KJGrade_Required", PublicResources)</span>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        <section id="Serial_ID" class="form-group  col-sm-6">
+                                            @Html.LabelFor(m => m.Coeficient_Grade, Html.Resource("Serial_ID", PublicResources), new { @class = "col-md-4 control-label" })
+                                            <div class="col-md-6">
+                                                @Html.Kendo().TextBoxFor(model => model.Serial_ID).HtmlAttributes(new { @class = "form-control form-control-md10" }).Name("Serial_ID")
+                                                <div class="text-danger field-validation-error" id="Coeficient_Grade_ValidationMsg" style="display:none;">
+
+                                                </div>
+                                            </div>
+                                        </section>
+                                        <section class="form-group  col-sm-12">
+                                            @Html.LabelFor(m => m.Skill_Description, Html.Resource("Skill_Description", PublicResources), new { @class = "col-md-2 text-left control-label" })
+                                            <div class="col-md-9">
+                                                @(Html.Kendo().EditorFor(m => m.Skill_Description).Tools(tools => tools.Clear().Bold().Italic().Underline().Strikethrough().JustifyCenter().JustifyFull().JustifyLeft().JustifyRight().CreateLink().Unlink().TableEditing().FontColor().BackColor().Pdf().ViewHtml()))
+                                            </div>
+                                        </section>
+                                    </fieldset>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end widget content -->
+                </div>
+                <!-- end widget -->
+                <div class="footer">
+                    <button type="button" class="btn btn-primary general-btn" onclick="SaveSkills();">@GeneralResources.save</button>
+                </div>
+            </article>
+        </div>
+    </section>
+</div>
+@section Scripts {
+    @Scripts.Render("~/Scripts/Skills")
+}
+
+

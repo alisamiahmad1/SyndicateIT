@@ -1,0 +1,1272 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AccountName" xml:space="preserve">
+    <value>Account Name</value>
+  </data>
+  <data name="AccountNumber" xml:space="preserve">
+    <value>Account Number</value>
+  </data>
+  <data name="AccountType" xml:space="preserve">
+    <value>Account Type</value>
+  </data>
+  <data name="Account_ID" xml:space="preserve">
+    <value>AccountID</value>
+  </data>
+  <data name="ActivitiesSocieties" xml:space="preserve">
+    <value>Activities and Societies</value>
+  </data>
+  <data name="add" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="AddApplicationStatus" xml:space="preserve">
+    <value>Add Application Status</value>
+  </data>
+  <data name="AddFiles" xml:space="preserve">
+    <value>Add Files</value>
+  </data>
+  <data name="AddFilesCopyID" xml:space="preserve">
+    <value>Copy of ID صورة عن الهوية</value>
+  </data>
+  <data name="AddFilesCV" xml:space="preserve">
+    <value>CV الملف الشخصي</value>
+  </data>
+  <data name="AddFilesEducationalStatus" xml:space="preserve">
+    <value>Educational Status الوضع العلمي</value>
+  </data>
+  <data name="AddFilesJobLetter" xml:space="preserve">
+    <value>Job Letter افادة عمل</value>
+  </data>
+  <data name="AddFilesJudicialRecord" xml:space="preserve">
+    <value>Judicial record سجل عدلي</value>
+  </data>
+  <data name="AddFilesProofResidence" xml:space="preserve">
+    <value>Proof of Residence افادة سكن</value>
+  </data>
+  <data name="AddRegis" xml:space="preserve">
+    <value>Add Regisrtation</value>
+  </data>
+  <data name="Amount" xml:space="preserve">
+    <value>Total Amount</value>
+  </data>
+  <data name="Assignment" xml:space="preserve">
+    <value>Assignment</value>
+  </data>
+  <data name="BankID" xml:space="preserve">
+    <value>BankID</value>
+  </data>
+  <data name="BankName" xml:space="preserve">
+    <value>Bank Name</value>
+  </data>
+  <data name="BankNumber" xml:space="preserve">
+    <value>Bank Number</value>
+  </data>
+  <data name="BUILDING" xml:space="preserve">
+    <value>Building</value>
+  </data>
+  <data name="BuildingRequired" xml:space="preserve">
+    <value>The building field is required</value>
+  </data>
+  <data name="CardNumber" xml:space="preserve">
+    <value>Card Number</value>
+  </data>
+  <data name="CardNumberValid" xml:space="preserve">
+    <value>Please enter card number field</value>
+  </data>
+  <data name="CityRequired" xml:space="preserve">
+    <value>The city field is required</value>
+  </data>
+  <data name="CITY_ID" xml:space="preserve">
+    <value>City</value>
+  </data>
+  <data name="ClassName" xml:space="preserve">
+    <value>Class Name</value>
+  </data>
+  <data name="ClassNameValid" xml:space="preserve">
+    <value>Please enter class field</value>
+  </data>
+  <data name="ClassValid" xml:space="preserve">
+    <value>please select a class</value>
+  </data>
+  <data name="Class_ID" xml:space="preserve">
+    <value>Class</value>
+  </data>
+  <data name="CloseDate" xml:space="preserve">
+    <value>Close Date</value>
+  </data>
+  <data name="committee" xml:space="preserve">
+    <value>Committee</value>
+  </data>
+  <data name="Company" xml:space="preserve">
+    <value>Company</value>
+  </data>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>Confirm Password</value>
+  </data>
+  <data name="Contract_Date" xml:space="preserve">
+    <value>Contract Date</value>
+  </data>
+  <data name="CountryID" xml:space="preserve">
+    <value>Country ID</value>
+  </data>
+  <data name="COUNTRYISS_ID" xml:space="preserve">
+    <value>Issuing Country</value>
+  </data>
+  <data name="CountryRequired" xml:space="preserve">
+    <value>The country field is required</value>
+  </data>
+  <data name="COUNTRY_ID" xml:space="preserve">
+    <value>Country</value>
+  </data>
+  <data name="CreationDate" xml:space="preserve">
+    <value>Creation Date</value>
+  </data>
+  <data name="CurrencyID" xml:space="preserve">
+    <value>Currency ID</value>
+  </data>
+  <data name="CycleName" xml:space="preserve">
+    <value>Cycle Name</value>
+  </data>
+  <data name="CycleNameValid" xml:space="preserve">
+    <value>The Cycle Name is required</value>
+  </data>
+  <data name="CycleName_validationMessage" xml:space="preserve">
+    <value>The Cycle Name is required</value>
+  </data>
+  <data name="CycleValid" xml:space="preserve">
+    <value>The Cycle field is required</value>
+  </data>
+  <data name="Cycle_ID" xml:space="preserve">
+    <value>Cycle</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="Degree" xml:space="preserve">
+    <value>Degree</value>
+  </data>
+  <data name="DegreeGuaranteeNotes" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="DegreeGuarantee_Id" xml:space="preserve">
+    <value>Degree Guarantee</value>
+  </data>
+  <data name="DegreeInsurance_Id" xml:space="preserve">
+    <value>Degree Insurance</value>
+  </data>
+  <data name="Department" xml:space="preserve">
+    <value>Department</value>
+  </data>
+  <data name="DepartmentValid" xml:space="preserve">
+    <value>Enter the department</value>
+  </data>
+  <data name="DEPARTMENT_ID" xml:space="preserve">
+    <value>Department</value>
+  </data>
+  <data name="desc" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="DescriptionValid" xml:space="preserve">
+    <value>please enter the description</value>
+  </data>
+  <data name="Division" xml:space="preserve">
+    <value>Division</value>
+  </data>
+  <data name="DivisionValid" xml:space="preserve">
+    <value>please select a division</value>
+  </data>
+  <data name="Division_ID" xml:space="preserve">
+    <value>Division</value>
+  </data>
+  <data name="Document" xml:space="preserve">
+    <value>Document</value>
+  </data>
+  <data name="Education" xml:space="preserve">
+    <value>Education</value>
+  </data>
+  <data name="EducationLanguage" xml:space="preserve">
+    <value>Education System</value>
+  </data>
+  <data name="EducationSystem" xml:space="preserve">
+    <value>Educational Status</value>
+  </data>
+  <data name="EmployeeNumber" xml:space="preserve">
+    <value>Employee Number</value>
+  </data>
+  <data name="EnterAccountType" xml:space="preserve">
+    <value>Enter Account Type</value>
+  </data>
+  <data name="EnterAccount_ID" xml:space="preserve">
+    <value>Select AccountID</value>
+  </data>
+  <data name="EnterAmount" xml:space="preserve">
+    <value>Enter Total Amount</value>
+  </data>
+  <data name="EnterApplicationDate" xml:space="preserve">
+    <value>Enter Application Date</value>
+  </data>
+  <data name="EnterApplicationNumber" xml:space="preserve">
+    <value>Enter Application Number</value>
+  </data>
+  <data name="EnterBus_id" xml:space="preserve">
+    <value>Enter Bus</value>
+  </data>
+  <data name="EnterClass" xml:space="preserve">
+    <value>Select Class</value>
+  </data>
+  <data name="EnterClassName" xml:space="preserve">
+    <value>Enter Class</value>
+  </data>
+  <data name="EnterClass_Id" xml:space="preserve">
+    <value>Class</value>
+  </data>
+  <data name="EnterCompanys_ID" xml:space="preserve">
+    <value>Enter Company</value>
+  </data>
+  <data name="EnterCountryID" xml:space="preserve">
+    <value>Enter Country</value>
+  </data>
+  <data name="EnterCountry_ID" xml:space="preserve">
+    <value>Enter Country</value>
+  </data>
+  <data name="EnterCourse_Id" xml:space="preserve">
+    <value>Course</value>
+  </data>
+  <data name="EnterCurrencyID" xml:space="preserve">
+    <value>Enter Currency</value>
+  </data>
+  <data name="EnterCycle" xml:space="preserve">
+    <value>Enter Cycle</value>
+  </data>
+  <data name="EnterCycleName" xml:space="preserve">
+    <value>Please enter cycle name field</value>
+  </data>
+  <data name="EnterCycle_Id" xml:space="preserve">
+    <value>Enter Cycle</value>
+  </data>
+  <data name="EnterDate_Of_Birth" xml:space="preserve">
+    <value>Enter Date of Birth</value>
+  </data>
+  <data name="EnterDepartment" xml:space="preserve">
+    <value>Enter Department</value>
+  </data>
+  <data name="EnterDescription" xml:space="preserve">
+    <value>Enter Description</value>
+  </data>
+  <data name="EnterDivision" xml:space="preserve">
+    <value>Select Division</value>
+  </data>
+  <data name="EnterDivision_Id" xml:space="preserve">
+    <value>Division</value>
+  </data>
+  <data name="EnterEducationLanguage" xml:space="preserve">
+    <value>Enter Education Language</value>
+  </data>
+  <data name="EnterEducationSystem" xml:space="preserve">
+    <value>Enter Education System</value>
+  </data>
+  <data name="EnterEmail" xml:space="preserve">
+    <value>Enter Email</value>
+  </data>
+  <data name="EnterFacebook_ID" xml:space="preserve">
+    <value>Enter Facebook</value>
+  </data>
+  <data name="EnterFirstName" xml:space="preserve">
+    <value>Enter First Name</value>
+  </data>
+  <data name="EnterFirstNameName_Ar" xml:space="preserve">
+    <value>Enter First Name </value>
+  </data>
+  <data name="EnterFirstNationality" xml:space="preserve">
+    <value>Enter First Nationality</value>
+  </data>
+  <data name="EnterFrom" xml:space="preserve">
+    <value>From</value>
+  </data>
+  <data name="EnterFromHistory" xml:space="preserve">
+    <value>Enter From History</value>
+  </data>
+  <data name="EnterGenders_Id" xml:space="preserve">
+    <value>Enter Gender</value>
+  </data>
+  <data name="EnterGoogle_ID" xml:space="preserve">
+    <value>Enter Google</value>
+  </data>
+  <data name="EnterIDNumber" xml:space="preserve">
+    <value>Enter ID Number</value>
+  </data>
+  <data name="EnterLastName" xml:space="preserve">
+    <value>Enter Last Name</value>
+  </data>
+  <data name="EnterLastName_Ar" xml:space="preserve">
+    <value>Enter Last Name </value>
+  </data>
+  <data name="Enterlinkedin" xml:space="preserve">
+    <value>Enter linkedin</value>
+  </data>
+  <data name="EnterLocation" xml:space="preserve">
+    <value>Enter Location</value>
+  </data>
+  <data name="EnterMaritals_ID" xml:space="preserve">
+    <value>Enter Marital Status</value>
+  </data>
+  <data name="EnterMIddleName" xml:space="preserve">
+    <value>Enter Middle Name</value>
+  </data>
+  <data name="EnterMiddleName_Ar" xml:space="preserve">
+    <value>Enter Middle Name  </value>
+  </data>
+  <data name="EnterMobileAlternateNumber" xml:space="preserve">
+    <value>Enter Mobile Alternate Number</value>
+  </data>
+  <data name="EnterMobileNumber" xml:space="preserve">
+    <value>Enter Mobile Number</value>
+  </data>
+  <data name="EnterMotherName" xml:space="preserve">
+    <value>Enter Mother Name</value>
+  </data>
+  <data name="EnterMotherName_Ar" xml:space="preserve">
+    <value>Enter Mother Name </value>
+  </data>
+  <data name="EnterPhoneAlternateNumber" xml:space="preserve">
+    <value>Enter Phone Alternate Number</value>
+  </data>
+  <data name="EnterPhoneNumber" xml:space="preserve">
+    <value>Enter Phone Number</value>
+  </data>
+  <data name="EnterPlace_Of_Birth" xml:space="preserve">
+    <value>Enter Place of Birth</value>
+  </data>
+  <data name="EnterPromotionFrom" xml:space="preserve">
+    <value>Select Class</value>
+  </data>
+  <data name="EnterPromotionTo" xml:space="preserve">
+    <value>Select Class</value>
+  </data>
+  <data name="EnterRegisteryNumber" xml:space="preserve">
+    <value>Enter Registery Number</value>
+  </data>
+  <data name="EnterRegisteryPlace" xml:space="preserve">
+    <value>Enter Registery Place</value>
+  </data>
+  <data name="EnterReligions_ID" xml:space="preserve">
+    <value>Enter Religion</value>
+  </data>
+  <data name="EnterRoles_ID" xml:space="preserve">
+    <value>Enter Role</value>
+  </data>
+  <data name="EnterSchoolName" xml:space="preserve">
+    <value>Enter School Name</value>
+  </data>
+  <data name="EnterSecondNationality" xml:space="preserve">
+    <value>Enter Second Nationality</value>
+  </data>
+  <data name="EnterSerialNumber" xml:space="preserve">
+    <value>Enter Accounting Id</value>
+  </data>
+  <data name="EnterStage" xml:space="preserve">
+    <value>Select Cycle</value>
+  </data>
+  <data name="EnterStageName" xml:space="preserve">
+    <value>Enter Cycle</value>
+  </data>
+  <data name="EnterStage_Id" xml:space="preserve">
+    <value>Cycle</value>
+  </data>
+  <data name="EnterStatusID" xml:space="preserve">
+    <value>Enter Status</value>
+  </data>
+  <data name="EnterSubjects_ID" xml:space="preserve">
+    <value>Enter Subject</value>
+  </data>
+  <data name="EnterTo" xml:space="preserve">
+    <value>To</value>
+  </data>
+  <data name="EnterToHistory" xml:space="preserve">
+    <value>Enter To History</value>
+  </data>
+  <data name="EnterTransactionDate" xml:space="preserve">
+    <value>Enter Transaction Date</value>
+  </data>
+  <data name="Entertwitter" xml:space="preserve">
+    <value>Enter twitter</value>
+  </data>
+  <data name="EnterUserName" xml:space="preserve">
+    <value>Enter User Name</value>
+  </data>
+  <data name="EnterUserReference_ID" xml:space="preserve">
+    <value>Enter Member Board Reference</value>
+  </data>
+  <data name="FAX" xml:space="preserve">
+    <value>Fax</value>
+  </data>
+  <data name="Files" xml:space="preserve">
+    <value>Files</value>
+  </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>First Name</value>
+  </data>
+  <data name="FLOOR" xml:space="preserve">
+    <value>Floor</value>
+  </data>
+  <data name="FloorRequired" xml:space="preserve">
+    <value>The Floor field is required</value>
+  </data>
+  <data name="From" xml:space="preserve">
+    <value>From Date</value>
+  </data>
+  <data name="FromDate" xml:space="preserve">
+    <value>From Date</value>
+  </data>
+  <data name="FromHistory" xml:space="preserve">
+    <value>From History</value>
+  </data>
+  <data name="FromHistoryValid" xml:space="preserve">
+    <value>please enter from history</value>
+  </data>
+  <data name="FromValid" xml:space="preserve">
+    <value>please enter from field</value>
+  </data>
+  <data name="Grade" xml:space="preserve">
+    <value>Grade</value>
+  </data>
+  <data name="HasAccepted" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="HasCardDelivered" xml:space="preserve">
+    <value>Has Card Delivered</value>
+  </data>
+  <data name="HasCardIssued" xml:space="preserve">
+    <value>Has Card Issued</value>
+  </data>
+  <data name="HasGuarantee" xml:space="preserve">
+    <value>Has Guarantee</value>
+  </data>
+  <data name="HasInsurance" xml:space="preserve">
+    <value>Has Insurance</value>
+  </data>
+  <data name="HasRegistration" xml:space="preserve">
+    <value>Has Registration</value>
+  </data>
+  <data name="HasResetPassword" xml:space="preserve">
+    <value>Reset Password</value>
+  </data>
+  <data name="HPD" xml:space="preserve">
+    <value>Hours Per Day</value>
+  </data>
+  <data name="IBAN" xml:space="preserve">
+    <value>IBAN</value>
+  </data>
+  <data name="InsuranceandGuarantee" xml:space="preserve">
+    <value>Insurance &amp;&amp; Guarantee</value>
+  </data>
+  <data name="IS_INTERNATIONAL" xml:space="preserve">
+    <value>International</value>
+  </data>
+  <data name="Job" xml:space="preserve">
+    <value>Job</value>
+  </data>
+  <data name="JobTitle" xml:space="preserve">
+    <value>Job Title</value>
+  </data>
+  <data name="JOB_ID" xml:space="preserve">
+    <value>Job Title</value>
+  </data>
+  <data name="LastName" xml:space="preserve">
+    <value>Last Name</value>
+  </data>
+  <data name="LblAccountInfo" xml:space="preserve">
+    <value>Account Info</value>
+  </data>
+  <data name="LblAddAccount" xml:space="preserve">
+    <value>Add Account</value>
+  </data>
+  <data name="LblAddDependent" xml:space="preserve">
+    <value>Add Dependent</value>
+  </data>
+  <data name="LblAddEducation" xml:space="preserve">
+    <value>Add Education</value>
+  </data>
+  <data name="LblAddExperience" xml:space="preserve">
+    <value>Add Experience</value>
+  </data>
+  <data name="LblAddTransaction" xml:space="preserve">
+    <value>Add Transaction</value>
+  </data>
+  <data name="LblAnglais" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="LblApplication" xml:space="preserve">
+    <value>Application</value>
+  </data>
+  <data name="LblApplicationDate" xml:space="preserve">
+    <value>Application Date</value>
+  </data>
+  <data name="LblApplicationNumber" xml:space="preserve">
+    <value>Application Number</value>
+  </data>
+  <data name="LblApplicationStatusHistory" xml:space="preserve">
+    <value>Application Status History</value>
+  </data>
+  <data name="LblArabic" xml:space="preserve">
+    <value>Arabic</value>
+  </data>
+  <data name="LblBus_id" xml:space="preserve">
+    <value>Bus</value>
+  </data>
+  <data name="LblClass_Id" xml:space="preserve">
+    <value>Class</value>
+  </data>
+  <data name="LblCompanys_ID" xml:space="preserve">
+    <value>Company</value>
+  </data>
+  <data name="LblCountry_ID" xml:space="preserve">
+    <value>Country</value>
+  </data>
+  <data name="LblCourse_Id" xml:space="preserve">
+    <value>Course</value>
+  </data>
+  <data name="LblCycle_Id" xml:space="preserve">
+    <value>Cycle</value>
+  </data>
+  <data name="LblDateOfBirth" xml:space="preserve">
+    <value>Date of Birth</value>
+  </data>
+  <data name="LblDate_Of_Birth" xml:space="preserve">
+    <value>Date of Birth</value>
+  </data>
+  <data name="LblDelete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="LblDependentInfo" xml:space="preserve">
+    <value>Dependent Info</value>
+  </data>
+  <data name="LblDivision_Id" xml:space="preserve">
+    <value>Division</value>
+  </data>
+  <data name="LblDriverLicense" xml:space="preserve">
+    <value>Driver's License</value>
+  </data>
+  <data name="LblEducationInfo" xml:space="preserve">
+    <value>Education Info</value>
+  </data>
+  <data name="LblEmail" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="LblEmploymentInfo" xml:space="preserve">
+    <value>Employment Info</value>
+  </data>
+  <data name="LblExperienceInfo" xml:space="preserve">
+    <value>Experience </value>
+  </data>
+  <data name="LblFacebook_ID" xml:space="preserve">
+    <value>Facebook</value>
+  </data>
+  <data name="LblFirstContact" xml:space="preserve">
+    <value>First Contact</value>
+  </data>
+  <data name="LblFirstName" xml:space="preserve">
+    <value>First Name</value>
+  </data>
+  <data name="LblFirstNameName_Ar" xml:space="preserve">
+    <value>First Name (Arabic)</value>
+  </data>
+  <data name="LblFirstNationality" xml:space="preserve">
+    <value>First Nationality</value>
+  </data>
+  <data name="LblFrench" xml:space="preserve">
+    <value>French</value>
+  </data>
+  <data name="LblGenders_Id" xml:space="preserve">
+    <value>Gender</value>
+  </data>
+  <data name="LblGoogle_ID" xml:space="preserve">
+    <value>Google</value>
+  </data>
+  <data name="LblHasEmergencyContact" xml:space="preserve">
+    <value>Has Emergency Contact</value>
+  </data>
+  <data name="LblIDNumber" xml:space="preserve">
+    <value>Number ID</value>
+  </data>
+  <data name="LblIsMemberOfSchool" xml:space="preserve">
+    <value>Member of School</value>
+  </data>
+  <data name="LblLanguages" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="LblLastName" xml:space="preserve">
+    <value>Last Name</value>
+  </data>
+  <data name="LblLastName_Ar" xml:space="preserve">
+    <value>Last Name (Arabic)</value>
+  </data>
+  <data name="Lbllinkedin" xml:space="preserve">
+    <value>linkedin</value>
+  </data>
+  <data name="LblListAccount" xml:space="preserve">
+    <value>List Account</value>
+  </data>
+  <data name="LblListDependent" xml:space="preserve">
+    <value>List Dependent</value>
+  </data>
+  <data name="LblListEducation" xml:space="preserve">
+    <value>List Education</value>
+  </data>
+  <data name="LblListExperience" xml:space="preserve">
+    <value>List Experience</value>
+  </data>
+  <data name="LblListTransaction" xml:space="preserve">
+    <value>List Transaction</value>
+  </data>
+  <data name="LblMaritals_ID" xml:space="preserve">
+    <value>Marital Status</value>
+  </data>
+  <data name="LblMIddleName" xml:space="preserve">
+    <value>Middle Name</value>
+  </data>
+  <data name="LblMiddleName_Ar" xml:space="preserve">
+    <value>Middle Name (Arabic)</value>
+  </data>
+  <data name="LblMobile" xml:space="preserve">
+    <value>Mobile</value>
+  </data>
+  <data name="LblMobileAlternateNumber" xml:space="preserve">
+    <value>Mobile Alternate Number</value>
+  </data>
+  <data name="LblMobileNumber" xml:space="preserve">
+    <value>Mobile Number</value>
+  </data>
+  <data name="LblMotherName" xml:space="preserve">
+    <value>Mother Name</value>
+  </data>
+  <data name="LblMotherName_Ar" xml:space="preserve">
+    <value>Mother Name (Arabic)</value>
+  </data>
+  <data name="LblPhoneAlternateNumber" xml:space="preserve">
+    <value>Phone Alternate Number</value>
+  </data>
+  <data name="LblPhoneNumber" xml:space="preserve">
+    <value>Phone Number</value>
+  </data>
+  <data name="LblPlace_Of_Birth" xml:space="preserve">
+    <value>Place of  Birth</value>
+  </data>
+  <data name="LblProfileInfo" xml:space="preserve">
+    <value>Profile Info</value>
+  </data>
+  <data name="LblReading" xml:space="preserve">
+    <value>Reading</value>
+  </data>
+  <data name="LblRegisteryNumber" xml:space="preserve">
+    <value>Registery Number</value>
+  </data>
+  <data name="LblRegisteryPlace" xml:space="preserve">
+    <value>Registery Place</value>
+  </data>
+  <data name="LblRegistration" xml:space="preserve">
+    <value>Registration</value>
+  </data>
+  <data name="LblRelationShip" xml:space="preserve">
+    <value>Relationship</value>
+  </data>
+  <data name="LblRelation_Type_ID" xml:space="preserve">
+    <value>Relation Type</value>
+  </data>
+  <data name="LblRelative_ID" xml:space="preserve">
+    <value>Relative</value>
+  </data>
+  <data name="LblReligions_ID" xml:space="preserve">
+    <value>Religion</value>
+  </data>
+  <data name="LblRoles_ID" xml:space="preserve">
+    <value>Role</value>
+  </data>
+  <data name="LblSchoolHistory" xml:space="preserve">
+    <value>School History</value>
+  </data>
+  <data name="LblSecondContact" xml:space="preserve">
+    <value>Second Contact</value>
+  </data>
+  <data name="LblSecondNationality" xml:space="preserve">
+    <value>Second Nationality</value>
+  </data>
+  <data name="LblSerialNumber" xml:space="preserve">
+    <value>Accounting Id</value>
+  </data>
+  <data name="LblSocialNetworking" xml:space="preserve">
+    <value>Social Networking</value>
+  </data>
+  <data name="LblSpeaking" xml:space="preserve">
+    <value>Speaking</value>
+  </data>
+  <data name="LblStage_Id" xml:space="preserve">
+    <value>Stage</value>
+  </data>
+  <data name="LblSubjects_ID" xml:space="preserve">
+    <value>Subject</value>
+  </data>
+  <data name="LblTransactionInfo" xml:space="preserve">
+    <value>Transaction Info</value>
+  </data>
+  <data name="Lbltwitter" xml:space="preserve">
+    <value>Twitter</value>
+  </data>
+  <data name="LblUsePhone" xml:space="preserve">
+    <value>Use Phone</value>
+  </data>
+  <data name="LblUserName" xml:space="preserve">
+    <value>User Name</value>
+  </data>
+  <data name="LblUserReference_ID" xml:space="preserve">
+    <value>Member Board Reference</value>
+  </data>
+  <data name="LblWriting" xml:space="preserve">
+    <value>Writing</value>
+  </data>
+  <data name="LicenseIssuingDate" xml:space="preserve">
+    <value>License Issuing Date</value>
+  </data>
+  <data name="LicenseNumber" xml:space="preserve">
+    <value>Lisence Number</value>
+  </data>
+  <data name="Location" xml:space="preserve">
+    <value>Location</value>
+  </data>
+  <data name="LocationValid" xml:space="preserve">
+    <value>Please select the location</value>
+  </data>
+  <data name="New" xml:space="preserve">
+    <value>New</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="POBOX" xml:space="preserve">
+    <value>POBox</value>
+  </data>
+  <data name="PromotionFromClass" xml:space="preserve">
+    <value>Promotion From Class</value>
+  </data>
+  <data name="PromotionFromClassValid" xml:space="preserve">
+    <value>Please enter the field</value>
+  </data>
+  <data name="PromotionToClass" xml:space="preserve">
+    <value>Promotion To Class</value>
+  </data>
+  <data name="PromotionToClassValid" xml:space="preserve">
+    <value>Please enter the field</value>
+  </data>
+  <data name="RegionRequired" xml:space="preserve">
+    <value>The Region field is required</value>
+  </data>
+  <data name="REGION_ID" xml:space="preserve">
+    <value>Region</value>
+  </data>
+  <data name="RequierdApplicationDate" xml:space="preserve">
+    <value>The Application Date field is required</value>
+  </data>
+  <data name="RequierdApplicationNumber" xml:space="preserve">
+    <value>The Application Number field is required</value>
+  </data>
+  <data name="RequierdBus" xml:space="preserve">
+    <value>The Bus is required</value>
+  </data>
+  <data name="RequierdCourse" xml:space="preserve">
+    <value>The Course field is required</value>
+  </data>
+  <data name="RequierdDateOfBirth" xml:space="preserve">
+    <value>The Date of Birth is required</value>
+  </data>
+  <data name="RequierdDate_Of_Birth" xml:space="preserve">
+    <value>The Date of Birth  is required</value>
+  </data>
+  <data name="RequierdEmail" xml:space="preserve">
+    <value>The Email of Birth is required</value>
+  </data>
+  <data name="RequierdFirstName" xml:space="preserve">
+    <value>The First Name is required</value>
+  </data>
+  <data name="RequierdFirstNameName_Ar" xml:space="preserve">
+    <value>The First Name is required</value>
+  </data>
+  <data name="RequierdFirstNationality" xml:space="preserve">
+    <value>The First Nationality is required</value>
+  </data>
+  <data name="RequierdHasEmergencyContact" xml:space="preserve">
+    <value>The Emergency Contact is required</value>
+  </data>
+  <data name="RequierdIsMemberOfSchool" xml:space="preserve">
+    <value>The Member of School is required</value>
+  </data>
+  <data name="RequierdLastName" xml:space="preserve">
+    <value>The Last Name is required</value>
+  </data>
+  <data name="RequierdLastName_Ar" xml:space="preserve">
+    <value>The Last Name is required</value>
+  </data>
+  <data name="RequierdMIddleName" xml:space="preserve">
+    <value>The Middle Name is required</value>
+  </data>
+  <data name="RequierdMiddleName_Ar" xml:space="preserve">
+    <value>The Middle Name is required</value>
+  </data>
+  <data name="RequierdMobile" xml:space="preserve">
+    <value>The Mobile is required</value>
+  </data>
+  <data name="RequierdMotherName" xml:space="preserve">
+    <value>The Mother Name is required</value>
+  </data>
+  <data name="RequierdMotherName_Ar" xml:space="preserve">
+    <value>The Mother Name is required</value>
+  </data>
+  <data name="RequierdPlace_Of_Birth" xml:space="preserve">
+    <value>The Place of Birth is required</value>
+  </data>
+  <data name="RequierdRegisteryNumber" xml:space="preserve">
+    <value>The Registery Number field is required</value>
+  </data>
+  <data name="RequierdRegisteryPlace" xml:space="preserve">
+    <value>The Registery  Registery  field is required</value>
+  </data>
+  <data name="RequierdRelationShip" xml:space="preserve">
+    <value>The Relation Ship is required</value>
+  </data>
+  <data name="RequierdRelation_Type_ID" xml:space="preserve">
+    <value>The Relation Type is required</value>
+  </data>
+  <data name="RequierdRelative_ID" xml:space="preserve">
+    <value>The Relative is required</value>
+  </data>
+  <data name="RequierdRoles" xml:space="preserve">
+    <value>The Role is required</value>
+  </data>
+  <data name="RequierdUserName" xml:space="preserve">
+    <value>The UserName field is required</value>
+  </data>
+  <data name="RequierdUserReference" xml:space="preserve">
+    <value>The Member Board Reference is required</value>
+  </data>
+  <data name="RequiredCompany" xml:space="preserve">
+    <value>The Company is required</value>
+  </data>
+  <data name="RequiredContractDate" xml:space="preserve">
+    <value>The Contract Date is required</value>
+  </data>
+  <data name="RequiredDegree" xml:space="preserve">
+    <value>The Degree is required</value>
+  </data>
+  <data name="RequiredDegreeGuarantee" xml:space="preserve">
+    <value>The Degree Guarantee is required</value>
+  </data>
+  <data name="RequiredDegreeInsurance" xml:space="preserve">
+    <value>The Degree Insurance is required</value>
+  </data>
+  <data name="RequiredDepartment" xml:space="preserve">
+    <value>The Department is required</value>
+  </data>
+  <data name="RequiredDivision" xml:space="preserve">
+    <value>The Division is required</value>
+  </data>
+  <data name="RequiredEmployeeNumber" xml:space="preserve">
+    <value>The Employee Number is required</value>
+  </data>
+  <data name="RequiredFromDate" xml:space="preserve">
+    <value>The From Date is required</value>
+  </data>
+  <data name="RequiredGrade" xml:space="preserve">
+    <value>The Grade is required</value>
+  </data>
+  <data name="RequiredJob" xml:space="preserve">
+    <value>The Job Title is required</value>
+  </data>
+  <data name="RequiredLocation" xml:space="preserve">
+    <value>The Location is required</value>
+  </data>
+  <data name="RequiredSchool" xml:space="preserve">
+    <value>The School is required</value>
+  </data>
+  <data name="RequiredToDate" xml:space="preserve">
+    <value>The To Date is required</value>
+  </data>
+  <data name="RequiredTypeGuarantee" xml:space="preserve">
+    <value>The Type Guarantee  is required</value>
+  </data>
+  <data name="RequiredTypeInsurance" xml:space="preserve">
+    <value>The Type Insurance is required</value>
+  </data>
+  <data name="Role" xml:space="preserve">
+    <value>Role</value>
+  </data>
+  <data name="RountingNumber" xml:space="preserve">
+    <value>Rounting Number</value>
+  </data>
+  <data name="save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="School" xml:space="preserve">
+    <value>School</value>
+  </data>
+  <data name="SchoolName" xml:space="preserve">
+    <value>School Name</value>
+  </data>
+  <data name="SchoolNameValid" xml:space="preserve">
+    <value>Please enter School Name</value>
+  </data>
+  <data name="SelectAccountName" xml:space="preserve">
+    <value>Select Account Name</value>
+  </data>
+  <data name="SelectAccountNumber" xml:space="preserve">
+    <value>Select Account Number</value>
+  </data>
+  <data name="SelectB" xml:space="preserve">
+    <value>Enter Building</value>
+  </data>
+  <data name="SelectBankID" xml:space="preserve">
+    <value>Select BankID</value>
+  </data>
+  <data name="SelectBankName" xml:space="preserve">
+    <value>Select Bank Name</value>
+  </data>
+  <data name="SelectBankNumber" xml:space="preserve">
+    <value>Select Bank Number</value>
+  </data>
+  <data name="SelectCloseDate" xml:space="preserve">
+    <value>Select Close Date</value>
+  </data>
+  <data name="SelectCo" xml:space="preserve">
+    <value>Select Country</value>
+  </data>
+  <data name="SelectCompany" xml:space="preserve">
+    <value>Please entre the Company</value>
+  </data>
+  <data name="SelectContractDate" xml:space="preserve">
+    <value>Enter Date</value>
+  </data>
+  <data name="SelectCountryIss" xml:space="preserve">
+    <value>Select Issuing Country</value>
+  </data>
+  <data name="SelectCreationDate" xml:space="preserve">
+    <value>Select Creation Date</value>
+  </data>
+  <data name="SelectCt" xml:space="preserve">
+    <value>Select City</value>
+  </data>
+  <data name="SelectDateOfBirth" xml:space="preserve">
+    <value>Select Date of Birth</value>
+  </data>
+  <data name="SelectDegree" xml:space="preserve">
+    <value>Please enter Degree</value>
+  </data>
+  <data name="SelectDegreeGuarantee" xml:space="preserve">
+    <value>Select Degree Guarantee</value>
+  </data>
+  <data name="SelectDegreeInsurance" xml:space="preserve">
+    <value>Select Degree Insurance</value>
+  </data>
+  <data name="SelectDepartment" xml:space="preserve">
+    <value>Select Department</value>
+  </data>
+  <data name="SelectDivision" xml:space="preserve">
+    <value>Enter Division</value>
+  </data>
+  <data name="SelectEmail" xml:space="preserve">
+    <value>Enter Email</value>
+  </data>
+  <data name="SelectEmployeeNumber" xml:space="preserve">
+    <value>Enter Number</value>
+  </data>
+  <data name="SelectF" xml:space="preserve">
+    <value>Enter Floor</value>
+  </data>
+  <data name="SelectFirstName" xml:space="preserve">
+    <value>Enter First Name</value>
+  </data>
+  <data name="SelectFromDate" xml:space="preserve">
+    <value>Please select the Date</value>
+  </data>
+  <data name="SelectFx" xml:space="preserve">
+    <value>Enter Fax</value>
+  </data>
+  <data name="SelectGrade" xml:space="preserve">
+    <value>Enter Grade</value>
+  </data>
+  <data name="SelectHPD" xml:space="preserve">
+    <value>Enter The Hours Per Day</value>
+  </data>
+  <data name="SelectIBAN" xml:space="preserve">
+    <value>Select IBAN</value>
+  </data>
+  <data name="SelectJob" xml:space="preserve">
+    <value>Select Job Status</value>
+  </data>
+  <data name="SelectJobTitle" xml:space="preserve">
+    <value>Please entre the Job Title</value>
+  </data>
+  <data name="SelectLastName" xml:space="preserve">
+    <value>Enter Last Name</value>
+  </data>
+  <data name="SelectLicenseIssuing" xml:space="preserve">
+    <value>Enter License Issuing Date</value>
+  </data>
+  <data name="SelectLicenseNumber" xml:space="preserve">
+    <value>Enter Number</value>
+  </data>
+  <data name="SelectLocation" xml:space="preserve">
+    <value>Please entre the Location</value>
+  </data>
+  <data name="SelectMobile" xml:space="preserve">
+    <value>Select Mobile</value>
+  </data>
+  <data name="SelectPB" xml:space="preserve">
+    <value>Enter POBox</value>
+  </data>
+  <data name="SelectRe" xml:space="preserve">
+    <value>Select Region</value>
+  </data>
+  <data name="SelectRelationShip" xml:space="preserve">
+    <value>Select Relation Ship</value>
+  </data>
+  <data name="SelectRelation_Type_ID" xml:space="preserve">
+    <value>Select Relation Type</value>
+  </data>
+  <data name="SelectRelative_ID" xml:space="preserve">
+    <value>Select Relative</value>
+  </data>
+  <data name="SelectRountingNumber" xml:space="preserve">
+    <value>Select Rounting Number</value>
+  </data>
+  <data name="SelectS" xml:space="preserve">
+    <value>Select State</value>
+  </data>
+  <data name="SelectSchool" xml:space="preserve">
+    <value>Please enter School</value>
+  </data>
+  <data name="SelectShift" xml:space="preserve">
+    <value>Select Shift</value>
+  </data>
+  <data name="SelectSt" xml:space="preserve">
+    <value>Enter Street</value>
+  </data>
+  <data name="SelectStatus" xml:space="preserve">
+    <value>Select Employee Status</value>
+  </data>
+  <data name="SelectToDate" xml:space="preserve">
+    <value>Please select the Date</value>
+  </data>
+  <data name="SelectTS" xml:space="preserve">
+    <value>Enter Town Ship</value>
+  </data>
+  <data name="SelectTypeGuarantee" xml:space="preserve">
+    <value>Select Type Guarantee</value>
+  </data>
+  <data name="SelectTypeInsurance" xml:space="preserve">
+    <value>Select Type Insurance</value>
+  </data>
+  <data name="SelectWD" xml:space="preserve">
+    <value>Enter The working Days</value>
+  </data>
+  <data name="SHIFT_ID" xml:space="preserve">
+    <value>Shift</value>
+  </data>
+  <data name="StageName" xml:space="preserve">
+    <value>Stage Name</value>
+  </data>
+  <data name="StageNameValid" xml:space="preserve">
+    <value>Please enter stage field</value>
+  </data>
+  <data name="StageValid" xml:space="preserve">
+    <value>Please select a stage</value>
+  </data>
+  <data name="Stage_ID" xml:space="preserve">
+    <value>Stage</value>
+  </data>
+  <data name="StateRequired" xml:space="preserve">
+    <value>The State field is required</value>
+  </data>
+  <data name="STATE_ID" xml:space="preserve">
+    <value>State</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="StatusID" xml:space="preserve">
+    <value>Status ID</value>
+  </data>
+  <data name="STATUS_ID" xml:space="preserve">
+    <value>Employee Status</value>
+  </data>
+  <data name="STREET" xml:space="preserve">
+    <value>Street</value>
+  </data>
+  <data name="StreetRequired" xml:space="preserve">
+    <value>The Street field is required</value>
+  </data>
+  <data name="String1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="To" xml:space="preserve">
+    <value>To Date</value>
+  </data>
+  <data name="ToDate" xml:space="preserve">
+    <value>To Date</value>
+  </data>
+  <data name="ToHistory" xml:space="preserve">
+    <value>To History</value>
+  </data>
+  <data name="ToHistoryValid" xml:space="preserve">
+    <value>Please enter History</value>
+  </data>
+  <data name="ToValid" xml:space="preserve">
+    <value>please Enter to field</value>
+  </data>
+  <data name="TownRequired" xml:space="preserve">
+    <value>The Town Ship field is required</value>
+  </data>
+  <data name="TOWNSHIP" xml:space="preserve">
+    <value>Town Ship</value>
+  </data>
+  <data name="TransactionDate" xml:space="preserve">
+    <value>Transaction Date</value>
+  </data>
+  <data name="TypeGuarantee_Id" xml:space="preserve">
+    <value>Type Guarantee</value>
+  </data>
+  <data name="TypeInsuranceNotes" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="TypeInsurance_Id" xml:space="preserve">
+    <value>Type Insurance</value>
+  </data>
+  <data name="TypeSpecialty" xml:space="preserve">
+    <value>Type of specialty</value>
+  </data>
+  <data name="TypeSpecialtyValid" xml:space="preserve">
+    <value>The Type Specialty field is required</value>
+  </data>
+  <data name="User" xml:space="preserve">
+    <value>User</value>
+  </data>
+  <data name="WD" xml:space="preserve">
+    <value>Working Day</value>
+  </data>
+</root>

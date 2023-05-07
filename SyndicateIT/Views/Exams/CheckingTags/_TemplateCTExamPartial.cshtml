@@ -1,0 +1,41 @@
+﻿@model SyndicateIT.Model.ViewModel.Exam.TableCTViewModel
+
+
+<section id="widget-grid0" class="">
+    <!-- row -->
+    <div class="row">
+        <!-- NEW WIDGET START -->
+        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12 sortable-grid ui-sortable">
+            <!-- Widget ID (each widget will need unique ID)-->
+            <div class="jarviswidget well jarviswidget-color-darken" id="wid-id-0" data-widget-sortable="false" data-widget-deletebutton="false" data-widget-editbutton="false" data-widget-colorbutton="false" role="widget">
+                <!-- widget div-->
+                <div role="content">
+                    <!-- widget edit box -->
+                    <!-- end widget edit box -->
+                    <!-- widget content -->
+                    <div class="widget-body no-padding divPSExam-Content">
+                        <div class="widget-body-toolbar">
+                            <div class="row">
+                                <div class="col-sm-4"></div>
+                                <div class="col-sm-8 text-align-right">
+                                    <div class="btn-group">                                    
+                                        <a href="javascript:void(0)" class="glyphicon glyphicon-print"  onclick="PrintByStudent('@Model.UserID');" data- da dat style="font-size:20px; color:#2196F3; cursor:pointer;">  </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="padding-10 ">
+                            <br>
+                            @Html.Partial("~/Views/Exams/CheckingTags/_TableCTExamPartial.cshtml", Model)
+                       </div>
+                    </div>
+                    <!-- end widget content -->
+                </div>
+                <!-- end widget div -->
+            </div>
+            <!-- end widget -->
+        </article>
+        <!-- WIDGET END -->
+    </div>
+    <!-- end row -->
+</section>

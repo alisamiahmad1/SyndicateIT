@@ -1,0 +1,23 @@
+﻿<!-- User info -->
+<div class="login-info">
+    <span>
+        <!-- User image size is adjusted inside CSS, it should stay as it -->
+        <a href="javascript:void(0);" id="show-shortcut" data-action="toggleShortcut">
+            <img src="~/Content/image/male.png" alt="me" class="online" />
+            <span>
+                @SessionContent.Container.Login.FullName
+            </span>
+            <i class="fa fa-angle-down"></i>
+        </a>
+    </span>
+</div>
+<!-- end user info -->
+@*<nav>
+    @{
+        var mystring = Html.Menu(SessionContent.Container.Login.MenuPage);
+        var myHtmlString = new HtmlString(mystring);}
+        @myHtmlString
+</nav>*@
+<span class="minifyme" data-action="minifyMenu">
+    <i class="fa fa-arrow-circle-left hit"></i>
+</span>

@@ -1,0 +1,29 @@
+﻿@model  SyndicateIT.Model.ViewModel.SetupManagement.SkillCoefficient.SkillCoefficientContentViewModel 
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string PublicResources = "~/Views/SetupManagement/SkillCoefficient/PublicResource";
+}
+@Scripts.Render("~/Scripts/SkillCoefficient")
+@Scripts.Render("~/Scripts/translate")
+@*@Html.Partial("~/Views/Shared/_NavigationPartial.cshtml", @Model.Navigation)*@
+<div id="SkillCoefficientContent">
+    @Html.Partial("~/Views/SetupManagement/SkillCoefficient/_SkillCoefficientContentPartial.cshtml", Model);
+</div>
+<script type="text/javascript">
+    var SkillCoefficientSearchURL = '@Html.GetUrl("LoadSearchSkillCoefficient", "SkillCoefficient")';
+    var SkillCoefficientDeleteURL = '@Html.GetUrl("SkillCoefficientDelete", "SkillCoefficient")';
+    var loadSkillCoefficientURL = '@Html.GetUrl("LoadSkillCoefficient", "SkillCoefficient")';
+    var loader = '@Utilities.GetAbsotuleUrl("~/Content/image/ajax-loader.gif")';
+    var saveSkillCoefficientUrl = '@Html.GetUrl("AddUpdateSkillCoefficient", "SkillCoefficient")';
+    var messageDelete = '@Html.Resource("MessageDelete", PublicResources)';
+    var loadTranslationSkillCoefficientURL = '@Html.GetUrl("LoadTranslateSkillCoefficient", "SkillCoefficient")';
+
+    $("#SchoolSettings", $("#nav")).addClass("active open");
+    $("#SchoolSettings Ul", $("#nav")).show();
+
+</script>
+ @section Scripts {
+       @Scripts.Render("~/bundles/kendo/js")
+
+   }

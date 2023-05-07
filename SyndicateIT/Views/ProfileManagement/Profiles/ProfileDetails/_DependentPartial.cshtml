@@ -1,0 +1,157 @@
+﻿
+@model SyndicateIT.Model.ViewModel.ProfileManagement.ProfileDetails.DependentViewModel
+
+@{
+    Layout = null;
+    string PublicResources = "~/Views/ProfileManagement/Profiles/ProfileDetails/PublicResources";
+}
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+@Html.Partial("~/Views/Shared/_AlertPartial.cshtml", Model.Alert)
+
+<article class="col-sm-12 sortable-grid ui-sortable">
+
+    @if (Model.IsEdit == true)
+    {
+    <!-- Widget ID (each widget will need unique ID)-->
+        <div class="jarviswidget jarviswidgetTransparent" id="wid-id-x" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false" data-widget-custombutton="false" data-widget-sortable="false" role="widget">
+            <header role="heading">
+                <span class="widget-icon"> <i class="fa fa-align-justify"></i> </span>
+                <h2>@Html.Resource("LblDependentInfo", PublicResources)</h2>
+                <span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span>
+            </header>
+            <!-- widget div-->
+            <div role="content">
+                @using (Html.BeginForm("SaveDependent", "ProfileManagement", FormMethod.Post, new { @class = "", role = "form", id = "Dependent-form" }))
+                {
+                    <div class="row">
+                        <div class="widget-body">
+                            @Html.Hidden("User_Relation_ID", Model.User_Relation_ID)
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true)
+                            @Html.HiddenFor(p=>p.IsMemberOfSchool) 
+                            <fieldset>
+                                <div class="form-group  col-sm-6">
+                                    @Html.LabelFor(m => m.Relation_Type_ID, Html.Resource("LblRelation_Type_ID", PublicResources), new { @class = "col-md-4 control-label" })
+                                    <div class="col-md-6">
+                                        @(Html.Kendo().DropDownListFor(m => m.Relation_Type_ID)
+                                                .DataTextField("Text")
+                                                .DataValueField("Value")
+                                                .Name("Relation_Type_ID")
+                                                .OptionLabel(@Html.Resource("SelectRelation_Type_ID", PublicResources))
+                                                .HtmlAttributes(new { @class = "ui-select form-control-md10" })
+                                                .DataSource(source =>
+                                                {
+                                                    source.Read(read =>
+                                                    {
+                                                        read.Action("GetRelationShip", "ProfileManagement");
+                                                    });
+                                                }))
+                                        <span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error" data-for="Relation_Type_ID" data-valmsg-for="Relation_Type_ID" id="Relation_Type_ID_validationMessage" style="display:none;" role="alert"><span class="k-icon k-warning"> </span> @Html.Resource("RequierdRelation_Type_ID", PublicResources)</span>
+                                    </div>
+                                </div>
+                                <div class="form-group  col-sm-6" style="padding-left: 4px;">
+                                    <label class="col-md-4 control-label">@Html.Resource("LblHasEmergencyContact", PublicResources)</label>
+                                    <div class="col-md-6">
+                                        @Html.Kendo().CheckBoxFor(model => model.HasEmergencyContact)
+                                    </div>
+                                </div>
+                                <div id="PersonalInformationNotMember" class="col-sm-12" style="padding-left: 0px!important;">
+                                    <div class="form-group  col-sm-6">
+                                        @Html.LabelFor(m => m.FirstName, Html.Resource("LblFirstName", PublicResources), new { @class = "col-md-4 control-label" })
+                                        <div class="col-md-6">
+                                            @Html.Kendo().TextBoxFor(model => model.FirstName).HtmlAttributes(new { @class = "form-control  form-control-md10", @maxlength = 150, @placeholder = @Html.Resource("SelectFirstName", PublicResources) }).Name("FirstName")
+                                            <span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error" data-for="FirstName" data-valmsg-for="FirstName" id="FirstName_validationMessage" style="display:none;" role="alert"><span class="k-icon k-warning"> </span> @Html.Resource("RequierdFirstName", PublicResources)</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group  col-sm-6">
+                                        @Html.LabelFor(m => m.LastName, Html.Resource("LblLastName", PublicResources), new { @class = "col-md-4 control-label" })
+                                        <div class="col-md-6">
+                                            @Html.Kendo().TextBoxFor(model => model.LastName).HtmlAttributes(new { @class = "form-control  form-control-md10", @maxlength = 150, @placeholder = @Html.Resource("SelectLastName", PublicResources) }).Name("LastName")
+                                            <span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error" data-for="LastName" data-valmsg-for="LastName" id="LastName_validationMessage" style="display:none;" role="alert"><span class="k-icon k-warning"> </span>@Html.Resource("RequierdLastName", PublicResources)</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group  col-sm-6">
+                                        @Html.LabelFor(m => m.Email, Html.Resource("LblEmail", PublicResources), new { @class = "col-md-4 control-label" })
+                                        <div class="col-md-6">
+                                            @Html.Kendo().TextBoxFor(model => model.Email).HtmlAttributes(new { @class = "form-control  form-control-md10", @maxlength = 200, @placeholder = @Html.Resource("SelectEmail", PublicResources) }).Name("Email")
+                                            <span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error" data-for="Email" data-valmsg-for="Email" id="Email_validationMessage" style="display:none;" role="alert"><span class="k-icon k-warning"> </span> @Html.Resource("RequierdEmail", PublicResources)</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group  col-sm-6">
+                                        @Html.LabelFor(m => m.Mobile, Html.Resource("LblMobile", PublicResources), new { @class = "col-md-4 control-label" })
+                                        <div class="col-md-6">
+                                            @Html.Kendo().TextBoxFor(model => model.Mobile).HtmlAttributes(new { @class = "form-control  form-control-md10", @maxlength = 50, @placeholder = @Html.Resource("SelectMobile", PublicResources) }).Name("Mobile")
+                                            <span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error" data-for="Mobile" data-valmsg-for="Mobile" id="Mobile_validationMessage" style="display:none;" role="alert"><span class="k-icon k-warning"> </span> @Html.Resource("RequierdMobile", PublicResources)</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group  col-sm-6">
+                                        @Html.LabelFor(m => m.DateOfBirth, Html.Resource("LblDateOfBirth", PublicResources), new { @class = "col-md-4 control-label" })
+                                        <div class="col-md-6" style="padding-left: 0px;">
+                                            @Html.Kendo().DatePickerFor(model => model.DateOfBirth).HtmlAttributes(new { @class = "form-control  form-control-md10", @maxlength = 200, @placeholder = @Html.Resource("SelectDateOfBirth", PublicResources) }).Name("DateOfBirth")
+                                            <span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error" data-for="DateOfBirth" data-valmsg-for="DateOfBirth" id="DateOfBirth_validationMessage" style="display:none;" role="alert"><span class="k-icon k-warning"> </span> @Html.Resource("RequierdDateOfBirth", PublicResources)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="PersonalInformationIsMember" class="col-sm-12">
+                                    <div class="form-group  col-sm-6">
+                                        @Html.LabelFor(m => m.Relative_ID, Html.Resource("LblRelative_ID", PublicResources), new { @class = "col-md-4 control-label" })
+                                        <div class="col-md-6">
+                                            @(Html.Kendo().DropDownListFor(m => m.Relative_ID)
+                                                .DataTextField("Text")
+                                                .DataValueField("Value")
+                                                .Name("Relative_ID")
+                                                .OptionLabel(@Html.Resource("SelectRelative_ID", PublicResources))
+                                                .HtmlAttributes(new { @class = "ui-select form-control-md10" })
+                                                .DataSource(source =>
+                                                {
+                                                    source.Read(read =>
+                                                    {
+                                                        read.Action("GetRelative", "ProfileManagement");
+                                                    });
+                                                }))
+                                            <span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error" data-for="Relative_ID" data-valmsg-for="Relative_ID" id="Relative_ID_validationMessage" style="display:none;" role="alert"><span class="k-icon k-warning"> </span>@Html.Resource("RequierdRelative_ID", PublicResources)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2">
+                                    <button type="button" onclick="SaveDependent();" class="btn bg-color-orange txt-color-white" data-toggle="#phoneInfo">
+                                        @Html.Resource("LblAddDependent", PublicResources)
+                                    </button>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                }
+            </div>
+            <!-- end widget content -->
+        </div>
+    <!-- end widget -->
+    }
+    @Html.Partial("~/Views/ProfileManagement/Profiles/ProfileDetails/_ListDependentPartial.cshtml", Model.Dependents)
+</article>
+<script type="text/javascript">
+    $("#PersonalInformationIsMember").hide();
+    $("#IsMemberOfSchool").change(function () {
+        if ($(this).is(':checked')) {
+            $("#PersonalInformationNotMember").hide();
+            $("#PersonalInformationIsMember").show();
+        } else {
+            $("#PersonalInformationNotMember").show();
+            $("#PersonalInformationIsMember").hide();
+        }
+    });
+    $(document).ready(function () {
+        HideEmploymentValidation();
+        $.validator.setDefaults({
+            ignore: ""
+        });
+    });
+    if ('@SessionContent.Container.Profiles.IsLoadProfilesContent' == "true") {
+
+    }
+    else {
+        $('#HoursPerDay').val("");
+        $('#WorkingDays').val("");
+    }
+</script>

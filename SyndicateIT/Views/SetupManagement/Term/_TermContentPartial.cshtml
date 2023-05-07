@@ -1,0 +1,141 @@
+﻿
+@model SyndicateIT.Model.ViewModel.SetupManagement.Term.TermContentViewModel
+@using SyndicateIT.Views.App_GlobalResources
+@{
+    Layout = null;
+    string PublicResources = "~/Views/SetupManagement/Term/PublicResource";
+}
+@Html.Partial("~/Views/Shared/_NavigationPartial.cshtml", @Model.Navigation)
+<div id="content">
+    <div class="row">
+        <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+            <h1 class="page-title txt-color-blueDark">
+                <i class="@Model.ClassTitle"></i> @Model.Title<span></span>
+            </h1>
+        </div>
+        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+            <!-- Button trigger modal -->
+            <a data-toggle="modal" href="#myModal" onclick="AddTerm();" class="btn btn-primary btn-lg pull-right header-btn hidden-mobile"><i class="fa fa-circle-arrow-up fa-lg"></i> @Html.Resource("AddTerm", PublicResources)</a>
+        </div>
+    </div>
+    <div id="AlertTypeId">
+        @Html.Partial("~/Views/Shared/_AlertPartial.cshtml", Model.Alert)
+    </div>
+
+    <section id="Term-content" class="">
+        <div class="row">
+            <!-- NEW WIDGET START -->
+            <article class="col-sm-12 sortable-grid ui-sortable">
+                <!-- Widget ID (each widget will need unique ID)-->
+                <div class="jarviswidget jarviswidgetTransparent" id="wid-id-x" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false" data-widget-custombutton="false" data-widget-sortable="false" role="widget">
+                    <header role="heading">
+                        <span class="widget-icon"> <i class="fa fa-align-justify"></i> </span>
+                        <h2>Search</h2>
+                        <span class="jarviswidget-loader"><i class="fa fa-lg fa-fw fa-th-list"></i></span>
+                    </header>
+                    <!-- widget div-->
+                    <div role="content">
+                        <div class="row">
+                            @Html.Partial("~/Views/SetupManagement/Term/_TermSearchPartial.cshtml", @Model)
+                        </div>
+                    </div>
+                    <!-- end widget content -->
+                </div>
+                <!-- end widget -->
+            </article>
+            <!-- WIDGET END -->
+            <!-- NEW WIDGET START -->
+            <!-- WIDGET END -->
+        </div>
+    </section>
+    <section id="widget-grid" class="">
+        <div class="row">
+            <!-- NEW WIDGET START -->
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12 sortable-grid ui-sortable">
+                <!-- Widget ID (each widget will need unique ID)-->
+                <div class="jarviswidget jarviswidget-color-blueDark jarviswidget-sortable" id="wid-id-0" data-widget-editbutton="false" role="widget">
+                    <header role="heading">
+                        <div class="jarviswidget-ctrls" role="menu">
+                            <a href="javascript:void(0);" class="button-icon jarviswidget-toggle-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Collapse">
+                                <i class="fa fa-minus "></i>
+                            </a>
+                            <a href="javascript:void(0);" class="button-icon jarviswidget-fullscreen-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Fullscreen">
+                                <i class="fa fa-expand "></i>
+                            </a>
+                        </div>
+                        <span class="widget-icon"> <i class="@Model.ClassTitle"></i> </span>
+                        <h3 class="widget-h3">  List</h3>
+                        <span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span>
+                    </header>
+                    <!-- widget div-->
+                    <div role="content" id="Grid_User">
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+                            <!-- This area used as dropdown edit box -->
+                        </div>
+                        <!-- end widget edit box -->
+                        <!-- widget content -->
+                        <div class="widget-body " id="Term-List">
+
+                        </div>
+                        <!-- end widget content -->
+                    </div>
+                    <!-- end widget div -->
+                </div>
+                <!-- end widget -->
+            </article>
+        </div>
+    </section>
+    <section id="widget-grid-Transalte" class="" style="display:none;">
+        <div class="row">
+            <!-- NEW WIDGET START -->
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12 sortable-grid ui-sortable">
+                <!-- Widget ID (each widget will need unique ID)-->
+                <div class="jarviswidget jarviswidget-color-blueDark jarviswidget-sortable" id="wid-id-0" data-widget-editbutton="false" role="widget">
+                    <header role="heading">
+                        <div class="jarviswidget-ctrls" role="menu">
+                            <a href="javascript:void(0);" class="button-icon jarviswidget-toggle-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Collapse">
+                                <i class="fa fa-minus "></i>
+                            </a>
+                            <a href="javascript:void(0);" class="button-icon jarviswidget-fullscreen-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Fullscreen">
+                                <i class="fa fa-expand "></i>
+                            </a>
+                        </div>
+                        <span class="widget-icon"> <i class="@Model.ClassTitle"></i> </span>
+                        <h3 class="widget-h3">  List Of Translate</h3>
+                        <span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span>
+                    </header>
+                    <!-- widget div-->
+                    <div role="content" id="Grid_User">
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+                            <!-- This area used as dropdown edit box -->
+                        </div>
+                        <!-- end widget edit box -->
+                        <!-- widget content -->
+                        <div class="widget-body " id="TermTranslate-List">
+
+                        </div>
+                        <!-- end widget content -->
+                    </div>
+                    <!-- end widget div -->
+                </div>
+                <!-- end widget -->
+            </article>
+        </div>
+    </section>
+</div>
+<script type="text/javascript">
+$(document).ready(function () {
+    $("#SchoolSettingsUL").children().find('li').removeClass("active");
+    $("#SchoolSettings").addClass("open");
+    $(".Term").addClass("active");
+    $("#SchoolSettingsUL").show();
+    $("#SchoolSettings").children().find('em').removeClass("fa fa-plus-square-o");
+    $("#SchoolSettings").children().find('em').addClass("fa fa-minus-square-o");
+});
+</script>
+@section Scripts {
+    @Scripts.Render("~/Scripts/Term")
+}
+

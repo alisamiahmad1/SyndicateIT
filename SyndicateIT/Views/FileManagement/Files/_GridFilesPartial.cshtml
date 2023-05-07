@@ -1,0 +1,90 @@
+﻿
+@model List<SyndicateIT.Model.ViewModel.FileManagement.ListFileViewModel>
+@Styles.Render("~/Content/Css/File")
+@{
+    string PublicResources = "~/Views/FileManagement/Files/_GridFilesPartial.cshtml";
+    var sourceId = (int)SessionContent.Container.Files.FileType;
+    var fileType = SessionContent.Container.Files.FileType;
+}
+@if (Model.Count > 0)
+{
+    <div class="row">
+
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            <div class="col-lg-3">
+                <div class="hpanel hblue  contact-panel">
+                    <div class="panel-body">
+
+                        <span class="label label-info  pull-right" style="padding:10px;">Register Number: @Model[i].RegisteryNumber</span>
+                        <img alt="logo" class="img-circle m-b" src="~/Content/image/male.png">
+                        <h4 style="font-size: 17px;"><a href="#"> @Model[i].ProfileName </a></h4>
+                        <div class="text-muted font-bold m-b-xs">Application Number:<span style="color:cadetblue"> @Model[i].ApplicationNumber</span></div>
+                        <div class="text-muted font-bold m-b-xs">Application Date:<span style="color:cadetblue"> @Model[i].ApplicationDate</span></div>
+                    </div>
+                    <div class="panel-footer contact-footer">
+                        <div class="row">
+                            <div class="col-md-12 border-right"> <div class="contact-stat"><span>@Html.Resource("View", PublicResources): </span> <strong onclick="ViewPeronalDetail('@Model[i].ProfileID',@sourceId);" style="cursor:pointer;">@Html.Resource("PeronalDetail", PublicResources) </strong></div> </div>
+                            @*<div class="col-md-6 border-right"> <div class="contact-stat"><span>@Html.Resource("View", PublicResources): </span> <strong onclick="ViewFileDetail('@Model[i].ProfileID','@fileType');" style="cursor:pointer;">@Html.Resource("FileDetail", PublicResources)</strong></div> </div>*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+}
+else
+{
+    <div class="row" style="background-color:none!important;">
+        <div class="col-lg-3">
+            <div class="hpanel hblue  contact-panel">
+                <div class="alert alert-info fade in">
+                    No Data
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

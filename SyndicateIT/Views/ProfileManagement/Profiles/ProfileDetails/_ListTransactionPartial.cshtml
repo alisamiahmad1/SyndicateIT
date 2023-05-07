@@ -1,0 +1,95 @@
+﻿
+@{
+    Layout = null;
+    string PublicResources = "~/Views/ProfileManagement/Profiles/ProfileDetails/PublicResources";
+}
+
+<article class="col-sm-12 sortable-grid ui-sortable">
+    <div class="alert alert-success alert-block">
+        <h4 class="alert-heading">@Html.Resource("LblListTransaction", PublicResources)</h4>
+    </div>
+    <div class="row">
+
+        <div class="col-sm-12">
+            <div class="well">
+                <table>
+                    <tr>
+                        <td width="50%"> <h1>TransactionID : 46189</h1></td>
+                        <td  width="50%"> <h1>Transaction Date : 01-22-2019</h1></td>
+                    </tr>
+                    <tr>
+                        <td  width="50%">  <h1>Status : Successful</h1></td>
+                        <td  width="50%">
+                            <button type="button" class="btn bg-color-red txt-color-white" data-toggle="#phoneInfo">
+                                Submit Claim
+                            </button>
+                        </td>
+                    </tr>
+                </table>
+               
+               
+               
+              
+                <div class="alert alert-info">
+                    Sender
+                </div>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th style="width:25%">Country</th>
+                            <th style="width:15%">Bank Name</th>
+                            <th style="width:15%">Account Number</th>
+                            <th style="width:15%">Account Type</th>
+                            <th style="width:15%">Total Amount</th>
+                            <th style="width:15%">Currency</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Lebanon</td>
+                            <td><code>Audi</code></td>
+                            <td>12345667</td>
+                            <td>Credit Card</td>
+                            <td>578900000</td>
+                            <td>USD</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+
+
+                <div class="alert alert-info">
+                    Receive
+                </div>
+
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th style="width:15%">Full name</th>
+                            <th style="width:10%">Country</th>
+                            <th style="width:15%">Bank Name</th>
+                            <th style="width:15%">Account Number</th>
+                            <th style="width:15%">Account Type</th>
+                            <th style="width:15%">Total Amount</th>
+                            <th style="width:15%">Currency</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Rami Rami Rami</td>
+                            <td>Syria</td>
+                            <td><code>Audi</code></td>
+                            <td>12345667</td>
+                            <td>Credit Card</td>
+                            <td>578900000</td>
+                            <td>USD</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+    </div>
+</article>
+

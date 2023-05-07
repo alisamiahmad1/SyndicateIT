@@ -1,0 +1,131 @@
+﻿
+@model SyndicateIT.Model.ViewModel.ServiceManagement.ServiceDetails.ScheduleViewModel
+
+
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+@Html.Partial("~/Views/Shared/_AlertPartial.cshtml", Model.Alert)
+@{
+    string PublicResources = "~/Views/ServiceManagement/Schedule/_SchedulePartiat.cshtml";
+}
+<article class="col-sm-12 sortable-grid ui-sortable">
+@using (Html.BeginForm("LoadSchedule", "ServiceManagement", FormMethod.Post, new { @class = "", role = "form", id = "Schedule-form" }))
+{
+    <!-- Widget ID (each widget will need unique ID)-->
+    <div class="jarviswidget jarviswidgetTransparent" id="wid-id-x" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false" data-widget-custombutton="false" data-widget-sortable="false" role="widget">
+        <header role="heading">
+            <span class="widget-icon"> <i class="fa fa-align-justify"></i> </span>
+            <h2>Schedule</h2>
+            <span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span>
+        </header>
+        <!-- widget div-->
+        <div role="content">      
+         
+                <div class="widget-body">                  
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+                    <div class="widget-body-toolbar " style="background-color:#f5f5f5">
+
+                        <form class="form-inline" role="form" id="#scheduleContent">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-10">
+                                    <div class="form-group col-md-4">                                       
+                                        @Html.LabelFor(m => m.Cycle_ID, @Html.Resource("CycleID", PublicResources), new { @class = "control-label" })
+                                        @(Html.Kendo().DropDownListFor(m => m.Cycle_ID)
+                                                .Name("Cycle_ID")
+                                                .DataTextField("Text")
+                                                .DataValueField("Value")
+                                                .OptionLabel(@Html.Resource("SelectCycle", PublicResources))
+                                                .HtmlAttributes(new { @class = "form-control input-sm" })
+                                                .Value(Model.Cycle_ID.ToString())
+                                                .DataSource(source =>
+                                                {
+                                                    source.Read(read =>
+                                                    {
+                                                        read.Action("GetCycleTypesList", "ServiceManagement");
+                                                    });
+                                                }))
+                                        <span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error" data-for="Cycle_ID" data-valmsg-for="Cycle_ID" id="CycleID_validationMessage" style="display:none;" role="alert"><span class="k-icon k-warning"> </span> @Html.Resource("CycleRequired", PublicResources)</span>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.Class_ID, Html.Resource("ClassID", PublicResources), new { @class = "control-label" })
+                                        @(Html.Kendo().DropDownListFor(m => m.Class_ID)
+                                                      .Name("Class_ID")
+                                                      .DataTextField("Text")
+                                                      .DataValueField("Value")
+                                                      .OptionLabel(@Html.Resource("SelectClass", PublicResources))
+                                                     .HtmlAttributes(new { @class = "form-control input-sm" })
+                                                      .Value(Model.Class_ID.ToString())
+                                                      .DataSource(source =>
+                                                        {
+                                                            source.Read(read =>
+                                                            {
+                                                                read.Action("GetClass", "ServiceManagement")
+                                                                .Data("FilterServiceClass");
+                                                            }).ServerFiltering(true);
+                                                        })
+                                                       .Enable(true)
+                                                       .AutoBind(false)
+                                                       .CascadeFrom("Cycle_ID"))
+                                        <span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error" data-for="Class_ID" data-valmsg-for="Class_ID" id="ClassID_validationMessage" style="display:none;" role="alert"><span class="k-icon k-warning"> </span> @Html.Resource("ClassRequired", PublicResources)</span>
+
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.Division_ID, Html.Resource("DivisionID", PublicResources), new { @class = "control-label" })
+                                        @(Html.Kendo().DropDownListFor(m => m.Division_ID)
+                                                .Name("Division_ID")
+                                                .DataTextField("Text")
+                                                .DataValueField("Value")
+                                                .OptionLabel(@Html.Resource("SelectDivision", PublicResources))
+                                                .HtmlAttributes(new { @class = "form-control input-sm" })
+                                                .Value(Model.Division_ID.ToString())
+                                                .DataSource(source =>
+                                                {
+                                                    source.Read(read =>
+                                                    {
+                                                        read.Action("GetDivision", "ServiceManagement")
+                                                        .Data("FilterServiceDivision");
+                                                    }).ServerFiltering(true);
+                                                })
+                                                .Enable(true)
+                                                .AutoBind(false)
+                                                .CascadeFrom("Class_ID"))
+                                         <span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error" data-for="Division_ID" data-valmsg-for="Division_ID" id="DivisionID_validationMessage" style="display:none;" role="alert"><span class="k-icon k-warning"> </span> @Html.Resource("DivisionRequired", PublicResources)</span>
+
+                                    </div>
+                                 </div>
+                                <div class="col-sm-12 col-md-2 text-align-right">
+                                    <button type="button" onclick="LoadSchedule();" class="btn btn-warning btn-xs" >
+                                        <i class="fa fa-plus"></i> Load
+                                    </button>                                    
+                                </div>
+
+                            </div>
+
+                        </form>
+
+                    </div>
+                    <div class="tree smart-form"  id="main_container" style=" width:100%!important;">
+                        
+                    </div>
+                 </div>
+              
+         </div>
+        <!-- end widget content -->
+    </div>
+    <!-- end widget -->
+   
+}
+</article>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+       
+        $.validator.setDefaults({
+            ignore: ""
+        });
+
+           });
+
+
+</script>

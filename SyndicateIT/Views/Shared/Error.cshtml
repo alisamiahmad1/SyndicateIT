@@ -1,0 +1,62 @@
+﻿@model System.Web.Mvc.HandleErrorInfo
+@{  string resouceFilePath = "~/Views/Shared/Error.cshtml"; Layout = null;}
+@{
+    ViewBag.Title = (!String.IsNullOrEmpty(ViewBag.StatusCode)) ? ViewBag.StatusCode : "Error";
+}
+<!DOCTYPE html>
+<html lang="en-us" id="lock-page">
+<head>
+    <meta charset="utf-8">
+    <title> @Html.Resource("SyndicateIT", resouceFilePath) </title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" type="text/css" media="screen" href="~/Content/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="~/Content/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="~/Content/smartadmin-production-plugins.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="~/Content/smartadmin-production.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="~/Content/smartadmin-skins.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="~/Content/smartadmin-rtl.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="~/Content/demo.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="~/Content/lockscreen.min.css" hr>   
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
+</head>
+<body>
+    <div id="content">
+        <!-- row -->
+        <div class="row">
+
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="text-center error-box">
+                            <h1 class="error-text tada animated"><i class="fa fa-times-circle text-danger error-icon-shadow" style="padding:30px;"></i>@ViewBag.Title</h1>
+                            <h2 class="font-xl">
+                                @if (!String.IsNullOrEmpty(ViewBag.StatusCode))
+                                {
+                                    if (ViewBag.StatusCode == "404 Error")
+                                    {
+                                        <strong><i class="fa fa-fw fa-warning fa-lg text-warning"></i> Page <u>Not</u> Found</strong>
+                                    }
+                                    else
+                                    {
+                                        <strong>@Html.Resource("Error505Message", resouceFilePath)</strong>
+                                    }
+                                }
+                                else
+                                {@Html.Resource("ErrorOccurredPprocessingRequest", resouceFilePath)}
+                            </h2>
+                            <ul class="error-search text-left font-md">
+                                <li><a href="@Html.GetUrl("Login", "Account", SessionContent.Current.Corporate.IsSecure)"><small>@Html.Resource("GoMyLogin", resouceFilePath)<i class="fa fa-mail-forward" style="margin-left:10px;"></i></small></a></li>
+                                <li><a href="javascript:history.go(-1);"><small>@Html.Resource("Goback", resouceFilePath)</small></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end row -->
+    </div>
+</body>
+</html>

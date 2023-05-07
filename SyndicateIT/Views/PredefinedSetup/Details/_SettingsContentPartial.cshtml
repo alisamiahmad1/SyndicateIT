@@ -1,0 +1,507 @@
+﻿@model SyndicateIT.Model.ViewModel.PredefinedSetup.PredefinedSetupContentViewModel
+@Html.Partial("~/Views/Shared/_NavigationPartial.cshtml", @Model.Navigation)
+@using SyndicateIT.Views.App_GlobalResources
+@{
+    string PublicResources = "~/Views/PredefinedSetup/Details/_SettingsContentPartial.cshtml";
+ }
+<div id="content"> 
+    <div class="row">
+        <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+            <h1 class="page-title txt-color-blueDark">
+                <i class="@Model.ClassTitle"></i> @Model.Title<span></span>
+            </h1>
+        </div>       
+    </div>
+    <div id="AlertTypeId">
+        @Html.Partial("~/Views/Shared/_AlertPartial.cshtml", Model.Alert)
+    </div>
+    <div class="row">
+        <article class="col-sm-12 col-md-12 col-lg-12 sortable-grid ui-sortable">
+            <!-- Widget ID (each widget will need unique ID)-->
+            <div class="jarviswidget jarviswidget-color-orange jarviswidget-sortable" id="wid-id-0" data-widget-editbutton="false" data-widget-deletebutton="false" role="widget">
+              <header role="heading">
+                <h2> School Setup</h2>
+              </header>
+                <!-- widget div-->
+                <div role="content">
+                    <!-- widget edit box -->
+                    <div class="jarviswidget-editbox">
+                        <!-- This area used as dropdown edit box -->
+                    </div>
+                    <!-- end widget edit box -->
+                    <!-- widget content -->
+                    <div class="widget-body">
+                        <div class="row">
+                            <form id="wizard-1" novalidate="novalidate">
+                                <div id="bootstrap-wizard-1" class="col-sm-12">
+                                    <div class="form-bootstrapWizard">
+                                        <ul class="bootstrapWizard form-wizard">
+                                            <li class="active" data-target="#step1" style="width:10%!important">
+                                                <a href="#tab1" data-toggle="tab" aria-expanded="true" onclick="LoadSchoolContent();"> <span class="step">1</span> <span class="title">School</span> </a>
+                                            </li>
+                                            <li  data-target="#step2" style="width:10%!important">
+                                                <a href="#tab2" data-toggle="tab" aria-expanded="true" onclick="LoadCyleContent();"> <span class="step">2</span> <span class="title">Cycle</span> </a>
+                                            </li>
+                                            <li data-target="#step3" class="" style="width:10%!important">
+                                                <a href="#tab3" data-toggle="tab" aria-expanded="false" onclick="LoadClassContent();"> <span class="step">3</span> <span class="title">Class</span> </a>
+                                            </li>
+                                            <li data-target="#step4" class="" style="width:10%!important">
+                                                <a href="#tab4" data-toggle="tab" aria-expanded="false" onclick="LoadDivisionContent();"> <span class="step">4</span> <span class="title">Division</span> </a>
+                                            </li>
+                                            <li data-target="#step5" class="" style="width:10%!important">
+                                                <a href="#tab5" data-toggle="tab" aria-expanded="false" onclick="LoadSubjectContent();"> <span class="step">5</span> <span class="title">Subject</span> </a>
+                                            </li>  
+                                            <li data-target="#step6" class="" style="width:10%!important">
+                                                <a href="#tab6" data-toggle="tab" aria-expanded="false" onclick="LoadCourseContent();"> <span class="step">6</span> <span class="title">Course</span> </a>
+                                            </li>
+                                            <li data-target="#step7" class="" style="width:10%!important">
+                                                <a href="#tab7" data-toggle="tab" aria-expanded="false" onclick="LoadSkillsContent();"> <span class="step">7</span> <span class="title">Skills</span> </a>
+                                            </li>                                                                                  
+                                            <li data-target="#step8" class="" style="width:10%!important">
+                                                <a href="#tab8" data-toggle="tab" aria-expanded="false" onclick="LoadSkillCoefficientContent();"> <span class="step">8</span> <span class="title">Skill Coefficient</span> </a>
+                                            </li>
+                                            <li data-target="#step9" class="" style="width:10%!important">
+                                                <a href="#tab9" data-toggle="tab" aria-expanded="false" onclick="LoadTermContent();"> <span class="step">8</span> <span class="title">Term</span> </a>
+                                            </li>
+                                            <li data-target="#step10" class="" style="width:10%!important">
+                                                <a href="#tab10" data-toggle="tab" aria-expanded="false" onclick="LoadTermMonthContent();"> <span class="step">10</span> <span class="title">Term Month</span> </a>
+                                            </li>
+                                        </ul>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" id="tab1">
+                                            <br>
+                                            <h3><strong>Step 1 </strong> - School</h3>
+                                            <div class="row">
+                                                <div class="widget-body" id="Company-Content"></div>
+                                            </div>
+                                          
+                                        </div>
+                                        <div class="tab-pane " id="tab2">
+                                            <br>
+                                            <h3><strong>Step 2 </strong> - Cycle</h3>
+                                            <div class="row">
+                                                <div class="widget-body" id="Cycle-Content"></div>
+                                            </div>
+                                            <section id="widget-grid" class="">
+                                                <div class="row">
+                                                    <!-- NEW WIDGET START -->
+                                                    <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12 sortable-grid ui-sortable">
+                                                        <!-- Widget ID (each widget will need unique ID)-->
+                                                        <div class="jarviswidget jarviswidget-color-blueDark jarviswidget-sortable" id="wid-id-0" data-widget-editbutton="false" role="widget">
+                                                            <header role="heading">
+                                                                <div class="jarviswidget-ctrls" role="menu">
+                                                                    <a href="javascript:void(0);" class="button-icon jarviswidget-toggle-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Collapse">
+                                                                        <i class="fa fa-minus "></i>
+                                                                    </a>
+                                                                    <a href="javascript:void(0);" class="button-icon jarviswidget-fullscreen-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Fullscreen">
+                                                                        <i class="fa fa-expand "></i>
+                                                                    </a>
+                                                                </div>
+                                                                <span class="widget-icon"> <i class="@Model.ClassTitle"></i> </span>
+                                                                <h3 class="widget-h3">Cycle List</h3>
+                                                                <span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span>
+                                                            </header>
+                                                            <!-- widget div-->
+                                                            <div role="content" id="Grid_User">
+                                                                <!-- widget edit box -->
+                                                                <div class="jarviswidget-editbox">
+                                                                    <!-- This area used as dropdown edit box -->
+                                                                </div>
+                                                                <!-- end widget edit box -->
+                                                                <!-- widget content -->
+                                                                <div class="widget-body " id="Cycle-List">
+
+                                                                </div>
+                                                                <!-- end widget content -->
+                                                            </div>
+                                                            <!-- end widget div -->
+                                                        </div>
+                                                        <!-- end widget -->
+                                                    </article>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div class="tab-pane" id="tab3">
+                                            <br>
+                                            <h3><strong>Step 3</strong> - Class</h3>
+                                            <div class="row">
+                                                <div class="widget-body" id="Class-Content"></div>
+                                            </div>
+                                            <section id="widget-grid" class="">
+                                                <div class="row">
+                                                    <!-- NEW WIDGET START -->
+                                                    <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12 sortable-grid ui-sortable">
+                                                        <!-- Widget ID (each widget will need unique ID)-->
+                                                        <div class="jarviswidget jarviswidget-color-blueDark jarviswidget-sortable" id="wid-id-0" data-widget-editbutton="false" role="widget">
+                                                            <header role="heading">
+                                                                <div class="jarviswidget-ctrls" role="menu">
+                                                                    <a href="javascript:void(0);" class="button-icon jarviswidget-toggle-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Collapse">
+                                                                        <i class="fa fa-minus "></i>
+                                                                    </a>
+                                                                    <a href="javascript:void(0);" class="button-icon jarviswidget-fullscreen-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Fullscreen">
+                                                                        <i class="fa fa-expand "></i>
+                                                                    </a>
+                                                                </div>
+                                                                <span class="widget-icon"> <i class="@Model.ClassTitle"></i> </span>
+                                                                <h3 class="widget-h3">Class List</h3>
+                                                                <span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span>
+                                                            </header>
+                                                            <!-- widget div-->
+                                                            <div role="content" id="Grid_User">
+                                                                <!-- widget edit box -->
+                                                                <div class="jarviswidget-editbox">
+                                                                    <!-- This area used as dropdown edit box -->
+                                                                </div>
+                                                                <!-- end widget edit box -->
+                                                                <!-- widget content -->
+                                                                <div class="widget-body " id="Class-List">
+
+                                                                </div>
+                                                                <!-- end widget content -->
+                                                            </div>
+                                                            <!-- end widget div -->
+                                                        </div>
+                                                        <!-- end widget -->
+                                                    </article>
+                                                </div>
+                                            </section>
+                                           
+                                        </div>
+                                        <div class="tab-pane" id="tab4">
+                                            <br>
+                                            <h3><strong>Step 4</strong> - Division</h3>
+                                            <div class="row">
+                                                <div class="widget-body" id="Division-Content"></div>
+                                            </div>
+                                            <section id="widget-grid" class="">
+                                                <div class="row">
+                                                    <!-- NEW WIDGET START -->
+                                                    <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12 sortable-grid ui-sortable">
+                                                        <!-- Widget ID (each widget will need unique ID)-->
+                                                        <div class="jarviswidget jarviswidget-color-blueDark jarviswidget-sortable" id="wid-id-0" data-widget-editbutton="false" role="widget">
+                                                            <header role="heading">
+                                                                <div class="jarviswidget-ctrls" role="menu">
+                                                                    <a href="javascript:void(0);" class="button-icon jarviswidget-toggle-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Collapse">
+                                                                        <i class="fa fa-minus "></i>
+                                                                    </a>
+                                                                    <a href="javascript:void(0);" class="button-icon jarviswidget-fullscreen-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Fullscreen">
+                                                                        <i class="fa fa-expand "></i>
+                                                                    </a>
+                                                                </div>
+                                                                <span class="widget-icon"> <i class="@Model.ClassTitle"></i> </span>
+                                                                <h3 class="widget-h3">Division List</h3>
+                                                                <span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span>
+                                                            </header>
+                                                            <!-- widget div-->
+                                                            <div role="content" id="Grid_User">
+                                                                <!-- widget edit box -->
+                                                                <div class="jarviswidget-editbox">
+                                                                    <!-- This area used as dropdown edit box -->
+                                                                </div>
+                                                                <!-- end widget edit box -->
+                                                                <!-- widget content -->
+                                                                <div class="widget-body " id="Division-List">
+
+                                                                </div>
+                                                                <!-- end widget content -->
+                                                            </div>
+                                                            <!-- end widget div -->
+                                                        </div>
+                                                        <!-- end widget -->
+                                                    </article>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div class="tab-pane" id="tab5">
+                                            <br>
+                                            <h3><strong>Step 5</strong> - Subject</h3>
+                                            <div class="row">
+                                                <div class="widget-body" id="Subject-Content"></div>
+                                            </div>
+                                            <section id="widget-grid" class="">
+                                                <div class="row">
+                                                    <!-- NEW WIDGET START -->
+                                                    <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12 sortable-grid ui-sortable">
+                                                        <!-- Widget ID (each widget will need unique ID)-->
+                                                        <div class="jarviswidget jarviswidget-color-blueDark jarviswidget-sortable" id="wid-id-0" data-widget-editbutton="false" role="widget">
+                                                            <header role="heading">
+                                                                <div class="jarviswidget-ctrls" role="menu">
+                                                                    <a href="javascript:void(0);" class="button-icon jarviswidget-toggle-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Collapse">
+                                                                        <i class="fa fa-minus "></i>
+                                                                    </a>
+                                                                    <a href="javascript:void(0);" class="button-icon jarviswidget-fullscreen-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Fullscreen">
+                                                                        <i class="fa fa-expand "></i>
+                                                                    </a>
+                                                                </div>
+                                                                <span class="widget-icon"> <i class="@Model.ClassTitle"></i> </span>
+                                                                <h3 class="widget-h3">Subject List</h3>
+                                                                <span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span>
+                                                            </header>
+                                                            <!-- widget div-->
+                                                            <div role="content" id="Grid_User">
+                                                                <!-- widget edit box -->
+                                                                <div class="jarviswidget-editbox">
+                                                                    <!-- This area used as dropdown edit box -->
+                                                                </div>
+                                                                <!-- end widget edit box -->
+                                                                <!-- widget content -->
+                                                                <div class="widget-body " id="Subject-List">
+
+                                                                </div>
+                                                                <!-- end widget content -->
+                                                            </div>
+                                                            <!-- end widget div -->
+                                                        </div>
+                                                        <!-- end widget -->
+                                                    </article>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div class="tab-pane" id="tab6">
+                                            <br>
+                                            <h3><strong>Step 6</strong> - Course</h3>
+                                            <div class="row">
+                                                <div class="widget-body" id="Course-Content"></div>
+                                            </div>
+                                            <section id="widget-grid" class="">
+                                                <div class="row">
+                                                    <!-- NEW WIDGET START -->
+                                                    <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12 sortable-grid ui-sortable">
+                                                        <!-- Widget ID (each widget will need unique ID)-->
+                                                        <div class="jarviswidget jarviswidget-color-blueDark jarviswidget-sortable" id="wid-id-0" data-widget-editbutton="false" role="widget">
+                                                            <header role="heading">
+                                                                <div class="jarviswidget-ctrls" role="menu">
+                                                                    <a href="javascript:void(0);" class="button-icon jarviswidget-toggle-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Collapse">
+                                                                        <i class="fa fa-minus "></i>
+                                                                    </a>
+                                                                    <a href="javascript:void(0);" class="button-icon jarviswidget-fullscreen-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Fullscreen">
+                                                                        <i class="fa fa-expand "></i>
+                                                                    </a>
+                                                                </div>
+                                                                <span class="widget-icon"> <i class="@Model.ClassTitle"></i> </span>
+                                                                <h3 class="widget-h3">Course List</h3>
+                                                                <span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span>
+                                                            </header>
+                                                            <!-- widget div-->
+                                                            <div role="content" id="Grid_User">
+                                                                <!-- widget edit box -->
+                                                                <div class="jarviswidget-editbox">
+                                                                    <!-- This area used as dropdown edit box -->
+                                                                </div>
+                                                                <!-- end widget edit box -->
+                                                                <!-- widget content -->
+                                                                <div class="widget-body " id="Course-List">
+
+                                                                </div>
+                                                                <!-- end widget content -->
+                                                            </div>
+                                                            <!-- end widget div -->
+                                                        </div>
+                                                        <!-- end widget -->
+                                                    </article>
+                                                </div>
+                                            </section>
+                                    </div>
+                                        <div class="tab-pane" id="tab7">
+                                            <br>
+                                            <h3><strong>Step 7</strong> - Skills</h3>
+                                            <div class="row">
+                                                <div class="widget-body" id="Skills-Content"></div>
+                                            </div>
+                                            <section id="widget-grid" class="">
+                                                <div class="row">
+                                                    <!-- NEW WIDGET START -->
+                                                    <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12 sortable-grid ui-sortable">
+                                                        <!-- Widget ID (each widget will need unique ID)-->
+                                                        <div class="jarviswidget jarviswidget-color-blueDark jarviswidget-sortable" id="wid-id-0" data-widget-editbutton="false" role="widget">
+                                                            <header role="heading">
+                                                                <div class="jarviswidget-ctrls" role="menu">
+                                                                    <a href="javascript:void(0);" class="button-icon jarviswidget-toggle-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Collapse">
+                                                                        <i class="fa fa-minus "></i>
+                                                                    </a>
+                                                                    <a href="javascript:void(0);" class="button-icon jarviswidget-fullscreen-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Fullscreen">
+                                                                        <i class="fa fa-expand "></i>
+                                                                    </a>
+                                                                </div>
+                                                                <span class="widget-icon"> <i class="@Model.ClassTitle"></i> </span>
+                                                                <h3 class="widget-h3">Skills List</h3>
+                                                                <span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span>
+                                                            </header>
+                                                            <!-- widget div-->
+                                                            <div role="content" id="Grid_User">
+                                                                <!-- widget edit box -->
+                                                                <div class="jarviswidget-editbox">
+                                                                    <!-- This area used as dropdown edit box -->
+                                                                </div>
+                                                                <!-- end widget edit box -->
+                                                                <!-- widget content -->
+                                                                <div class="widget-body " id="Skills-List">
+
+                                                                </div>
+                                                                <!-- end widget content -->
+                                                            </div>
+                                                            <!-- end widget div -->
+                                                        </div>
+                                                        <!-- end widget -->
+                                                    </article>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div class="tab-pane" id="tab8">
+                                            <br>
+                                            <h3><strong>Step 8</strong> - Skill Coefficient</h3>
+                                            <div class="row">
+                                                <div class="widget-body" id="SkillCoefficient-Content"></div>
+                                            </div>
+                                            <section id="widget-grid" class="">
+                                                <div class="row">
+                                                    <!-- NEW WIDGET START -->
+                                                    <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12 sortable-grid ui-sortable">
+                                                        <!-- Widget ID (each widget will need unique ID)-->
+                                                        <div class="jarviswidget jarviswidget-color-blueDark jarviswidget-sortable" id="wid-id-0" data-widget-editbutton="false" role="widget">
+                                                            <header role="heading">
+                                                                <div class="jarviswidget-ctrls" role="menu">
+                                                                    <a href="javascript:void(0);" class="button-icon jarviswidget-toggle-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Collapse">
+                                                                        <i class="fa fa-minus "></i>
+                                                                    </a>
+                                                                    <a href="javascript:void(0);" class="button-icon jarviswidget-fullscreen-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Fullscreen">
+                                                                        <i class="fa fa-expand "></i>
+                                                                    </a>
+                                                                </div>
+                                                                <span class="widget-icon"> <i class="@Model.ClassTitle"></i> </span>
+                                                                <h3 class="widget-h3">Skill Coefficient List</h3>
+                                                                <span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span>
+                                                            </header>
+                                                            <!-- widget div-->
+                                                            <div role="content" id="Grid_User">
+                                                                <!-- widget edit box -->
+                                                                <div class="jarviswidget-editbox">
+                                                                    <!-- This area used as dropdown edit box -->
+                                                                </div>
+                                                                <!-- end widget edit box -->
+                                                                <!-- widget content -->
+                                                                <div class="widget-body " id="SkillCoefficient-List">
+
+                                                                </div>
+                                                                <!-- end widget content -->
+                                                            </div>
+                                                            <!-- end widget div -->
+                                                        </div>
+                                                        <!-- end widget -->
+                                                    </article>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div class="tab-pane" id="tab9">
+                                            <br>
+                                            <h3><strong>Step 9</strong> - Term</h3>
+                                            <div class="row">
+                                                <div class="widget-body" id="Term-Content"></div>
+                                            </div>
+                                            <section id="widget-grid" class="">
+                                                <div class="row">
+                                                    <!-- NEW WIDGET START -->
+                                                    <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12 sortable-grid ui-sortable">
+                                                        <!-- Widget ID (each widget will need unique ID)-->
+                                                        <div class="jarviswidget jarviswidget-color-blueDark jarviswidget-sortable" id="wid-id-0" data-widget-editbutton="false" role="widget">
+                                                            <header role="heading">
+                                                                <div class="jarviswidget-ctrls" role="menu">
+                                                                    <a href="javascript:void(0);" class="button-icon jarviswidget-toggle-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Collapse">
+                                                                        <i class="fa fa-minus "></i>
+                                                                    </a>
+                                                                    <a href="javascript:void(0);" class="button-icon jarviswidget-fullscreen-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Fullscreen">
+                                                                        <i class="fa fa-expand "></i>
+                                                                    </a>
+                                                                </div>
+                                                                <span class="widget-icon"> <i class="@Model.ClassTitle"></i> </span>
+                                                                <h3 class="widget-h3">Term List</h3>
+                                                                <span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span>
+                                                            </header>
+                                                            <!-- widget div-->
+                                                            <div role="content" id="Grid_User">
+                                                                <!-- widget edit box -->
+                                                                <div class="jarviswidget-editbox">
+                                                                    <!-- This area used as dropdown edit box -->
+                                                                </div>
+                                                                <!-- end widget edit box -->
+                                                                <!-- widget content -->
+                                                                <div class="widget-body " id="Term-List">
+
+                                                                </div>
+                                                                <!-- end widget content -->
+                                                            </div>
+                                                            <!-- end widget div -->
+                                                        </div>
+                                                        <!-- end widget -->
+                                                    </article>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div class="tab-pane" id="tab10">
+                                            <br>
+                                            <h3><strong>Step 10</strong> - Term Month</h3>
+                                            <div class="row">
+                                                <div class="widget-body" id="TermMonth-Content"></div>
+                                            </div>
+                                            <section id="widget-grid" class="">
+                                                <div class="row">
+                                                    <!-- NEW WIDGET START -->
+                                                    <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12 sortable-grid ui-sortable">
+                                                        <!-- Widget ID (each widget will need unique ID)-->
+                                                        <div class="jarviswidget jarviswidget-color-blueDark jarviswidget-sortable" id="wid-id-0" data-widget-editbutton="false" role="widget">
+                                                            <header role="heading">
+                                                                <div class="jarviswidget-ctrls" role="menu">
+                                                                    <a href="javascript:void(0);" class="button-icon jarviswidget-toggle-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Collapse">
+                                                                        <i class="fa fa-minus "></i>
+                                                                    </a>
+                                                                    <a href="javascript:void(0);" class="button-icon jarviswidget-fullscreen-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Fullscreen">
+                                                                        <i class="fa fa-expand "></i>
+                                                                    </a>
+                                                                </div>
+                                                                <span class="widget-icon"> <i class="@Model.ClassTitle"></i> </span>
+                                                                <h3 class="widget-h3">Term Month List</h3>
+                                                                <span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span>
+                                                            </header>
+                                                            <!-- widget div-->
+                                                            <div role="content" id="Grid_User">
+                                                                <!-- widget edit box -->
+                                                                <div class="jarviswidget-editbox">
+                                                                    <!-- This area used as dropdown edit box -->
+                                                                </div>
+                                                                <!-- end widget edit box -->
+                                                                <!-- widget content -->
+                                                                <div class="widget-body " id="TermMonth-List">
+
+                                                                </div>
+                                                                <!-- end widget content -->
+                                                            </div>
+                                                            <!-- end widget div -->
+                                                        </div>
+                                                        <!-- end widget -->
+                                                    </article>
+                                                </div>
+                                            </section>
+                                        </div>
+                                </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- end widget content -->
+                </div>
+                <!-- end widget div -->
+            </div>
+            <!-- end widget -->
+        </article>
+    </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function () {
+    LoadSchoolContent();
+});
+</script>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

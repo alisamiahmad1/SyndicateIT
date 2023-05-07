@@ -1,0 +1,90 @@
+﻿@model SyndicateIT.Model.ViewModel.UserManagement.UserViewModel
+@{
+    ViewBag.Title = "User";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{  string resouceFilePath = "~/Views/UserManagement/User.cshtml";}
+
+@section TopMenu{
+    @Html.Partial("_MenuTopPartial")
+}
+@section LeftMenu{
+    @Html.Partial("_MenuLeftPartial")
+}
+<br />
+<section id="content" class="content-container animate-fade-up" data-ui-view="" style="">
+    <div class="page page-general ng-scope">
+        <ul class="breadcrumb">
+            <li>@Html.ActionLink(@Html.Resource("UserManagement", resouceFilePath), "Index", "UserManagement")</li>
+            <li class="active">@Html.Resource("User", resouceFilePath)</li>
+        </ul>
+        @using (Html.BeginForm(@Html.Resource("Register", resouceFilePath), "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+            <fieldset>
+                <legend>@ViewBag.SubTitle</legend>
+                @if (@ViewBag.IsReadOnly == true)
+                {
+                    <div class="form-group" id="DownloadTemplate">
+                        <a href="#" class="btn btn-info ">@Html.Resource("ResetPassword", resouceFilePath)</a>
+                    </div>
+                }
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Username, new { @class = "col-lg-2 control-label" })
+                    <div class="col-lg-3">
+                        @if (@ViewBag.IsReadOnly == true)
+                        {
+                            @Html.Kendo().TextBoxFor(model => model.Username).HtmlAttributes(new { @class = "", @disabled = "true" }).Name("Username")
+                        }
+                        else
+                        {
+                            @Html.Kendo().TextBoxFor(model => model.Username).HtmlAttributes(new { @class = "" }).Name("Username")
+                            @Html.ValidationMessageFor(model => model.Username, null, new { @class = "text-danger" })
+                        }
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.RoleID, new { @class = "col-lg-2 control-label" })
+                    <div class="col-lg-3">
+                        @(Html.Kendo().DropDownListFor(m => m.RoleID)
+                        .DataTextField("Text")
+                        .DataValueField("Value")
+                        .OptionLabel("Please Select")
+                        .SelectedIndex(Model.RoleID)
+                        .DataSource(source =>
+                        {
+                            source.Read(read =>
+                            {
+                                read.Action("GetProducts", "BillerManagement");
+                            });
+                        })
+                        )
+                        @Html.ValidationMessageFor(model => model.RoleID, null, new { @class = "text-danger" })
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <div class="col-lg-10 col-lg-offset-2">
+                        <button type="submit" class="btn btn-info">@Html.Resource("Save", resouceFilePath)</button>
+                    </div>
+                </div>
+            </fieldset>
+        }
+    </div>
+</section>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#Administration", $("#nav")).addClass("active open");
+            $("#Administration Ul", $("#nav")).show();
+            $.validator.setDefaults({
+                ignore: ""
+            });
+        });
+    </script>
+}
+
+
+

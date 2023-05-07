@@ -1,0 +1,61 @@
+﻿@model SyndicateIT.Model.ViewModel.Exam.ExamFileStudentContentViewModel
+@{    
+    string PublicResources = "~/Views/Exams/LoadExamsFileStudent/_ExamsFileStudents.cshtml";
+}
+@Html.Partial("~/Views/Shared/_NavigationPartial.cshtml", @Model.Navigation)
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>    
+<script src="~/Scripts/Views/Exams/examsSetup.js"></script> 
+<div id="content">
+    <div class="row">
+        <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+            <h1 class="page-title txt-color-blueDark">
+                <i class="@Model.ClassTitle"></i> @Model.Title<span></span>
+            </h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-3">
+            <div id="ExamStudentTemplates-container">
+                <div class="well well-sm">
+                    <form>
+                        <fieldset>
+                            <legend>
+                                <span class="badge bg-color-orange" style="margin-right:10px;">@Html.Resource("Step", PublicResources) 1 </span> @Html.Resource("FileStudents", PublicResources)
+                            </legend>
+                            <ul id="external-events" class="list-unstyled">
+                                @for (int i = 0; i < Model.lstExam.Count(); i++)
+                                 {
+                                    <li style="position: relative; width: 100%;cursor: pointer!important; " onclick="LoadFileStudentById('@Model.lstExam[i].Value');">
+                                        <span class="bg-color-blue  txt-color-white" data-icon="fa-time" style="cursor: pointer!important; "><i class="fa  fa-pencil-square-o txt-color-white"></i><span style="margin-left:5%">@Model.lstExam[i].Text</span></span>
+                                    </li>
+                                 }
+                            </ul>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-9">
+            <!-- new widget -->
+            <div class="jarviswidget jarviswidget-color-blueDark">
+                <header style="border-color: #B2B5B9!important;background: #B2B5B9;">
+                    <h2><span class="badge bg-color-orange" style="margin-right:10px;">@Html.Resource("Step", PublicResources) 2 </span>@Html.Resource("LoadMaterialsStudent", PublicResources) </h2>
+                </header>
+                <!-- widget div-->
+                <div>
+                    <div class=" no-padding" style="margin:0px!important">
+                        <div class="fc fc-ltr fc-unthemed" id="ExamFileStudent-Content">
+                            no data available
+                        </div>
+                    </div>
+                    <!-- end widget div -->
+                </div>
+                <!-- end widget -->
+            </div>
+        </div>
+    </div>
+</div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }

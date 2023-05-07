@@ -1,0 +1,89 @@
+﻿@using SyndicateIT.Models
+
+@model LoginViewModel
+@{
+    ViewBag.Title = "Log in";
+    ViewBag.CurrentYear = DateTime.Now.ToString("yyyy");
+    Layout = null;
+    string resouceFilePath = "~/Views/Account/Login.cshtml";
+}
+<!DOCTYPE html>
+<html lang="en-us" id="extr-page">
+<head>
+    <meta charset="utf-8">
+    <title> @Html.Resource("SyndicateIT", resouceFilePath) </title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" type="text/css" media="screen" href="~/Content/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="~/Content/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="~/Content/smartadmin-production-plugins.min.css">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="~/Content/smartadmin-skins.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="~/Content/smartadmin-rtl.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="~/Content/demo.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="~/Content/lockscreen.min.css" hr>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
+    <link rel="stylesheet" type="text/css" media="screen" href="~/Content/smartadmin-production.min.css">
+</head>
+<body>
+    <header id="header">
+
+        <div id="logo-group">
+            <span id="logo"> <img src="@Utilities.GetAbsotuleUrl("~/Content/image/Corporate/SkyWeb.png")" alt="SyndicateIT"> </span>
+        </div>
+
+        <span id="extr-page-header-space"> <span class="hidden-mobile hiddex-xs">Need an account?</span> <a href="@Html.GetUrl("Register", "Account", SessionContent.Current.Corporate.IsSecure)" class="btn btn-danger">Create account</a> </span>
+
+    </header>
+    <div id="main" role="main">
+        <!-- MAIN CONTENT -->
+        @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "lockscreen animated flipInY", role = "form" }))
+        {
+            <div class="logo">
+                <h1 class="semi-bold"><img src="" style="width: 134px;margin-left:-16px" alt="" / > </h1>
+            </div>
+            <div>
+                <img src="@string.Format(@Utilities.GetAbsotuleUrl("/Content/image/Corporate/{0}.png"), SessionContent.Current.Corporate.LogoName)" alt="" style="margin-top:10%!important">
+                <div>
+                    <h1>@Html.Resource("Signin", resouceFilePath)</h1>
+                    <p class="text-muted">
+
+                    </p>
+                    <div class="input-group">
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @maxlength = "100", @placeholder = "Email" })
+                        <div class="input-group-btn">
+                            <span class="btn btn-White">
+                                <i class="icon-append fa fa-user"></i>
+                            </span>
+                        </div>
+                    </div>
+                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                    <p class="font-xs margin-top-5"></p>
+                    <div class="input-group">
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", @maxlength = "15", autocomplete = "off", @placeholder = "Password" })
+                        <div class="input-group-btn">
+                            <span class="btn btn-White">
+                                <i class="icon-append fa fa-lock"></i>
+                            </span>
+                        </div>
+                    </div>
+                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                    <p class="font-xs margin-top-5"></p>
+                    <button type="submit" class="btn btn-signin">@Html.Resource("Signin", resouceFilePath)</button>
+                </div>
+            </div>
+            if (!ViewData.ModelState.IsValid)
+            {
+                <div class="alert alert-danger fade in">
+                    <i class="fa-fw fa fa-times"></i>
+                    <strong>@Html.Resource("Error", resouceFilePath) </strong> @Html.ValidationMessage("Error").
+                </div>
+            }
+    <p class="font-xs margin-top-5">
+        ® @ViewBag.CurrentYear, IT Syndicate in Lebanon
+    </p>
+        }
+    </div>
+</body>
+</html>

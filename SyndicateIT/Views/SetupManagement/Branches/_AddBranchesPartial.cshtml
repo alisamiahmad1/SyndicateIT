@@ -1,0 +1,181 @@
+﻿
+@model SyndicateIT.Model.ViewModel.SetupManagement.Branches.BranchesViewModel
+@using SyndicateIT.Views.App_GlobalResources
+@{
+    Layout = null;
+    string PublicResources = "~/Views/SetupManagement/Branches/PublicResource";
+}
+@Html.Partial("~/Views/Shared/_NavigationPartial.cshtml", @Model.Navigation)
+<div id="content">
+    <div class="row">
+        <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+            <h1 class="page-title txt-color-blueDark">
+                <i class="@Model.ClassTitle"></i> @Model.Title<span></span>
+            </h1>
+        </div>
+    </div>
+    @Html.Partial("~/Views/Shared/_AlertPartial.cshtml", Model.Alert)
+    <section id="widget-grid" class="">
+        <!-- row -->
+        <div class="row">
+            <article class="col-sm-12 sortable-grid ui-sortable">
+                <!-- Widget ID (each widget will need unique ID)-->
+                <div class="jarviswidget jarviswidgetTransparent" id="wid-id-x" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false" data-widget-custombutton="false" data-widget-sortable="false" role="widget">
+                    <header role="heading"></header>
+                    <!-- widget div-->
+                    <div role="content">
+                        <div class="row">
+                            <div class="widget-body">
+                                @using (Html.BeginForm("AddUpdateBranches", "Branches", FormMethod.Post, new { @class = "smart-form", role = "form", id = "Branches-form" }))
+                                {
+                                    @Html.HiddenFor(m => m.BranchId)
+                                    @Html.AntiForgeryToken()
+                                    @Html.ValidationSummary(true)
+                                    <fieldset>
+                                        <section class="form-group  col-sm-12">
+                                            @Html.Label(GeneralResources.IS_ACTIVE, new { @class = "col-md-2 control-label" })
+                                            <div class="col-md-10">
+                                                <label class="checkbox">
+                                                    @Html.CheckBoxFor(m => m.IS_ACTIVE, new { @checked = "checked" })
+                                                    <i></i>
+                                                </label>
+                                            </div>
+                                        </section>
+                                        <section class="form-group  col-sm-6">
+                                            @Html.LabelFor(m => m.Name, Html.Resource("Name", PublicResources), new { @class = "col-md-4 control-label" })
+                                            <div class="col-md-6">
+                                                @Html.Kendo().TextBoxFor(model => model.Name).HtmlAttributes(new { @class = "form-control form-control-md10" }).Name("Name")
+                                                <div class="text-danger field-validation-error" id="Name_ValidationMsg" style="display:none;">
+                                                    <span for="SearchBranches" class=""> @Html.Resource("Name_Required", PublicResources)</span>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        <section class="form-group  col-sm-6">
+                                            @Html.LabelFor(m => m.Email, Html.Resource("Email", PublicResources), new { @class = "col-md-4 control-label" })
+                                            <div class="col-md-6">
+                                                @Html.Kendo().TextBoxFor(model => model.Email).HtmlAttributes(new { @class = "form-control form-control-md10" }).Name("Email")
+                                                <div class="text-danger field-validation-error" id="Email_ValidationMsg" style="display:none;">
+                                                    <span for="Email" class=""> @Html.Resource("Email_Required", PublicResources)</span>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        <section class="form-group  col-sm-6">
+                                            @Html.LabelFor(m => m.Address, Html.Resource("Address", PublicResources), new { @class = "col-md-4 control-label" })
+                                            <div class="col-md-6">
+                                                @Html.Kendo().TextBoxFor(model => model.Address).HtmlAttributes(new { @class = "form-control form-control-md10" }).Name("Address")
+                                                <div class="text-danger field-validation-error" id="Address_ValidationMsg" style="display:none;">
+                                                     <span for="Address" class=""> @Html.Resource("Address_Required", PublicResources)</span>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        <section class="form-group  col-sm-6">
+                                            @Html.LabelFor(m => m.MobileNumber, Html.Resource("MobileNumber", PublicResources), new { @type = "number", @class = "col-md-4 control-label" })
+                                            <div class="col-md-6">
+                                                @Html.Kendo().TextBoxFor(model => model.MobileNumber).HtmlAttributes(new { @class = "form-control form-control-md10" }).Name("MobileNumber")
+                                                <div class="text-danger field-validation-error" id="MobileNumber_ValidationMsg" style="display:none;">
+                                                     <span for="MobileNumber" class=""> @Html.Resource("MobileNumber_Required", PublicResources)</span>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        <section class="form-group  col-sm-6">
+                                            @Html.LabelFor(m => m.Country, Html.Resource("Country", PublicResources), new { @class = "col-md-4 control-label" })
+                                            <div class="col-md-6">
+                                                @(Html.Kendo().DropDownListFor(m => m.Country)
+                                                .Name("Country")
+                                                .DataTextField("Text")
+                                                .DataValueField("Value")
+                                                .OptionLabel(@Html.Resource("SelectCo", PublicResources))
+                                                .HtmlAttributes(new { @class = "ui-select form-control-md10" })
+                                                //    .SelectedIndex(Model.Country)
+                                                .Value(Model.Country.ToString())
+                                                 .Filter("startswith")
+                                                .DataSource(source =>
+                                                {
+                                                    source.Read(read =>
+                                                    {
+                                                        read.Action("GetCountry", "ProfileManagement");
+                                                    });
+                                                }))
+                                                <div class="text-danger field-validation-error" id="Country_ValidationMsg" style="display:none;">
+                                                    <span for="Country" class=""> @Html.Resource("Country_Required", PublicResources)</span>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        <section class="form-group  col-sm-6">
+                                            @Html.LabelFor(m => m.City, Html.Resource("City", PublicResources), new { @class = "col-md-4 control-label" })
+                                            <div class="col-md-6">
+                                                @(Html.Kendo().DropDownListFor(m => m.City)
+                                                .Name("City")
+                                                .DataTextField("Text")
+                                                .DataValueField("Value")
+                                                .OptionLabel(@Html.Resource("SelectCt", PublicResources))
+                                                .HtmlAttributes(new { @class = "ui-select form-control-md10" })
+                                                // .SelectedIndex(Model.City)
+                                                .Value(Model.City.ToString())
+                                                .DataSource(source =>
+                                                {
+                                                    source.Read(read =>
+                                                    {
+                                                        read.Action("GetCity", "ProfileManagement");
+                                                    });
+                                                }))
+                                                <div class="text-danger field-validation-error" id="City_ValidationMsg" style="display:none;">
+                                                    <span for="City" class=""> @Html.Resource("City_Required", PublicResources)</span>
+                                                </div>
+                                          </div>
+                                        </section>                                   
+                                       <section class="form-group  col-sm-6">
+                                            @Html.LabelFor(m => m.User_Id, Html.Resource("User_Id", PublicResources), new { @class = "col-md-4 control-label" })
+                                            <div class="col-md-6">
+                                                @(Html.Kendo().DropDownListFor(m => m.User_Id)
+                                                .Name("User_Id")
+                                                .DataTextField("Text")
+                                                .DataValueField("Value")
+                                                .OptionLabel("Select User")
+                                                 .OptionLabel(@Html.Resource("Selectusert", PublicResources))
+                                                .HtmlAttributes(new { @class = "ui-select form-control-md10" })
+                                                // .SelectedIndex(Model.City)
+                                                .Value(Model.User_Id.ToString())
+                                                 .Filter("startswith")
+                                                .DataSource(source =>
+                                                {
+                                                    source.Read(read =>
+                                                    {
+                                                        read.Action("GetRelative", "Branches");
+                                                    });
+                                                }))
+                                                <div class="text-danger field-validation-error" id="User_Id_ValidationMsg" style="display:none;">
+                                                    <span for="User_Id" class=""> @Html.Resource("User_Id_Required", PublicResources)</span>
+                                                </div>
+                                            </div>
+                                        </section>                                    
+                                       <section class="form-group  col-sm-6">
+                                            @Html.LabelFor(m => m.RecordDate, Html.Resource("RecordDate", PublicResources), new { @class = "col-md-4  control-label" })
+                                            <div class="col-md-6">
+                                                @Html.Kendo().DatePickerFor(model => model.RecordDate).HtmlAttributes(new { @class = "form-control form-control-md10", @maxlength = 200, @placeholder = "Enter Date" }).Name("RecordDate")
+                                                <div class="text-danger field-validation-error" id="RecordDate_validationMessage" style="display:none;">
+                                                    <span for="RecordDate" class=""> @Html.Resource("RecordDate_Required", PublicResources)</span>
+                                                </div>
+                                             
+                                             </div>
+                                        </section>
+                                   </fieldset>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end widget content -->
+                </div>
+                <!-- end widget -->
+                <div class="footer">
+                    <button type="button" class="btn btn-primary general-btn" onclick="SaveBranches();">@GeneralResources.save</button>
+                </div>
+            </article>
+        </div>
+    </section>
+</div>
+@section Scripts {
+    @Scripts.Render("~/Scripts/Branches")
+}
+
+

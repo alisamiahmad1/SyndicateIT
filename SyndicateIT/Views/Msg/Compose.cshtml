@@ -1,0 +1,158 @@
+﻿@model SyndicateIT.Model.ViewModel.Msg.MsgViewModel
+@{
+
+    string PublicResources = "~/Views/MSG/PublicResource";
+}
+
+<script>
+
+
+    function FilterClass() {
+        return { Cycle_ID: $("#Cycle_ID").data("kendoDropDownList").value() };
+    }
+    function FilterDivision() {
+        return { Class_ID: $("#Class_ID").data("kendoDropDownList").value() };
+    }
+
+</script>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <h5>Compose New Email</h5>
+    <form id="compose-form" method="post" onsubmit="return false;">
+        <fieldset>
+            <section class="col-lg-12">
+                @Html.Label("Subject", new { @for = "Subject" })
+                @Html.TextBoxFor(m => m.Msg_Subject, new { @class = "form-control", placeholder = "Subject" })
+            </section>
+            <section class="col-lg-12">
+                <fieldset>
+                    <legend>
+                        @Html.Label("Attachement")
+                        <span class="pull-right fa fa-paperclip font-lg text-danger" id="toggle-attachement"></span>
+                    </legend>
+                    <div class="row" id="attachement-row">
+                        <section class="col-lg-12">
+                            @(Html.Kendo().Upload()
+                                .Name("Attachement-Files")
+                                .Multiple(false)
+                            )
+                        </section>
+                    </div>
+                </fieldset>
+            </section>
+            <section class="col-lg-12">
+                <fieldset>
+                    <legend>
+                        @Html.Label("Recivers")
+                        <span class="pull-right fa fa-plus font-lg text-danger" id="toggle-recivers"></span>
+                    </legend>
+                    <div class="row hidden" id="recivers-row" style="padding:20px 20px 20px 20px">
+                        <section class="col-sm-4 col-xs-6">
+                            @Html.LabelFor(m => m.Cycle_ID, Html.Resource("Cycle_id", PublicResources), new { @class = "control-label" })
+                            @(Html.Kendo().DropDownListFor(m => m.Cycle_ID)
+                                                 .DataTextField("Text")
+                                                .DataValueField("Value")
+                                                .OptionLabel(@Html.Resource("EnterCycle", PublicResources))
+                                                .HtmlAttributes(new { @class = "input-required" })
+                                                //.Value(Model.StageID)
+                                                .DataSource(source =>
+                                                {
+                                                    source.Read(read =>
+                                                    {
+                                                        read.Action("GetCycleTypesList", "Msg");
+                                                    });
+                                                })
+                                                 .Events(e => e.Change("findUsers"))
+                            )
+
+                        </section>
+                        <section class="col-sm-4 col-xs-6">
+                            @Html.LabelFor(m => m.Class_ID, Html.Resource("Class_ID", PublicResources), new { @class = "control-label" })
+                            @(Html.Kendo().DropDownListFor(m => m.Class_ID)
+                                                //.Name("Class_ID")
+                                                .DataTextField("Text")
+                                                .DataValueField("Value")
+                                                .OptionLabel(@Html.Resource("EnterClass", PublicResources))
+                                                  .HtmlAttributes(new { @class = "input-required find-users" })
+                                                .Value(Model.Class_ID.ToString())
+                                                .Filter("startswith")
+                                                .DataSource(source =>
+                                                {
+                                                    source.Read(read =>
+                                                    {
+                                                        read.Action("GetClass", "Msg")
+                                                        .Data("FilterClass");
+                                                    }).ServerFiltering(true);
+                                                })
+                                                .Enable(true)
+                                                .AutoBind(false)
+                                                .CascadeFrom("Cycle_ID")
+                                                .Events(e => e.Change("findUsers"))
+                                                )
+
+
+
+                        </section>                        
+                        <section class="col-sm-4 col-xs-6">
+                              @Html.LabelFor(m => m.Division_ID, Html.Resource("Division_ID", PublicResources), new { @class = "control-label" })
+                             @(Html.Kendo().DropDownListFor(m => m.Division_ID)
+                                                .Name("Division_ID")
+                                                .DataTextField("Text")
+                                                .DataValueField("Value")
+                                                 .OptionLabel(@Html.Resource("EnterDivision", PublicResources))
+                                                  .HtmlAttributes(new { @class = "input-required find-users" })
+                                                .Value(Model.Division_ID.ToString())
+                                                .Filter("startswith")
+                                                .DataSource(source =>
+                                                {
+                                                    source.Read(read =>
+                                                    {
+                                                        read.Action("GetDivision", "Msg")
+                                                        .Data("FilterDivision");
+                                                    }).ServerFiltering(true);
+                                                })
+                                                .Enable(true)
+                                                .AutoBind(false)
+                                                .CascadeFrom("Class_ID")
+                                                 .Events(e => e.Change("findUsers"))
+                                                )
+
+
+
+                        </section>
+                        <section class="col-lg-12" id="lstUsers" style="display:none; ">
+                            <select multiple="multiple" name="lstRecivers_IDs"></select>
+                        </section>
+                    </div>
+                </fieldset>
+            </section>
+            <section class="col-lg-12" style="margin-bottom:50px!important;">
+                @(Html.Kendo().EditorFor(m => m.Msg_Content)
+                    .HtmlAttributes(new { @class = "form-control" })
+                    .Tools(tools => tools
+                        .Clear()
+                        .Bold().Italic()
+                        .Underline().Strikethrough()
+                        .JustifyLeft().JustifyCenter()
+                        .JustifyRight().JustifyFull()
+                        .InsertUnorderedList()
+                        .InsertOrderedList()
+                        .Outdent().Indent()
+                        .CreateLink().Unlink()
+                        .InsertImage().SubScript()
+                        .SuperScript().TableEditing()
+                        .ViewHtml()
+                        //.Formatting().FontName().FontSize()
+                        .FontColor().BackColor()
+                    )
+                    .Value(@<text></text>)
+                )
+            </section>
+            <div class="resultMsg"></div>
+            <footer class="col-lg-12">
+                <button class="btn btn-danger pull-left" type="reset">Cancel</button>
+                <button class="btn btn-primary pull-right" type="submit" id="btn-send-compose">Send</button>
+            </footer>
+        </fieldset>
+
+    </form>
+</div>

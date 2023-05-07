@@ -1,0 +1,42 @@
+﻿@model List<SyndicateIT.Model.ViewModel.ProfileManagement.ProfileDetails.JoinCourcesViewModel>
+
+  @for (int i = 0; i < Model.Count; i++)
+  {
+
+      var joinClass = Model[i].JoinClass;
+
+    <li class="parent_li" role="treeitem">
+        <span title="Collapse this branch"><i class="fa fa-lg fa-folder-open"></i> @Model[i].Cycle</span>
+        <ul role="group">
+            @for (int j = 0; j < joinClass.Count; j++)
+            {
+                var joinDivision = joinClass[j].JoinDivision;
+
+                <li class="parent_li" role="treeitem">
+                    <span title="Collapse this branch"><i class="fa fa-lg fa-minus-circle"></i> @joinClass[j].Class</span>
+                    <ul role="group">
+                        @for (int t = 0; t < joinDivision.Count; t++)
+                        {
+                            var JoinCourse = joinDivision[t].JoinCourse;
+
+                            <li class="parent_li" role="treeitem">
+                                <span title="Expand this branch"><i class="fa fa-lg fa-Divisionplus-circle"></i> @joinDivision[t].Division</span>
+                                <ul role="group">
+                                    @for (int s = 0; s < JoinCourse.Count; s++)
+                                    {
+                                        <li>
+                                            <span class="label label-warning"><i class="fa fa-times"style="color: #a90329; float: right;cursor:pointer;"  onClick="DeleteJoinCourse('@JoinCourse[s].JoinCourcesId')">Delete</i> @JoinCourse[s].Course</span>
+                                        </li>                                       
+                                    }                                   
+                                </ul>
+                            </li>
+                        }                       
+                    </ul>
+                </li>
+            }
+           
+        </ul>
+    </li>
+  }
+
+

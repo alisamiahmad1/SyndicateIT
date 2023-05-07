@@ -1,0 +1,199 @@
+﻿@model SyndicateIT.Model.ViewModel.ServiceManagement.ServicesContentDetailsViewModel
+
+@Html.Partial("~/Views/Shared/_NavigationPartial.cshtml", @Model.Navigation)
+<script src="~/Scripts/Views/Enrollment/inquiry.js"></script>
+<div id="content">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <h1 class="page-title txt-color-blueDark">
+                <i class="@Model.ClassTitle"></i> @Model.SubTitle
+            </h1>
+        </div>
+    </div>
+    <section id="widget-grid" class="">
+        <!-- row -->
+        <div class="row">
+            <!-- NEW WIDGET START -->
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12 sortable-grid ui-sortable" id="Main-Service-Container">
+                @if (Model.ServiceType == ServiceType.Attendance)
+                {
+                    @Html.Partial("~/Views/ServiceManagement/Attendance/_AttendancePartial.cshtml", @Model.Attendance)
+                }
+                else if (Model.ServiceType == ServiceType.AttendanceMonthly)
+                {
+                    @Html.Partial("~/Views/ServiceManagement/Attendance/_AttendanceMonthlyPartial.cshtml", @Model.AttendanceMonthly)
+                }
+                @if (Model.ServiceType == ServiceType.AbsorptionGrades)
+                {
+                    @Html.Partial("~/Views/ServiceManagement/AbsorptionGrades/_AbsorptionGradesPartial.cshtml", @Model.AbsorptionGrades)
+                }
+                else if (Model.ServiceType == ServiceType.AbsorptionGradesMonthly)
+                {
+                    @Html.Partial("~/Views/ServiceManagement/AbsorptionGrades/_AbsorptionGradesMonthlyPartial.cshtml", @Model.AbsorptionGradesMonthly)
+                }
+
+                @if (Model.ServiceType == ServiceType.DegreesParticipationActivites)
+                {
+                    @Html.Partial("~/Views/ServiceManagement/DegreesParticipationActivites/_DegreesParticipationActivitesPartial.cshtml", @Model.DegreesParticipationActivites)
+                }
+                else if (Model.ServiceType == ServiceType.DegreesParticipationMonthly)
+                {
+                    @Html.Partial("~/Views/ServiceManagement/DegreesParticipationActivites/_DegreesParticipationActivitesMonthlyPartial.cshtml", @Model.DegreesParticipationActivitesMonthly)
+                }
+
+
+                @if (Model.ServiceType == ServiceType.Agenda)
+                {
+                    @Html.Partial("~/Views/ServiceManagement/Agenda/_AgendaPartial.cshtml", @Model.Agenda)
+                }
+                else if (Model.ServiceType == ServiceType.AgendaDaily)
+                {
+                    @Html.Partial("~/Views/ServiceManagement/Agenda/_AgendaDailyPartial.cshtml", @Model.AgendaDaily)
+                }
+                else if (Model.ServiceType == ServiceType.Schedule)
+                {
+                    @Html.Partial("~/Views/ServiceManagement/Schedule/_SchedulePartiat.cshtml", @Model.Schedule)
+                }
+                else if (Model.ServiceType == ServiceType.PeriodSchedule)
+                {
+                    @Html.Partial("~/Views/ServiceManagement/PeriodSchedule/_PeriodSchedulePartiat.cshtml", @Model.Schedule)
+                }
+                else if (Model.ServiceType == ServiceType.DistributionStudents)
+                {
+                    @Html.Partial("~/Views/ServiceManagement/DistributionStudents/_DistributionStudentsPartial.cshtml", @Model.DistributionStudents)
+                }
+                else if (Model.ServiceType == ServiceType.ExamProgram)
+                {
+                    @Html.Partial("~/Views/ServiceManagement/ExamProgram/_ExamProgramPartial.cshtml", @Model.ExamProgram)
+                }
+
+                
+               
+
+               
+                else if (Model.ServiceType == ServiceType.Duties)
+                {
+                    @Html.Partial("~/Views/ServiceManagement/Duties/_DutiesPartial.cshtml", @Model.Duties)
+                }
+                else if (Model.ServiceType == ServiceType.DutiesMonthly)
+                {
+                    @Html.Partial("~/Views/ServiceManagement/Duties/_DutiesMonthlyPartial.cshtml", @Model.DutiesMonthly)
+                }
+                else if (Model.ServiceType == ServiceType.LevelBehavior)
+                {
+                    @Html.Partial("~/Views/ServiceManagement/LevelBehavior/_LevelBehaviorPartial.cshtml", @Model.LevelBehavior)
+                }
+                else if (Model.ServiceType == ServiceType.LevelBehaviorMonthly)
+                {
+                    @Html.Partial("~/Views/ServiceManagement/LevelBehavior/_LevelBehaviorMonthlyPartial.cshtml", @Model.LevelBehaviorMonthly)
+                }
+                               else if (Model.ServiceType == ServiceType.LevelIntelligence)
+                {
+                    @Html.Partial("~/Views/ServiceManagement/LevelIntelligence/_LevelIntelligencePartial.cshtml", @Model.LevelIntelligence)
+                }
+                else if (Model.ServiceType == ServiceType.LevelIntelligenceMonthly)
+                {
+                    @Html.Partial("~/Views/ServiceManagement/LevelIntelligence/_LevelIntelligenceMonthlyPartial.cshtml", @Model.LevelIntelligenceMonthly)
+                }
+
+            </article>
+            <!-- WIDGET END -->
+        </div>
+        <!-- end row -->
+    </section>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        if ('@Model.ServiceType' == '@ServiceType.Duties') {
+            $("#StudentLevelsUL").children().find('li').removeClass("active");
+            $("#Duties").addClass("active");
+            $("#StudentLevels").addClass("open"),
+            $("#StudentLevelsUL").show();
+            $("#StudentLevels").children().find('em').removeClass("fa fa-plus-square-o");
+            $("#StudentLevels").children().find('em').addClass("fa fa-minus-square-o");
+        } else if ('@Model.ServiceType' == '@ServiceType.LevelBehavior') {
+            $("#StudentLevelsUL").children().find('li').removeClass("active");
+            $("#LevelBehavior").addClass("active");
+            $("#StudentLevels").addClass("open"),
+            $("#StudentLevelsUL").show();
+            $("#StudentLevels").children().find('em').removeClass("fa fa-plus-square-o");
+            $("#StudentLevels").children().find('em').addClass("fa fa-minus-square-o");
+        } else if ('@Model.ServiceType' == '@ServiceType.LevelIntelligence') {
+            $("#StudentLevelsUL").children().find('li').removeClass("active");
+            $("#LevelIntelligence").addClass("active");
+            $("#StudentLevels").addClass("open"),
+            $("#StudentLevelsUL").show();
+            $("#StudentLevels").children().find('em').removeClass("fa fa-plus-square-o");
+            $("#StudentLevels").children().find('em').addClass("fa fa-minus-square-o");
+        } else if ('@Model.ServiceType' == '@ServiceType.Attendance') {
+            $("#StudentGradesUL").children().find('li').removeClass("active");
+            $("#Attendance").addClass("active");
+            $("#StudentGrades").addClass("open"),
+            $("#StudentGradesUL").show();
+            $("#StudentGrades").children().find('em').removeClass("fa fa-plus-square-o");
+            $("#StudentGrades").children().find('em').addClass("fa fa-minus-square-o");
+        } else if ('@Model.ServiceType' == '@ServiceType.DegreesParticipationActivites') {
+            $("#StudentGradesUL").children().find('li').removeClass("active");
+            $("#DegreesParticipation").addClass("active");
+            $("#StudentGrades").addClass("open"),
+            $("#StudentGradesUL").show();
+            $("#StudentGrades").children().find('em').removeClass("fa fa-plus-square-o");
+            $("#StudentGrades").children().find('em').addClass("fa fa-minus-square-o");
+        } else if ('@Model.ServiceType' == '@ServiceType.AbsorptionGrades') {
+            $("#StudentGradesUL").children().find('li').removeClass("active");
+            $("#AbsorptionGrades").addClass("active");
+            $("#StudentGrades").addClass("open"),
+            $("#StudentGradesUL").show();
+            $("#StudentGrades").children().find('em').removeClass("fa fa-plus-square-o");
+            $("#StudentGrades").children().find('em').addClass("fa fa-minus-square-o");
+        }
+
+        else if ('@Model.ServiceType' == '@ServiceType.Agenda') {
+            $("#ServicesUL").children().find('li').removeClass("active");
+            $("#Agenda").addClass("active");
+            $("#Services").addClass("open"),
+            $("#ServicesUL").show();
+            $("#Services").children().find('em').removeClass("fa fa-plus-square-o");
+            $("#Services").children().find('em').addClass("fa fa-minus-square-o");
+        }
+        else if ('@Model.ServiceType' == '@ServiceType.Schedule') {
+            $("#ServicesUL").children().find('li').removeClass("active");
+            $("#Schedule").addClass("active");
+            $("#Services").addClass("open"),
+            $("#ServicesUL").show();
+            $("#Services").children().find('em').removeClass("fa fa-plus-square-o");
+            $("#Services").children().find('em').addClass("fa fa-minus-square-o");
+        }
+        else if ('@Model.ServiceType' == '@ServiceType.PeriodSchedule') {
+            $("#ServicesUL").children().find('li').removeClass("active");
+            $("#PeriodSchedule").addClass("active");
+            $("#Services").addClass("open"),
+            $("#ServicesUL").show();
+            $("#Services").children().find('em').removeClass("fa fa-plus-square-o");
+            $("#Services").children().find('em').addClass("fa fa-minus-square-o");
+        }
+        else if ('@Model.ServiceType' == '@ServiceType.DistributionStudents') {
+            $("#ServicesUL").children().find('li').removeClass("active");
+            $("#DistributionStudents").addClass("active");
+            $("#Services").addClass("open"),
+            $("#ServicesUL").show();
+            $("#Services").children().find('em').removeClass("fa fa-plus-square-o");
+            $("#Services").children().find('em').addClass("fa fa-minus-square-o");
+        } else if ('@Model.ServiceType' == '@ServiceType.ExamProgram') {
+            $("#ServicesUL").children().find('li').removeClass("active");
+            $("#ExamProgram").addClass("active");
+            $("#Services").addClass("open"),
+            $("#ServicesUL").show();
+            $("#Services").children().find('em').removeClass("fa fa-plus-square-o");
+            $("#Services").children().find('em').addClass("fa fa-minus-square-o");
+        }
+    });
+
+</script>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+

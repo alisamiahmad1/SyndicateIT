@@ -1,0 +1,62 @@
+﻿@model SyndicateIT.Model.ViewModel.SetupManagement.Cycle.CycleViewModel
+@using SyndicateIT.Views.App_GlobalResources
+@{
+    Layout = null;
+    string PublicResources = "~/Views/PredefinedSetup/Details/_SettingsContentPartial.cshtml";
+}
+
+
+@using (Html.BeginForm("AddUpdateCycle", "Cycle", FormMethod.Post, new { @class = "smart-form", role = "form", id = "Cycle-form" }))
+{
+    @Html.HiddenFor(m => m.Cycle_ID)
+    
+    <fieldset>
+        <section class="form-group  col-sm-6">
+            @Html.Label(GeneralResources.IS_ACTIVE, new { @class = "col-md-4 control-label" })
+            <div class="col-md-6">
+                <label class="checkbox">
+                    @Html.CheckBoxFor(m => m.IS_ACTIVE, new { @checked = "checked" })
+                    <i></i>
+                </label>
+            </div>
+        </section>
+        <section class="form-group  col-sm-6">
+            @Html.LabelFor(m => m.Cycle_Title, Html.Resource("Cycle_Title", PublicResources), new { @class = "col-md-4 control-label" })
+            <div class="col-md-6">
+                @Html.Kendo().TextBoxFor(model => model.Cycle_Title).HtmlAttributes(new { @class = "form-control form-control-md10" }).Name("Cycle_Title")
+                <div class="text-danger field-validation-error" id="Cycle_Title_ValidationMsg" style="display:none;">
+                    <span for="SearchCycle" class=""> @Html.Resource("Cycle_Title_Required", PublicResources)</span>
+                </div>
+            </div>
+        </section>
+        <section class="form-group  col-sm-6">
+            @Html.LabelFor(m => m.Company_ID, Html.Resource("Company_ID", PublicResources), new { @class = "col-md-4 control-label" })
+            <div class="col-md-6">
+                @(Html.Kendo().DropDownListFor(m => m.Company_ID)
+                                                                        .DataTextField("Text")
+                                                                        .DataValueField("Value")
+                                                                        .OptionLabel("Select Company")
+                                                                        .HtmlAttributes(new { @class = "ui-select form-control-md10" })
+                                                                        .DataSource(source =>
+                                                                        {
+                                                                            source.Read(read =>
+                                                                            {
+                                                                                read.Action("GetCompanyName", "Cycle");
+                                                                            });
+                                                                        }))
+                <div class="text-danger field-validation-error" id="Company_ID_ValidationMsg" style="display:none;">
+                    <span for="Company_ID" class=""> @Html.Resource("Company_ID_Required", PublicResources)</span>
+                </div>
+            </div>
+        </section>
+        <section class="form-group  col-sm-12">
+            @Html.LabelFor(m => m.Cycle_Description, Html.Resource("Cycle_Description", PublicResources), new { @class = "col-md-2 text-left control-label" })
+            <div class="col-md-9">
+                @(Html.Kendo().EditorFor(m => m.Cycle_Description).Tools(tools => tools.Clear().Bold().Italic().Underline().Strikethrough().JustifyCenter().JustifyFull().JustifyLeft().JustifyRight().CreateLink().Unlink().TableEditing().FontColor().BackColor().Pdf().ViewHtml()))
+            </div>
+        </section>
+    </fieldset>
+}
+<div class="footer">
+    <button type="button" class="btn btn-primary general-btn" onclick="SaveCycle();" style="width: 150px;margin-bottom: 22px;">Save Cycle</button>
+</div>

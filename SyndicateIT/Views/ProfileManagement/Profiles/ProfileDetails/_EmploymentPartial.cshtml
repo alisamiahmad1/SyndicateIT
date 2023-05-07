@@ -1,0 +1,256 @@
+﻿
+@model SyndicateIT.Model.ViewModel.ProfileManagement.ProfileDetails.EmploymentViewModel
+@{
+    Layout = null;
+    string PublicResources = "~/Views/ProfileManagement/Profiles/ProfileDetails/PublicResources";
+}
+
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+@Html.Partial("~/Views/Shared/_AlertPartial.cshtml", Model.Alert)
+
+<article class="col-sm-12 sortable-grid ui-sortable">
+@using (Html.BeginForm("SaveEmployment", "ProfileManagement", FormMethod.Post, new { @class = "", role = "form", id = "Employment-form" }))
+{
+    <!-- Widget ID (each widget will need unique ID)-->
+    <div class="jarviswidget jarviswidgetTransparent" id="wid-id-x" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false" data-widget-custombutton="false" data-widget-sortable="false" role="widget">
+        <header role="heading">
+            <span class="widget-icon"> <i class="fa fa-align-justify"></i> </span>
+            <h2>@Html.Resource("LblEmploymentInfo", PublicResources)</h2>
+            <span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span>
+        </header>
+        <!-- widget div-->
+        <div role="content">
+        
+            <div class="row">
+                <div class="widget-body"> 
+                    @Html.Hidden("User_Employment_ID", Model.User_Employment_ID)                 
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+                        <fieldset>
+                            <div class="form-group  col-sm-6">
+                                @Html.LabelFor(m => m.JOB_ID, Html.Resource("JOB_ID", PublicResources), new { @class = "col-md-4 control-label" })
+                                <div class="col-md-7">
+                                   
+                                        @(Html.Kendo().DropDownListFor(m => m.JOB_ID)
+                                                .DataTextField("Text")
+                                                .DataValueField("Value")
+                                               .OptionLabel(@Html.Resource("SelectJob", PublicResources))
+                                                .HtmlAttributes(new { @class = "ui-select form-control-md10" })
+                                                .Enable(@Model.IsEdit)
+
+                                                .DataSource(source =>
+                                                {
+                                                    source.Read(read =>
+                                                    {
+                                                        read.Action("GetJob", "ProfileManagement");
+                                                    });
+                                                })
+                                        )
+                                      <span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error" data-for="JobTitle" data-valmsg-for="JobTitle" id="JobTitle_validationMessage" style="display:none;" role="alert"><span class="k-icon k-warning"> </span>@Html.Resource("RequiredJob", PublicResources)</span>
+                                </div>
+                            </div>                            
+                            <div class="form-group  col-sm-6">
+                                @Html.LabelFor(m => m.DEPARTMENT_ID, Html.Resource("DEPARTMENT_ID", PublicResources), new { @class = "col-md-4 control-label" })
+                                <div class="col-md-7">
+                                   
+                                        @(Html.Kendo().DropDownListFor(m => m.DEPARTMENT_ID)
+                                                .DataTextField("Text")
+                                                .DataValueField("Value")
+                                                .OptionLabel(@Html.Resource("SelectDepartment", PublicResources))
+                                                .HtmlAttributes(new { @class = "ui-select form-control-md10" })
+                                                .Enable(@Model.IsEdit)
+
+                                                .DataSource(source =>
+                                                {
+                                                    source.Read(read =>
+                                                    {
+                                                        read.Action("GetDepartment", "ProfileManagement");
+                                                    });
+                                                })
+                                        )
+                                    
+                                    <span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error" data-for="Department" data-valmsg-for="Department" id="Department_validationMessage" style="display:none;" role="alert"><span class="k-icon k-warning"> </span> @Html.Resource("RequiredDepartment", PublicResources)</span>
+                                </div>
+                            </div>
+                            <div class="form-group  col-sm-6">
+                                @Html.LabelFor(m => m.Grade, Html.Resource("Grade", PublicResources), new { @class = "col-md-4 control-label" })
+                                <div class="col-md-7">
+                                    @Html.Kendo().TextBoxFor(model => model.Grade).HtmlAttributes(new { @class = "form-control  form-control-md10", @maxlength = 150, @placeholder = @Html.Resource("SelectGrade", PublicResources) }).Name("Grade").Enable(@Model.IsEdit)
+                                    <span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error" data-for="Grade" data-valmsg-for="Grade" id="Grade_validationMessage" style="display:none;" role="alert"><span class="k-icon k-warning"> </span> @Html.Resource("RequiredGrade", PublicResources)</span>
+                                </div>
+                            </div>
+                            <div class="form-group  col-sm-6">
+                                @Html.LabelFor(m => m.Division, Html.Resource("Division", PublicResources), new { @class = "col-md-4 control-label" })
+                                <div class="col-md-7">
+                                    @Html.Kendo().TextBoxFor(model => model.Division).HtmlAttributes(new { @class = "form-control  form-control-md10", @maxlength = 200,  @placeholder = @Html.Resource("SelectDivision", PublicResources) }).Name("Division").Enable(@Model.IsEdit)
+                                    <span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error" data-for="Division" data-valmsg-for="Division" id="Division_validationMessage" style="display:none;" role="alert"><span class="k-icon k-warning"> </span>@Html.Resource("RequiredDivision", PublicResources)</span>
+                                </div>
+                            </div>
+                            <div class="form-group  col-sm-6">
+                                @Html.LabelFor(m => m.EmployeeNumber, Html.Resource("EmployeeNumber", PublicResources), new { @class = "col-md-4 control-label" })
+                                <div class="col-md-7">
+                                    @Html.Kendo().TextBoxFor(model => model.EmployeeNumber).HtmlAttributes(new { @class = "form-control  form-control-md10", @maxlength = 50, @placeholder = @Html.Resource("SelectEmployeeNumber", PublicResources) }).Name("EmployeeNumber").Enable(@Model.IsEdit)
+                                    <span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error" data-for="EmployeeNumber" data-valmsg-for="EmployeeNumber" id="EmployeeNumber_validationMessage" style="display:none;" role="alert"><span class="k-icon k-warning"> </span> @Html.Resource("RequiredEmployeeNumber", PublicResources)</span>
+
+                                  </div>
+                            </div>                          
+                            <div class="form-group  col-sm-6">
+                                @Html.LabelFor(m => m.Contract_Date, Html.Resource("Contract_Date", PublicResources), new { @class = "col-md-4 control-label" })
+                                <div class="col-md-7">
+                                    @Html.Kendo().DatePickerFor(model => model.Contract_Date).HtmlAttributes(new { @class = "form-control  form-control-md10", @maxlength = 200, @placeholder = @Html.Resource("SelectContractDate", PublicResources) }).Name("Contract_Date").Enable(@Model.IsEdit)
+                                    <span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error" data-for="ContractDates" data-valmsg-for="ContractDates" id="ContractDates_validationMessage"  style="display:none;" role="alert"><span class="k-icon k-warning"> </span>@Html.Resource("RequiredContractDate", PublicResources)</span>
+                                 </div>
+                            </div>                           
+                            <div class="form-group  col-sm-6">
+                                @Html.LabelFor(m => m.STATUS_ID, Html.Resource("STATUS_ID", PublicResources), new { @class = "col-md-4 control-label" })
+                                <div class="col-md-7">
+                                    @(Html.Kendo().DropDownListFor(m => m.STATUS_ID)
+                                                .DataTextField("Text")
+                                                .DataValueField("Value")
+                                                .OptionLabel(@Html.Resource("SelectStatus", PublicResources))
+                                                .HtmlAttributes(new { @class = "ui-select form-control-md10" })
+                                                .Enable(@Model.IsEdit)
+                                                .DataSource(source =>
+                                                {
+                                                    source.Read(read =>
+                                                    {
+                                                        read.Action("GetStatus", "ProfileManagement");
+                                                    });
+                                                })
+                                    )
+                                </div>
+                            </div>
+                            <div class="form-group  col-sm-6">
+                                @Html.LabelFor(m => m.SHIFT_ID, Html.Resource("SHIFT_ID", PublicResources), new { @class = "col-md-4 control-label" })
+                                <div class="col-md-7">
+                                    @(Html.Kendo().DropDownListFor(m => m.SHIFT_ID)
+                                                .DataTextField("Text")
+                                                .DataValueField("Value")
+                                                .OptionLabel(@Html.Resource("SelectShift", PublicResources))
+                                                .HtmlAttributes(new { @class = "ui-select form-control-md10" })
+                                                .Enable(@Model.IsEdit)
+                                                .DataSource(source =>
+                                                {
+                                                    source.Read(read =>
+                                                    {
+                                                        read.Action("GetShift", "ProfileManagement");
+                                                    });
+                                                })
+                                    )
+                                </div>
+                            </div>
+                            <div class="form-group  col-sm-6">
+                                @Html.LabelFor(m => m.HPD, Html.Resource("HPD", PublicResources), new { @class = "col-md-4 control-label" })
+                                <div class="col-md-7">
+                                    @Html.Kendo().TextBoxFor(model => model.HPD).HtmlAttributes(new { @class = "form-control  form-control-md10", @maxlength = 150, @placeholder = @Html.Resource("SelectHPD", PublicResources) }).Enable(@Model.IsEdit)
+                                </div>
+                            </div>
+                            <div class="form-group  col-sm-6">
+                                @Html.LabelFor(m => m.WD, Html.Resource("WD", PublicResources), new { @class = "col-md-4 control-label" })
+                                <div class="col-md-7">
+                                    @Html.Kendo().TextBoxFor(model => model.WD).HtmlAttributes(new { @class = "form-control  form-control-md10", @maxlength = 200, @placeholder = @Html.Resource("SelectWD", PublicResources) }).Enable(@Model.IsEdit)
+                                </div>
+                            </div>
+
+                         </fieldset>                    
+                </div>
+            </div>          
+         
+        </div>
+        <!-- end widget content -->
+    </div>
+    <!-- end widget -->
+
+    <!-- Widget ID (each widget will need unique ID)-->
+    <div class="jarviswidget jarviswidgetTransparent" id="wid-id-x" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false" data-widget-custombutton="false" data-widget-sortable="false" role="widget">
+        <header role="heading">
+            <span class="widget-icon"> <i class="fa fa-align-justify"></i> </span>
+            <h2>@Html.Resource("LblDriverLicense", PublicResources)</h2>
+            <span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span>
+        </header>
+        <!-- widget div-->
+        <div role="content">
+
+            <div class="row">
+                <div class="widget-body">
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+                    <fieldset>
+                        <div class="form-group  col-sm-6">
+                            <label class="col-md-4 control-label" > @Html.Resource("IS_INTERNATIONAL", PublicResources)</label>
+                            <div class="col-md-6">
+                                @Html.Kendo().CheckBoxFor(model => model.IS_INTERNATIONAL).Enable(@Model.IsEdit)
+                            </div>
+                        </div>                       
+                        <div class="form-group  col-sm-6">
+                            @Html.LabelFor(m => m.LicenseNumber, Html.Resource("LicenseNumber", PublicResources), new { @class = "col-md-4 control-label" })
+                            <div class="col-md-7">
+                                @Html.Kendo().TextBoxFor(model => model.LicenseNumber).HtmlAttributes(new { @class = "form-control  form-control-md10", @maxlength = 150, @placeholder = @Html.Resource("SelectLicenseNumber", PublicResources) }).Enable(@Model.IsEdit)
+                            </div>
+                        </div>
+                        <div class="form-group  col-sm-6">
+                            @Html.LabelFor(m => m.COUNTRY_ID, Html.Resource("COUNTRYISS_ID", PublicResources), new { @class = "col-md-4 control-label" })
+                            <div class="col-md-7">
+                                @(Html.Kendo().DropDownListFor(m => m.COUNTRY_ID)
+                                                .DataTextField("Text")
+                                                .DataValueField("Value")
+                                                .OptionLabel(@Html.Resource("SelectCountryIss", PublicResources))
+                                                .HtmlAttributes(new { @class = "ui-select form-control-md10" })
+                                                .Enable(@Model.IsEdit)
+                                                .DataSource(source =>
+                                                {
+                                                    source.Read(read =>
+                                                    {
+                                                        read.Action("GetCountry", "ProfileManagement");
+                                                    });
+                                                })
+                                )
+                            </div>
+                        </div>
+                        <div class="form-group  col-sm-6">
+                            @Html.LabelFor(m => m.LicenseIssuingDate, Html.Resource("LicenseIssuingDate", PublicResources), new { @class = "col-md-4 control-label" })
+                            <div class="col-md-7">
+                                @Html.Kendo().DatePickerFor(model => model.LicenseIssuingDate).HtmlAttributes(new { @class = "form-control  form-control-md10", @maxlength = 200, @placeholder = @Html.Resource("SelectLicenseIssuing", PublicResources) }).Enable(@Model.IsEdit)
+                            </div>
+                        </div>     
+                       
+                    </fieldset>
+                </div>
+            </div>
+                
+        </div>
+        <!-- end widget content -->
+    </div>
+    <!-- end widget -->
+    if (@Model.IsEdit == true)
+    {
+
+    <div class="footer">
+        <button type="button" class="btn btn-primary general-btn" onclick="SaveEmployment();"> @Html.Resource("save", PublicResources)</button>
+    </div>
+    }
+}
+</article>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        // CheckNumericOnly();
+        HideEmploymentValidation();
+        $.validator.setDefaults({
+            ignore: ""
+        });
+
+    });
+
+    if ('@SessionContent.Container.Profiles.IsLoadProfilesContent' == "true") {
+     
+    }
+    else {
+        $('#HoursPerDay').val("");
+        $('#WorkingDays').val("");
+        $('#Shift').val("");
+        $('#IssuingCountry').val("");
+    }
+
+</script>

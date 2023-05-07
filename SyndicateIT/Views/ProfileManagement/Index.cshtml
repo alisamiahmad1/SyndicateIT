@@ -1,0 +1,71 @@
+﻿@model SyndicateIT.Model.ViewModel.ProfileManagement.ProfilesViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Profile";   
+}
+<!-- MAIN CONTENT -->
+<script src="~/Scripts/Views/Profiles/profiles.js" type="text/javascript"></script>
+<script src="~/Scripts/Views/Profiles/document.js"></script>
+<div id="MainContent">
+    @{Html.RenderPartial(@Model.PartialViewName, @Model.PartialViewNameModel);}
+</div>
+<!-- END MAIN CONTENT -->
+<script type="text/javascript">
+    $(document).ready(function () { });
+    var loadPofilesUrl = '@Html.GetUrl("LoadProfilesList", "ProfileManagement", SessionContent.Current.Corporate.IsSecure)';
+    var loadProfilesContentUrl = '@Html.GetUrl("LoadProfilesContent", "ProfileManagement", SessionContent.Current.Corporate.IsSecure)';
+    var loadProfilesContentDetailsUrl = '@Html.GetUrl("LoadProfilesContentDetails", "ProfileManagement", SessionContent.Current.Corporate.IsSecure)';
+
+
+    var loadPersonalInformationUrl = '@Html.GetUrl("LoadPersonalInformation", "ProfileManagement", SessionContent.Current.Corporate.IsSecure)';
+    var loadContactDetailsUrl = '@Html.GetUrl("LoadContactDetails", "ProfileManagement", SessionContent.Current.Corporate.IsSecure)';
+
+    var loadEmploymentUrl = '@Html.GetUrl("LoadEmployment", "ProfileManagement", SessionContent.Current.Corporate.IsSecure)';
+    var loadInsurranceUrl = '@Html.GetUrl("LoadInsurrance", "ProfileManagement", SessionContent.Current.Corporate.IsSecure)';
+    
+
+    var loadApplicationStatusUrl = '@Html.GetUrl("LoadApplicationStatus", "ProfileManagement", SessionContent.Current.Corporate.IsSecure)';
+
+    var loadDependentUrl = '@Html.GetUrl("LoadDependent", "ProfileManagement", SessionContent.Current.Corporate.IsSecure)';
+    var loadSystemPrivilegesUrl = '@Html.GetUrl("LoadSystemPrivileges", "ProfileManagement", SessionContent.Current.Corporate.IsSecure)';
+    var loadDocumentUrl = '@Html.GetUrl("LoadDocument", "ProfileManagement", SessionContent.Current.Corporate.IsSecure)';
+    var loadRegistrationUrl = '@Html.GetUrl("LoadRegistration", "ProfileManagement", SessionContent.Current.Corporate.IsSecure)';
+    var loadAssignmentUrl = '@Html.GetUrl("LoadAssignment", "ProfileManagement", SessionContent.Current.Corporate.IsSecure)';
+
+   
+    var loadExperienceUrl = '@Html.GetUrl("LoadExperience", "ProfileManagement", SessionContent.Current.Corporate.IsSecure)';
+    var saveExperienceUrl = '@Html.GetUrl("SaveExperience", "ProfileManagement", SessionContent.Current.Corporate.IsSecure)';
+    var DeleteExperienceUrl = '@Html.GetUrl("DeleteExperience", "ProfileManagement", SessionContent.Current.Corporate.IsSecure)';
+
+    var loadAccountUrl = '@Html.GetUrl("LoadAccount", "ProfileManagement", SessionContent.Current.Corporate.IsSecure)';
+    var loadTransactionUrl = '@Html.GetUrl("LoadTransaction", "ProfileManagement", SessionContent.Current.Corporate.IsSecure)';
+
+
+    var loadEducationUrl = '@Html.GetUrl("LoadEducation", "ProfileManagement", SessionContent.Current.Corporate.IsSecure)';
+    var saveEducationUrl = '@Html.GetUrl("SaveEducation", "ProfileManagement", SessionContent.Current.Corporate.IsSecure)';
+    var DeleteEducationUrl = '@Html.GetUrl("DeleteEducation", "ProfileManagement", SessionContent.Current.Corporate.IsSecure)';
+
+    var savePersonalInformationsUrl = '@Html.GetUrl("SavePersonalInformation", "ProfileManagement", SessionContent.Current.Corporate.IsSecure)';
+    var saveContactInformationsUrl = '@Html.GetUrl("SaveContactInformations", "ProfileManagement", SessionContent.Current.Corporate.IsSecure)';
+    var saveInsuranceUrl = '@Html.GetUrl("SaveInsurance", "ProfileManagement", SessionContent.Current.Corporate.IsSecure)';
+    var saveEmploymentUrl = '@Html.GetUrl("SaveEmployment", "ProfileManagement", SessionContent.Current.Corporate.IsSecure)';
+    var saveDependentUrl = '@Html.GetUrl("SaveDependent", "ProfileManagement", SessionContent.Current.Corporate.IsSecure)';
+    var DeleteDependentUrl = '@Html.GetUrl("DeleteDependent", "ProfileManagement", SessionContent.Current.Corporate.IsSecure)';
+    var DeleteHistoryUrl = '@Html.GetUrl("DeleteHistory", "ProfileManagement", SessionContent.Current.Corporate.IsSecure)';
+    var saveSystemPrivilegesUrl = '@Html.GetUrl("SaveSystemPrivileges", "ProfileManagement", SessionContent.Current.Corporate.IsSecure)';
+    var saveDocumentUrl = '@Html.GetUrl("SaveDocument", "ProfileManagement", SessionContent.Current.Corporate.IsSecure)';
+    var saveRegistrationUrl = '@Html.GetUrl("SaveRegistration", "ProfileManagement", SessionContent.Current.Corporate.IsSecure)';
+    var SaveHistoryRegistrationUrl = '@Html.GetUrl("SaveHistoryRegistration", "ProfileManagement", SessionContent.Current.Corporate.IsSecure)';
+    var saveAssignmentUrl = '@Html.GetUrl("SaveAssignment", "ProfileManagement", SessionContent.Current.Corporate.IsSecure)';
+    var deleteJoinCourseUrl = '@Html.GetUrl("DeleteJoinCourse", "ProfileManagement", SessionContent.Current.Corporate.IsSecure)';
+
+    var saveApplicationStatusUrl = '@Html.GetUrl("SaveApplicationStatus", "ProfileManagement", SessionContent.Current.Corporate.IsSecure)';
+
+    var loader = '@Utilities.GetAbsotuleUrl("~/Content/image/ajax-loader.gif")';
+
+     var sourceId = '@SessionContent.Container.Profiles.SourceID';
+
+</script>
+@section Scripts {
+    @Scripts.Render("~/bundles/kendo/js")
+}

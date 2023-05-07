@@ -1,0 +1,222 @@
+﻿
+@model SyndicateIT.Model.ViewModel.SetupManagement.Event.EventViewModel
+@using SyndicateIT.Views.App_GlobalResources
+@{
+    Layout = null;
+    string PublicResources = "~/Views/SetupManagement/Event/PublicResource";
+}
+@Html.Partial("~/Views/Shared/_NavigationPartial.cshtml", @Model.Navigation)
+<div id="content">
+    <div class="row">
+        <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+            <h1 class="page-title txt-color-blueDark">
+                <i class="@Model.ClassTitle"></i> @Model.Title<span></span>
+            </h1>
+        </div>
+    </div>
+    @Html.Partial("~/Views/Shared/_AlertPartial.cshtml", Model.Alert)
+    <section id="widget-grid" class="">
+        <!-- row -->
+        <div class="row">
+            <article class="col-sm-12 sortable-grid ui-sortable">
+                <!-- Widget ID (each widget will need unique ID)-->
+                <div class="jarviswidget jarviswidgetTransparent" id="wid-id-x" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false" data-widget-custombutton="false" data-widget-sortable="false" role="widget">
+                    <header role="heading"></header>
+                    <!-- widget div-->
+                    <div role="content">
+                        <div class="row">
+                            <div class="widget-body">
+                                @using (Html.BeginForm("AddUpdateEvent", "Event", FormMethod.Post, new { @class = "", role = "form", id = "Event-form" }))
+                                {
+                                    @Html.HiddenFor(m => m.Event_Id)
+                                    @Html.AntiForgeryToken()
+                                    @Html.ValidationSummary(true)
+                                    <fieldset>
+                                        <div class="form-group  col-sm-6">
+                                            @Html.LabelFor(m => m.Event_StartDate, Html.Resource("Event_StartDate", PublicResources), new { @class = "col-md-4 control-label" })
+                                            <div class="col-md-6">
+                                                @Html.Kendo().DatePickerFor(model => model.Event_StartDate).HtmlAttributes(new { @class = "form-control ", @maxlength = 200, @placeholder = "Enter  Date" }).Name("Event_StartDate")
+                                                <span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error" data-for="PeriodDate" data-valmsg-for="PeriodDate" id="PeriodDate_validationMessage" style="display:none;" role="alert"><span class="k-icon k-warning"> </span> The Date field is required.</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group  col-sm-6">
+                                            @Html.LabelFor(m => m.Event_EndDate, Html.Resource("Event_EndDate", PublicResources), new { @class = "col-md-4 control-label" })
+                                            <div class="col-md-6">
+                                                @Html.Kendo().DatePickerFor(model => model.Event_EndDate).HtmlAttributes(new { @class = "form-control ", @maxlength = 200, @placeholder = "Enter  Date" }).Name("Event_EndDate")
+                                                <span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error" data-for="PeriodDate" data-valmsg-for="PeriodDate" id="PeriodDate_validationMessage" style="display:none;" role="alert"><span class="k-icon k-warning"> </span> The Date field is required.</span>
+                                            </div>
+                                        </div>       
+
+
+                                        <div class="form-group  col-sm-6">
+                                            @Html.LabelFor(m => m.Event_Title, Html.Resource("Event_Title", PublicResources), new { @class = "col-md-4 control-label" })
+                                            <div class="col-md-6">
+                                                @Html.Kendo().TextBoxFor(model => model.Event_Title).HtmlAttributes(new { @class = "form-control   form-control-md10" }).Name("Event_Title")
+                                                <div class="text-danger field-validation-error" id="Event_Title_ValidationMsg" style="display:none;">
+                                                    <span for="SearchEvent" class=""> @Html.Resource("Event_Title_Required", PublicResources)</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group  col-sm-6">
+                                            @Html.Label(GeneralResources.IS_ACTIVE, new { @class = "col-md-4 control-label" })
+                                            <div class="col-md-6">
+                                                <label class="checkbox">
+                                                    @Html.CheckBoxFor(m => m.IS_ACTIVE, new { @checked = "checked" })
+                                                    <i></i>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group  col-sm-12">
+                                            @Html.LabelFor(m => m.Event_Description, Html.Resource("Event_Description", PublicResources), new { @class = "col-md-4 text-left control-label" })
+                                            <div class="col-md-12">
+                                                @(Html.Kendo().EditorFor(m => m.Event_Description).Tools(tools => tools.Clear().Bold().Italic().Underline().Strikethrough().JustifyCenter().JustifyFull().JustifyLeft().JustifyRight().CreateLink().Unlink().TableEditing().FontColor().BackColor().Pdf().ViewHtml()))
+                                            </div>
+                                        </div>                              
+
+
+                                        @*<div class="form-group  col-sm-6">
+                                            @Html.LabelFor(m => m.EventType_Id, Html.Resource("Event_Type", PublicResources), new { @class = "col-md-4 text-center control-label" })
+                                            <div class="col-md-8">
+                                                @(Html.Kendo().DropDownListFor(m => m.EventType_Id)
+                                                .DataTextField("Text")
+                                                .DataValueField("Value")
+                                                .OptionLabel("Select Event Type")
+                                                .HtmlAttributes(new { @class = "ui-select form-control-md10" })
+                                                .DataSource(source =>
+                                                {
+                                                    source.Read(read =>
+                                                    {
+                                                        read.Action("GetEventTypesList", "Event");
+                                                    });
+                                                })
+                                                )
+                                                <span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error" data-for="Stage" data-valmsg-for="Stage" id="Stage_validationMessage" style="display:none;" role="alert"><span class="k-icon k-warning"> </span> The Stage field is required.</span>
+                                            </div>
+                                        </div>                                     
+                                        <div class="form-group  col-sm-12">
+                                            @Html.LabelFor(m => m.Event_Description, Html.Resource("Event_Description", PublicResources), new { @class = "col-md-4 text-left control-label" })
+                                            <div class="col-md-12">
+                                                
+                                              @(Html.Kendo().EditorFor(m => m.Event_Description).Tools(tools => tools.Clear().Bold().Italic().Underline().Strikethrough().JustifyCenter().JustifyFull().JustifyLeft().JustifyRight().CreateLink().Unlink().TableEditing().FontColor().BackColor().Pdf().ViewHtml()))
+                                               
+                                            </div>
+
+                                        </div>                  
+                                        <div class="form-group  col-sm-6">
+                                            @Html.LabelFor(m => m.Event_IsUser, Html.Resource("Event_IsUser", PublicResources), new { @class = "col-md-4 text-right control-label" })
+                                            <div class="col-md-6">
+                                                <label class="checkbox">
+                                                    @Html.CheckBoxFor(m => m.Event_IsUser,  new Dictionary<string, object>{
+                                                                                                                         
+                                                                                                                         {"id", "p1isCompleted"},
+                                                                                                                         {"onclick","setCompleteStatus.call(this)"},
+                                                                                                                         {"data-role", "flipswitch"},
+                                                                                                                         {"data-on-text", "complete"},
+                                                                                                                         {"data-off-text", "incomplete"},
+                                                                                                                         {"data-wrapper-class", "custom-size-flipswitch"}})
+                                                    <i></i>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group  col-sm-6">
+                                            <div class="col-md-12">
+                                                @(Html.Kendo().DropDownListFor(m => m.Event_UserId)
+                                                //.Name("toto")
+                                                .DataTextField("Text")
+                                                .DataValueField("Value")
+                                                .OptionLabel("Select Existing User")
+                                                .HtmlAttributes(new { @class = "ui-select form-control-md10" })
+                                                .DataSource(source =>
+                                                {
+                                                    source.Read(read =>
+                                                    {
+                                                        read.Action("GetRelative", "Event");
+                                                    });
+                                                })
+                                                )
+                                                  <span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error" data-for="Stage" data-valmsg-for="Stage" id="Stage_validationMessage" style="display:none;" role="alert"><span class="k-icon k-warning"> </span> The Stage field is required.</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group  col-sm-4">
+                                            @Html.LabelFor(m => m.Event_FirstName, Html.Resource("Event_FirstName", PublicResources), new { @class = "col-md-5 text-right control-label"})
+                                            <div class="col-md-7">
+                                                @Html.Kendo().TextBoxFor(model => model.Event_FirstName).Name("fname").HtmlAttributes(new { @class = "form-control   form-control-md10" }).Name("Event_FirstName")
+                                                <div class="text-danger field-validation-error" id="Event_Title_ValidationMsg" style="display:none;">
+                                                  <span for="SearchEvent" class=""> @Html.Resource("Event_Title_Required", PublicResources)</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group  col-sm-4">
+                                            @Html.LabelFor(m => m.Event_MiddleName, Html.Resource("Event_MiddleName", PublicResources), new { @class = "col-md-5 text-left control-label" })
+                                            <div class="col-md-7">
+                                                @Html.Kendo().TextBoxFor(model => model.Event_MiddleName).Name("mname").HtmlAttributes(new { @class = "form-control   form-control-md10" }).Name("Event_MiddleName")
+                                                <div class="text-danger field-validation-error" id="Event_Title_ValidationMsg" style="display:none;">
+                                                 <span for="SearchEvent" class=""> @Html.Resource("Event_Title_Required", PublicResources)</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group  col-sm-4">
+                                            @Html.LabelFor(m => m.Event_LastName, Html.Resource("Event_LastName", PublicResources), new { @class = "col-md-5 text-left control-label" })
+                                            <div class="col-md-7">
+                                                @Html.Kendo().TextBoxFor(model => model.Event_LastName).Name("lname").HtmlAttributes(new { @class = "form-control   form-control-md10" }).Name("Event_LastName")
+                                                <div class="text-danger field-validation-error" id="Event_Title_ValidationMsg" style="display:none;">
+                                                   <span for="SearchEvent" class=""> @Html.Resource("Event_Title_Required", PublicResources)</span>
+                                                </div>
+                                            </div>
+                                        </div>*@
+
+                                        <div class="footer">
+                                            <button type="button" class="btn btn-primary general-btn" onclick="SaveEvent();">@GeneralResources.save</button>
+                                        </div>
+
+                                    </fieldset>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end widget content -->
+                </div>
+                <!-- end widget -->
+            </article>
+        </div>
+    </section>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $.validator.setDefaults({
+            ignore: ""
+        });
+    });
+   $('#forumPost').summernote({
+					height : 180,
+					focus : false,
+					tabsize : 2
+   });
+
+
+</script>
+
+@*<script type="text/javascript">
+    function setCompleteStatus() {
+       
+        if (!this.checked) {
+            var dropdownlist = $("#toto").data("kendoDropDownList");
+            alert(dropdownlist);
+            dropdownlist.enable(false);
+        }
+        else {
+            var dropdownlist = $("#toto").data("kendoDropDownList");
+            alert(dropdownlist);
+            dropdownlist.enable(true);
+
+        }
+
+    }
+</script>*@
+
+@section Scripts {
+    @Scripts.Render("~/Scripts/Event")
+}
+
+

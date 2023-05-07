@@ -1,0 +1,34 @@
+﻿@model SyndicateIT.Model.ViewModel.Exam.PublishedTagsContentViewModel
+@{
+    string PublicResources = "~/Views/Exams/PublishedTags/_ExamsPublishedTags.cshtml";
+}
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+<br /><br />
+<div class="col-sm-12">
+    <div class="alert alert-info fade in">
+        <i class="fa-fw fa fa-info"></i>
+        <strong>@Html.Resource("CurrentExamName", PublicResources)!</strong> @SessionContent.Container.Exams.CurrentExamsName
+    </div>
+</div>
+
+<h3 class=""><strong>@Html.Resource("Stage", PublicResources) 4 </strong> - @Html.Resource("PublishedTags", PublicResources)</h3>
+<br />
+<div>
+    <div class="alert alert-warning">      
+        <ul>
+            <li style="margin-bottom: 10px;">@Html.Resource("ExamStudentNote1", PublicResources)</li>           
+        </ul>  
+    </div>
+</div>
+<section id="ExamsStudents-content" class="">
+    @Html.Partial("~/Views/Exams/PublishedTags/_ExamsPublishedTagsFilter.cshtml", Model)
+</section>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $.validator.setDefaults({
+            ignore: ""
+        });       
+    });
+</script>

@@ -1,0 +1,79 @@
+﻿
+@model SyndicateIT.Model.ViewModel.ServiceManagement.ServicesContentViewModel
+
+@(Html.Kendo().Grid<SyndicateIT.Model.ViewModel.ServiceManagement.GridServicesViewModel>()
+        .Name("ServicesGrid")
+        .TableHtmlAttributes(new { @class = "table table-striped table-hover" })
+        .Columns(columns =>
+        {
+            columns.Command(commands =>
+            {
+                columns.Bound(c => c.Cycle);
+                columns.Bound(c => c.Class);
+                columns.Bound(c => c.Division);
+                columns.Bound(c => c.Courses);
+                columns.Bound(c => c.DateString);
+                columns.Bound(p => p.Enabled).ClientTemplate("# if(Enabled == true) {#" +
+                "<span class='label label-success' style='font-size: 11px;'> Enable</span>" +
+                    "#} else {#" +
+                    " <span class='label label-warning' style='font-size: 11px;'>Disabled</span>" +
+                    "#}#")
+                    .Title("Status");
+                commands
+                    .Custom("EditServices")
+                    .Text("Edit")
+                    .Click("EditServices");
+                columns.Bound(c => c.ServiceID).Visible(false);
+            });
+        }
+    )
+    .DataSource(dataSource => dataSource
+        .Ajax()
+        .Read(read => read.Action("ServiceList_Read", "ServiceManagement", new { serviceType = Model.ServiceType, searchCycle = Model.ServicesSearch.SearchCycle, searchClass = Model.ServicesSearch.SearchClass, searchDivision = Model.ServicesSearch.SearchDivision, searchCourse = Model.ServicesSearch.SearchCourse, searchFromDate = Model.ServicesSearch.SearchFromDate , searchToDate = Model.ServicesSearch.SearchToDate }))
+        .Model(model => { model.Id(c => c.ServiceID); })
+        .PageSize(Constants.PAGESIZE)
+        )
+    .Pageable()
+    .Sortable()
+    .Selectable()
+)
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

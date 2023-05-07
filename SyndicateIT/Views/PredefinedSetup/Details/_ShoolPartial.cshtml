@@ -1,0 +1,82 @@
+﻿
+@model SyndicateIT.Model.ViewModel.SetupManagement.Company.CompanyViewModel
+@using SyndicateIT.Views.App_GlobalResources
+@{
+    string PublicResources = "~/Views/PredefinedSetup/Details/_SettingsContentPartial.cshtml";
+}
+@using (Html.BeginForm("AddUpdateCompany", "Company", FormMethod.Post, new { @class = "smart-form", role = "form", id = "Company-form" }))
+{
+    @Html.HiddenFor(m => m.School_ID)
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <section class="form-group  col-sm-6">
+            @Html.Label(GeneralResources.IS_ACTIVE, new { @class = "col-md-4 control-label" })
+            <div class="col-md-6">
+                <label class="checkbox">
+                    @Html.CheckBoxFor(m => m.IS_ACTIVE, new { @checked = "checked" })
+                    <i></i>
+                </label>
+            </div>
+        </section>
+        <section class="form-group  col-sm-6">
+            @Html.LabelFor(m => m.Company_Name, Html.Resource("Company_Name", PublicResources), new { @class = "col-md-4 control-label" })
+            <div class="col-md-6">
+                @Html.Kendo().TextBoxFor(model => model.Company_Name).HtmlAttributes(new { @class = "form-control form-control-md10" }).Name("Company_Name")
+                <div class="text-danger field-validation-error" id="Company_Name_ValidationMsg" style="display:none;">
+                    <span for="SearchCompany" class=""> @Html.Resource("Company_Name_Required", PublicResources)</span>
+                </div>
+            </div>
+        </section>
+        <section class="form-group  col-sm-6">
+            @Html.LabelFor(m => m.Company_Website, Html.Resource("Company_Website", PublicResources), new { @class = "col-md-4 control-label" })
+            <div class="col-md-6">
+                @Html.Kendo().TextBoxFor(model => model.Company_Website).HtmlAttributes(new { @class = "form-control form-control-md10" }).Name("Company_Website")
+                <div class="text-danger field-validation-error" id="Company_Name_ValidationMsg" style="display:none;">
+                    @*<span for="SearchCompany" class=""> @Html.Resource("Company_Name_Required", PublicResources)</span>*@
+                </div>
+            </div>
+        </section>
+        <section class="form-group  col-sm-6">
+            @Html.LabelFor(m => m.Company_Email, Html.Resource("Company_Email", PublicResources), new { @class = "col-md-4 control-label" })
+            <div class="col-md-6">
+                @Html.Kendo().TextBoxFor(model => model.Company_Email).HtmlAttributes(new { @class = "form-control form-control-md10" }).Name("Company_Email")
+                <div class="text-danger field-validation-error" id="Company_Name_ValidationMsg" style="display:none;">
+                    @*<span for="SearchCompany" class=""> @Html.Resource("Company_Name_Required", PublicResources)</span>*@
+                </div>
+            </div>
+        </section>
+        <section class="form-group  col-sm-6">
+            @Html.LabelFor(m => m.Reg_Finance, Html.Resource("Reg_Finance", PublicResources), new { @class = "col-md-4 control-label" })
+            <div class="col-md-6">
+                @Html.Kendo().TextBoxFor(model => model.Reg_Finance).HtmlAttributes(new { @class = "form-control form-control-md10" }).Name("Reg_Finance")
+                <div class="text-danger field-validation-error" id="Company_Name_ValidationMsg" style="display:none;">
+                    @*<span for="SearchCompany" class=""> @Html.Resource("Company_Name_Required", PublicResources)</span>*@
+                </div>
+            </div>
+        </section>
+        <section class="form-group  col-sm-6">
+            @Html.LabelFor(m => m.Reg_CNSS, Html.Resource("Reg_CNSS", PublicResources), new { @class = "col-md-4 control-label" })
+            <div class="col-md-6">
+                @Html.Kendo().TextBoxFor(model => model.Reg_CNSS).HtmlAttributes(new { @class = "form-control form-control-md10" }).Name("Reg_CNSS")
+                <div class="text-danger field-validation-error" id="Company_Name_ValidationMsg" style="display:none;">
+                    @*<span for="SearchCompany" class=""> @Html.Resource("Company_Name_Required", PublicResources)</span>*@
+                </div>
+            </div>
+        </section>
+        <section class="form-group  col-sm-12">
+            @Html.LabelFor(m => m.Company_Description, Html.Resource("Company_Description", PublicResources), new { @class = "col-md-2 text-left control-label" })
+            <div class="col-md-9">
+                @(Html.Kendo().EditorFor(m => m.Company_Description).Tools(tools => tools.Clear().Bold().Italic().Underline().Strikethrough().JustifyCenter().JustifyFull().JustifyLeft().JustifyRight().CreateLink().Unlink().TableEditing().FontColor().BackColor().Pdf().ViewHtml()))
+            </div>
+        </section>
+    </fieldset>
+}
+<div class="footer">
+    <button type="button" class="btn btn-primary general-btn" onclick="SaveCompany();" style="width: 150px;margin-bottom: 22px;">Save School</button>
+</div>
+@section Scripts {
+    @Scripts.Render("~/Scripts/Company")
+}
+
+

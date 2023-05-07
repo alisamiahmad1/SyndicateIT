@@ -1,0 +1,55 @@
+﻿
+@model SyndicateIT.Model.ViewModel.Exam.ExamsDefinitionsViewModel
+@{
+    Layout = null;
+    string PublicResources = "~/Views/Exams/ExamsSetup/_ExamsSetupContentPartial.cshtml";
+}
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<br /><br />
+<div class="col-sm-12">
+    <div class="alert alert-info fade in">
+        <i class="fa-fw fa fa-info"></i>
+        <strong>@Html.Resource("CurrentExamName", PublicResources)!</strong> @SessionContent.Container.Exams.CurrentExamsName
+    </div>
+</div>
+<h2 class="row-seperator-header"><strong>Stage 1 </strong> - Exam Definition</h2>
+@Html.Partial("~/Views/Shared/_AlertPartial.cshtml", Model.Alert)
+
+    <div class="col-sm-12">
+        <!-- well -->
+        <div class="well" style="background-color: #fff;border: 1px solid #C2C2C2!important;">
+            @using (Html.BeginForm("SaveExamsDefinitions", "Exams", FormMethod.Post, new { @class = "", role = "form", id = "ExamsDefinitions-form" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+                @Html.HiddenFor(p => p.ID)
+                <fieldset>
+                    @Html.HiddenFor(p => p.ID)
+                    <div class="form-group  col-sm-6">
+                        @Html.LabelFor(m => m.Enabled, new { @class = "col-md-4 control-label" })
+                        <div class="col-md-6">
+                            @Html.Kendo().CheckBoxFor(model => model.Enabled).Enable(false)
+                        </div>
+                    </div>
+                    <div class="form-group  col-sm-6">
+                        @Html.LabelFor(m => m.ExamsNme, new { @class = "col-md-4 control-label" })
+                        <div class="col-md-6">
+                            @Html.Kendo().TextBoxFor(model => model.ExamsNme).HtmlAttributes(new { @class = "form-control  form-control-md10", @maxlength = 20,}).Name("ExamsNme").Enable(false)
+                       </div>
+                    </div>                
+                </fieldset>
+            }
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function () {           
+          
+            $.validator.setDefaults({
+                ignore: ""
+            });
+            
+            currentExamsID = '@SessionContent.Container.Exams.CurrentExamsID';
+
+        });
+    </script>

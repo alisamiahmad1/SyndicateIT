@@ -1,0 +1,141 @@
+﻿@model SyndicateIT.Model.ViewModel.Exam.ExamStudentMaterialsViewModel
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+@Html.Partial("~/Views/Shared/_AlertPartial.cshtml", Model.Alert)
+@{
+    string PublicResources = "~/Views/Exams/LoadExamsStudents/PublicResource";
+}
+<div class="row">   
+    <!-- NEW WIDGET START -->
+    <article class="col-sm-12 sortable-grid ui-sortable">
+        <!-- well -->
+        <div class="well" style="background-color: #fff;border: 1px solid #fff!important;">
+            @using (Html.BeginForm("SaveExamMaterialStudents", "ExamManagement", FormMethod.Post, new { @class = "", role = "form", id = "ExamMaterialStudents-form" }))
+            {               
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+                <fieldset>
+                    <a href="javascript:void(0);" onclick="PrintByStudent();" class="btn bg-color-blue txt-color-white __web-inspector-hide-shortcut__" style="float: right;margin-bottom: 17px;">@Html.Resource("PrintStudent", PublicResources) (@Model.StudentName) </a>
+                    <div >
+                        <ul class="col-md-12 alert alert-success" >
+                            <li class="col-md-4" style="margin-left:1%"> <span><label class="">@Html.Resource("TotalGrade", PublicResources)</label></span><strong style="padding-left:10px;">@Model.TotalGrad</strong></li>
+                            <li class="col-md-4"> <span><label class="">@Html.Resource("CoefficientGrade", PublicResources)</label></span><strong style="padding-left:10px;">@Model.CoefficientGrade</strong></li>
+                            <li class="col-md-2"><strong>@Model.SuccessGrade</strong></li>
+                        </ul>  
+                    </div>
+                </fieldset>                              
+                <fieldset class="tree" id="TreeExam">
+                 <ul role="tree">
+                  <li class="parent_li paymentType-content" role="treeitem">                                   
+                   <span title="Collapse  this branch"><i class="fa fa-lg fa-minus-circle"></i> @Model.StudentName</span>                               
+                     <ul role="group">
+                            @for (int k = 0; k < Model.ExamMaterials.Count; k++)
+                            {
+                                var pExamMaterials = @Model.ExamMaterials[k];
+                                var pNameMaterials = @Model.ExamMaterials[k].MaterialName.ToString().Replace(" ", "");
+                                var pMaterialId = @Model.ExamMaterials[k].MaterialId.ToString().Replace(" ", "");
+                                var pMaterialTotalValue = @Model.ExamMaterials[k].TotalValue;
+
+                                <li class="parent_li student-content" role="treeitem" style="display: list-item;">                                               
+                                    <span class="label label-success" title="Collapse this branch"><i class="fa fa-lg fa-minus-circle"></i> @pExamMaterials.MaterialName</span>
+                                    <span class="label label-warning" title="Collapse this branch" style="width: 20%;"><b>@Html.Resource("Total", PublicResources) </b>&nbsp;&nbsp;( @pMaterialTotalValue )</span>
+                                        <ul role="group">
+                                                     
+                                    @for (int i = 0; i < pExamMaterials.ExamMaterilasTermMonths.Count; i++)
+                                    {
+                                        var pExamMaterilasTermMonths = @Model.ExamMaterials[k].ExamMaterilasTermMonths[i];
+                                        var pEnableValueCourse = "disabled";
+                                        if (pExamMaterilasTermMonths.ExamStudentSkils.Count == 0 )
+                                        {
+                                            pEnableValueCourse = "";
+                                        }                                  
+                                        <li class="smart-li-form">
+                                            <label class="">@Html.Resource("Value", PublicResources)</label>
+                                            <label class="input">
+                                                <input class="k-textbox k-textbox-Exam txt-Material" id="@pMaterialId" name="@pMaterialId" value="@pExamMaterilasTermMonths.Value"  materialid ="@pMaterialId" min="0" max="100" @pEnableValueCourse>
+                                            </label>
+                                            <label class="">@Html.Resource("Coefficient", PublicResources)</label>
+                                            <label class="input">
+                                                <input class="k-textbox k-textbox-Exam txt-Coefficient" id="@pExamMaterilasTermMonths.Coefficient" name="@pExamMaterilasTermMonths.Coefficient" value="@pExamMaterilasTermMonths.Coefficient.ToString()" min="0" max="100" disabled>
+                                            </label>
+                                            <label class="">@Html.Resource("TermMonth", PublicResources)</label>
+                                            <label class="input">
+                                                <input class="k-textbox k-textbox-Exam txt-Coefficient" id="@pExamMaterilasTermMonths.TermMonthId" name="@pExamMaterilasTermMonths.TermMonthId" value="@pExamMaterilasTermMonths.TermMonthname.ToString()" min="0" max="100" disabled>
+                                            </label>
+                                            @for (int t = 0; t < pExamMaterilasTermMonths.ExamStudentSkils.Count; t++)
+                                            {
+                                                var pExamStudentSkils = @pExamMaterilasTermMonths.ExamStudentSkils[t];
+                                                var pNameSkill = @pExamMaterilasTermMonths.ExamStudentSkils[t].SkilsName.ToString().Replace(" ", "");
+                                                var pSkilsId = @pExamMaterilasTermMonths.ExamStudentSkils[t].SkilsId.ToString().Replace(" ", "");
+                                                var pNameSkillCoefficient = @pExamMaterilasTermMonths.ExamStudentSkils[t].Percentage.ToString().Replace(" ", "");
+                                                <div class="smart-form" >                                                                
+                                                    <fieldset>
+                                                        <section class="col col-3">
+                                                            <label class="label">&nbsp;</label>
+                                                            <span class="bg-color-pinkDark  label label-primary txt-center txt-color-white" >      
+                                                                @pExamStudentSkils.SkilsName
+                                                            </span>
+                                                        </section>
+                                                        <section class="col col-2">
+                                                            <label class="label">@Html.Resource("Value", PublicResources)</label>
+                                                            <label class="input">
+                                                                <input class="k-textbox k-textbox-Exam txt-Skill" id="@pNameSkill" name="@pNameSkill" skillid="@pSkilsId" value="@pExamStudentSkils.Value" min="0" max="100" >
+                                                            </label>
+                                                        </section>
+                                                        <section class="col col-3">
+                                                            <label class="label">@Html.Resource("Coefficient", PublicResources)</label>
+                                                            <label class="input">
+                                                                <input class="k-textbox k-textbox-Exam txt-Percentage" id="@pNameSkillCoefficient" name="@pNameSkillCoefficient" value="@pExamStudentSkils.Percentage.ToString()" min="0" max="100" disabled>
+                                                            </label>
+                                                        </section>                                                                 
+                                                        </fieldset>
+                                                </div>
+                                            }
+                                        </li>
+                                    }
+                                    </ul>
+                                </li>
+                            }
+                        </ul>
+                 </li>                                                                              
+                </ul>                        
+              </fieldset>              
+            }
+            <div class="footer">
+                <button type="button" class="btn btn-primary general-btn" onclick="SaveExamMaterilaStudents();" style="width:20%;">@Html.Resource("Save", PublicResources)</button>
+            </div>
+        </div>
+    </article>
+</div>
+<script type="text/javascript">
+    jQuery.fn.ForceNumericOnly =
+        function () {
+            return this.each(function () {
+                $(this).keydown(function (e) {
+                    var key = e.charCode || e.keyCode || 0;
+                    // allow backspace, tab, delete, enter, arrows, numbers and keypad numbers ONLY
+                    // home, end, period, and numpad decimal
+                    return (
+                        key == 8 ||
+                        key == 9 ||
+                        key == 13 ||
+                        key == 46 ||
+                        key == 110 ||
+                        key == 190 ||
+                        (key >= 35 && key <= 40) ||
+                        (key >= 48 && key <= 57) ||
+                        (key >= 96 && key <= 105));
+                });
+            });
+        };
+
+
+    var saveExamMaterialStudentsUrl = '@Html.GetUrl("AddUpdateExamMaterialStudents", "ExamManagement")';
+    $(document).ready(function () {
+        $.validator.setDefaults({
+            ignore: ""
+        });
+       
+    });   
+    $(".k-textbox-Exam").ForceNumericOnly();
+</script>

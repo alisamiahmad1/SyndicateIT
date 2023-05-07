@@ -1,0 +1,33 @@
+﻿    @model  SyndicateIT.Model.ViewModel.SetupManagement.Branches.BranchesContentViewModel
+    @{
+        ViewBag.Title = "Index";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+        string PublicResources = "~/Views/SetupManagement/Branches/PublicResource";
+    }
+        @Scripts.Render("~/Scripts/Branches")
+        @Scripts.Render("~/Scripts/translate")
+        @*@Html.Partial("~/Views/Shared/_NavigationPartial.cshtml", @Model.Navigation)*@
+        <div id="BranchesContent">
+            @Html.Partial("~/Views/SetupManagement/Branches/_BranchesContentPartial.cshtml", Model);
+        </div>
+        <script type="text/javascript">
+    var BranchesSearchURL = '@Html.GetUrl("LoadSearchBranches", "Branches")';
+    var BranchesDeleteURL = '@Html.GetUrl("BranchesDelete", "Branches")';
+    var loadBranchesURL = '@Html.GetUrl("LoadBranches", "Branches")';
+    var loader = '@Utilities.GetAbsotuleUrl("~/Content/image/ajax-loader.gif")';
+    var saveBranchesUrl = '@Html.GetUrl("AddUpdateBranches", "Branches")';
+    var messageDelete = '@Html.Resource("MessageDelete", PublicResources)';
+    var loadTranslationBranchesURL = '@Html.GetUrl("LoadTranslateBranches", "Branches")';
+
+    $("#SchoolSettings", $("#nav")).addClass("active open");
+    $("#SchoolSettings Ul", $("#nav")).show();
+
+        </script>
+        @section Scripts {
+            @Scripts.Render("~/bundles/kendo/js")
+        }
+
+
+
+
+

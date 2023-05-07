@@ -1,0 +1,74 @@
+﻿
+@model SyndicateIT.Model.ViewModel.SetupManagement.SkillCoefficient.SkillCoefficientViewModel
+@using SyndicateIT.Views.App_GlobalResources
+@{
+    Layout = null;
+    string PublicResources = "~/Views/SetupManagement/SkillCoefficient/PublicResource";
+}
+@Html.Partial("~/Views/Shared/_NavigationPartial.cshtml", @Model.Navigation)
+<div id="content">
+    <div class="row">
+        <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+            <h1 class="page-title txt-color-blueDark">
+                <i class="@Model.ClassTitle"></i> @Model.Title<span></span>
+            </h1>
+        </div>
+    </div>
+    @Html.Partial("~/Views/Shared/_AlertPartial.cshtml", Model.Alert)
+    <section id="widget-grid" class="">
+        <!-- row -->
+        <div class="row">
+            <article class="col-sm-12 sortable-grid ui-sortable">
+                <!-- Widget ID (each widget will need unique ID)-->
+                <div class="jarviswidget jarviswidgetTransparent" id="wid-id-x" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false" data-widget-custombutton="false" data-widget-sortable="false" role="widget">
+                    <header role="heading"></header>
+                    <!-- widget div-->
+                    <div role="content">
+                        <div class="row">
+                            <div class="widget-body">
+                                @using (Html.BeginForm("AddUpdateSkillCoefficient", "SkillCoefficient", FormMethod.Post,  new { @class = "smart-form", role = "form" , id = "SkillCoefficient-form" }))
+                                {
+                                    @Html.HiddenFor(m => m.SkillCoefficient_ID)
+                                    @Html.AntiForgeryToken()
+                                    @Html.ValidationSummary(true)
+                                    <fieldset>
+                                        <section class="form-group  col-sm-6">
+                                            @Html.Label(GeneralResources.IS_ACTIVE, new { @class = "col-md-4 control-label" })
+                                            <div class="col-md-6">
+                                                <label class="checkbox">
+                                                    @Html.CheckBoxFor(m => m.IS_ACTIVE, new { @checked = "checked" })
+                                                    <i></i>
+                                                </label>
+                                            </div>
+                                        </section>      
+                                        <section class="form-group  col-sm-6">
+                                            @Html.LabelFor(m => m.SkillCoefficient_NAME, Html.Resource("SkillCoefficient_NAME", PublicResources), new { @class = "col-md-4 control-label" })
+                                            <div class="col-md-6">
+                                                @Html.Kendo().TextBoxFor(model => model.SkillCoefficient_NAME).HtmlAttributes(new { @class = "form-control form-control-md10" }).Name("SkillCoefficient_NAME")
+                                                <div class="text-danger field-validation-error" id="SkillCoefficient_NAME_ValidationMsg" style="display:none;">
+                                                    <span for="SearchSkillCoefficient" class=""> @Html.Resource("SkillCoefficient_NAME_Required", PublicResources)</span>
+                                                </div>
+                                            </div>
+                                        </section>                                                                        
+                                    </fieldset>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end widget content -->
+                </div>
+                <!-- end widget -->
+                <div class="footer">
+                    <button type="button" class="btn btn-primary general-btn" onclick="SaveSkillCoefficient();">@GeneralResources.save</button>
+                </div>
+            </article>
+
+        </div>
+    </section>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/Scripts/SkillCoefficient")
+}
+
+

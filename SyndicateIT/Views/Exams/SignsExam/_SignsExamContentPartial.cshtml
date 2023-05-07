@@ -1,0 +1,62 @@
+﻿@model SyndicateIT.Model.ViewModel.Exam.SignsExamsContentViewModel
+@{
+    Layout = null;
+    string PublicResources = "~/Views/Exams/SignsExam/_SignsExamSearchPartial.cshtml";
+}
+@Html.Partial("~/Views/Shared/_NavigationPartial.cshtml", @Model.Navigation)
+<script src="~/Scripts/Views/Exams/signsexams.js"></script>
+<div id="content">  
+    <div class="row">
+        <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+            <h1 class="page-title txt-color-blueDark">
+                <i class="@Model.ClassTitle"></i> @Model.Title<span></span>
+            </h1>
+        </div>
+    </div>    
+    <section id="enrollment-content" class="">   
+        <div class="row">
+            <!-- NEW WIDGET START -->
+            <article class="col-sm-12 sortable-grid ui-sortable">
+                <!-- Widget ID (each widget will need unique ID)-->
+                <div class="jarviswidget jarviswidgetTransparent" id="wid-id-x" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false" data-widget-custombutton="false" data-widget-sortable="false" role="widget">
+                    <header role="heading">
+                        <span class="widget-icon"> <i class="fa fa-align-justify"></i> </span>
+                        <h2>@Html.Resource("SearchExams", PublicResources)</h2>
+                        <span class="jarviswidget-loader"><i class="fa fa-lg fa-fw fa-th-list"></i></span>
+                    </header>
+                    <!-- widget div-->
+                    <div role="content">                     
+                        <div class="row">                            
+                          @Html.Partial("~/Views/Exams/SignsExam/_SignsExamSearchPartial.cshtml", @Model.SignsExamsSearch)
+                        </div>          
+                    </div>
+                    <!-- end widget content -->
+                </div>
+                <!-- end widget -->
+            </article>
+            <!-- WIDGET END -->
+            <!-- NEW WIDGET START -->         
+            <!-- WIDGET END -->
+        </div>
+    </section>
+    <section id="widget-grid" class="Sign-Exam-content">
+       
+    </section> 
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#ExamUL").children().find('li').removeClass("active");
+        $("#SignsExam").addClass("active");
+        $("#Exam").addClass("open");
+        $("#ExamUL").show();
+        $("#Exam").children().find('em').removeClass("fa fa-plus-square-o");
+        $("#Exam").children().find('em').addClass("fa fa-minus-square-o");
+      
+    });
+
+</script>
+
+
+@section Scripts {     
+    @Scripts.Render("~/bundles/jqueryval")
+}

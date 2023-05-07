@@ -1,0 +1,26 @@
+﻿@model SyndicateIT.Model.ViewModel.Exam.ExamsSearchViewModel
+
+@{
+    Layout = null;
+    string PublicResources = "~/Views/Exams/ExamsSetup/_ExamsSetupContentPartial.cshtml";
+}
+@using (Html.BeginForm("SearchExams", "Exams", FormMethod.Post, new { @class = "smart-form", role = "form" })){
+       
+        @Html.Hidden("PageID", Model.PageID);
+        <section class="col col-5">
+            @Html.LabelFor(m => m.SearchExamName, new { @class = "label" })
+            @(Html.Kendo().TextBoxFor(m => m.SearchExamName))
+            <div class="text-danger field-validation-error" id="ErrorSearchPlanName" style="display:none;">
+                <span for="SearchPlanName" class=""> Examan Name is not valid</span>
+            </div>
+        </section>       
+    <section class="col col-2 ">
+        <label class="label">&nbsp;</label>
+        <button type="button" class="btn btn-serach " onclick="SearchExams()">@Html.Resource("Search", PublicResources)</button>
+    </section>
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+        SearchExams();         
+    });
+</script>

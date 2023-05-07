@@ -1,0 +1,29 @@
+﻿@model  SyndicateIT.Model.ViewModel.SetupManagement.skills.skillsContentViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string PublicResources = "~/Views/SetupManagement/Skills/PublicResource";
+}
+@Scripts.Render("~/Scripts/Skills")
+@Scripts.Render("~/Scripts/translate")
+@*@Html.Partial("~/Views/Shared/_NavigationPartial.cshtml", @Model.Navigation)*@
+<div id="SkillsContent">
+    @Html.Partial("~/Views/SetupManagement/Skills/_SkillsContentPartial.cshtml", Model);
+</div>
+<script type="text/javascript">
+    var SkillsSearchURL = '@Html.GetUrl("LoadSearchSkills", "Skills")';
+    var SkillsDeleteURL = '@Html.GetUrl("SkillsDelete", "Skills")';
+    var loadSkillsURL = '@Html.GetUrl("LoadSkills", "Skills")';
+    var loader = '@Utilities.GetAbsotuleUrl("~/Content/image/ajax-loader.gif")';
+    var saveSkillsUrl = '@Html.GetUrl("AddUpdateSkills", "Skills")';
+    var messageDelete = '@Html.Resource("MessageDelete", PublicResources)';
+    var loadTranslationSkillsURL = '@Html.GetUrl("LoadTranslateSkills", "Skills")';
+
+    $("#SchoolSettings", $("#nav")).addClass("active open");
+    $("#SchoolSettings Ul", $("#nav")).show();
+
+</script>
+@section Scripts {
+    @Scripts.Render("~/bundles/kendo/js")
+}
+

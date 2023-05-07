@@ -1,0 +1,19 @@
+﻿@model SyndicateIT.Model.ViewModel.Dashboard.DashboardViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Profile";   
+}
+<!-- MAIN CONTENT -->
+
+<div id="MainContent">
+    @{Html.RenderPartial(@Model.PartialViewName, @Model.PartialViewNameModel);}
+</div>
+<!-- END MAIN CONTENT -->
+<script type="text/javascript">
+    $(document).ready(function () { }); 
+    var loadFilesContentUrl = '@Html.GetUrl("LoadFilesContent", "FileManagement", SessionContent.Current.Corporate.IsSecure)';
+    var loader = '@Utilities.GetAbsotuleUrl("~/Content/image/ajax-loader.gif")';
+</script>
+@section Scripts {
+    @Scripts.Render("~/bundles/kendo/js")
+}

@@ -1,0 +1,117 @@
+﻿
+@model SyndicateIT.Model.ViewModel.ServiceManagement.ServiceDetails.ScheduleViewModel
+
+
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+@Html.Partial("~/Views/Shared/_AlertPartial.cshtml", Model.Alert)
+
+<article class="col-sm-12 sortable-grid ui-sortable">
+@using (Html.BeginForm("LoadSchedule", "ServiceManagement", FormMethod.Post, new { @class = "", role = "form", id = "Schedule-form" }))
+{
+    <!-- Widget ID (each widget will need unique ID)-->
+    <div class="jarviswidget jarviswidgetTransparent" id="wid-id-x" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false" data-widget-custombutton="false" data-widget-sortable="false" role="widget">
+        <header role="heading">
+            <span class="widget-icon"> <i class="fa fa-align-justify"></i> </span>
+            <h2>Add New Period Schedule</h2>
+            <span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span>
+        </header>
+        <!-- widget div-->
+        <div role="content">      
+         
+                <div class="widget-body">                  
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+                    <div class="widget-body-toolbar " style="background-color:#f5f5f5">
+
+                        <form class="form-inline" role="form">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-10">
+                                    <div class="form-group col-md-3">                                       
+                                        @Html.LabelFor(m => m.StageID, new { @class = "control-label" })
+                                        @(Html.Kendo().DropDownListFor(m => m.StageID)
+                                                .DataTextField("Text")
+                                                .DataValueField("Value")
+                                                .OptionLabel("Please Select Stage")
+                                                .HtmlAttributes(new { @class = "form-control input-sm" })
+                                                //.Value(Model.StageID)
+                                                .DataSource(source =>
+                                                {
+                                                    source.Read(read =>
+                                                    {
+                                                        read.Action("GetStageList", "ProfileManagement");
+                                                    });
+                                                })
+                                        )
+                                       
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        @Html.LabelFor(m => m.ClassID, new { @class = "control-label" })
+                                        @(Html.Kendo().DropDownListFor(m => m.ClassID)
+                                                .DataTextField("Text")
+                                                .DataValueField("Value")
+                                                .OptionLabel("Please Select Class")
+                                                .HtmlAttributes(new { @class = "form-control input-sm" })
+                                                //.Value(Model.StageID)
+                                                .DataSource(source =>
+                                                {
+                                                    source.Read(read =>
+                                                    {
+                                                        read.Action("GetClassList", "ProfileManagement");
+                                                    });
+                                                })
+                                        )
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        @Html.LabelFor(m => m.DivisionID, new { @class = "control-label" })
+                                        @(Html.Kendo().DropDownListFor(m => m.DivisionID)
+                                                .DataTextField("Text")
+                                                .DataValueField("Value")
+                                                .OptionLabel("Please Select Division")
+                                                .HtmlAttributes(new { @class = "form-control input-sm" })
+                                                //.Value(Model.StageID)
+                                                .DataSource(source =>
+                                                {
+                                                    source.Read(read =>
+                                                    {
+                                                        read.Action("GetDivisionList", "ProfileManagement");
+                                                    });
+                                                })
+                                        )
+                                    </div>
+                                 </div>
+                                <div class="col-sm-12 col-md-2 text-align-right">
+                                    <button type="button" onclick="LoadPeriodSchedule();" class="btn btn-warning btn-xs" >
+                                        <i class="fa fa-plus"></i> Load
+                                    </button>                                    
+                                </div>
+
+                            </div>
+
+                        </form>
+
+                    </div>
+                    <div class="tree smart-form"  id="main_container">
+                        
+                    </div>
+                 </div>
+              
+         </div>
+        <!-- end widget content -->
+    </div>
+    <!-- end widget -->
+   
+}
+</article>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+       
+        $.validator.setDefaults({
+            ignore: ""
+        });
+
+           });
+
+
+</script>

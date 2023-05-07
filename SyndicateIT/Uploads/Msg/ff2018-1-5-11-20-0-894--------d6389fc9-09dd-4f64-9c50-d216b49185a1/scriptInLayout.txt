@@ -1,0 +1,9 @@
+function checkInbox() {
+        setInterval(function () {
+            $.post('@Html.GetUrl("MsgNoReaded", "Msg")', {}, function (data, textStatus, xhr) {
+                $("#activity > b").html(data.count);
+                $(document).find("#recive span").html(data.count);
+            })
+        }, 2000)
+    }
+    checkInbox();

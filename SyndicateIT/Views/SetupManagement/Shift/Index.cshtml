@@ -1,0 +1,29 @@
+﻿@model  SyndicateIT.Model.ViewModel.SetupManagement.Shift.ShiftContentViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string PublicResources = "~/Views/SetupManagement/Shift/PublicResource";
+}
+@Scripts.Render("~/Scripts/Shift")
+@Scripts.Render("~/Scripts/translate")
+@*@Html.Partial("~/Views/Shared/_NavigationPartial.cshtml", @Model.Navigation)*@
+<div id="ShiftContent">
+    @Html.Partial("~/Views/SetupManagement/Shift/_ShiftContentPartial.cshtml", Model);
+</div>
+<script type="text/javascript">
+    var ShiftSearchURL = '@Html.GetUrl("LoadSearchShift", "Shift")';
+    var ShiftDeleteURL = '@Html.GetUrl("ShiftDelete", "Shift")';
+    var loadShiftURL = '@Html.GetUrl("LoadShift", "Shift")';
+    var loader = '@Utilities.GetAbsotuleUrl("~/Content/image/ajax-loader.gif")';
+    var saveShiftUrl = '@Html.GetUrl("AddUpdateShift", "Shift")';
+    var messageDelete = '@Html.Resource("MessageDelete", PublicResources)';
+    var loadTranslationShiftURL = '@Html.GetUrl("LoadTranslateShift", "Shift")';
+
+    $("#SchoolSettings", $("#nav")).addClass("active open");
+    $("#SchoolSettings Ul", $("#nav")).show();
+
+</script>
+@section Scripts {
+    @Scripts.Render("~/bundles/kendo/js")
+}
+

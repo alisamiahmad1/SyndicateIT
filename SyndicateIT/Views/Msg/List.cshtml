@@ -1,0 +1,93 @@
+﻿@model List<SyndicateIT.Model.ViewModel.Msg.Msg_GridViewModel>
+@{
+    var isSent = ViewBag.isSent != null && ViewBag.isSent == true;
+    var isTrash = ViewBag.isTrash != null && ViewBag.isTrash == true;
+    var sModel = Model;
+
+}
+@if(sModel.Count == 0)
+{
+    <h1>No Masseges</h1>
+
+    return;
+}
+<table id="inbox-table" class="table table-striped table-hover max-height">
+    <thead>
+        <tr id="msgH" class="unread ">
+            <td class="inbox-table-icon">
+                <div class="checkbox">
+                    <label for="checkAll">
+                        <input type="checkbox" class="checkbox style-2" id="checkAll">
+                        <span></span>
+                    </label>
+                </div>
+            </td>
+            <td class="inbox-data-from">
+                <div>
+                    Check All
+                </div>
+            </td>
+            <td class="checkAllCount" colspan="3">
+
+            </td>
+            @if (!isTrash)
+            {
+                <td class="font-lg"><i class="fa fa-times font-lg" id="MsgsDelete"></i></td>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < sModel.Count; i++)
+        {
+            var vModel = sModel[i];
+
+            <tr id="@vModel.Msg_ID" class="@(vModel.Readed?"":"unread text-danger")">
+                <td class="inbox-table-icon">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" class="checkbox style-2">
+                            <span></span>
+                        </label>
+                    </div>
+                </td>
+                <td class="inbox-data-from MsgContent">
+                    <div>
+                        @(vModel.isSender ? vModel.nbRecivers + " Reciver(s)" : vModel.SenderName)
+                    </div>
+                </td>
+                <td class="inbox-data-message MsgContent">
+                    <div>
+                        <span><span class="label bg-color-orange">Subject : </span>&nbsp; @vModel.Msg_Subject</span>
+                    </div>
+                </td>
+                <td class="inbox-data-attachment MsgContent">
+                    <div>
+                        @if (vModel.Has_Attachemant)
+                        {
+                            <a href="javascript:void(0);" rel="tooltip" data-placement="left" data-original-title="" class="txt-color-darken"><i class="fa fa-paperclip fa-lg"></i></a>
+                        }
+                    </div>
+                </td>
+                <td class="inbox-data-date MsgContent">
+                    <div>
+                        @if (vModel.ENTRY_DATE.GetValueOrDefault().Date == DateTime.Now.Date)
+                        {
+                            <span>@string.Format("{0:hh:mm tt}", vModel.ENTRY_DATE.GetValueOrDefault())</span>
+                        }
+                        else
+                        {
+                            <span>@string.Format("{0:dd/MM/yyyy}", vModel.ENTRY_DATE.GetValueOrDefault())</span>
+                        }
+                    </div>
+                </td>
+                @if (!isTrash)
+                {
+                    <td><i class="fa fa-times font-lg MsgToTrash"></i></td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+<script>
+    var checkAll = false;
+</script>

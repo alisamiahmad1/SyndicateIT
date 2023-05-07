@@ -1,0 +1,272 @@
+﻿@model SyndicateIT.Model.ViewModel.Exam.TablePRViewModel
+@{
+    Layout = null;
+    string PublicResources = "~/Views/Exams/SignsExam/_TablePRExamPartial.cshtml";
+}
+<html lang="en-us" style="margin: 0;padding: 0; min-height: 100%;position: relative;font-size: 10px;font-family: sans-serif;">
+<head style="">
+</head>
+<body style="font-family: 'Open Sans',Arial,Helvetica,Sans-Serif;color: #333;background-color: #fff;">
+    <table width="100%" cellpadding="0" cellspacing="0" style="border-collapse: collapse;border-spacing: 0;">
+        <tr style="display: table-row; vertical-align: inherit; border-color: inherit;">
+            <td style="vertical-align: top;padding: 0; display: table-cell; vertical-align: inherit; vertical-align:top">
+                <table width="100%" cellpadding="0" cellspacing="0" style="background-color: transparent; border-collapse: collapse; border-spacing: 0; display: table; border-spacing: 0;">
+                    <tr style="display: table-row; vertical-align: inherit; border-color: inherit;">
+                        <td style="vertical-align: top;width: 39.33333333%; min-height: 1px;padding-left: 13px; padding-right: 13px;padding: 0px 0px; display: table-cell; vertical-align: inherit;">
+                            <table width="100%" cellpadding="0" cellspacing="0" style="background-color: transparent; border-collapse: collapse; border-spacing: 0; display: table; border-spacing: 0;">
+
+                                <tr style="display: table-row; vertical-align: inherit; border-color: inherit;">
+                                    <td colspan="2" style="vertical-align: top;display: table-cell; vertical-align: inherit;padding: 1px 1px;text-align:left;font-size:13px;font-weight:bold;">@Html.Resource("SchoolName", PublicResources)</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" style="vertical-align: top;display: table-cell; vertical-align: inherit;padding: 1px 1px;text-align:left;font-size:13px;font-weight:bold;">@Html.Resource("SchoolNameFr", PublicResources)</td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td style="width: 27.33333333%; min-height: 1px;padding-left: 13px; padding-right: 13px;padding: 1px 1px; display: table-cell; vertical-align: inherit;text-align:center;"><img src="http://www.byec-edu.org/AppByec/Content/image/Corporate/logo-bey-exam1.png" style="width:40px!important; height:40px!important;"></td>
+                        <td style="width: 33.33333333%; min-height: 1px;padding-left: 13px; padding-right: 13px;padding: 1px 1px; display: table-cell; vertical-align: inherit;">
+                            <table width="100%" cellpadding="0" cellspacing="0" style="background-color: transparent; border-collapse: collapse; border-spacing: 0; display: table; border-spacing: 0;">
+                                <tr style="display: table-row; vertical-align: inherit; border-color: inherit;">
+                                    <td colspan="2" style="vertical-align: top;display: table-cell; vertical-align: inherit;text-align:right;font-size:18px;font-weight:bold;">@Html.Resource("SchoolNameAr", PublicResources)</td>
+                                </tr>
+                                <tr style="display: table-row; vertical-align: inherit; border-color: inherit;">
+                                    <td colspan="2" style="vertical-align: top;display: table-cell; vertical-align: inherit;text-align:right;font-size:18px;font-weight:bold;">@Html.Resource("SchoolNameArAddr", PublicResources)</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr style="display: table-row; vertical-align: inherit; border-color: inherit;">
+            <td class="col-md-12" style="width: 100%; float: left;position: relative; min-height: 1px;padding-left: 13px;padding-right: 13px;display: table-cell; vertical-align: inherit;padding: 1px 1px;">
+                <table cellpadding="0" cellspacing="0" style="width: 100%; float: left;position: relative; min-height: 1px;padding-left: 13px;padding-right: 13px;background-color: transparent; border-collapse: collapse; border-spacing: 0; display: table; border-spacing: 0;">
+                    <tr style="display: table-row; vertical-align: inherit; border-color: inherit;">
+                        <td style="line-height: 1.42857143; vertical-align: top;padding: 1px 1px; display: table-cell; vertical-align: inherit;text-align:center;font-size:20px;">
+                            @Html.Resource("SignExamTitle", PublicResources)  @Model.Class
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr style="display: table-row; vertical-align: inherit; border-color: inherit;">
+            <td class="col-md-12" style="width: 100%; float: left;position: relative; min-height: 1px;padding-left: 13px;padding-right: 13px;display: table-cell; vertical-align: inherit;padding: 1px 1px;">
+                <table cellpadding="0" cellspacing="0" style="width: 100%; float: left;position: relative; min-height: 1px;padding-left: 13px;padding-right: 13px;background-color: transparent; border-collapse: collapse; border-spacing: 0; display: table; border-spacing: 0;">
+                    <tr style="display: table-row; vertical-align: inherit; border-color: inherit;">
+                        <td style="width: 70%;">&nbsp;</td>
+                        <td style="width: 20%;text-align:right;font-size:18px;">@Model.NameStudent</td>
+                        <td style="width: 10%;text-align:right;font-size:18px; font-weight:bold;">@Html.Resource("Name", PublicResources)</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr><td>&nbsp;</td></tr>
+        <tr style="display: table-row; vertical-align: inherit; border-color: inherit;padding: 8px 10px;">
+            <td class="col-md-12" style="width: 100%; float: left;position: relative; min-height: 1px;padding-left: 13px;padding-right: 13px;display: table-cell; vertical-align: inherit;padding: 4px 5px;">
+                <table cellpadding="0" cellspacing="0" class="col-md-12" style="width: 100%;">
+                    <tr>
+                        <td class="col-md-7" style="width: 50%;">&nbsp;</td>
+                        <td class="col-md-2 font-md" style="width: 15%;text-align:right;font-size:18px;">@Model.Division</td>
+                        <td class="col-md-1 font-md" style="width: 10%;text-align:right;font-size:18px;">@Html.Resource("Division", PublicResources)</td>
+                        <td class="col-md-1 font-md" style="width: 15%;text-align:right;font-size:18px;">@Model.Class</td>
+                        <td class="col-md-1 font-md" style="width: 10%;text-align:right;font-size:18px;">@Html.Resource("Class", PublicResources)</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <table width="100%" cellpadding="0" cellspacing="0">
+
+                    @for (int i = 0; i < Model.ItemSubjectPR.Count; i++)
+                    {
+                        var dir = "";
+                        var txtAlign = "";
+                        if (Model.ItemSubjectPR[i].LanguageID == 2)
+                        {
+                            dir = "rtl";
+                            txtAlign = "text-align:right";
+                        }
+                        else
+                        {
+                            dir = "ltr";
+                            txtAlign = "text-align:left";
+                        }
+                        <tr dir=@dir>
+                            <td dir=@dir><h3>@Model.ItemSubjectPR[i].Subject</h3></td>
+                        </tr>
+                        for (int t = 0; t < Model.ItemSubjectPR[i].ItemCoursePR.Count; t++)
+                        {
+                            var ItemCourseData = Model.ItemSubjectPR[i].ItemCoursePR[t];
+                            <tr><td>&nbsp;</td></tr>
+                            if (ItemCourseData.Name == "Understands sets and whole numbers" || ItemCourseData.Name == "Understands sets and whole numbers.")
+                            {
+
+                                <tr dir=@dir style="">
+                                    <td dir=@dir><h3>Mathematics and Sciences Competences</h3></td>
+                                </tr>
+
+                            }
+                            if (ItemCourseData.Name == "Comprend les ensembles et les nombres entiers" || ItemCourseData.Name == "Comprend les ensembles et les nombres entiers.")
+                            {
+
+                                <tr dir=@dir style="">
+                                    <td dir=@dir><h3>Mathématiques et compétences scientifiques</h3></td>
+                                </tr>
+
+
+                            }
+                            if (ItemCourseData.Name == "يفهم مجموعات وأرقام كاملة" || ItemCourseData.Name == ".يفهم مجموعات وأرقام كاملة")
+                            {
+
+                                <tr dir=@dir style="">
+                                    <td dir=@dir><h3>في الرياضيات والعلوم</h3></td>
+                                </tr>
+
+                            }
+                            <tr style="display: table-row; vertical-align: inherit; border-color: inherit;display: table-row; vertical-align: inherit; ">
+                                <td style="line-height: 1.42857143; vertical-align: top;padding:0; display: table-cell; vertical-align: inherit;">
+                                    <table class="table table-bordered table-striped responsive-utilities col-md-12" dir=@dir style="width: 100%; max-width: 100%;  margin-bottom: 18px;width: 100%; max-width: 100%;  margin-bottom: 18px;width: 100%; float: left;position: relative; min-height: 1px;padding-left: 13px;padding-right: 13px;background-color: transparent; border-collapse: collapse; border-spacing: 0; display: table; border-spacing: 0;">
+                                        <thead style="display: table-header-group; vertical-align: middle; border-color: inherit;">
+                                            <tr style="display: table-row; vertical-align: inherit; border-color: inherit;">
+                                                <th class="col-md-6 text-center" style="width:52%;text-align:center;border: 1px solid #ddd;padding: 4px 5px;background-color: rgba(61, 106, 124, 0.15);border: 1px solid rgba(61, 106, 124, 0.2);font-size:16px;">@ItemCourseData.Name</th>
+                                                <th class="col-md-2 text-center" style="width:16%;text-align:center;border: 1px solid #ddd;padding: 4px 5px;background-color: rgba(61, 106, 124, 0.15);border: 1px solid rgba(61, 106, 124, 0.2);font-size:16px;">@ItemCourseData.FirstTerm</th>
+                                                <th class="col-md-2 text-center" style="width:16%;text-align:center;border: 1px solid #ddd;padding: 4px 5px;background-color: rgba(61, 106, 124, 0.15);border: 1px solid rgba(61, 106, 124, 0.2);font-size:16px;">@ItemCourseData.SecondTerm </th>
+                                                <th class="col-md-2 text-center" style="width:16%;text-align:center;border: 1px solid #ddd;padding: 4px 5px;background-color: rgba(61, 106, 124, 0.15);border: 1px solid rgba(61, 106, 124, 0.2);font-size:16px;">@ItemCourseData.ThirdTerm </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @for (int j = 0; j < ItemCourseData.ItemSkilsPR.Count; j++)
+                                            {
+
+
+
+                                                if (Model.ItemSubjectPR[i].LanguageID == 2)
+                                                {
+                                                    <tr style="display: table-row; vertical-align: inherit; border-color: inherit;background-color: #fff;" dir="rtl">
+                                                        <th class="is-visible " style="text-align:right;line-height: 1.42857143;border: 1px solid #ddd;padding: 4px 5px;font-size:14px; display: table-cell; vertical-align: inherit;">@ItemCourseData.ItemSkilsPR[j].Name</th>
+                                                        <td class="is-visible " style="text-align:right;line-height: 1.42857143;border: 1px solid #ddd;padding: 4px 5px;font-size:14px; display: table-cell; vertical-align: inherit;">@ItemCourseData.ItemSkilsPR[j].FirstTermValue</td>
+                                                        <td class="is-hidden " style="text-align:right;line-height: 1.42857143;border: 1px solid #ddd;padding: 4px 5px;font-size:14px; display: table-cell; vertical-align: inherit;">@ItemCourseData.ItemSkilsPR[j].SecondTermValue</td>
+                                                        <td class="is-hidden " style="text-align:right;line-height: 1.42857143;border: 1px solid #ddd;padding: 4px 5px;font-size:14px; display: table-cell; vertical-align: inherit;">@ItemCourseData.ItemSkilsPR[j].ThirdTermValue</td>
+                                                    </tr>
+                                                }
+                                                else
+                                                {
+                                                    <tr style="display: table-row; vertical-align: inherit; border-color: inherit;background-color: #fff;">
+                                                        <th class="is-visible " style="text-align:left;line-height: 1.42857143;border: 1px solid #ddd;padding: 4px 5px;font-size:14px; display: table-cell; vertical-align: inherit;">@ItemCourseData.ItemSkilsPR[j].Name</th>
+                                                        <td class="is-visible " style="text-align:left;line-height: 1.42857143;border: 1px solid #ddd;padding: 4px 5px;font-size:14px; display: table-cell; vertical-align: inherit;">@ItemCourseData.ItemSkilsPR[j].FirstTermValue</td>
+                                                        <td class="is-hidden " style="text-align:left;line-height: 1.42857143;border: 1px solid #ddd;padding: 4px 5px;font-size:14px; display: table-cell; vertical-align: inherit;">@ItemCourseData.ItemSkilsPR[j].SecondTermValue</td>
+                                                        <td class="is-hidden " style="text-align:left;line-height: 1.42857143;border: 1px solid #ddd;padding: 4px 5px;font-size:14px; display: table-cell; vertical-align: inherit;">@ItemCourseData.ItemSkilsPR[j].ThirdTermValue</td>
+                                                    </tr>
+                                                }
+                                            }
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        }
+                        if (Model.ItemSubjectPR[i].LanguageID == 2)
+                        {
+                            <tr>
+                                <td style="text-align:right;font-size:18px;margin:20px" dir=@dir>@Html.Resource("Semester1Ar", PublicResources)</td>
+                            </tr>
+                            <tr dir=@dir>
+                                <td style="width: 100%; float: left;">
+                                    <table style="width: 100%; float: left;background-color: transparent; border-collapse: collapse; border-spacing: 0; display: table; border-spacing: 0;">
+                                        <tr>
+                                            <td style="width: 50%;border: 1px solid #ddd; vertical-align:top; height:100%">
+                                                <table width="100%" height="150px" cellpadding="0" cellspacing="0" style="background-color: transparent; border-collapse: collapse; border-spacing: 0; display: table; border-spacing: 0;">
+                                                    <tbody style="display: table-row-group; vertical-align: middle;border-color: inherit;">
+                                                        <tr style="display: table-row; vertical-align: inherit; border-color: inherit;">
+                                                            <td style="vertical-align: top; text-align: right; font-size:16px;text-decoration: underline;">@Html.Resource("SchoolNotesAr", PublicResources) </td>
+                                                        </tr>
+                                                        <tr style="display: table-row; vertical-align: inherit; border-color: inherit;">
+                                                            <td style=" vertical-align top; text-align right; font-size:16px;">@Model.ArabicNotes</td>
+                                                        </tr>
+                                                        <tr style="display: table-row; vertical-align: bottom; border-color: inherit;">
+                                                            <td style=" vertical-align top; text-align left; font-size:16px;">@Html.Resource("ParentSignature", PublicResources)</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="height:700px">&nbsp;</td>
+                            </tr>
+
+                        }
+                        else if (Model.ItemSubjectPR[i].LanguageID == 1)
+                        {
+                            <tr style="display: block;page-break-after: always;">
+                                <td style="font-size:18px;margin:20px" dir=@dir>@Html.Resource("Semester1Eng", PublicResources)</td>
+                            </tr>
+                            <tr dir=@dir>
+                                <td style="width: 100%; float: left;">
+                                    <table style="width: 100%; float: left;background-color: transparent; border-collapse: collapse; border-spacing: 0; display: table; border-spacing: 0;">
+                                        <tr>
+                                            <td style="width: 100%;border: 1px solid #ddd; vertical-align:top; height:100%">
+                                                <table width="100%" height="150px" cellpadding="0" cellspacing="0" style="background-color: transparent; border-collapse: collapse; border-spacing: 0; display: table; border-spacing: 0;">
+                                                    <tbody style="display: table-row-group; vertical-align: middle;border-color: inherit;">
+                                                        <tr style="display: table-row; vertical-align: inherit; border-color: inherit;">
+                                                            <td style="vertical-align: top; text-align: left; font-size:16px;text-decoration: underline;">@Html.Resource("SchoolNotesEng", PublicResources) </td>
+                                                        </tr>
+                                                        <tr style="display: table-row; vertical-align: inherit; border-color: inherit;">
+                                                            <td style="vertical-align: top; text-align: left; font-size:16px;">@Model.EnglishNotes</td>
+                                                        </tr>
+                                                        <tr style="display: table-row; vertical-align: bottom; border-color: inherit;">
+                                                            <td style="vertical-align: top;text-align: right; font-size:16px;">@Html.Resource("ParentSignatureEng", PublicResources)</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="height:750px">&nbsp;</td>
+                            </tr>
+                        }
+                        else if (Model.ItemSubjectPR[i].LanguageID == 3)
+                        {
+
+                            <tr>
+                                <td style="font-size:18px;margin:10px" dir=@dir>@Html.Resource("Semester1Fr", PublicResources)</td>
+                            </tr>
+                            <tr dir=@dir>
+                                <td style="width: 100%; float: left;">
+                                    <table style="width: 100%; float: left;background-color: transparent; border-collapse: collapse; border-spacing: 0; display: table; border-spacing: 0;">
+                                        <tr>
+                                            <td style="width: 50%;border: 1px solid #ddd; vertical-align:top; height:100%">
+                                                <table width="100%" cellpadding="0" height="150px" cellspacing="0" style="background-color: transparent; border-collapse: collapse; border-spacing: 0; display: table; border-spacing: 0;">
+                                                    <tbody style="display: table-row-group; vertical-align: middle;border-color: inherit;">
+                                                        <tr style="display: table-row; vertical-align: inherit; border-color: inherit;">
+                                                            <td style="vertical-align: top; text-align: left; font-size:16px;text-decoration: underline;">@Html.Resource("SchoolNotesFr", PublicResources) </td>
+                                                        </tr>
+                                                        <tr style="display: table-row; vertical-align: inherit; border-color: inherit;">
+                                                            <td style="vertical-align: top; text-align: left; font-size:16px;">@Model.FrenchNotes</td>
+                                                        </tr>
+                                                        <tr style="display: table-row; vertical-align: bottom; border-color: inherit;">
+                                                            <td style="vertical-align: top; text-align: right; font-size:16px;">@Html.Resource("ParentSignatureFr", PublicResources)</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        }
+                    }
+
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
+

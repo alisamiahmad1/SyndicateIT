@@ -1,0 +1,271 @@
+﻿@model List<SyndicateIT.Model.ViewModel.Exam.TableCTViewModel>
+@{
+    Layout = null;
+    string PublicResources = "~/Views/Exams/CheckingTags/_TableCTExamPartial.cshtml";
+}
+<style>
+    .list-rotated {
+        text-align: justify;
+        padding: 0 1em;
+    }
+
+        .list-rotated:after {
+            content: "";
+            width: 100%;
+            display: inline-block;
+        }
+
+        .list-rotated > li {
+            display: inline-block;
+            width: 0;
+            line-height: 0;
+        }
+
+            .list-rotated > li > * {
+                display: inline-block;
+                white-space: nowrap;
+                transform: translate(0,100%) rotate(-90deg);
+                transform-origin: 0 0;
+                vertical-align: bottom;
+            }
+
+                .list-rotated > li > *:before {
+                    content: "";
+                    float: left;
+                    margin-top: 100%;
+                }
+</style>
+
+<div class="padding-10" style=" background-color:#fff">
+    <table width="100%" cellpadding="0" cellspacing="0">
+        <tbody>                       
+            <tr>
+                <td>
+                    <table cellpadding="0" cellspacing="0" class="col-md-12">
+                        <tr>
+                            <td class="col-md-4">
+                                <table width="100%" cellpadding="0" cellspacing="0">
+                                    <tr>
+                                        <td colspan="2" class="txt-center font-md" style="padding: 8px 10px;text-align:left; ">@Html.Resource("SchoolName", PublicResources)</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" class="txt-center font-md" style="padding: 8px 10px;text-align:left;">@Html.Resource("SchoolNameFr", PublicResources)</td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td class="col-md-4" style="text-align:center;"><img src="http://www.byec-edu.org/AppByec/Content/image/Corporate/logo-bey-exam1.png" style="width:40px!important; height:40px!important;"></td>
+                            <td class="col-md-4">
+                                <table width="100%" cellpadding="0" cellspacing="0">
+                                    <tr>
+                                        <td colspan="2" class="txt-center font-md" style="padding: 8px 10px;text-align:right;font-weight:bold;">@Html.Resource("SchoolNameAr", PublicResources)</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" class="txt-center font-md" style="padding: 8px 10px;text-align:right;font-weight:bold;">@Html.Resource("SchoolNameArAddr", PublicResources)</td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>                  
+               </td>
+             </tr>                    
+            <tr>
+                <td class="col-md-12" style="padding: 4px 5px;">
+                    <table cellpadding="0" cellspacing="0" class="col-md-12">
+                        <tr>
+                            <td style="text-align:center;" class="font-xl">
+                                @Html.Resource("SignExamTitle", PublicResources)  @Model[0].ClassNameAlfa
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>            
+            <tr>
+                <td class="col-md-12" style="padding: 8px 10px;">
+                    <table cellpadding="0" cellspacing="0" class="col-md-12" style="margin-bottom: 20px;">
+                        <tr>
+                            <td class="col-md-7">&nbsp;</td>
+                            <td class="col-md-2 font-md" style="text-align:right;">@Model[0].Division</td>
+                            <td class="col-md-1 font-md" style="text-align:left;">@Html.Resource("Division", PublicResources)</td>
+                            <td class="col-md-1 font-md" style="text-align:right;">@Model[0].Class</td>
+                            <td class="col-md-1 font-md" style="text-align:right;">@Html.Resource("Class", PublicResources)</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>      
+            <tr>
+                <td>
+                    <table cellpadding="0" cellspacing="0" style="border-collapse: collapse;border-spacing: 0;width: 100%;" dir="rtl" class="table-striped dataTable  table-hover">
+                        <tbody>
+                            <tr>
+                                <td style="width:20px;background-color: #fff;"></td>
+                                <td style="width:200px;background-color: #fff;"></td>
+                                @for (int r = 0; r < Model[0].ItemCoursePS.Count; r++)
+                                {
+                                    var ItemCourseData = Model[0].ItemCoursePS[r];
+                                    if (Model[0].ItemCoursePS[r].HasSkils == true)
+                                    {
+                                        var ItemCourse = Model[0].ItemCoursePS[r];
+                                        for (int j = 0; j < ItemCourse.ItemSkilsPS.Count; j++)
+                                        {
+                                            <td style="width:50px;background-color: #fff;">&nbsp;</td>
+                                        }
+                                        <td style="width:50px;background-color: #fff;">&nbsp;</td>
+                                    }
+                                    else
+                                    {
+                                        <td style="width:50px;background-color: #fff;">&nbsp;</td>
+                                    }
+                                }                             
+                                <td style="width:50px;background-color: #fff;">&nbsp;</td>
+                                <td style="width:50px;background-color: #fff;">&nbsp;</td>
+                                <td style="width:50px;background-color: #fff;">&nbsp;</td>
+                                <td style="width:50px;background-color: #fff;">&nbsp;</td>                                
+                            </tr>
+                            <tr>
+
+                                <td style="border: 1px solid #ddd;border-bottom:1px solid #fff;background-color: #fff;">&nbsp;</td>
+                                <td colspan="1" style="border: 1px solid #ddd;border-bottom:1px solid #fff";background-color: #fff;>&nbsp;</td>
+
+
+                                @for (int r = 0; r < Model[0].ItemCoursePS.Count; r++)
+                                {
+                                    var ItemCourseData = Model[0].ItemCoursePS[r];
+                                    if (Model[0].ItemCoursePS[r].HasSkils == true)
+                                    {
+                                        var counter = 0;
+                                        var ItemCourse = Model[0].ItemCoursePS[r];
+                                        for (int j = 0; j < ItemCourse.ItemSkilsPS.Count; j++)
+                                        {
+                                            counter = counter + 1;
+                                        }
+                                        counter = counter + 1;
+                                        <td colspan="@(counter)" style="border: 1px solid #ddd; border-bottom:1px solid #ddd; text-align:center;background-color: #fff;">@ItemCourseData.Name</td>
+                                    }
+                                    else
+                                    {
+                                        <td colspan="1" style="border: 1px solid #ddd; border-bottom:1px solid #fff; text-align:center;background-color: #fff;"></td>
+                                    }
+                                }      
+
+
+
+                                <td colspan="1" style="border: 1px solid #ddd;border-bottom:1px solid #fff;  text-align:center;background-color: #fff;">&nbsp;</td>
+                                <td colspan="1" style="border: 1px solid #ddd;border-bottom:1px solid #fff;  text-align:center;background-color: #fff;">&nbsp;</td>
+                                <td colspan="1" style="border: 1px solid #ddd;border-bottom:1px solid #fff;  text-align:center;background-color: #fff;">&nbsp;</td>
+                                <td colspan="1" style="border: 1px solid #ddd;border-bottom:1px solid #fff;  text-align:center;background-color: #fff;">&nbsp;</td>                             
+                            </tr>
+                            <tr>
+                                <td colspan="2" style="border: 1px solid #ddd;width:200px;text-align:center;font-size:12px; display: table-cell; vertical-align: inherit; font-size:14px;background-color: #fff;">المادة</td>
+                                @for (int i = 0; i < Model[0].ItemCoursePS.Count; i++)
+                                {
+                                    var ItemCourse = Model[0].ItemCoursePS[i];
+                                    if (Model[0].ItemCoursePS[i].HasSkils == true)
+                                    {
+                                        for (int j = 0; j < ItemCourse.ItemSkilsPS.Count; j++)
+                                        {
+                                            <td class="list-rotated text-center" style="border: 1px solid #ddd;text-align:center;font-size:14px;height: 200px;font-weight: bold;background-color: #fff;">
+                                                <li><span style="width: 0px;vertical-align:top!important;font-weight: bold;margin-top:-75px;"> @ItemCourse.ItemSkilsPS[j].Name </span></li>
+                                            </td>
+                                        }
+                                        <td class="list-rotated text-center" style="border: 1px solid #ddd;text-align:center;font-size:14px;height: 200px;font-weight: bold;background-color: #fff;">
+                                            <li style="line-height:0px!important"><span style="width: 0px;vertical-align:top!important;font-weight: bold;margin-top:-75px;">@Html.Resource("Average", PublicResources)</span></li>
+                                        </td>
+
+                                    }
+                                    else
+                                    {
+                                        <td class="list-rotated text-center" style="border: 1px solid #ddd;text-align:center;font-size:14px;height: 200px;font-weight: bold;background-color: #fff;">
+                                            <li><span style = "width: 0px;vertical-align:top!important;font-weight: bold;margin-top:-75px;" > @Model[0].ItemCoursePS[i].Name </span ></li >
+                                        </td >
+                                    }
+                                }    
+                                <td class="list-rotated text-center" style="border: 1px solid #ddd;text-align:center;font-size:14px;height: 200px;font-weight: bold;background-color: #fff;">
+                                    <li><span style="width: 0px;vertical-align:top!important;font-weight: bold;margin-top:-75px;"> @Html.Resource("GeneralTotal", PublicResources) </span></li>
+                                </td>
+                                <td class="list-rotated text-center" style="border: 1px solid #ddd;text-align:center;font-size:14px;height: 200px;font-weight: bold;background-color: #fff;">
+                                    <li><span style="width: 0px;vertical-align:top!important;font-weight: bold;margin-top:-75px;"> @Html.Resource("GeneralAverage", PublicResources)</span></li>
+                                </td>
+                                <td class="list-rotated text-center" style="border: 1px solid #ddd;text-align:center;font-size:14px;height: 200px;font-weight: bold;background-color: #fff;">
+                                    <li><span style="width: 0px;vertical-align:top!important;font-weight: bold;margin-top:-75px;"> @Html.Resource("Category", PublicResources)</span></li>
+                                </td>
+                                <td class="list-rotated text-center" style="border: 1px solid #ddd;text-align:center;font-size:14px;height: 200px;font-weight: bold;background-color: #fff;">
+                                    <li><span style="width: 0px;vertical-align:top!important;font-weight: bold;margin-top:-75px;"> @Html.Resource("Result", PublicResources)</span></li>
+                                </td>
+                               </tr>  
+                            <tr>
+                                <td style="border: 1px solid #ddd;font-size:14px;text-align:center;background-color: #e3f2fd;">#</td>
+                                <td style="border: 1px solid #ddd;width:200px;text-align:center; font-size:20px;background-color: #e3f2fd;">الطالب</td>
+                                @for (int r = 0; r < Model[0].ItemCoursePS.Count; r++)
+                                {
+                                    var ItemCourseData = Model[0].ItemCoursePS[r];
+                                    if (Model[0].ItemCoursePS[r].HasSkils == true)
+                                    {
+                                        var ItemCourse = Model[0].ItemCoursePS[r];
+                                        for (int j = 0; j < ItemCourse.ItemSkilsPS.Count; j++)
+                                        {
+                                            <td style="border: 1px solid #ddd;text-align:center;font-size:12px; display: table-cell; vertical-align: inherit;background-color: #e3f2fd;">@ItemCourseData.ItemSkilsPS[j].MaximumMark</td>
+                                        }
+                                        <td style="border: 1px solid #ddd;text-align:center;font-size:12px; display: table-cell; vertical-align: inherit;background-color: #bbdefb ;">@ItemCourseData.ItemSkilsPS[0].Total</td>
+                                    }
+                                    else
+                                    {
+                                        <td style="border: 1px solid #ddd;text-align:center;font-size:12px; display: table-cell; vertical-align: inherit;background-color: #e3f2fd;">@ItemCourseData.ItemSkilsPS[0].Total</td>
+                                    }
+                                }
+
+
+                                <td style="border: 1px solid #ddd;text-align:center;font-size:12px; display: table-cell; vertical-align: inherit;background-color: #e3f2fd;">@Model[0].MAximunCoefficeint</td>
+                                <td style="border: 1px solid #ddd;text-align:center;font-size:12px; display: table-cell; vertical-align: inherit;background-color: #e3f2fd;">&nbsp;</td>
+                                <td style="border: 1px solid #ddd;text-align:center;font-size:12px; display: table-cell; vertical-align: inherit;background-color: #e3f2fd;">&nbsp;</td>
+                                <td style="border: 1px solid #ddd;text-align:center;font-size:12px; display: table-cell; vertical-align: inherit;background-color: #e3f2fd;">&nbsp;</td>
+                            </tr>
+                            
+                            
+                                @for (int f = 0; f < Model.Count; f++)
+                                {
+                                    <tr>
+                                        <td style="border: 1px solid #ddd;font-size:14px;text-align:center;">@Model[f].NumberStudent</td>
+                                        <td style="border: 1px solid #ddd;width:200px;text-align:center; font-size:14px;">@Model[f].NameStudent</td>
+                                        @for (int t = 0; t < Model[f].ItemCoursePS.Count; t++)
+                                        {
+                                            var ItemCourseData = Model[f].ItemCoursePS[t];
+
+                                            if (Model[f].ItemCoursePS[t].HasSkils == true)
+                                            {
+                                                decimal subTotal = 0;
+                                                for (int j = 0; j < ItemCourseData.ItemSkilsPS.Count; j++)
+                                                {
+                                                    if(ItemCourseData.ItemSkilsPS[j].Average!= null && ItemCourseData.ItemSkilsPS[j].Average!="")
+                                                    {
+                                                        subTotal = Convert.ToDecimal(subTotal) + Convert.ToDecimal(ItemCourseData.ItemSkilsPS[j].Average);
+                                                    }
+                                                    else
+                                                    {
+                                                        subTotal = Convert.ToDecimal(subTotal);
+                                                    }
+                                                    
+                                                    <td style="border: 1px solid #ddd;text-align:center;font-size:12px; display: table-cell; vertical-align: inherit;">@ItemCourseData.ItemSkilsPS[j].Average</td>
+                                                }
+                                                <td style="border: 1px solid #ddd;text-align:center;font-size:12px; display: table-cell; vertical-align: inherit;background-color: #bbdefb  ;">@subTotal</td>
+                                            }
+                                            else
+                                            {
+                                                <td style="border: 1px solid #ddd;text-align:center;font-size:12px; display: table-cell; vertical-align: inherit;">@ItemCourseData.ItemSkilsPS[0].Average</td>
+                                            }
+                                        }
+
+
+                                        <td style="border: 1px solid #ddd;text-align:center;font-size:12px; display: table-cell; vertical-align: inherit;background-color: #ffccbc   ;">@Model[f].AgerageAllSemester</td>
+                                        <td style="border: 1px solid #ddd;text-align:center;font-size:12px; display: table-cell; vertical-align: inherit;background-color: #4db6ac   ;">@Model[f].CoefficientAgerageAllSemester</td>
+                                        <td style="border: 1px solid #ddd;text-align:center;font-size:12px; display: table-cell; vertical-align: inherit; background-color:rgba(255, 235, 59, 0.7)">@Model[f].ratingAgerageAllSemester</td>
+                                        <td style="border: 1px solid #ddd;text-align:center;font-size:12px; display: table-cell; vertical-align: inherit; background-color:#c8e6c9  ">@Model[f].resultAgerageAllSemester</td>
+                                    </tr>
+                                }
+
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

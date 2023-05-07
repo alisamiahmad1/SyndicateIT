@@ -1,0 +1,123 @@
+﻿@model List<SyndicateIT.Model.ViewModel.Exam.PublishedTagsStudentsViewModel>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+@{
+    string PublicResources = "~/Views/Exams/PublishedTags/_ExamsPublishedTagsStudents.cshtml";
+}
+@Html.Partial("~/Views/Shared/_AlertPartial.cshtml", Model[0].Alert)
+<div class="row">   
+    <input type="hidden" id="CycleID" value="@Model[0].CycleId" />
+    <input type="hidden" id="ClassID" value="@Model[0].Class_ID" />
+    <input type="hidden" id="DivisionID" value="@Model[0].Division_ID" />
+    <input type="hidden" id="TermID" value="@Model[0].Term_ID" />
+
+    <!-- NEW WIDGET START -->
+    <article class="col-sm-12 sortable-grid ui-sortable">
+        <!-- well -->
+        <div class="well" style="background-color: #fff;border: 1px solid #fff!important;">
+            @using (Html.BeginForm("PublishedStudents", "ExamManagement", FormMethod.Post, new { @class = "", role = "smart-form", id = "PublishedStudents-form" }))
+            {
+                var studentsExsiting = Model.Where(p => p.HasPublished == true).ToList();
+                var studentsNotExsiting = Model.Where(p => p.HasPublished == false).ToList();
+
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+                <fieldset>
+                    <a href="javascript:void(0);" onclick="PublishedStudents();" class="btn bg-color-blue txt-color-white __web-inspector-hide-shortcut__" style="float: right;margin-bottom: 17px;">@Html.Resource("PublishedStudents", PublicResources) </a>
+                </fieldset>                              
+                if (studentsExsiting != null && studentsExsiting.Count > 0)
+                {
+                    <form class="smart-form ">
+                        <fieldset>
+                            <legend>
+                                <label class="checkbox">
+                                    <input type="checkbox" name="studentsPublishedcheckbox" id="studentsPublishedcheckbox" checked="checked" style="font-size: 19px; -ms-transform: scale(2); -moz-transform: scale(2); -webkit-transform: scale(2); -o-transform: scale(2);  padding: 10px; margin-left: 2%;">
+                                    <span style="margin-left:10%">@Html.Resource("StudentsPublished", PublicResources)</span>
+                                </label>
+                              
+                            </legend>
+                            <ul id="external-events" class="list-unstyled">
+                                @for (int i = 0; i < studentsExsiting.Count(); i++)
+                                {
+                                    <li style="position: relative; width: 100%;cursor: pointer!important;    " class="li-studentsExsiting">
+                                        <span class="bg-color-blue  txt-color-white" data-icon="fa-time" style="cursor: pointer!important; ">
+                                            <input class="txt-studentsExsiting" type="checkbox" id="studentsExsitingcheckbox_@(i)" name="studentsExsitingcheckbox_@(i)" studientId="@studentsExsiting[i].StudentID" style="font-size: 14px; -ms-transform: scale(1); -moz-transform: scale(1); -webkit-transform: scale(1); -o-transform: scale(1);  padding: 10px; margin-left: 2%;" checked="checked">
+                                            <span style="margin-left:5%;font-size: 14px;padding: 0px 0px 0px!important">@studentsExsiting[i].StudentName</span>
+                                        </span>
+                                    </li>
+                                }
+                            </ul>
+                        </fieldset>
+                    </form>
+                }
+                if (studentsNotExsiting != null && studentsNotExsiting.Count > 0)
+                {
+                    <form class="smart-form ">
+                        <fieldset>
+                            <legend>
+                                <label class="checkbox">
+                                    <input type="checkbox" name="studentsUnPublishedcheckbox" id="studentsUnPublishedcheckbox"  style="font-size: 19px; -ms-transform: scale(2); -moz-transform: scale(2); -webkit-transform: scale(2); -o-transform: scale(2);  padding: 10px; margin-left: 2%;">
+                                    <span style="margin-left:10%">@Html.Resource("StudentsUnPublished", PublicResources)</span>
+                                </label>                              
+                            </legend>
+                            <ul id="external-events" class="list-unstyled">
+                                @for (int i = 0; i < studentsNotExsiting.Count(); i++)
+                                {
+                                    <li style="position: relative; width: 100%;cursor: pointer!important;" class="li-studentsNoExsiting" >                                       
+                                      <span class="bg-color-orange  txt-color-white" data-icon="fa-time" style="cursor: pointer!important; ">
+                                           <input type="checkbox" class="txt-studentsNoExsiting"  id="studentsNotExsitingcheckbox_@(i)" name="studentsNotExsitingcheckbox_@(i+1)" class="fa  fa-pencil-square-o txt-color-white" studientId ="@studentsNotExsiting[i].StudentID" style="font-size: 19px; -ms-transform: scale(1); -moz-transform: scale(1); -webkit-transform: scale(1); -o-transform: scale(1);  padding: 10px; margin-left: 2%;">  
+                                           <span style="margin-left:5%;font-size: 14px;padding: 0px 0px 0px!important">@studentsNotExsiting[i].StudentName</span>
+                                        </span>
+                                    </li>
+                                }
+                            </ul>
+                        </fieldset>
+                    </form>
+
+                }
+            }
+           
+        </div>
+    </article>
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $('#studentsPublishedcheckbox').change(function () {
+            if ($(this).is(":checked")) {
+              
+                $(".li-studentsExsiting").each(function (index) {
+                   
+                    $('#studentsExsitingcheckbox_' + index).prop('checked', true);
+                });
+            }
+            else {
+                $(".li-studentsExsiting").each(function (index) {
+                    $('#studentsExsitingcheckbox_' + index).prop('checked', false);
+                });
+
+            }
+        });
+        $('#studentsUnPublishedcheckbox').change(function () {
+            if ($(this).is(":checked")) {
+               
+                $(".li-studentsNoExsiting").each(function (index) {
+                    $('#studentsNotExsitingcheckbox_' + index).prop('checked', true);
+                });
+            }
+            else {
+                $(".li-studentsNoExsiting").each(function (index) {
+                    $('#studentsNotExsitingcheckbox_' + index).prop('checked', false);
+                });
+
+            }
+        });
+
+    });
+
+    
+
+    
+</script>
